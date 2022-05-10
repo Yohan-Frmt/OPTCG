@@ -1,7 +1,8 @@
 import { IsNumber, IsString } from 'class-validator';
+import { CardSetDto } from '../cardset/cardset.dto';
 
 export class CardDto {
-  // set: CardSet;
+  cardSet: CardSetDto;
 
   @IsString()
   serial_number: string;

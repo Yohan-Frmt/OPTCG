@@ -1,11 +1,19 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { CardSet } from '../cardset/cardset.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // set: CardSet;
+  @ManyToOne(() => CardSet, (cardset: CardSet) => cardset.cards)
+  cardSet: CardSet;
 
   @Column()
   serial_number: string;

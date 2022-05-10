@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { CardModule } from './card/card.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CardSetModule } from './cardset/cardset.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       logging: true,
     }),
     CardModule,
+    CardSetModule,
   ],
   controllers: [AppController],
   providers: [AppService],
