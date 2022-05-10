@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DeckVisibilityModule } from './deckvisibility/deckvisibility.module';
+import { DeckModule } from './deck/deck.module';
 
 @Module({
   imports: [
@@ -14,6 +16,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       logging: true,
     }),
+    DeckVisibilityModule,    
+    DeckModule,
   ],
   controllers: [AppController],
   providers: [AppService],
