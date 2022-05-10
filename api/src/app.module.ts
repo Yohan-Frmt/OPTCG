@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { CardModule } from './card/card.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -14,6 +15,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true,
       logging: true,
     }),
+    CardModule,
   ],
   controllers: [AppController],
   providers: [AppService],
