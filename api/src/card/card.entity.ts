@@ -5,6 +5,7 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CardSet } from '../cardset/cardset.entity';
@@ -12,6 +13,7 @@ import { CardType } from '../cardtype/cardtype.entity';
 import { CardColor } from '../cardcolor/cardcolor.entity';
 import { CardStatus } from '../cardstatus/cardstatus.entity';
 import { CardTag } from '../cardtag/cardtag.entity';
+import { CardImage } from '../cardimage/cardimage.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -52,6 +54,9 @@ export class Card extends BaseEntity {
   @ManyToMany(() => CardTag, (tags: CardTag) => tags.cards)
   @JoinTable()
   tags: CardTag[];
+
+  @OneToMany(() => CardImage, (images: CardImage) => images.card)
+  images: CardImage[];
 
   @Column()
   fr_effect: string;
