@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CardModule } from './card/card.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CardSetModule } from './cardset/cardset.module';
+import { CardTypeModule } from './cardtype/cardtype.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CardSetModule } from './cardset/cardset.module';
     }),
     CardModule,
     CardSetModule,
+    CardTypeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

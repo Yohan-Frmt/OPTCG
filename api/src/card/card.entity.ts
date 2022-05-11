@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CardSet } from '../cardset/cardset.entity';
+import { CardType } from '../cardtype/cardtype.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -18,7 +19,8 @@ export class Card extends BaseEntity {
   @Column()
   serial_number: string;
 
-  // type: CardType;
+  @ManyToOne(() => CardType, (cardType: CardType) => cardType.cards)
+  cardType: CardType;
 
   @Column()
   fr_name: string;
