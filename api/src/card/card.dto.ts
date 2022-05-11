@@ -1,5 +1,7 @@
 import { IsNumber, IsString } from 'class-validator';
 import { CardSetDto } from '../cardset/cardset.dto';
+import { CardTypeDto } from '../cardtype/cardtype.dto';
+import { CardColorDto } from '../cardcolor/cardcolor.dto';
 
 export class CardDto {
   cardSet: CardSetDto;
@@ -7,7 +9,7 @@ export class CardDto {
   @IsString()
   serial_number: string;
 
-  // type: CardType;
+  type: CardTypeDto;
 
   @IsString()
   fr_name: string;
@@ -27,7 +29,7 @@ export class CardDto {
   @IsNumber()
   life: number;
 
-  // color: CardColor;
+  color: CardColorDto;
 
   @IsString()
   fr_effect: string;

@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CardSetModule } from './cardset/cardset.module';
 import { CardTypeModule } from './cardtype/cardtype.module';
 import { CardColorModule } from './cardcolor/cardcolor.module';
+import { CardStatusModule } from './cardstatus/cardstatus.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CardColorModule } from './cardcolor/cardcolor.module';
     CardSetModule,
     CardTypeModule,
     CardColorModule,
+    CardStatusModule,
   ],
   controllers: [AppController],
   providers: [AppService],

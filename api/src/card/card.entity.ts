@@ -10,6 +10,7 @@ import {
 import { CardSet } from '../cardset/cardset.entity';
 import { CardType } from '../cardtype/cardtype.entity';
 import { CardColor } from '../cardcolor/cardcolor.entity';
+import { CardStatus } from '../cardstatus/cardstatus.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -45,7 +46,7 @@ export class Card extends BaseEntity {
 
   @ManyToMany(() => CardColor, (color: CardColor) => color.cards)
   @JoinTable()
-  color: CardColor;
+  colors: CardColor;
 
   @Column()
   fr_effect: string;
@@ -58,5 +59,6 @@ export class Card extends BaseEntity {
 
   // rarity: CardRarity;
 
-  // ban_status: BanStatus;
+  @ManyToOne(() => CardStatus, (status: CardStatus) => status.cards)
+  status: CardStatus;
 }

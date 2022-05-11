@@ -2,13 +2,13 @@ import {
   BaseEntity,
   Column,
   Entity,
-  ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Card } from '../card/card.entity';
 
-@Entity('cardcolor')
-export class CardColor extends BaseEntity {
+@Entity('cardstatus')
+export class CardStatus extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,8 +19,8 @@ export class CardColor extends BaseEntity {
   en_name: string;
 
   @Column()
-  hex_color: string;
+  max_amount: number;
 
-  @ManyToMany(() => Card, (card: Card) => card.colors)
+  @OneToMany(() => Card, (card: Card) => card.status)
   cards: Card[];
 }

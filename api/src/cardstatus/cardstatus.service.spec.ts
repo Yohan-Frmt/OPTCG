@@ -1,17 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CardTypeService } from './cardtype.service';
-import { Repository } from 'typeorm';
+import { CardStatusService } from './cardstatus.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CardType } from './cardtype.entity';
+import { CardStatus } from './cardstatus.entity';
 
-describe('CardTypeService', () => {
-  let service: CardTypeService;
-  const repositoryToken = getRepositoryToken(CardType);
+describe('CardStatusService', () => {
+  let service: CardStatusService;
+  const repositoryToken = getRepositoryToken(CardStatus);
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        CardTypeService,
+        CardStatusService,
         {
           provide: repositoryToken,
           useValue: {},
@@ -19,7 +18,7 @@ describe('CardTypeService', () => {
       ],
     }).compile();
 
-    service = module.get<CardTypeService>(CardTypeService);
+    service = module.get<CardStatusService>(CardStatusService);
   });
 
   it('should be defined', () => {
