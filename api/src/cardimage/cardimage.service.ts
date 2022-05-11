@@ -11,7 +11,7 @@ export class CardImageService {
     private readonly repository: Repository<CardImage>,
   ) {}
 
-  public async create(cardImage: CardImageDto): Promise<CardImageDto> {
+  public async create(cardImage: CardImageDto): Promise<CardImage> {
     const cardImageCreated = await this.repository.save(cardImage);
     return await this.repository.save(cardImageCreated);
   }

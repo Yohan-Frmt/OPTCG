@@ -1,4 +1,5 @@
 import {
+  IsDate,
   IsDefined,
   IsNotEmpty,
   IsNotEmptyObject,
@@ -8,22 +9,27 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { CardSetDto } from '../cardset/cardset.dto';
 import { CardDto } from '../card/card.dto';
 
-export class CardImageDto {
+export class CardErrataDto {
   @IsUUID()
   @IsString()
   @IsNotEmpty()
   id: string;
 
+  @IsDate()
+  @IsNotEmpty()
+  date: Date;
+
   @IsString()
   @IsNotEmpty()
-  path: string;
+  description: string;
 
   @IsDefined()
   @IsNotEmptyObject()
   @IsObject()
   @ValidateNested({ each: true })
-  @Type(() => CardDto)
+  @Type(() => CardSetDto)
   card: CardDto;
 }

@@ -15,6 +15,7 @@ import { CardStatus } from '../cardstatus/cardstatus.entity';
 import { CardTag } from '../cardtag/cardtag.entity';
 import { CardImage } from '../cardimage/cardimage.entity';
 import { CardRarity } from '../cardrarity/cardrarity.entity';
+import { CardErrata } from '../carderrata/carderrata.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -67,6 +68,9 @@ export class Card extends BaseEntity {
 
   @OneToMany(() => CardImage, (image: CardImage) => image.card)
   images: CardImage[];
+
+  @OneToMany(() => CardErrata, (errata: CardErrata) => errata.card)
+  errata: CardErrata[];
 
   @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards)
   @JoinTable()

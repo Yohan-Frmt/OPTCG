@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { Card } from '../card/card.entity';
 
-@Entity('CardRarity')
+@Entity('cardrarity')
 export class CardRarity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;

@@ -1,20 +1,24 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Card } from '../card/card.entity';
 
-@Entity('cardimage')
-export class CardImage extends BaseEntity {
+@Entity('carderrata')
+export class CardErrata extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  path: string;
+  @CreateDateColumn()
+  date: Date;
 
-  @ManyToOne(() => Card, (card: Card) => card.images)
+  @Column()
+  description: string;
+
+  @ManyToOne(() => Card, (card: Card) => card.errata)
   card: Card;
 }
