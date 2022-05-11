@@ -11,6 +11,7 @@ import { CardSet } from '../cardset/cardset.entity';
 import { CardType } from '../cardtype/cardtype.entity';
 import { CardColor } from '../cardcolor/cardcolor.entity';
 import { CardStatus } from '../cardstatus/cardstatus.entity';
+import { CardTag } from '../cardtag/cardtag.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -44,9 +45,13 @@ export class Card extends BaseEntity {
   @Column()
   life: number;
 
-  @ManyToMany(() => CardColor, (color: CardColor) => color.cards)
+  @ManyToMany(() => CardColor, (colors: CardColor) => colors.cards)
   @JoinTable()
-  colors: CardColor;
+  colors: CardColor[];
+
+  @ManyToMany(() => CardTag, (tags: CardTag) => tags.cards)
+  @JoinTable()
+  tags: CardTag[];
 
   @Column()
   fr_effect: string;
