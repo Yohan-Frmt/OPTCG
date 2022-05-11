@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CardTagService } from './cardtag.service';
 import { CardTagDto } from './cardtag.dto';
 
-@Controller('CardTag')
+@Controller('cardtag')
 export class CardTagController {
   constructor(private readonly service: CardTagService) {}
 

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CardRarityService } from './cardrarity.service';
 import { CardRarityDto } from './cardrarity.dto';
 
-@Controller('CardRarity')
+@Controller('cardrarity')
 export class CardRarityController {
   constructor(private readonly service: CardRarityService) {}
 

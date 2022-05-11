@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CardImageService } from './cardimage.service';
 import { CardImageDto } from './cardimage.dto';
 
-@Controller('CardImage')
+@Controller('cardimage')
 export class CardImageController {
   constructor(private readonly service: CardImageService) {}
 

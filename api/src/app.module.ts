@@ -8,6 +8,9 @@ import { CardSetModule } from './cardset/cardset.module';
 import { CardTypeModule } from './cardtype/cardtype.module';
 import { CardColorModule } from './cardcolor/cardcolor.module';
 import { CardStatusModule } from './cardstatus/cardstatus.module';
+import { CardImageModule } from './cardimage/cardimage.module';
+import { CardTagModule } from './cardtag/cardtag.module';
+import { CardRarityModule } from './cardrarity/cardrarity.module';
 
 @Module({
   imports: [
@@ -24,6 +27,9 @@ import { CardStatusModule } from './cardstatus/cardstatus.module';
     CardTypeModule,
     CardColorModule,
     CardStatusModule,
+    CardImageModule,
+    CardTagModule,
+    CardRarityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
