@@ -2,25 +2,28 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CardSet } from '../cardset/cardset.entity';
 import { CardType } from '../cardtype/cardtype.entity';
+import { CardColor } from '../cardcolor/cardcolor.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => CardSet, (cardset: CardSet) => cardset.cards)
-  cardSet: CardSet;
+  @ManyToOne(() => CardSet, (set: CardSet) => set.cards)
+  set: CardSet;
 
   @Column()
   serial_number: string;
 
-  @ManyToOne(() => CardType, (cardType: CardType) => cardType.cards)
-  cardType: CardType;
+  @ManyToOne(() => CardType, (type: CardType) => type.cards)
+  type: CardType;
 
   @Column()
   fr_name: string;
@@ -40,7 +43,9 @@ export class Card extends BaseEntity {
   @Column()
   life: number;
 
-  // color: CardColor;
+  @ManyToMany(() => CardColor, (color: CardColor) => color.cards)
+  @JoinTable()
+  color: CardColor;
 
   @Column()
   fr_effect: string;

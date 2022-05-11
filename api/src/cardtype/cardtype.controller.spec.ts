@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CardsetController } from './cardtype.controller';
-import { CardsetService } from './cardtype.service';
+import { CardTypeController } from './cardtype.controller';
+import { CardTypeService } from './cardtype.service';
 
-describe('CardsetController', () => {
-  let controller: CardsetController;
+describe('CardTypeController', () => {
+  let controller: CardTypeController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [CardsetController],
-      providers: [CardsetService],
+      controllers: [CardTypeController],
+      providers: [CardTypeService],
     }).compile();
 
-    controller = module.get<CardsetController>(CardsetController);
+    controller = module.get<CardTypeController>(CardTypeController);
   });
 
   it('should be defined', () => {

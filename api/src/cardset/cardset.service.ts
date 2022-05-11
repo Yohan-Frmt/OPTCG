@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Card } from '../card/card.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CardSet } from './cardset.entity';

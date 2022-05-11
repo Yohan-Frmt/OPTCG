@@ -7,8 +7,8 @@ import {
 } from 'typeorm';
 import { Card } from '../card/card.entity';
 
-@Entity('cardtype')
-export class CardType extends BaseEntity {
+@Entity('cardcolor')
+export class CardColor extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -18,6 +18,9 @@ export class CardType extends BaseEntity {
   @Column()
   en_name: string;
 
-  @OneToMany(() => Card, (card: Card) => card.type)
+  @Column()
+  hex_color: string;
+
+  @OneToMany(() => Card, (card: Card) => card.color)
   cards: Card[];
 }
