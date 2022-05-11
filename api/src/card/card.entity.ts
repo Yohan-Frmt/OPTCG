@@ -14,20 +14,15 @@ import { CardColor } from '../cardcolor/cardcolor.entity';
 import { CardStatus } from '../cardstatus/cardstatus.entity';
 import { CardTag } from '../cardtag/cardtag.entity';
 import { CardImage } from '../cardimage/cardimage.entity';
+import { CardRarity } from '../cardrarity/cardrarity.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => CardSet, (set: CardSet) => set.cards)
-  set: CardSet;
-
   @Column()
   serial_number: string;
-
-  @ManyToOne(() => CardType, (type: CardType) => type.cards)
-  type: CardType;
 
   @Column()
   fr_name: string;
@@ -47,17 +42,6 @@ export class Card extends BaseEntity {
   @Column()
   life: number;
 
-  @ManyToMany(() => CardColor, (colors: CardColor) => colors.cards)
-  @JoinTable()
-  colors: CardColor[];
-
-  @ManyToMany(() => CardTag, (tags: CardTag) => tags.cards)
-  @JoinTable()
-  tags: CardTag[];
-
-  @OneToMany(() => CardImage, (images: CardImage) => images.card)
-  images: CardImage[];
-
   @Column()
   fr_effect: string;
 
@@ -67,7 +51,26 @@ export class Card extends BaseEntity {
   @Column()
   counter: number;
 
-  // rarity: CardRarity;
+  @ManyToOne(() => CardSet, (set: CardSet) => set.cards)
+  set: CardSet;
+
+  @ManyToOne(() => CardType, (type: CardType) => type.cards)
+  type: CardType;
+
+  @ManyToMany(() => CardColor, (color: CardColor) => color.cards)
+  @JoinTable()
+  colors: CardColor[];
+
+  @ManyToMany(() => CardTag, (tag: CardTag) => tag.cards)
+  @JoinTable()
+  tags: CardTag[];
+
+  @OneToMany(() => CardImage, (image: CardImage) => image.card)
+  images: CardImage[];
+
+  @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards)
+  @JoinTable()
+  rarities: CardRarity[];
 
   @ManyToOne(() => CardStatus, (status: CardStatus) => status.cards)
   status: CardStatus;
