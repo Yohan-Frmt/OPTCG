@@ -11,6 +11,7 @@ import { CardStatusModule } from './cardstatus/cardstatus.module';
 import { CardImageModule } from './cardimage/cardimage.module';
 import { CardTagModule } from './cardtag/cardtag.module';
 import { CardRarityModule } from './cardrarity/cardrarity.module';
+import { CardErrataModule } from './carderrata/carderrata.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CardRarityModule } from './cardrarity/cardrarity.module';
     CardImageModule,
     CardTagModule,
     CardRarityModule,
+    CardErrataModule,
   ],
   controllers: [AppController],
   providers: [AppService],
