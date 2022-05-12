@@ -16,7 +16,7 @@ export class CardErrataDto {
   @IsUUID()
   @IsString()
   @IsNotEmpty()
-  id: string;
+  id?: string;
 
   @IsDate()
   @IsNotEmpty()

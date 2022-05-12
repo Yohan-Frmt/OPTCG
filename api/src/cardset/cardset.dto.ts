@@ -14,7 +14,7 @@ export class CardSetDto {
   @IsUUID()
   @IsString()
   @IsNotEmpty()
-  id: string;
+  id?: string;
 
   @IsString()
   @IsNotEmpty()

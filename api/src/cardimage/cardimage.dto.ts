@@ -14,7 +14,7 @@ export class CardImageDto {
   @IsUUID()
   @IsString()
   @IsNotEmpty()
-  id: string;
+  id?: string;
 
   @IsString()
   @IsNotEmpty()

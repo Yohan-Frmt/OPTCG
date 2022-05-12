@@ -15,7 +15,7 @@ export class CardStatusDto {
   @IsUUID()
   @IsString()
   @IsNotEmpty()
-  id: string;
+  id?: string;
 
   @IsString()
   @IsNotEmpty()

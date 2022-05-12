@@ -12,7 +12,7 @@ export class CardErrataService {
   ) {}
 
   public async create(CardErrata: CardErrataDto): Promise<CardErrata> {
-    const CardErrataCreated = await this.repository.save(CardErrata);
+    const CardErrataCreated = await this.repository.create(CardErrata);
     return await this.repository.save(CardErrataCreated);
   }
 

@@ -11,7 +11,7 @@ export class CardTagService {
   ) {}
 
   public async create(card: CardTagDto): Promise<CardTag> {
-    const cardCreated = await this.repository.save(card);
+    const cardCreated = await this.repository.create(card);
     return await this.repository.save(cardCreated);
   }
 

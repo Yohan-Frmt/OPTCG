@@ -12,7 +12,7 @@ export class CardColorService {
   ) {}
 
   public async create(cardColor: CardColorDto): Promise<CardColor> {
-    const cardColorCreated = await this.repository.save(cardColor);
+    const cardColorCreated = await this.repository.create(cardColor);
     return await this.repository.save(cardColorCreated);
   }
 

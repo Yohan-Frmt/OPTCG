@@ -12,7 +12,7 @@ export class CardTypeService {
   ) {}
 
   public async create(cardType: CardTypeDto): Promise<CardType> {
-    const cardTypeCreated = await this.repository.save(cardType);
+    const cardTypeCreated = await this.repository.create(cardType);
     return await this.repository.save(cardTypeCreated);
   }
 

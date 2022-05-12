@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CardTypeService } from './cardtype.service';
 import { CardTypeDto } from './cardtype.dto';
 
@@ -7,12 +14,13 @@ export class CardTypeController {
   constructor(private readonly service: CardTypeService) {}
 
   @Get()
-  findAll(): Promise<CardTypeDto[]> {
-    return this.service.findAll();
+  public async findAll(): Promise<CardTypeDto[]> {
+    return await this.service.findAll();
   }
 
   @Post()
-  create(@Body() cardType: CardTypeDto): Promise<CardTypeDto> {
-    return this.service.create(cardType);
+  @UsePipes(new ValidationPipe({ transform: true }))
+  public async create(@Body() cardType: CardTypeDto): Promise<CardTypeDto> {
+    return await this.service.create(cardType);
   }
 }

@@ -7,12 +7,12 @@ export class CardSetController {
   constructor(private readonly service: CardSetService) {}
 
   @Get()
-  findAll(): Promise<CardSetDto[]> {
-    return this.service.findAll();
+  public async findAll(): Promise<CardSetDto[]> {
+    return await this.service.findAll();
   }
 
   @Post()
-  create(@Body() card: CardSetDto): Promise<CardSetDto> {
-    return this.service.create(card);
+  public async create(@Body() card: CardSetDto): Promise<CardSetDto> {
+    return await this.service.create(card);
   }
 }

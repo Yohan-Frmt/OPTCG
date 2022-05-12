@@ -12,7 +12,7 @@ export class CardImageService {
   ) {}
 
   public async create(cardImage: CardImageDto): Promise<CardImage> {
-    const cardImageCreated = await this.repository.save(cardImage);
+    const cardImageCreated = await this.repository.create(cardImage);
     return await this.repository.save(cardImageCreated);
   }
 

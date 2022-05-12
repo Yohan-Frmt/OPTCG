@@ -12,7 +12,7 @@ export class CardRarityService {
   ) {}
 
   public async create(CardRarity: CardRarityDto): Promise<CardRarity> {
-    const CardRarityCreated = await this.repository.save(CardRarity);
+    const CardRarityCreated = await this.repository.create(CardRarity);
     return await this.repository.save(CardRarityCreated);
   }
 

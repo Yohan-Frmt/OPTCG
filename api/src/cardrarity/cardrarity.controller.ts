@@ -7,12 +7,14 @@ export class CardRarityController {
   constructor(private readonly service: CardRarityService) {}
 
   @Get()
-  findAll(): Promise<CardRarityDto[]> {
-    return this.service.findAll();
+  public async findAll(): Promise<CardRarityDto[]> {
+    return await this.service.findAll();
   }
 
   @Post()
-  create(@Body() CardRarity: CardRarityDto): Promise<CardRarityDto> {
-    return this.service.create(CardRarity);
+  public async create(
+    @Body() CardRarity: CardRarityDto,
+  ): Promise<CardRarityDto> {
+    return await this.service.create(CardRarity);
   }
 }
