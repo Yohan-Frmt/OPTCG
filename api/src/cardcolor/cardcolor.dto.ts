@@ -1,9 +1,9 @@
 import {
-  IsDefined,
+  ArrayNotEmpty,
+  IsArray,
   IsHexColor,
   IsNotEmpty,
-  IsNotEmptyObject,
-  IsObject,
+  IsOptional,
   IsString,
   IsUUID,
   ValidateNested,
@@ -14,7 +14,7 @@ import { Type } from 'class-transformer';
 export class CardColorDto {
   @IsUUID()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   id?: string;
 
   @IsString()
@@ -30,9 +30,9 @@ export class CardColorDto {
   @IsNotEmpty()
   hex_color: string;
 
-  @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
   cards: CardDto[];

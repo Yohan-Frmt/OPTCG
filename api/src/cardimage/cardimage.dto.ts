@@ -1,8 +1,8 @@
 import {
-  IsDefined,
   IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
+  IsOptional,
   IsString,
   IsUUID,
   ValidateNested,
@@ -13,16 +13,16 @@ import { CardDto } from '../card/card.dto';
 export class CardImageDto {
   @IsUUID()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   id?: string;
 
   @IsString()
   @IsNotEmpty()
   path: string;
 
-  @IsDefined()
-  @IsNotEmptyObject()
+  @IsOptional()
   @IsObject()
+  @IsNotEmptyObject()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
   card: CardDto;

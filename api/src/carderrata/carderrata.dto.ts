@@ -1,9 +1,9 @@
 import {
   IsDate,
-  IsDefined,
   IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
+  IsOptional,
   IsString,
   IsUUID,
   ValidateNested,
@@ -15,20 +15,21 @@ import { CardDto } from '../card/card.dto';
 export class CardErrataDto {
   @IsUUID()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   id?: string;
 
   @IsDate()
   @IsNotEmpty()
-  date: Date;
+  @IsOptional()
+  date?: Date;
 
   @IsString()
   @IsNotEmpty()
   description: string;
 
-  @IsDefined()
-  @IsNotEmptyObject()
+  @IsOptional()
   @IsObject()
+  @IsNotEmptyObject()
   @ValidateNested({ each: true })
   @Type(() => CardSetDto)
   card: CardDto;
