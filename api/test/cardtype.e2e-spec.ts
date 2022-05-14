@@ -32,7 +32,7 @@ describe('CardTypeController (e2e)', () => {
     await app.init();
   });
 
-  it('/api/cardtype (GET)', () => {
+  it('/cardtype (GET)', () => {
     return request(app.getHttpServer())
       .get('/cardtype')
       .expect('Content-type', /json/)
@@ -44,7 +44,6 @@ describe('CardTypeController (e2e)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
-      cards: [],
     };
     return request(app.getHttpServer())
       .post('/cardtype')
@@ -64,7 +63,6 @@ describe('CardTypeController (e2e)', () => {
   it('/cardtype (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
-      cards: [],
     };
     return request(app.getHttpServer())
       .post('/cardtype')
@@ -82,7 +80,6 @@ describe('CardTypeController (e2e)', () => {
   it('/cardtype (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
-      cards: [],
     };
     return request(app.getHttpServer())
       .post('/cardtype')
@@ -93,24 +90,6 @@ describe('CardTypeController (e2e)', () => {
         expect(response.body.message).toEqual([
           'fr_name should not be empty',
           'fr_name must be a string',
-        ]);
-      });
-  });
-
-  it('/cardtype (POST) --> Validation Error cards is empty', () => {
-    const dto = {
-      fr_name: 'test',
-      en_name: 'test',
-    };
-    return request(app.getHttpServer())
-      .post('/cardtype')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toEqual([
-          'cards should not be null or undefined',
-          'cards must be an array',
         ]);
       });
   });
