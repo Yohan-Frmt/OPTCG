@@ -1,19 +1,19 @@
 import { Test } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
-import { CardTypeModule } from '../src/cardtype/cardtype.module';
-import { CardType } from '../src/cardtype/cardtype.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
-import { CardTypeService } from '../src/cardtype/cardtype.service';
-import { CardTypeController } from '../src/cardtype/cardtype.controller';
 import { randomUUID } from 'crypto';
+import { CardSetModule } from '../src/cardset/cardset.module';
+import { CardSetService } from '../src/cardset/cardset.service';
+import { CardSetController } from '../src/cardset/cardset.controller';
+import { CardSet } from '../src/cardset/cardset.entity';
 
-describe('CardTypeController (e2e)', () => {
+describe('CardSetController (e2e)', () => {
   let app: INestApplication;
-  let controller: CardTypeController;
-  let service: CardTypeService;
-  let repository: Repository<CardType>;
+  let controller: CardSetController;
+  let service: CardSetService;
+  let repository: Repository<CardSet>;
 
   const mockRepository = {
     find: jest.fn(() => Promise.resolve([])),
@@ -28,35 +28,35 @@ describe('CardTypeController (e2e)', () => {
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [CardTypeModule, TypeOrmModule.forFeature([CardType])],
+      imports: [CardSetModule, TypeOrmModule.forFeature([CardSet])],
     })
-      .overrideProvider(getRepositoryToken(CardType))
+      .overrideProvider(getRepositoryToken(CardSet))
       .useValue(mockRepository)
       .compile();
 
     app = moduleRef.createNestApplication();
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
     await app.init();
-    repository = moduleRef.get(getRepositoryToken(CardType));
-    service = new CardTypeService(repository);
-    controller = new CardTypeController(service);
+    repository = moduleRef.get(getRepositoryToken(CardSet));
+    service = new CardSetService(repository);
+    controller = new CardSetController(service);
   });
 
-  it('/cardtype (GET)', async () => {
+  it('/cardset (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/cardtype')
+      .get('/cardset')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await service.findAll());
   });
 
-  it('/cardtype (POST)', () => {
+  it('/cardset (POST)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardset')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -70,12 +70,12 @@ describe('CardTypeController (e2e)', () => {
       });
   });
 
-  it('/cardtype (POST) --> Validation Error en_name is empty', () => {
+  it('/cardset (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardset')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -84,13 +84,13 @@ describe('CardTypeController (e2e)', () => {
       });
   });
 
-  it('/cardtype (POST) --> Validation Error en_name is not a string', () => {
+  it('/cardset (POST) --> Validation Error en_name is not a string', () => {
     const dto = {
       fr_name: 'test',
       en_name: 123,
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardset')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -99,12 +99,12 @@ describe('CardTypeController (e2e)', () => {
       });
   });
 
-  it('/cardtype (POST) --> Validation Error fr_name is empty', () => {
+  it('/cardset (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardset')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -113,13 +113,13 @@ describe('CardTypeController (e2e)', () => {
       });
   });
 
-  it('/cardtype (POST) --> Validation Error fr_name is not a string', () => {
+  it('/cardset (POST) --> Validation Error fr_name is not a string', () => {
     const dto = {
       fr_name: 123,
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardset')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

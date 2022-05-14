@@ -1,10 +1,12 @@
 import {
+  ArrayNotEmpty,
   IsArray,
   IsDefined,
   IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   IsUUID,
   ValidateNested,
@@ -21,7 +23,7 @@ import { CardErrataDto } from '../carderrata/carderrata.dto';
 export class CardDto {
   @IsUUID()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   id?: string;
 
   @IsString()
@@ -79,43 +81,38 @@ export class CardDto {
   type: CardTypeDto;
 
   @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @ArrayNotEmpty()
+  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CardColorDto)
-  @IsArray()
   colors: CardColorDto[];
 
   @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @ArrayNotEmpty()
+  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CardTypeDto)
-  @IsArray()
   tags: CardTypeDto[];
 
   @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @ArrayNotEmpty()
+  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CardImageDto)
-  @IsArray()
   images: CardImageDto[];
 
   @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @ArrayNotEmpty()
+  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CardRarityDto)
-  @IsArray()
   rarities: CardRarityDto[];
 
   @IsDefined()
-  @IsNotEmptyObject()
-  @IsObject()
+  @ArrayNotEmpty()
+  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CardErrataDto)
-  @IsArray()
   errata: CardErrataDto[];
 
   @IsDefined()

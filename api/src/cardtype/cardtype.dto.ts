@@ -1,9 +1,7 @@
 import {
+  ArrayNotEmpty,
   IsArray,
-  IsDefined,
   IsNotEmpty,
-  IsNotEmptyObject,
-  IsObject,
   IsOptional,
   IsString,
   IsUUID,
@@ -26,8 +24,9 @@ export class CardTypeDto {
   @IsNotEmpty()
   en_name: string;
 
-  @IsDefined()
+  @IsOptional()
   @IsArray()
+  @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
   cards: CardDto[];

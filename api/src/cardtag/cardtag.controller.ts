@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { CardTagService } from './cardtag.service';
 import { CardTagDto } from './cardtag.dto';
 
@@ -12,6 +19,7 @@ export class CardTagController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe({ transform: true }))
   public async create(@Body() card: CardTagDto): Promise<CardTagDto> {
     return await this.service.create(card);
   }
