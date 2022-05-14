@@ -1,8 +1,8 @@
 import {
-  ArrayNotEmpty,
-  IsArray,
+  IsDefined,
   IsNotEmpty,
-  IsOptional,
+  IsNotEmptyObject,
+  IsObject,
   IsString,
   IsUUID,
   ValidateNested,
@@ -13,7 +13,7 @@ import { CardDto } from '../card/card.dto';
 export class CardRarityDto {
   @IsUUID()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   id?: string;
 
   @IsString()
@@ -24,9 +24,9 @@ export class CardRarityDto {
   @IsNotEmpty()
   en_name: string;
 
-  @IsOptional()
-  @IsArray()
-  @ArrayNotEmpty()
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
   cards: CardDto[];

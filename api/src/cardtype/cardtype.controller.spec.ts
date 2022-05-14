@@ -7,7 +7,6 @@ describe('CardTypeController', () => {
   let controller: CardTypeController;
 
   const mockService = {
-    findAll: jest.fn(() => Promise.resolve([])),
     create: jest.fn((dto) => {
       return {
         id: randomUUID(),
@@ -32,10 +31,6 @@ describe('CardTypeController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should find all type', async () => {
-    expect(await controller.findAll()).toEqual([]);
-  });
-
   it('should create a new type', async () => {
     const dto = {
       fr_name: 'tester',
@@ -46,7 +41,9 @@ describe('CardTypeController', () => {
       id: expect.stringMatching(
         /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
       ),
-      ...dto,
+      fr_name: 'tester',
+      en_name: 'test',
+      cards: [],
     });
   });
 });

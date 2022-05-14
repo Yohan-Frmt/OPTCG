@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CardStatusService } from './cardstatus.service';
 import { CardStatusDto } from './cardstatus.dto';
 
@@ -19,7 +12,6 @@ export class CardStatusController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe({ transform: true }))
   public async create(
     @Body() CardStatus: CardStatusDto,
   ): Promise<CardStatusDto> {

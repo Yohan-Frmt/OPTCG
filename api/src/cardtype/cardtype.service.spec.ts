@@ -3,13 +3,11 @@ import { CardTypeService } from './cardtype.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CardType } from './cardtype.entity';
 import { randomUUID } from 'crypto';
-import * as request from 'supertest';
 
 describe('CardTypeService', () => {
   let service: CardTypeService;
   const repositoryToken = getRepositoryToken(CardType);
   const mockRepository = {
-    find: jest.fn(() => Promise.resolve([])),
     create: jest.fn((dto) => dto),
     save: jest.fn((cardType) =>
       Promise.resolve({
@@ -35,10 +33,6 @@ describe('CardTypeService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-  });
-
-  it('should find all type', async () => {
-    expect(await service.findAll()).toEqual([]);
   });
 
   it('should create a new card type', async () => {

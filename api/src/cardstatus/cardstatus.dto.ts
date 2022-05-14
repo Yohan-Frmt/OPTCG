@@ -1,13 +1,11 @@
 import {
-  ArrayNotEmpty,
-  IsArray,
+  IsDefined,
   IsNotEmpty,
+  IsNotEmptyObject,
   IsNumber,
-  IsOptional,
+  IsObject,
   IsString,
   IsUUID,
-  Max,
-  Min,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -16,7 +14,7 @@ import { CardDto } from '../card/card.dto';
 export class CardStatusDto {
   @IsUUID()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   id?: string;
 
   @IsString()
@@ -29,13 +27,11 @@ export class CardStatusDto {
 
   @IsNumber()
   @IsNotEmpty()
-  @Min(0)
-  @Max(4)
   max_amount: number;
 
-  @IsOptional()
-  @IsArray()
-  @ArrayNotEmpty()
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
   cards: CardDto[];
