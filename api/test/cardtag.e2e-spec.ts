@@ -47,7 +47,7 @@ describe('CardTagController (e2e)', () => {
       .get('/cardtag')
       .expect('Content-type', /json/)
       .expect(200)
-      .expect(await service.findAll());
+      .expect(await controller.findAll());
   });
 
   it('/cardtag (POST)', () => {

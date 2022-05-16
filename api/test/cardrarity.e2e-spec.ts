@@ -47,7 +47,7 @@ describe('CardRarityController (e2e)', () => {
       .get('/cardrarity')
       .expect('Content-type', /json/)
       .expect(200)
-      .expect(await service.findAll());
+      .expect(await controller.findAll());
   });
 
   it('/cardrarity (POST)', () => {

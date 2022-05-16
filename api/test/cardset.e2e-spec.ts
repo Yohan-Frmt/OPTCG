@@ -47,7 +47,7 @@ describe('CardSetController (e2e)', () => {
       .get('/cardset')
       .expect('Content-type', /json/)
       .expect(200)
-      .expect(await service.findAll());
+      .expect(await controller.findAll());
   });
 
   it('/cardset (POST)', () => {

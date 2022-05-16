@@ -49,7 +49,7 @@ describe('CardErrataController (e2e)', () => {
       .get('/carderrata')
       .expect('Content-type', /json/)
       .expect(200)
-      .expect(await service.findAll());
+      .expect(await controller.findAll());
   });
 
   it('/carderrata (POST)', () => {

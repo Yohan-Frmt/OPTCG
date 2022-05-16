@@ -47,7 +47,7 @@ describe('CardImageController (e2e)', () => {
       .get('/cardimage')
       .expect('Content-type', /json/)
       .expect(200)
-      .expect(await service.findAll());
+      .expect(await controller.findAll());
   });
 
   it('/cardimage (POST)', () => {

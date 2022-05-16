@@ -47,7 +47,7 @@ describe('CardColorController (e2e)', () => {
       .get('/cardcolor')
       .expect('Content-type', /json/)
       .expect(200)
-      .expect(await service.findAll());
+      .expect(await controller.findAll());
   });
 
   it('/cardcolor (POST)', () => {
