@@ -29,5 +29,5 @@ export class CardSetDto {
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
-  cards: CardDto[];
+  cards?: CardDto[];
 }

@@ -35,5 +35,5 @@ export class CardColorDto {
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
-  cards: CardDto[];
+  cards?: CardDto[];
 }

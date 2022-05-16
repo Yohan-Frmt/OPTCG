@@ -32,5 +32,5 @@ export class CardErrataDto {
   @IsNotEmptyObject()
   @ValidateNested({ each: true })
   @Type(() => CardSetDto)
-  card: CardDto;
+  card?: CardDto;
 }

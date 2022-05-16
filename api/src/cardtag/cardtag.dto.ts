@@ -29,5 +29,5 @@ export class CardTagDto {
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
-  cards: CardDto[];
+  cards?: CardDto[];
 }

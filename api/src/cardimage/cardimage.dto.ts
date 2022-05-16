@@ -25,5 +25,5 @@ export class CardImageDto {
   @IsNotEmptyObject()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
-  card: CardDto;
+  card?: CardDto;
 }

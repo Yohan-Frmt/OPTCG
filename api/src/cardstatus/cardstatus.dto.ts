@@ -38,5 +38,5 @@ export class CardStatusDto {
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => CardDto)
-  cards: CardDto[];
+  cards?: CardDto[];
 }

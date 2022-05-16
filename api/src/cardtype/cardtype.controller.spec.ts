@@ -35,7 +35,6 @@ describe('CardTypeController', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
-      cards: [],
     };
     expect(await controller.create(dto)).toEqual({
       id: expect.stringMatching(
@@ -43,7 +42,6 @@ describe('CardTypeController', () => {
       ),
       fr_name: 'tester',
       en_name: 'test',
-      cards: [],
     });
   });
 });

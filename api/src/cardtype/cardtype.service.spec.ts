@@ -39,7 +39,6 @@ describe('CardTypeService', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
-      cards: [],
     };
     expect(await service.create(dto)).toEqual({
       id: expect.stringMatching(
