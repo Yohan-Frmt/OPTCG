@@ -3,10 +3,10 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { UserPronounModule } from '../src/userpronoun/userpronoun.module';
-import { UserPronoun } from '../src/userpronoun/userpronoun.entity';
+import { UserRegionModule } from '../src/userregion/userregion.module';
+import { UserRegion } from '../src/userregion/userregion.entity';
 
-describe('UserPronounController (e2e)', () => {
+describe('UserRegionController (e2e)', () => {
   let app: INestApplication;
 
   const mockRepository = {
@@ -22,9 +22,9 @@ describe('UserPronounController (e2e)', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [UserPronounModule],
+      imports: [UserRegionModule],
     })
-      .overrideProvider(getRepositoryToken(UserPronoun))
+      .overrideProvider(getRepositoryToken(UserRegion))
       .useValue(mockRepository)
       .compile();
 
@@ -32,21 +32,21 @@ describe('UserPronounController (e2e)', () => {
     await app.init();
   });
 
-  it('/userpronoun (GET)', () => {
+  it('/userregion (GET)', () => {
     return request(app.getHttpServer())
-      .get('/userpronoun')
+      .get('/userregion')
       .expect('Content-type', /json/)
       .expect(200)
       .expect([]);
   });
 
-  it('/userpronoun (POST)', () => {
+  it('/userregion (POST)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userregion')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -60,12 +60,12 @@ describe('UserPronounController (e2e)', () => {
       });
   });
 
-  it('/userpronoun (POST) --> Validation Error en_name is empty', () => {
+  it('/userregion (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userregion')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -74,12 +74,12 @@ describe('UserPronounController (e2e)', () => {
       });
   });
 
-  it('/userpronoun (POST) --> Validation Error fr_name is empty', () => {
+  it('/userregion (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userregion')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -87,13 +87,12 @@ describe('UserPronounController (e2e)', () => {
         expect(response.body.message).toContain('fr_name should not be empty');
       });
   });
-
-  it('/userpronoun (POST) --> Validation Error en_name is not a string', () => {
+  it('/userregion (POST) --> Validation Error en_name is not a string', () => {
     const dto = {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userregion')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -102,12 +101,12 @@ describe('UserPronounController (e2e)', () => {
       });
   });
 
-  it('/userpronoun (POST) --> Validation Error fr_name is not a string', () => {
+  it('/userregion (POST) --> Validation Error fr_name is not a string', () => {
     const dto = {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userregion')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

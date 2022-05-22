@@ -14,8 +14,8 @@ export class UserCountryController {
   constructor(private readonly service: UserCountryService) {}
 
   @Get()
-  findAll(): Promise<UserCountryDto[]> {
-    return this.service.findAll();
+  public async findAll(): Promise<UserCountryDto[]> {
+    return await this.service.findAll();
   }
 
   @Post()

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from '../user/user.entity';
 
 @Entity('userpronoun')
 export class UserPronoun {
@@ -11,6 +12,6 @@ export class UserPronoun {
   @Column()
   en_name: string;
 
-  // @ManyToMany(() => User, (user: User) => user.pronouns)
-  // users: User[]
+  @ManyToMany(() => User, (user: User) => user.pronouns)
+  users: User[];
 }

@@ -15,8 +15,8 @@ export class UserCountryService {
     return await this.repository.find();
   }
 
-  public async create(userPronoun: UserCountryDto): Promise<UserCountry> {
-    const userPronounCreated = await this.repository.create(userPronoun);
+  public async create(userCountry: UserCountryDto): Promise<UserCountry> {
+    const userPronounCreated = this.repository.create(userCountry);
     return await this.repository.save(userPronounCreated);
   }
 }

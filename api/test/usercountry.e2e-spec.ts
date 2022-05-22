@@ -72,10 +72,23 @@ describe('UserCountryController (e2e)', () => {
       .expect('Content-type', /json/)
       .expect(400)
       .then((response) => {
-        expect(response.body.message).toEqual([
-          'en_name should not be empty',
-          'en_name must be a string',
-        ]);
+        expect(response.body.message).toContain('en_name should not be empty');
+      });
+  });
+
+  it('/usercountry (POST) --> Validation Error en_name is not a string', () => {
+    const dto = {
+      fr_name: 'test',
+      en_name: 123,
+      iso_code: 'FR',
+    };
+    return request(app.getHttpServer())
+      .post('/usercountry')
+      .send(dto)
+      .expect('Content-type', /json/)
+      .expect(400)
+      .then((response) => {
+        expect(response.body.message).toContain('en_name must be a string');
       });
   });
 
@@ -90,10 +103,23 @@ describe('UserCountryController (e2e)', () => {
       .expect('Content-type', /json/)
       .expect(400)
       .then((response) => {
-        expect(response.body.message).toEqual([
-          'fr_name should not be empty',
-          'fr_name must be a string',
-        ]);
+        expect(response.body.message).toContain('fr_name should not be empty');
+      });
+  });
+
+  it('/usercountry (POST) --> Validation Error fr_name is not a string', () => {
+    const dto = {
+      fr_name: 123,
+      en_name: 'test',
+      iso_code: 'FR',
+    };
+    return request(app.getHttpServer())
+      .post('/usercountry')
+      .send(dto)
+      .expect('Content-type', /json/)
+      .expect(400)
+      .then((response) => {
+        expect(response.body.message).toContain('fr_name must be a string');
       });
   });
 
@@ -108,10 +134,41 @@ describe('UserCountryController (e2e)', () => {
       .expect('Content-type', /json/)
       .expect(400)
       .then((response) => {
-        expect(response.body.message).toEqual([
-          'iso_code should not be empty',
-          'iso_code must be a string',
-        ]);
+        expect(response.body.message).toContain('iso_code should not be empty');
+      });
+  });
+
+  it('/usercountry (POST) --> Validation Error iso_code is not a string', () => {
+    const dto = {
+      fr_name: 'tester',
+      en_name: 'test',
+      iso_code: 123,
+    };
+    return request(app.getHttpServer())
+      .post('/usercountry')
+      .send(dto)
+      .expect('Content-type', /json/)
+      .expect(400)
+      .then((response) => {
+        expect(response.body.message).toContain('iso_code must be a string');
+      });
+  });
+
+  it('/usercountry (POST) --> Validation Error iso_code is empty', () => {
+    const dto = {
+      fr_name: 'tester',
+      en_name: 'test',
+      iso_code: 'SDF',
+    };
+    return request(app.getHttpServer())
+      .post('/usercountry')
+      .send(dto)
+      .expect('Content-type', /json/)
+      .expect(400)
+      .then((response) => {
+        expect(response.body.message).toContain(
+          'iso_code must be a valid ISO31661 Alpha2 code',
+        );
       });
   });
 });

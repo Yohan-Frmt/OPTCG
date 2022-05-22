@@ -1,41 +1,45 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { randomUUID } from 'crypto';
-import { UserCountryController } from './usercountry.controller';
-import { UserCountryService } from './usercountry.service';
+import { UserRegionController } from './userregion.controller';
+import { UserRegionService } from './userregion.service';
 
-describe('UserCountryController', () => {
-  let controller: UserCountryController;
+describe('UserRegionController', () => {
+  let controller: UserRegionController;
 
   const mockService = {
     findAll: jest.fn(() => Promise.resolve([])),
-    create: jest.fn((dto) => Promise.resolve({ id: randomUUID(), ...dto })),
+    create: jest.fn((dto) => {
+      return {
+        id: randomUUID(),
+        ...dto,
+      };
+    }),
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [UserCountryController],
-      providers: [UserCountryService],
+      controllers: [UserRegionController],
+      providers: [UserRegionService],
     })
-      .overrideProvider(UserCountryService)
+      .overrideProvider(UserRegionService)
       .useValue(mockService)
       .compile();
 
-    controller = module.get<UserCountryController>(UserCountryController);
+    controller = module.get<UserRegionController>(UserRegionController);
   });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should find all countries', async () => {
+  it('should find all pronouns', async () => {
     expect(await controller.findAll()).toEqual([]);
   });
 
-  it('should create a new country', async () => {
+  it('should create a new pronoun', async () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
-      iso_code: 'FR',
     };
     expect(await controller.create(dto)).toEqual({
       id: expect.stringMatching(
@@ -43,7 +47,6 @@ describe('UserCountryController', () => {
       ),
       fr_name: 'tester',
       en_name: 'test',
-      iso_code: 'FR',
     });
   });
 });
