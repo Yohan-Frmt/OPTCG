@@ -41,6 +41,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+*.http
 api/package-lock.json
 api/yarn.lock
 client/yarn.lock
