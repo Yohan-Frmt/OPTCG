@@ -12,9 +12,9 @@ const connectionOptions: ConnectionOptions = {
   entities: ['dist/**/**.entity{.ts,.js}'],
   synchronize: false,
   logging: true,
-  migrations: ['dist/migrations/**/*{.ts,.js}'],
+  migrations: ['dist/src/migrations/**/*{.ts,.js}'],
   cli: {
-    migrationsDir: 'migrations',
+    migrationsDir: 'src/migrations',
   },
   dropSchema: false,
   migrationsRun: true,
