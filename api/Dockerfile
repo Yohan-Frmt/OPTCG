@@ -7,12 +7,10 @@ WORKDIR /usr/src/app
 
 # Copy the application files to the container
 COPY package*.json ./
+COPY tsconfig.build.json ./
 
 # Install dependencies
 RUN npm install
-
-# Bundle the application
-COPY . .
 
 # Build the application
 RUN npm run build

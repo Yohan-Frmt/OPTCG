@@ -9,7 +9,7 @@ WORKDIR /usr/client/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN yarn
+RUN npm install
 RUN npm install -g @angular/cli@latest
 
 # Bundle the application
