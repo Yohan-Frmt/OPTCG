@@ -9,7 +9,7 @@ export class DeckVisibilityController {
         
     }
 
-    @Get("/")
+    @Get("")
     findAll() {
         return this.service.findAll()
     }

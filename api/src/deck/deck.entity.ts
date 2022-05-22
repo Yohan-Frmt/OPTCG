@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, Generated, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { DeckVisibility } from 'src/deckvisibility/deckvisibility.entity';
-import { User } from 'src/user/user.entity';
+import { DeckVisibility } from '../deckvisibility/deckvisibility.entity';
+import { User } from '../user/user.entity';
 @Entity()
 export class Deck {
    @PrimaryGeneratedColumn("uuid")
@@ -9,17 +9,17 @@ export class Deck {
    @Column({length: 50})
    name: string;
 
-   /*@Column()
-   author: User ; // TODO*/
+   @ManyToOne(type => User)
+   author: User ;
 
    @Column()
    content: string;
 
    @CreateDateColumn()
-   created_on
+   created_at
 
    @UpdateDateColumn()
-   updated_on
+   updated_at
 
    @ManyToOne(type => DeckVisibility)
    visibility: DeckVisibility
