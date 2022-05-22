@@ -9,7 +9,7 @@ import {
 import { UserRegionService } from './userregion.service';
 import { UserRegionDto } from './userregion.dto';
 
-@Controller('userregion')
+@Controller('userregions')
 export class UserRegionController {
   constructor(private readonly service: UserRegionService) {}
 

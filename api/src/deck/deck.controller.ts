@@ -4,7 +4,7 @@ import { DeckDto } from './deck.dto';
 import { DeckRepository } from './deck.repository';
 import { DeckService } from './deck.service';
 
-@Controller('deck')
+@Controller('decks')
 export class DeckController {
     constructor(private readonly service: DeckService) {
         

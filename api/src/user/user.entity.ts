@@ -52,7 +52,7 @@ export class User {
   pronouns: UserPronoun[];
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @Column({ type: 'timestamptz' })
   last_login: Date;

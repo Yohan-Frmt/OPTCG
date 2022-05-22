@@ -69,15 +69,15 @@ describe('UserController (e2e)', () => {
     controller = new UserController(service);
   });
 
-  it('/user (GET)', async () => {
+  it('/users (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/user')
+      .get('/users')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await controller.findAll());
   });
 
-  it('/user (POST) with no store', () => {
+  it('/users (POST) with no store', () => {
     const dto = {
       email: 'john@Doe.com',
       username: 'John',
@@ -91,7 +91,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -120,7 +120,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -143,7 +143,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -165,7 +165,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -188,7 +188,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -210,7 +210,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -233,7 +233,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -256,7 +256,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -280,7 +280,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .then((response) => {
@@ -309,7 +309,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -332,7 +332,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -355,7 +355,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -379,7 +379,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .then((response) => {
@@ -408,7 +408,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -433,7 +433,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -457,7 +457,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -482,7 +482,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -506,7 +506,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -531,7 +531,7 @@ describe('UserController (e2e)', () => {
       pronouns: [pronouns],
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -555,7 +555,7 @@ describe('UserController (e2e)', () => {
       stores,
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -580,7 +580,7 @@ describe('UserController (e2e)', () => {
       pronouns: 'pronouns',
     };
     return request(app.getHttpServer())
-      .post('/user')
+      .post('/users')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

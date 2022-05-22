@@ -34,7 +34,7 @@ describe('UserCountryController (e2e)', () => {
 
   it('/usercountry (GET)', () => {
     return request(app.getHttpServer())
-      .get('/usercountry')
+      .get('/usercountries')
       .expect('Content-type', /json/)
       .expect(200)
       .expect([]);
@@ -47,7 +47,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 'FR',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -67,7 +67,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 'FR',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -83,7 +83,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 'FR',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -98,7 +98,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 'FR',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -114,7 +114,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 'FR',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -129,7 +129,7 @@ describe('UserCountryController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -145,7 +145,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 123,
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -161,7 +161,7 @@ describe('UserCountryController (e2e)', () => {
       iso_code: 'SDF',
     };
     return request(app.getHttpServer())
-      .post('/usercountry')
+      .post('/usercountries')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

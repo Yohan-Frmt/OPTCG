@@ -34,7 +34,7 @@ describe('UserStoreController (e2e)', () => {
 
   it('/userstore (GET)', () => {
     return request(app.getHttpServer())
-      .get('/userstore')
+      .get('/userstores')
       .expect('Content-type', /json/)
       .expect(200)
       .expect([]);
@@ -48,7 +48,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -69,7 +69,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -85,7 +85,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201);
@@ -98,7 +98,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -113,7 +113,7 @@ describe('UserStoreController (e2e)', () => {
       zip_code: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -130,7 +130,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -147,7 +147,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -164,7 +164,7 @@ describe('UserStoreController (e2e)', () => {
       city: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -180,7 +180,7 @@ describe('UserStoreController (e2e)', () => {
       city: 123,
     };
     return request(app.getHttpServer())
-      .post('/userstore')
+      .post('/userstores')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

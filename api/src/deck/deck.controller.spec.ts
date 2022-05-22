@@ -38,7 +38,6 @@ describe('deck Controller', () => {
   it('should return created object with a new id', async () => {
     const deckDto = {
       name: "name",
-      author: {id: "IDAUTHOR"},
       content: "{}",
       visibility: new DeckVisibility(),
       description: "description"
@@ -50,7 +49,6 @@ describe('deck Controller', () => {
       created_at: expect.any(Date),
       updated_at: expect.any(Date),
       name: "name",
-      author: {id: "IDAUTHOR"},
       content: "{}",
       visibility: new DeckVisibility(),
       description: "description"

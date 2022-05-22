@@ -9,7 +9,7 @@ import {
 import { UserCountryService } from './usercountry.service';
 import { UserCountryDto } from './usercountry.dto';
 
-@Controller('usercountry')
+@Controller('usercountries')
 export class UserCountryController {
   constructor(private readonly service: UserCountryService) {}
 

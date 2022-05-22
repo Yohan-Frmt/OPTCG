@@ -34,7 +34,7 @@ describe('UserRegionController (e2e)', () => {
 
   it('/userregion (GET)', () => {
     return request(app.getHttpServer())
-      .get('/userregion')
+      .get('/userregions')
       .expect('Content-type', /json/)
       .expect(200)
       .expect([]);
@@ -46,7 +46,7 @@ describe('UserRegionController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userregion')
+      .post('/userregions')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -65,7 +65,7 @@ describe('UserRegionController (e2e)', () => {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userregion')
+      .post('/userregions')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -79,7 +79,7 @@ describe('UserRegionController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userregion')
+      .post('/userregions')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -92,7 +92,7 @@ describe('UserRegionController (e2e)', () => {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userregion')
+      .post('/userregions')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -106,7 +106,7 @@ describe('UserRegionController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userregion')
+      .post('/userregions')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

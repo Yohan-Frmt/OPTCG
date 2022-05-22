@@ -34,7 +34,7 @@ describe('UserPronounController (e2e)', () => {
 
   it('/userpronoun (GET)', () => {
     return request(app.getHttpServer())
-      .get('/userpronoun')
+      .get('/userpronouns')
       .expect('Content-type', /json/)
       .expect(200)
       .expect([]);
@@ -46,7 +46,7 @@ describe('UserPronounController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userpronouns')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -65,7 +65,7 @@ describe('UserPronounController (e2e)', () => {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userpronouns')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -79,7 +79,7 @@ describe('UserPronounController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userpronouns')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -93,7 +93,7 @@ describe('UserPronounController (e2e)', () => {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userpronouns')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -107,7 +107,7 @@ describe('UserPronounController (e2e)', () => {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/userpronoun')
+      .post('/userpronouns')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

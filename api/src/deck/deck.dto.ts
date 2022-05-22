@@ -4,6 +4,7 @@ import { DeckVisibilityDto } from '../deckvisibility/deckvisibility.dto';
 import { Deck } from "../deck/deck.entity";
 import { DeckVisibility } from "../deckvisibility/deckvisibility.entity";
 import { User } from '../user/user.entity';
+import { UserDto } from '../user/user.dto';
 
 export class DeckDto {
     @IsUUID()
@@ -22,7 +23,8 @@ export class DeckDto {
     @IsNotEmptyObject()
     @ValidateNested({each: true})
     @Type(()=>UserDto)
-    readonly author: UserDto;
+    @IsOptional() // TODO: REMOVE ISOPTIONAL QUAND TESTS COMPLETS
+    readonly author?: UserDto;
 
 
     @IsString()

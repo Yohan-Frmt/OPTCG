@@ -9,7 +9,7 @@ import {
 import { UserStoreService } from './userstore.service';
 import { UserStoreDto } from './userstore.dto';
 
-@Controller('userstore')
+@Controller('userstores')
 export class UserStoreController {
   constructor(private readonly service: UserStoreService) {}
 

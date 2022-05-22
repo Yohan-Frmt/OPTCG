@@ -9,7 +9,7 @@ import {
 import { UserPronounService } from './userpronoun.service';
 import { UserPronounDto } from './userpronoun.dto';
 
-@Controller('userpronoun')
+@Controller('userpronouns')
 export class UserPronounController {
   constructor(private readonly service: UserPronounService) {}
 
