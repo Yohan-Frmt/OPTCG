@@ -9,7 +9,7 @@ import {
 import { CardColorService } from './cardcolor.service';
 import { CardColorDto } from './cardcolor.dto';
 
-@Controller('cardcolor')
+@Controller('cardcolors')
 export class CardColorController {
   constructor(private readonly service: CardColorService) {}
 

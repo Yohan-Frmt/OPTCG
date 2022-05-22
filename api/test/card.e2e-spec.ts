@@ -82,15 +82,15 @@ describe('CardController (e2e)', () => {
     controller = new CardController(service);
   });
 
-  it('/card (GET)', async () => {
+  it('/cards (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/card')
+      .get('/cards')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await controller.findAll());
   });
 
-  it('/card (POST)', () => {
+  it('/cards (POST)', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -114,7 +114,7 @@ describe('CardController (e2e)', () => {
 
     return (
       request(app.getHttpServer())
-        .post('/card')
+        .post('/cards')
         .send(dto)
         .expect('Content-type', /json/)
         // .expect(201)
@@ -129,7 +129,7 @@ describe('CardController (e2e)', () => {
     );
   });
 
-  it('/card (POST) --> Validation Error serial_number is empty ', () => {
+  it('/cards (POST) --> Validation Error serial_number is empty ', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
@@ -151,7 +151,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -162,7 +162,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error serial_number is not a string ', () => {
+  it('/cards (POST) --> Validation Error serial_number is not a string ', () => {
     const dto = {
       serial_number: 123456789,
       fr_name: 'tester',
@@ -185,7 +185,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -196,7 +196,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error fr_name is empty ', () => {
+  it('/cards (POST) --> Validation Error fr_name is empty ', () => {
     const dto = {
       serial_number: '123456789',
       en_name: 'test',
@@ -218,7 +218,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -227,7 +227,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error fr_name is not a string ', () => {
+  it('/cards (POST) --> Validation Error fr_name is not a string ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 123,
@@ -250,7 +250,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -259,7 +259,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error en_name is empty ', () => {
+  it('/cards (POST) --> Validation Error en_name is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'test',
@@ -281,7 +281,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -290,7 +290,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error en_name is not a string ', () => {
+  it('/cards (POST) --> Validation Error en_name is not a string ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -313,7 +313,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -322,7 +322,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error jp_name is empty ', () => {
+  it('/cards (POST) --> Validation Error jp_name is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -344,7 +344,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -353,7 +353,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error jp_name is not a string ', () => {
+  it('/cards (POST) --> Validation Error jp_name is not a string ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -376,7 +376,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -385,7 +385,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error cost is empty ', () => {
+  it('/cards (POST) --> Validation Error cost is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -407,7 +407,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -416,7 +416,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error cost is not a number ', () => {
+  it('/cards (POST) --> Validation Error cost is not a number ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -439,7 +439,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -450,7 +450,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error power is empty ', () => {
+  it('/cards (POST) --> Validation Error power is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -472,7 +472,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -481,7 +481,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error power is not a number ', () => {
+  it('/cards (POST) --> Validation Error power is not a number ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -504,7 +504,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -515,7 +515,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error life is empty ', () => {
+  it('/cards (POST) --> Validation Error life is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -537,7 +537,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -546,7 +546,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error life is not a number ', () => {
+  it('/cards (POST) --> Validation Error life is not a number ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -569,7 +569,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -580,7 +580,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error fr_effect is empty ', () => {
+  it('/cards (POST) --> Validation Error fr_effect is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -602,7 +602,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -613,7 +613,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error fr_effect is not a string ', () => {
+  it('/cards (POST) --> Validation Error fr_effect is not a string ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -636,7 +636,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -645,7 +645,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error en_effect is empty ', () => {
+  it('/cards (POST) --> Validation Error en_effect is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -667,7 +667,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -678,7 +678,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error en_effect is not a string ', () => {
+  it('/cards (POST) --> Validation Error en_effect is not a string ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -701,7 +701,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -710,7 +710,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error counter is empty ', () => {
+  it('/cards (POST) --> Validation Error counter is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -732,7 +732,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -741,7 +741,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error counter is not a number ', () => {
+  it('/cards (POST) --> Validation Error counter is not a number ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -764,7 +764,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -775,7 +775,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error set is not defined ', () => {
+  it('/cards (POST) --> Validation Error set is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -797,7 +797,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -808,7 +808,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error set is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error set is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -831,7 +831,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -842,7 +842,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error type is not defined ', () => {
+  it('/cards (POST) --> Validation Error type is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -864,7 +864,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -875,7 +875,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error type is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error type is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -898,7 +898,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -909,7 +909,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error colors is not defined ', () => {
+  it('/cards (POST) --> Validation Error colors is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -931,7 +931,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -942,7 +942,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error colors is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error colors is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -965,7 +965,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -976,7 +976,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error colors is empty ', () => {
+  it('/cards (POST) --> Validation Error colors is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1000,7 +1000,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1009,7 +1009,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error tags is not defined ', () => {
+  it('/cards (POST) --> Validation Error tags is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1031,7 +1031,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1042,7 +1042,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error tags is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error tags is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1065,7 +1065,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1076,7 +1076,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error tags is empty ', () => {
+  it('/cards (POST) --> Validation Error tags is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1099,7 +1099,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1108,7 +1108,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error images is not defined ', () => {
+  it('/cards (POST) --> Validation Error images is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1130,7 +1130,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1141,7 +1141,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error images is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error images is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1164,7 +1164,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1175,7 +1175,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error images is empty ', () => {
+  it('/cards (POST) --> Validation Error images is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1198,7 +1198,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1207,7 +1207,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error rarities is not defined ', () => {
+  it('/cards (POST) --> Validation Error rarities is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1229,7 +1229,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1240,7 +1240,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error rarities is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error rarities is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1263,7 +1263,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1274,7 +1274,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error rarities is empty ', () => {
+  it('/cards (POST) --> Validation Error rarities is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1297,7 +1297,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1306,7 +1306,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error errata is not defined ', () => {
+  it('/cards (POST) --> Validation Error errata is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1328,7 +1328,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1339,7 +1339,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error errata is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error errata is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1362,7 +1362,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1373,7 +1373,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error errata is empty ', () => {
+  it('/cards (POST) --> Validation Error errata is empty ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1396,7 +1396,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1405,7 +1405,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error status is not defined ', () => {
+  it('/cards (POST) --> Validation Error status is not defined ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1427,7 +1427,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -1438,7 +1438,7 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/card (POST) --> Validation Error status is not a DTO ', () => {
+  it('/cards (POST) --> Validation Error status is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
       fr_name: 'tester',
@@ -1461,7 +1461,7 @@ describe('CardController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/card')
+      .post('/cards')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

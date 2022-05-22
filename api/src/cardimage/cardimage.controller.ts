@@ -9,7 +9,7 @@ import {
 import { CardImageService } from './cardimage.service';
 import { CardImageDto } from './cardimage.dto';
 
-@Controller('cardimage')
+@Controller('cardimages')
 export class CardImageController {
   constructor(private readonly service: CardImageService) {}
 

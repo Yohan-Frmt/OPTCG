@@ -9,7 +9,7 @@ import {
 import { CardSetService } from './cardset.service';
 import { CardSetDto } from './cardset.dto';
 
-@Controller('cardset')
+@Controller('cardsets')
 export class CardSetController {
   constructor(private readonly service: CardSetService) {}
 

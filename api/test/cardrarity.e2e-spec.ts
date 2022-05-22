@@ -42,21 +42,21 @@ describe('CardRarityController (e2e)', () => {
     controller = new CardRarityController(service);
   });
 
-  it('/cardrarity (GET)', async () => {
+  it('/cardrarities (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/cardrarity')
+      .get('/cardrarities')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await controller.findAll());
   });
 
-  it('/cardrarity (POST)', () => {
+  it('/cardrarities (POST)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardrarity')
+      .post('/cardrarities')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -70,12 +70,12 @@ describe('CardRarityController (e2e)', () => {
       });
   });
 
-  it('/cardrarity (POST) --> Validation Error en_name is empty', () => {
+  it('/cardrarities (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardrarity')
+      .post('/cardrarities')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -84,13 +84,13 @@ describe('CardRarityController (e2e)', () => {
       });
   });
 
-  it('/cardrarity (POST) --> Validation Error en_name is not a string', () => {
+  it('/cardrarities (POST) --> Validation Error en_name is not a string', () => {
     const dto = {
       fr_name: 'test',
       en_name: 123,
     };
     return request(app.getHttpServer())
-      .post('/cardrarity')
+      .post('/cardrarities')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -99,12 +99,12 @@ describe('CardRarityController (e2e)', () => {
       });
   });
 
-  it('/cardrarity (POST) --> Validation Error fr_name is empty', () => {
+  it('/cardrarities (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardrarity')
+      .post('/cardrarities')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -113,13 +113,13 @@ describe('CardRarityController (e2e)', () => {
       });
   });
 
-  it('/cardrarity (POST) --> Validation Error fr_name is not a string', () => {
+  it('/cardrarities (POST) --> Validation Error fr_name is not a string', () => {
     const dto = {
       fr_name: 123,
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardrarity')
+      .post('/cardrarities')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

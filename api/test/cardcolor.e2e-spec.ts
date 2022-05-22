@@ -42,22 +42,22 @@ describe('CardColorController (e2e)', () => {
     controller = new CardColorController(service);
   });
 
-  it('/cardcolor (GET)', async () => {
+  it('/cardcolors (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/cardcolor')
+      .get('/cardcolors')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await controller.findAll());
   });
 
-  it('/cardcolor (POST)', () => {
+  it('/cardcolors (POST)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
       hex_color: '#ffffff',
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -71,13 +71,13 @@ describe('CardColorController (e2e)', () => {
       });
   });
 
-  it('/cardcolor (POST) --> Validation Error en_name is empty', () => {
+  it('/cardcolors (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
       hex_color: '#ffffff',
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -86,14 +86,14 @@ describe('CardColorController (e2e)', () => {
       });
   });
 
-  it('/cardcolor (POST) --> Validation Error en_name is not a string', () => {
+  it('/cardcolors (POST) --> Validation Error en_name is not a string', () => {
     const dto = {
       en_name: 123,
       fr_name: 'test',
       hex_color: '#ffffff',
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -102,13 +102,13 @@ describe('CardColorController (e2e)', () => {
       });
   });
 
-  it('/cardcolor (POST) --> Validation Error fr_name is empty', () => {
+  it('/cardcolors (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
       hex_color: '#ffffff',
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -117,14 +117,14 @@ describe('CardColorController (e2e)', () => {
       });
   });
 
-  it('/cardcolor (POST) --> Validation Error fr_name is not a string', () => {
+  it('/cardcolors (POST) --> Validation Error fr_name is not a string', () => {
     const dto = {
       fr_name: 123,
       en_name: 'test',
       hex_color: '#ffffff',
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -133,14 +133,14 @@ describe('CardColorController (e2e)', () => {
       });
   });
 
-  it('/cardcolor (POST) --> Validation Error hex_color is not a string', () => {
+  it('/cardcolors (POST) --> Validation Error hex_color is not a string', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
       hex_color: 74,
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -148,14 +148,14 @@ describe('CardColorController (e2e)', () => {
         expect(response.body.message).toContain('hex_color must be a string');
       });
   });
-  it('/cardcolor (POST) --> Validation Error hex_color is not a valid hex color', () => {
+  it('/cardcolors (POST) --> Validation Error hex_color is not a valid hex color', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
       hex_color: 'hexColor',
     };
     return request(app.getHttpServer())
-      .post('/cardcolor')
+      .post('/cardcolors')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

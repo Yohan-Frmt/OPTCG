@@ -42,20 +42,20 @@ describe('CardImageController (e2e)', () => {
     controller = new CardImageController(service);
   });
 
-  it('/cardimage (GET)', async () => {
+  it('/cardimages (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/cardimage')
+      .get('/cardimages')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await controller.findAll());
   });
 
-  it('/cardimage (POST)', () => {
+  it('/cardimages (POST)', () => {
     const dto = {
       path: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardimage')
+      .post('/cardimages')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -69,10 +69,10 @@ describe('CardImageController (e2e)', () => {
       });
   });
 
-  it('/cardimage (POST) --> Validation Error path is empty', () => {
+  it('/cardimages (POST) --> Validation Error path is empty', () => {
     const dto = {};
     return request(app.getHttpServer())
-      .post('/cardimage')
+      .post('/cardimages')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -81,12 +81,12 @@ describe('CardImageController (e2e)', () => {
       });
   });
 
-  it('/cardimage (POST) --> Validation Error path is not a string', () => {
+  it('/cardimages (POST) --> Validation Error path is not a string', () => {
     const dto = {
       path: 123,
     };
     return request(app.getHttpServer())
-      .post('/cardimage')
+      .post('/cardimages')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

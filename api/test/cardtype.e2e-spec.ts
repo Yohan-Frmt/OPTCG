@@ -32,21 +32,21 @@ describe('CardTypeController (e2e)', () => {
     await app.init();
   });
 
-  it('/cardtype (GET)', () => {
+  it('/cardtypes (GET)', () => {
     return request(app.getHttpServer())
-      .get('/cardtype')
+      .get('/cardtypes')
       .expect('Content-type', /json/)
       .expect(200)
       .expect([]);
   });
 
-  it('/cardtype (POST)', () => {
+  it('/cardtypes (POST)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardtypes')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -60,12 +60,12 @@ describe('CardTypeController (e2e)', () => {
       });
   });
 
-  it('/cardtype (POST) --> Validation Error en_name is empty', () => {
+  it('/cardtypes (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardtypes')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -77,12 +77,12 @@ describe('CardTypeController (e2e)', () => {
       });
   });
 
-  it('/cardtype (POST) --> Validation Error fr_name is empty', () => {
+  it('/cardtypes (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtype')
+      .post('/cardtypes')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)

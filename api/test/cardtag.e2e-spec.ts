@@ -42,21 +42,21 @@ describe('CardTagController (e2e)', () => {
     controller = new CardTagController(service);
   });
 
-  it('/cardtag (GET)', async () => {
+  it('/cardtags (GET)', async () => {
     return request(app.getHttpServer())
-      .get('/cardtag')
+      .get('/cardtags')
       .expect('Content-type', /json/)
       .expect(200)
       .expect(await controller.findAll());
   });
 
-  it('/cardtag (POST)', () => {
+  it('/cardtags (POST)', () => {
     const dto = {
       fr_name: 'tester',
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtag')
+      .post('/cardtags')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(201)
@@ -70,12 +70,12 @@ describe('CardTagController (e2e)', () => {
       });
   });
 
-  it('/cardtag (POST) --> Validation Error en_name is empty', () => {
+  it('/cardtags (POST) --> Validation Error en_name is empty', () => {
     const dto = {
       fr_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtag')
+      .post('/cardtags')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -84,13 +84,13 @@ describe('CardTagController (e2e)', () => {
       });
   });
 
-  it('/cardtag (POST) --> Validation Error en_name is not a string', () => {
+  it('/cardtags (POST) --> Validation Error en_name is not a string', () => {
     const dto = {
       fr_name: 'test',
       en_name: 123,
     };
     return request(app.getHttpServer())
-      .post('/cardtag')
+      .post('/cardtags')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -99,12 +99,12 @@ describe('CardTagController (e2e)', () => {
       });
   });
 
-  it('/cardtag (POST) --> Validation Error fr_name is empty', () => {
+  it('/cardtags (POST) --> Validation Error fr_name is empty', () => {
     const dto = {
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtag')
+      .post('/cardtags')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
@@ -113,13 +113,13 @@ describe('CardTagController (e2e)', () => {
       });
   });
 
-  it('/cardtag (POST) --> Validation Error fr_name is not a string', () => {
+  it('/cardtags (POST) --> Validation Error fr_name is not a string', () => {
     const dto = {
       fr_name: 123,
       en_name: 'test',
     };
     return request(app.getHttpServer())
-      .post('/cardtag')
+      .post('/cardtags')
       .send(dto)
       .expect('Content-type', /json/)
       .expect(400)
