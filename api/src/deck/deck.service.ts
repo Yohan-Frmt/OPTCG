@@ -6,7 +6,7 @@ import { DeckRepository } from "./deck.repository";
 
 @Injectable()
 export class DeckService {
-    constructor(@InjectRepository(DeckRepository) private repository: DeckRepository) {
+    constructor(@InjectRepository(Deck) private repository: DeckRepository) {
 
     }
     
@@ -16,6 +16,6 @@ export class DeckService {
     }
 
     public async findAll(): Promise<Deck[]> {
-        return await this.repository.findAll();
+        return await this.repository.find();
     }
 }
