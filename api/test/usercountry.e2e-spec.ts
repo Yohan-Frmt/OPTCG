@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { UserCountryModule } from '../src/usercountry/usercountry.module';
-import { UserCountry } from '../src/usercountry/usercountry.entity';
+import { UserCountryModule } from '../src/users/usercountry/usercountry.module';
+import { UserCountry } from '../src/users/usercountry/usercountry.entity';
 
 describe('UserCountryController (e2e)', () => {
   let app: INestApplication;

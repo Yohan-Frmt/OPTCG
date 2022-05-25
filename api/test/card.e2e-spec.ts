@@ -4,18 +4,18 @@ import * as request from 'supertest';
 import { Repository } from 'typeorm';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { CardModule } from '../src/card/card.module';
-import { CardService } from '../src/card/card.service';
-import { CardController } from '../src/card/card.controller';
-import { Card } from '../src/card/card.entity';
-import { CardSetDto } from '../src/cardset/cardset.dto';
-import { CardTypeDto } from '../src/cardtype/cardtype.dto';
-import { CardStatusDto } from '../src/cardstatus/cardstatus.dto';
-import { CardTagDto } from '../src/cardtag/cardtag.dto';
-import { CardRarityDto } from '../src/cardrarity/cardrarity.dto';
-import { CardColorDto } from '../src/cardcolor/cardcolor.dto';
-import { CardImageDto } from '../src/cardimage/cardimage.dto';
-import { CardErrataDto } from '../src/carderrata/carderrata.dto';
+import { CardModule } from '../src/cards/card/card.module';
+import { CardService } from '../src/cards/card/card.service';
+import { CardController } from '../src/cards/card/card.controller';
+import { Card } from '../src/cards/card/card.entity';
+import { CardSetDto } from '../src/cards/cardset/cardset.dto';
+import { CardTypeDto } from '../src/cards/cardtype/cardtype.dto';
+import { CardStatusDto } from '../src/cards/cardstatus/cardstatus.dto';
+import { CardTagDto } from '../src/cards/cardtag/cardtag.dto';
+import { CardRarityDto } from '../src/cards/cardrarity/cardrarity.dto';
+import { CardColorDto } from '../src/cards/cardcolor/cardcolor.dto';
+import { CardImageDto } from '../src/cards/cardimage/cardimage.dto';
+import { CardErrataDto } from '../src/cards/carderrata/carderrata.dto';
 
 describe('CardController (e2e)', () => {
   let app: INestApplication;
@@ -38,6 +38,7 @@ describe('CardController (e2e)', () => {
   const rarity = new CardRarityDto();
   rarity.fr_name = 'test';
   rarity.en_name = 'test';
+  rarity.abbr = 'test';
 
   const image = new CardImageDto();
   image.path = 'test';
