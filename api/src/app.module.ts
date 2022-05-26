@@ -19,6 +19,7 @@ import { UserRegionModule } from './userregion/userregion.module';
 import { UserStoreModule } from './userstore/userstore.module';
 import { DeckVisibilityModule } from './deckvisibility/deckvisibility.module';
 import { DeckModule } from './deck/deck.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 import * as options from './ormconfig';
 
 @Module({
@@ -39,8 +40,9 @@ import * as options from './ormconfig';
     UserRegionModule,
     UserStoreModule,
     UserModule,
-    DeckVisibilityModule,    
+    DeckVisibilityModule,
     DeckModule,
+    AuthenticationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

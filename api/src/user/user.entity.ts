@@ -1,4 +1,3 @@
-
 import {
   Column,
   CreateDateColumn,
@@ -30,7 +29,7 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   discord: string;
 
   @Column({ default: false })

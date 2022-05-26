@@ -17,7 +17,7 @@ const connectionOptions: ConnectionOptions = {
     migrationsDir: 'src/migrations',
   },
   dropSchema: false,
-  migrationsRun: true,
+  migrationsRun: false,
   logger: process.env.NODE_ENV === PROD_ENV ? 'file' : 'advanced-console',
 };
 
