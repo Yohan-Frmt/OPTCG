@@ -36,7 +36,7 @@ export class UserDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly password: string;
+  password: string;
 
   @IsBoolean()
   readonly isActive: boolean = true;
