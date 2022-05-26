@@ -103,6 +103,7 @@ describe('UserController (e2e)', () => {
           createdAt: spy.mock.instances[0],
           last_login: spy.mock.instances[0],
           ...dto,
+          password: expect.stringMatching(/^\$2[ayb]\$.{56}$/i),
         });
       });
   });
@@ -291,7 +292,8 @@ describe('UserController (e2e)', () => {
           createdAt: spy.mock.instances[0],
           last_login: spy.mock.instances[0],
           isActive: true,
-          ...dto,
+          ...dto,          
+          password: expect.stringMatching(/^\$2[ayb]\$.{56}$/i),
         });
       });
   });
@@ -391,6 +393,7 @@ describe('UserController (e2e)', () => {
           last_login: spy.mock.instances[0],
           isStore: false,
           ...dto,
+          password: expect.stringMatching(/^\$2[ayb]\$.{56}$/i),
         });
       });
   });
