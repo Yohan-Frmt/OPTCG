@@ -6,19 +6,36 @@ const db =
     ? process.env.DATABASE_URL
     : 'postgres://user:password@localhost:35000/db';
 
-const connectionOptions: ConnectionOptions = {
-  type: 'postgres',
-  url: db,
-  entities: ['dist/**/**.entity{.ts,.js}'],
-  synchronize: false,
-  logging: true,
-  migrations: ['dist/src/migrations/**/*{.ts,.js}'],
-  cli: {
-    migrationsDir: 'src/migrations',
+const connectionOptions: ConnectionOptions[] = [
+  {
+    type: 'postgres',
+    url: db,
+    entities: ['dist/**/**.entity{.ts,.js}'],
+    synchronize: false,
+    logging: true,
+    migrations: ['dist/migrations/**/*{.ts,.js}'],
+    cli: {
+      migrationsDir: 'src/migrations',
+    },
+    dropSchema: false,
+    migrationsRun: true,
+    logger: process.env.NODE_ENV === PROD_ENV ? 'file' : 'advanced-console',
   },
-  dropSchema: false,
-  migrationsRun: true,
-  logger: process.env.NODE_ENV === PROD_ENV ? 'file' : 'advanced-console',
-};
+  {
+    name: 'seed',
+    type: 'postgres',
+    url: db,
+    entities: ['dist/**/**.entity{.ts,.js}'],
+    synchronize: false,
+    logging: true,
+    migrations: ['dist/seeds/**/*{.ts,.js}'],
+    cli: {
+      migrationsDir: 'src/seeds',
+    },
+    dropSchema: false,
+    migrationsRun: true,
+    logger: process.env.NODE_ENV === PROD_ENV ? 'file' : 'advanced-console',
+  },
+];
 
 export = connectionOptions;

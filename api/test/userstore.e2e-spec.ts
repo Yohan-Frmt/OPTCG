@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { UserStoreModule } from '../src/userstore/userstore.module';
-import { UserStore } from '../src/userstore/userstore.entity';
+import { UserStoreModule } from '../src/users/userstore/userstore.module';
+import { UserStore } from '../src/users/userstore/userstore.entity';
 
 describe('UserStoreController (e2e)', () => {
   let app: INestApplication;

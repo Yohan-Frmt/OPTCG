@@ -4,10 +4,10 @@ import * as request from 'supertest';
 import { Repository } from 'typeorm';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { CardErrataController } from '../src/carderrata/carderrata.controller';
-import { CardErrataService } from '../src/carderrata/carderrata.service';
-import { CardErrataModule } from '../src/carderrata/carderrata.module';
-import { CardErrata } from '../src/carderrata/carderrata.entity';
+import { CardErrataController } from '../src/cards/carderrata/carderrata.controller';
+import { CardErrataService } from '../src/cards/carderrata/carderrata.service';
+import { CardErrataModule } from '../src/cards/carderrata/carderrata.module';
+import { CardErrata } from '../src/cards/carderrata/carderrata.entity';
 
 describe('CardErrataController (e2e)', () => {
   let app: INestApplication;

@@ -3,14 +3,14 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { User } from '../src/user/user.entity';
-import { UserModule } from '../src/user/user.module';
-import { UserCountry } from '../src/usercountry/usercountry.entity';
-import { UserRegion } from '../src/userregion/userregion.entity';
-import { UserPronoun } from '../src/userpronoun/userpronoun.entity';
-import { UserStore } from '../src/userstore/userstore.entity';
-import { UserService } from '../src/user/user.service';
-import { UserController } from '../src/user/user.controller';
+import { User } from '../src/users/user/user.entity';
+import { UserModule } from '../src/users/user/user.module';
+import { UserCountry } from '../src/users/usercountry/usercountry.entity';
+import { UserRegion } from '../src/users/userregion/userregion.entity';
+import { UserPronoun } from '../src/users/userpronoun/userpronoun.entity';
+import { UserStore } from '../src/users/userstore/userstore.entity';
+import { UserService } from '../src/users/user/user.service';
+import { UserController } from '../src/users/user/user.controller';
 import { Repository } from 'typeorm';
 
 describe('UserController (e2e)', () => {

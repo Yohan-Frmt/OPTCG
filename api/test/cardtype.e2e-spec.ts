@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { CardTypeModule } from '../src/cardtype/cardtype.module';
+import { CardTypeModule } from '../src/cards/cardtype/cardtype.module';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { CardType } from '../src/cardtype/cardtype.entity';
+import { CardType } from '../src/cards/cardtype/cardtype.entity';
 import { randomUUID } from 'crypto';
 
 describe('CardTypeController (e2e)', () => {

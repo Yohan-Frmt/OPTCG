@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { UserRegionModule } from '../src/userregion/userregion.module';
-import { UserRegion } from '../src/userregion/userregion.entity';
+import { UserRegionModule } from '../src/users/userregion/userregion.module';
+import { UserRegion } from '../src/users/userregion/userregion.entity';
 
 describe('UserRegionController (e2e)', () => {
   let app: INestApplication;

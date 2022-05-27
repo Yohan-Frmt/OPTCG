@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { UserPronounModule } from '../src/userpronoun/userpronoun.module';
-import { UserPronoun } from '../src/userpronoun/userpronoun.entity';
+import { UserPronounModule } from '../src/users/userpronoun/userpronoun.module';
+import { UserPronoun } from '../src/users/userpronoun/userpronoun.entity';
 
 describe('UserPronounController (e2e)', () => {
   let app: INestApplication;

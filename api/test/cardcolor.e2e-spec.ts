@@ -4,10 +4,10 @@ import * as request from 'supertest';
 import { Repository } from 'typeorm';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { CardColorModule } from '../src/cardcolor/cardcolor.module';
-import { CardColorController } from '../src/cardcolor/cardcolor.controller';
-import { CardColorService } from '../src/cardcolor/cardcolor.service';
-import { CardColor } from '../src/cardcolor/cardcolor.entity';
+import { CardColorModule } from '../src/cards/cardcolor/cardcolor.module';
+import { CardColorController } from '../src/cards/cardcolor/cardcolor.controller';
+import { CardColorService } from '../src/cards/cardcolor/cardcolor.service';
+import { CardColor } from '../src/cards/cardcolor/cardcolor.entity';
 
 describe('CardColorController (e2e)', () => {
   let app: INestApplication;
