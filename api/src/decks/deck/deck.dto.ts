@@ -12,9 +12,6 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { DeckVisibilityDto } from '../deckvisibility/deckvisibility.dto';
-import { Deck } from './deck.entity';
-import { DeckVisibility } from '../deckvisibility/deckvisibility.entity';
-import { User } from '../../users/user/user.entity';
 import { UserDto } from '../../users/user/user.dto';
 
 export class DeckDto {

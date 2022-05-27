@@ -5,7 +5,7 @@ import { DeckVisibilityService } from './deckvisibility.service';
 export class DeckVisibilityController {
   constructor(private readonly service: DeckVisibilityService) {}
 
-  @Get('')
+  @Get()
   findAll() {
     return this.service.findAll();
   }
