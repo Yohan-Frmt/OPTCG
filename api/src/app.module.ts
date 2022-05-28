@@ -7,6 +7,7 @@ import { CardsModule } from './cards/cards.module';
 import { DecksModule } from './decks/decks.module';
 import * as options from './ormconfig';
 import { UsersModule } from './users/users.module';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     CardsModule,
     DecksModule,
+    AuthenticationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
