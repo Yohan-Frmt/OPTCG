@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { CreateUserRequestDto, UserDto } from './user.dto';
+import { CreateUserRequestDto, LoginUserRequestDto } from './user.dto';
 import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Injectable()
@@ -34,9 +34,10 @@ export class UserService {
     return this.userRepository.findOne(user.id);
   }
 
-  public async login(user: UserDto): Promise<string> {
+  public async login(user: LoginUserRequestDto): Promise<string> {
     const userExists = await this.userRepository.findOne({
       where: { email: user.email },
+      select: ['id', 'email', 'username', 'password'],
     });
     if (!userExists)
       throw new HttpException(
@@ -49,12 +50,16 @@ export class UserService {
     );
     if (!isValid)
       throw new HttpException(
-        'Email or password is incorrect',
+        'Email or password is incorrectt',
         HttpStatus.I_AM_A_TEAPOT,
       );
     const payload = await this.userRepository.findOne({
-      where: { id: user.id },
+      where: { id: userExists.id },
     });
     return this.authenticationService.generateJwtToken(payload);
+  }
+
+  public async findById(id: string): Promise<User> {
+    return await this.userRepository.findOne(id);
   }
 }

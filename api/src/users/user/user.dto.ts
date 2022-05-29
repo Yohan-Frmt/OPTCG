@@ -11,6 +11,7 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNotEmptyObject,
+  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -116,4 +117,25 @@ export class CreateUserResponseDto {
   @IsString()
   @IsNotEmpty()
   message: string;
+}
+
+export class LoginUserRequestDto {
+  @IsString()
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}
+
+export class LoginUserResponseDto {
+  @IsString()
+  @IsNotEmpty()
+  access_token: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  expires_in: number;
 }

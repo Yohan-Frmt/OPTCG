@@ -5,15 +5,15 @@ export class CreateUser1653130560706 implements MigrationInterface {
     await queryRunner.query(
       `CREATE TABLE "user"
        (
-           "id"         uuid                     NOT NULL DEFAULT uuid_generate_v4(),
-           "email"      character varying        NOT NULL,
-           "username"   character varying        NOT NULL,
-           "password"   character varying        NOT NULL,
-           "isActive"   boolean                  NOT NULL DEFAULT true,
+           "id"         uuid              NOT NULL DEFAULT uuid_generate_v4(),
+           "email"      character varying NOT NULL,
+           "username"   character varying NOT NULL,
+           "password"   character varying NOT NULL,
+           "isActive"   boolean           NOT NULL DEFAULT true,
            "discord"    character varying,
-           "isStore"    boolean                  NOT NULL DEFAULT false,
-           "created_at" TIMESTAMP                NOT NULL DEFAULT now(),
-           "last_login" TIMESTAMP WITH TIME ZONE NOT NULL,
+           "isStore"    boolean           NOT NULL DEFAULT false,
+           "created_at" TIMESTAMP         NOT NULL DEFAULT now(),
+           "last_login" TIMESTAMP WITH TIME ZONE,
            "countryId"  uuid,
            "regionId"   uuid,
            CONSTRAINT "UQ_e12875dfb3b1d92d7d7c5377e22" UNIQUE ("email"),

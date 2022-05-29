@@ -1,7 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { UserRegion } from '../userregion/userregion.entity';
 import { User } from '../user/user.entity';
-import { Exclude } from 'class-transformer';
 
 @Entity('usercountry')
 export class UserCountry {

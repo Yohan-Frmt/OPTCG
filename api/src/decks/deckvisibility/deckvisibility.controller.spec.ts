@@ -1,9 +1,6 @@
-import { Controller } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { randomUUID } from 'crypto';
 import { DeckVisibilityController } from './deckvisibility.controller';
 import { DeckVisibilityDto } from './deckvisibility.dto';
-import { DeckVisibility } from './deckvisibility.entity';
 import { DeckVisibilityService } from './deckvisibility.service';
 
 describe('deck Controller', () => {

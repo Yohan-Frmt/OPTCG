@@ -1,7 +1,7 @@
 import {
-  IsObject,
-  IsNotEmptyObject,
   IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
   IsOptional,
   IsString,
   IsUUID,

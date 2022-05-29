@@ -26,7 +26,7 @@ export class User {
   @Column({ select: false })
   password: string;
 
-  @Column({ default: true })
+  @Column({ default: true, select: false })
   isActive: boolean;
 
   @Column({ nullable: true })
@@ -50,9 +50,9 @@ export class User {
   )
   pronouns: UserPronoun[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ select: false })
   created_at: Date;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: 'timestamptz', nullable: true, select: false })
   last_login: Date;
 }
