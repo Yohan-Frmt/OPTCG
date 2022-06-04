@@ -8,7 +8,8 @@ import { DecksModule } from './decks/decks.module';
 import * as options from './ormconfig';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { AuthenticationMiddleware } from './authentication/authentication.middleware';
+import { SharedModule } from './shared/shared.module';
+import { JwtMiddleware } from './shared/middleware/jwt.middleware';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthenticationMiddleware } from './authentication/authentication.middle
     CardsModule,
     DecksModule,
     AuthenticationModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -25,7 +27,8 @@ import { AuthenticationMiddleware } from './authentication/authentication.middle
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(AuthenticationMiddleware)
+      .apply(JwtMiddleware)
+      .exclude('api/auth/(.*)')
       .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

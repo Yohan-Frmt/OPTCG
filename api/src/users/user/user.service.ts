@@ -1,65 +1,46 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
-import { CreateUserRequestDto, LoginUserRequestDto } from './user.dto';
-import { AuthenticationService } from '../../authentication/authentication.service';
+import { CreateUserDto } from './user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-    private readonly authenticationService: AuthenticationService,
   ) {}
+
+  public hash = async (password: string): Promise<string> =>
+    bcrypt.hash(password, await bcrypt.genSalt(12));
+
+  public compare = async (password: string, hash: string): Promise<boolean> =>
+    bcrypt.compare(password, hash);
 
   public async findAll(): Promise<User[]> {
     return await this.userRepository.find();
   }
 
-  public async create(createUser: CreateUserRequestDto): Promise<User> {
-    const userExists = await this.userRepository.findOne({
-      where: { email: createUser.email },
-    });
-    if (userExists)
-      throw new HttpException(
-        'Email is already in use',
-        HttpStatus.I_AM_A_TEAPOT,
-      );
-    createUser.password = await this.authenticationService.hash(
-      createUser.password,
-    );
-    const user = await this.userRepository.save(
-      this.userRepository.create(createUser),
-    );
-    return this.userRepository.findOne(user.id);
-  }
+  public async create(createUser: CreateUserDto): Promise<User> {
+    const user = new User();
+    user.email = createUser.email;
+    user.username = createUser.username;
+    user.password = await this.hash(createUser.password);
 
-  public async login(user: LoginUserRequestDto): Promise<string> {
-    const userExists = await this.userRepository.findOne({
-      where: { email: user.email },
-      select: ['id', 'email', 'username', 'password'],
-    });
-    if (!userExists)
-      throw new HttpException(
-        'Email or password is incorrect',
-        HttpStatus.I_AM_A_TEAPOT,
-      );
-    const isValid = await this.authenticationService.compare(
-      user.password,
-      userExists.password,
-    );
-    if (!isValid)
-      throw new HttpException(
-        'Email or password is incorrectt',
-        HttpStatus.I_AM_A_TEAPOT,
-      );
-    const payload = await this.userRepository.findOne({
-      where: { id: userExists.id },
-    });
-    return this.authenticationService.generateJwtToken(payload);
+    try {
+      return await this.userRepository.save(user);
+    } catch (error) {
+      if (error.code === 'ER_DUP_ENTRY') {
+        throw new Error(`User already exists with email ${user.email}`);
+      }
+      throw error;
+    }
   }
 
   public async findById(id: string): Promise<User> {
     return await this.userRepository.findOne(id);
+  }
+  public async findByEmail(email: string): Promise<User> {
+    return await this.userRepository.findOne({ where: { email } });
   }
 }

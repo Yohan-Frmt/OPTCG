@@ -1,21 +1,83 @@
-import { Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
-import { UserDto } from '../users/user/user.dto';
+import { CreateUserDto, CredentialsDto } from '../users/user/user.dto';
+import { UserService } from '../users/user/user.service';
+import { User } from '../users/user/user.entity';
+import { TokenDto } from './dto/token.dto';
+import { PayloadDto } from './dto/payload.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private readonly jwt: JwtService) {}
+  constructor(
+    @Inject(forwardRef(() => UserService)) private readonly _user: UserService,
+    private readonly _jwt: JwtService,
+  ) {}
 
-  public generateJwtToken = async (user: UserDto): Promise<string> =>
-    this.jwt.signAsync({ user });
+  public generateJsonWebToken = async (user: User): Promise<TokenDto> => {
+    const access: PayloadDto = {
+      sub: () => user.id,
+      email: user.email,
+      type: 'access',
+      user,
+    };
 
-  public verifyJwtToken = async (token: string): Promise<any> =>
-    this.jwt.verifyAsync(token);
+    const refresh: PayloadDto = {
+      sub: () => user.id,
+      email: user.email,
+      type: 'refresh',
+    };
 
-  public hash = async (password: string): Promise<string> =>
-    bcrypt.hash(password, 12);
+    const accessToken = await this._jwt.signAsync(access, { expiresIn: '1h' });
+    const refreshToken = await this._jwt.signAsync(refresh, {
+      expiresIn: '1h',
+    });
+    return {
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      expires_in: '1h',
+    };
+  };
 
-  public compare = async (password: string, hash: string): Promise<boolean> =>
-    bcrypt.compare(password, hash);
+  public refreshJsonWebToken = async (
+    token: RefreshTokenDto,
+  ): Promise<TokenDto> => {
+    let payload: PayloadDto;
+    try {
+      payload = this._jwt.verify(token.refreshToken);
+    } catch (error) {
+      throw new Error('Invalid refresh token');
+    }
+    if (payload.type !== 'refresh') throw new Error('Wrong token type');
+    const user = await this._user.findById(payload.sub());
+    if (!user) throw new Error('Invalid user');
+    if (!user.isActive) throw new Error('Inactive user');
+    return await this.generateJsonWebToken(user);
+  };
+
+  public validate = async (payload: any): Promise<TokenDto> => {
+    const user = await this._user.findByEmail(payload.email);
+    if (user) return this.generateJsonWebToken(user);
+    else throw new UnauthorizedException();
+  };
+
+  public register = async (user: CreateUserDto): Promise<User> =>
+    this._user.create(user);
+
+  public login = async (credentials: CredentialsDto): Promise<TokenDto> => {
+    const user = await this._user.findByEmail(credentials.email);
+    if (!user) throw new Error('Invalid username or password');
+    const isValid = await this._user.compare(
+      credentials.password,
+      user.password,
+    );
+    if (!isValid) throw new Error('Invalid username or password');
+    if (!user.isActive) throw new Error('Inactive user');
+    return await this.generateJsonWebToken(user);
+  };
 }

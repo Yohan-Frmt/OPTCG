@@ -1,20 +1,13 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthenticationService } from './authentication.service';
-import { JwtModule } from '@nestjs/jwt';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserModule } from '../users/user/user.module';
+import { AuthenticationController } from './authentication.controller';
+import { SharedModule } from '../shared/shared.module';
+import { JwtStrategy } from '../shared/strategy/jwt.strategy';
 
 @Module({
-  imports: [
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (config: ConfigService) => ({
-        secret: config.get('JWT_SECRET'),
-        signOptions: { expiresIn: '1h' },
-      }),
-    }),
-  ],
-  providers: [AuthenticationService],
-  exports: [AuthenticationService],
+  imports: [forwardRef(() => UserModule), forwardRef(() => SharedModule)],
+  providers: [AuthenticationService, JwtStrategy],
+  controllers: [AuthenticationController],
 })
 export class AuthenticationModule {}

@@ -11,6 +11,7 @@ import { UserCountry } from '../usercountry/usercountry.entity';
 import { UserRegion } from '../userregion/userregion.entity';
 import { UserPronoun } from '../userpronoun/userpronoun.entity';
 import { UserStore } from '../userstore/userstore.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('user')
 export class User {
@@ -23,10 +24,11 @@ export class User {
   @Column({ unique: true })
   username: string;
 
-  @Column({ select: false })
+  @Exclude()
+  @Column()
   password: string;
 
-  @Column({ default: true, select: false })
+  @Column({ default: true })
   isActive: boolean;
 
   @Column({ nullable: true })

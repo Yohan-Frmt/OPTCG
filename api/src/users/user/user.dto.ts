@@ -11,7 +11,6 @@ import {
   IsEmail,
   IsNotEmpty,
   IsNotEmptyObject,
-  IsNumber,
   IsObject,
   IsOptional,
   IsString,
@@ -86,56 +85,30 @@ export class UserDto {
   readonly last_login?: Date;
 }
 
-export class CreateUserRequestDto {
+export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  readonly email: string;
 
   @IsString()
   @IsNotEmpty()
-  username: string;
+  readonly username: string;
 
   @IsString()
   @IsNotEmpty()
   @Length(8, 24)
   @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
-  password: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @Length(8, 24)
-  @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
-  password_confirmation: string;
+  readonly password: string;
 }
 
-export class CreateUserResponseDto {
-  @IsBoolean()
-  @IsNotEmpty()
-  successStatus: boolean;
-
-  @IsString()
-  @IsNotEmpty()
-  message: string;
-}
-
-export class LoginUserRequestDto {
+export class CredentialsDto {
   @IsString()
   @IsNotEmpty()
   @IsEmail()
-  email: string;
+  readonly email: string;
 
   @IsString()
   @IsNotEmpty()
-  password: string;
-}
-
-export class LoginUserResponseDto {
-  @IsString()
-  @IsNotEmpty()
-  access_token: string;
-
-  @IsNumber()
-  @IsNotEmpty()
-  expires_in: number;
+  readonly password: string;
 }
