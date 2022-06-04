@@ -9,7 +9,7 @@ import * as options from './ormconfig';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
-import { JwtMiddleware } from './shared/middleware/jwt.middleware';
+import { JwtMiddleware } from './shared/middlewares/jwt.middleware';
 
 @Module({
   imports: [
