@@ -8,8 +8,4 @@ export class TokenDto {
   @IsString()
   @IsNotEmpty()
   readonly refresh_token: string;
-
-  @IsString()
-  @IsNotEmpty()
-  readonly expires_in: string;
 }

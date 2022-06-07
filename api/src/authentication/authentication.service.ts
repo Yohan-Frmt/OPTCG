@@ -40,7 +40,6 @@ export class AuthenticationService {
     return {
       access_token: accessToken,
       refresh_token: refreshToken,
-      expires_in: '1h',
     };
   };
 
@@ -70,14 +69,16 @@ export class AuthenticationService {
     this._user.create(user);
 
   public login = async (credentials: CredentialsDto): Promise<TokenDto> => {
-    const user = await this._user.findByEmail(credentials.email);
+    let user = await this._user.findByEmail(credentials.email);
     if (!user) throw new Error('Invalid username or password');
     const isValid = await this._user.compare(
       credentials.password,
       user.password,
     );
     if (!isValid) throw new Error('Invalid username or password');
+    console.table(user);
     if (!user.isActive) throw new Error('Inactive user');
+    user = await this._user.findById(user.id);
     return await this.generateJsonWebToken(user);
   };
 }
