@@ -1,0 +1,35 @@
+<form class="app-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="app-form__controls">
+    <form-field>
+      <label for="form-email">Email</label>
+      <input
+        id="form-email"
+        type="text"
+        name="email"
+        spellcheck="false"
+        autocapitalize="off"
+        autofocus="autofocus"
+        autocomplete="username"
+        formControlName="email"
+      />
+    </form-field>
+
+    <form-field>
+      <label for="form-password">Password</label>
+      <input
+        id="form-password"
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        formControlName="password"
+      />
+    </form-field>
+
+    <button
+      class="app-form__submit"
+      [disabled]="loginForm.invalid || isLoading"
+    >
+      {{ isLoading ? 'Waiting...' : 'Log in' }}
+    </button>
+  </div>
+</form>
