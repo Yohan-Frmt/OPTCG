@@ -4,6 +4,7 @@ import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from '../../core/authentication/services/authentication.service';
 import { Login } from '../../core/authentication/models/login.model';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
   selector: 'login',
@@ -17,12 +18,13 @@ export class LoginComponent {
     private readonly _router: Router,
     private readonly _route: ActivatedRoute,
     private readonly _authentication: AuthenticationService,
+    private readonly _alert: AlertService,
   ) {
     if (this._authentication.currentUserValue())
       this._router.navigate(['/'], { replaceUrl: true });
   }
 
-  onSubmit(form: Login): void {
+  public onSubmit = (form: Login): void => {
     this.isLoading = true;
     this._authentication
       .login(form)
@@ -38,9 +40,10 @@ export class LoginComponent {
             { replaceUrl: true },
           );
         },
-        error: ({ error }: HttpErrorResponse) => {
-          console.error(error.message, 'Error');
+        error: ({ message }: HttpErrorResponse) => {
+          console.error(message, 'Error');
+          this._alert.error(message);
         },
       });
-  }
+  };
 }

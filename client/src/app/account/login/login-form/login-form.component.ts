@@ -5,12 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Login } from '../../../core/authentication/models/login.model';
 
 @Component({
@@ -20,27 +15,19 @@ import { Login } from '../../../core/authentication/models/login.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  loginForm: FormGroup = new FormGroup({
+  public loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
   });
 
   @Input()
-  isLoading = false;
+  public isLoading: boolean = false;
 
   @Output()
-  formSubmit: EventEmitter<Login> = new EventEmitter<Login>();
+  public formSubmit: EventEmitter<Login> = new EventEmitter<Login>();
 
-  get email(): AbstractControl | null {
-    return this.loginForm.get('email');
-  }
-
-  get password(): AbstractControl | null {
-    return this.loginForm.get('password');
-  }
-
-  onSubmit(): void {
-    if (!this.loginForm.valid) return;
+  public onSubmit = (): void => {
+    if (this.loginForm.invalid) return;
     this.formSubmit.emit(this.loginForm.value as Login);
-  }
+  };
 }
