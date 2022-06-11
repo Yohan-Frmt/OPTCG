@@ -26,6 +26,7 @@ export class RegisterComponent {
 
   public onSubmit = (form: Register): void => {
     this.isLoading = true;
+    this._alert.clear();
     this._authentication
       .register(form)
       .pipe(
@@ -36,14 +37,10 @@ export class RegisterComponent {
       .subscribe({
         next: () => {
           this._alert.success('Registration successful', { keep: true });
-          this._router.navigate(
-            [this._route.snapshot.queryParams['redirect'] || '/'],
-            { replaceUrl: true },
-          );
+          this._router.navigate(['auth/login'], { relativeTo: this._route });
         },
-        error: ({ message }: HttpErrorResponse) => {
-          console.error(message, 'Error');
-          this._alert.error(message);
+        error: ({ error }: HttpErrorResponse) => {
+          this._alert.error('Error : ' + error.message);
         },
       });
   };

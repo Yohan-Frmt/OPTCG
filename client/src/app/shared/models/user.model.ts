@@ -8,6 +8,7 @@ export interface User {
   readonly username: string;
   readonly discord?: string;
   readonly isStore: boolean;
+  readonly isActive: boolean;
   country: Country;
   stores?: Store[];
   pronouns: Pronoun[];

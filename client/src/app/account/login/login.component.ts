@@ -26,6 +26,7 @@ export class LoginComponent {
 
   public onSubmit = (form: Login): void => {
     this.isLoading = true;
+    this._alert.clear();
     this._authentication
       .login(form)
       .pipe(
@@ -35,6 +36,10 @@ export class LoginComponent {
       )
       .subscribe({
         next: () => {
+          this._alert.success('Login successful', {
+            keep: true,
+            autoClose: true,
+          });
           this._router.navigate(
             [this._route.snapshot.queryParams['redirect'] || '/profile'],
             { replaceUrl: true },

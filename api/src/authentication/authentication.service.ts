@@ -65,8 +65,13 @@ export class AuthenticationService {
     else throw new UnauthorizedException();
   };
 
-  public register = async (user: CreateUserDto): Promise<User> =>
-    this._user.create(user);
+  public register = async (user: CreateUserDto): Promise<User> => {
+    if (await this._user.findByEmail(user.email))
+      throw new Error('Email is already used');
+    if (await this._user.findByUsername(user.username))
+      throw new Error('Username is already used');
+    return this._user.create(user);
+  };
 
   public login = async (credentials: CredentialsDto): Promise<TokenDto> => {
     let user = await this._user.findByEmail(credentials.email);
