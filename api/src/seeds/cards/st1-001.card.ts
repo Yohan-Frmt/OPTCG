@@ -2,15 +2,11 @@ import { Card } from '../../cards/card/card.entity';
 import { romance_dawn } from './utils/sets.cards';
 import { leader } from './utils/types.cards';
 import { red } from './utils/colors.cards';
-import { CardImage } from '../../cards/cardimage/cardimage.entity';
 import { unlimited } from './utils/status.cards';
 import { strawHatPirates } from './utils/tags.cards';
 import { leaderRare } from './utils/rarities.cards';
 
 export const st1_001 = new Card();
-
-const image = new CardImage();
-image.path = 'https://kongbakpao.com/wp-content/uploads/2022/05/leader_1_1.jpg';
 
 st1_001.serial_number = 'ST01-001';
 st1_001.fr_name = 'Monkey D. Luffy';
@@ -26,6 +22,5 @@ st1_001.set = romance_dawn;
 st1_001.type = leader;
 st1_001.colors = [red];
 st1_001.tags = [strawHatPirates];
-st1_001.images = [image];
 st1_001.rarities = [leaderRare];
 st1_001.status = unlimited;
