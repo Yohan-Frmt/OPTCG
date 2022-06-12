@@ -40,7 +40,8 @@ describe('CardController (e2e)', () => {
   rarity.en_name = 'test';
   rarity.abbr = 'test';
 
-  const image = new CardImage('test');
+  const image = new CardImage();
+  image.path = 'test';
 
   const errata = new CardErrata();
   errata.description = 'test';

@@ -16,6 +16,17 @@ export class CardService {
   }
 
   public async findAll(): Promise<Card[]> {
-    return await this.repository.find();
+    return await this.repository.find({
+      relations: [
+        'set',
+        'type',
+        'colors',
+        'tags',
+        'images',
+        'errata',
+        'rarities',
+        'status',
+      ],
+    });
   }
 }
