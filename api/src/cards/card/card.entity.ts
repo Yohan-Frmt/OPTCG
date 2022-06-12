@@ -34,23 +34,23 @@ export class Card extends BaseEntity {
   @Column()
   jp_name: string;
 
-  @Column()
-  cost: number;
+  @Column({ nullable: true })
+  cost?: number;
 
-  @Column()
-  power: number;
+  @Column({ nullable: true })
+  power?: number;
 
-  @Column()
-  life: number;
+  @Column({ nullable: true })
+  life?: number;
 
-  @Column()
-  fr_effect: string;
+  @Column({ nullable: true })
+  fr_effect?: string;
 
-  @Column()
-  en_effect: string;
+  @Column({ nullable: true })
+  en_effect?: string;
 
-  @Column()
-  counter: number;
+  @Column({ nullable: true })
+  counter?: number;
 
   @ManyToOne(() => CardSet, (set: CardSet) => set.cards)
   set: CardSet;
@@ -70,7 +70,7 @@ export class Card extends BaseEntity {
   images: CardImage[];
 
   @OneToMany(() => CardErrata, (errata: CardErrata) => errata.card)
-  errata: CardErrata[];
+  errata?: CardErrata[];
 
   @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards)
   @JoinTable()

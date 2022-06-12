@@ -3,19 +3,16 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { randomUUID } from 'crypto';
-import { User } from '../src/user/user.entity';
-import { UserModule } from '../src/user/user.module';
-import { DeckRepository } from '../src/deck/deck.repository';
-import { DeckService } from '../src/deck/deck.service';
-import { DeckController } from '../src/deck/deck.controller';
-import { DeckVisibility } from '../src/deckvisibility/deckvisibility.entity';
-import { DeckModule } from '../src/deck/deck.module';
-import { Deck } from '../src/deck/deck.entity';
-import { UserCountry } from '../src/usercountry/usercountry.entity';
-import { UserRegion } from '../src/userregion/userregion.entity';
-import { UserPronoun } from '../src/userpronoun/userpronoun.entity';
-import { Repository } from 'typeorm';
-import { EMPTY } from 'rxjs';
+import { DeckController } from '../src/decks/deck/deck.controller';
+import { UserPronoun } from '../src/users/userpronoun/userpronoun.entity';
+import { User } from '../src/users/user/user.entity';
+import { DeckModule } from '../src/decks/deck/deck.module';
+import { UserRegion } from '../src/users/userregion/userregion.entity';
+import { DeckService } from '../src/decks/deck/deck.service';
+import { DeckVisibility } from '../src/decks/deckvisibility/deckvisibility.entity';
+import { UserCountry } from '../src/users/usercountry/usercountry.entity';
+import { Deck } from '../src/decks/deck/deck.entity';
+import { DeckRepository } from '../src/decks/deck/deck.repository';
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -26,8 +23,8 @@ describe('UserController (e2e)', () => {
   const spy = jest.spyOn(global, 'Date');
 
   const visibility = new DeckVisibility();
-  visibility.en_name = "Public";
-  visibility.fr_name = "Public";
+  visibility.en_name = 'Public';
+  visibility.fr_name = 'Public';
   visibility.id = randomUUID();
 
   const country = new UserCountry();
@@ -55,7 +52,6 @@ describe('UserController (e2e)', () => {
   user.pronouns = [pronouns];
   user.created_at = new Date();
   user.last_login = new Date();
-
 
   const mockRepository = {
     find: jest.fn(() => Promise.resolve([])),
@@ -98,7 +94,7 @@ describe('UserController (e2e)', () => {
       name: 'DECKTEST1',
       content: '{}',
       visibility: visibility,
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -106,13 +102,13 @@ describe('UserController (e2e)', () => {
       .expect('Content-type', /json/)
       .expect(201)
       .then((response) => {
-        expect(response.body).toEqual({          
+        expect(response.body).toEqual({
           id: expect.stringMatching(
             /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
           ),
           created_at: spy.mock.instances[0],
           updated_at: spy.mock.instances[0],
-          ...dto
+          ...dto,
         });
       });
   });
@@ -121,7 +117,7 @@ describe('UserController (e2e)', () => {
     const dto = {
       content: '{}',
       visibility: visibility,
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -132,13 +128,13 @@ describe('UserController (e2e)', () => {
         expect(response.body.message).toContain('name should not be empty');
       });
   });
-  
+
   it('/decks (POST) --> Validation Error name is not a string', () => {
     const dto = {
       content: '{}',
       name: 123,
       visibility: visibility,
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -154,7 +150,7 @@ describe('UserController (e2e)', () => {
     const dto = {
       name: 'DECKTEST1',
       visibility: visibility,
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -171,7 +167,7 @@ describe('UserController (e2e)', () => {
       name: 'DECKTEST1',
       content: 'aaa',
       visibility: visibility,
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -179,7 +175,9 @@ describe('UserController (e2e)', () => {
       .expect('Content-type', /json/)
       .expect(400)
       .then((response) => {
-        expect(response.body.message).toContain('content must be a json string');
+        expect(response.body.message).toContain(
+          'content must be a json string',
+        );
       });
   });
 
@@ -188,7 +186,7 @@ describe('UserController (e2e)', () => {
       name: 'DECKTEST1',
       content: 123,
       visibility: visibility,
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -204,7 +202,7 @@ describe('UserController (e2e)', () => {
     const dto = {
       name: 'DECKTEST1',
       content: '{}',
-      description: 'description test'
+      description: 'description test',
     };
     return request(app.getHttpServer())
       .post('/decks')
@@ -214,7 +212,7 @@ describe('UserController (e2e)', () => {
       .then((response) => {
         expect(response.body.message).toContain('visibility must be an object');
       });
-  }); 
+  });
 
   it('/decks (POST) --> Validation Error description must a string', () => {
     const dto = {
@@ -230,5 +228,5 @@ describe('UserController (e2e)', () => {
       .then((response) => {
         expect(response.body.message).toContain('description must be a string');
       });
-  }); 
+  });
 });

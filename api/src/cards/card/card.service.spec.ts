@@ -32,8 +32,7 @@ describe('CardService', () => {
   rarity.fr_name = 'test';
   rarity.en_name = 'test';
 
-  const image = new CardImage();
-  image.path = 'test';
+  const image = new CardImage('test');
 
   const errata = new CardErrata();
   errata.description = 'test';

@@ -43,28 +43,28 @@ export class CardDto {
   readonly jp_name: string;
 
   @IsNumber()
-  @IsNotEmpty()
-  readonly cost: number;
+  @IsOptional()
+  readonly cost?: number;
 
   @IsNumber()
-  @IsNotEmpty()
-  readonly power: number;
+  @IsOptional()
+  readonly power?: number;
 
   @IsNumber()
-  @IsNotEmpty()
-  readonly life: number;
+  @IsOptional()
+  readonly life?: number;
 
   @IsString()
-  @IsNotEmpty()
-  readonly fr_effect: string;
+  @IsOptional()
+  readonly fr_effect?: string;
 
   @IsString()
-  @IsNotEmpty()
-  readonly en_effect: string;
+  @IsOptional()
+  readonly en_effect?: string;
 
   @IsNumber()
-  @IsNotEmpty()
-  readonly counter: number;
+  @IsOptional()
+  readonly counter?: number;
 
   @IsDefined()
   @IsNotEmptyObject()
@@ -108,12 +108,11 @@ export class CardDto {
   @Type(() => CardRarityDto)
   readonly rarities: CardRarityDto[];
 
-  @IsDefined()
-  @ArrayNotEmpty()
+  @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CardErrataDto)
-  readonly errata: CardErrataDto[];
+  readonly errata?: CardErrataDto[];
 
   @IsDefined()
   @IsNotEmptyObject()

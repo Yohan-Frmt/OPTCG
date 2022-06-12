@@ -29,5 +29,5 @@ export class UserPronounDto {
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
   @Type(() => UserDto)
-  readonly users: UserDto[];
+  readonly users?: UserDto[];
 }
