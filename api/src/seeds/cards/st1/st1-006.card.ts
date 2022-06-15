@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterStraw } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { red } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { animal, strawHatPirates } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+
+export const st1_006 = new Card();
+st1_006.serial_number = 'ST01-006';
+st1_006.fr_name = 'Tony Tony Chopper';
+st1_006.en_name = 'Tony Tony Chopper';
+st1_006.jp_name = 'トニー・トニー・チョッパー';
+st1_006.power = 1000;
+st1_006.cost = 1;
+st1_006.fr_effect = '[Bloqueur]';
+st1_006.en_effect = '[Blocker]';
+st1_006.set = starterStraw;
+st1_006.type = character;
+st1_006.colors = [red];
+st1_006.tags = [strawHatPirates, animal];
+st1_006.rarities = [common];
+st1_006.status = unlimited;

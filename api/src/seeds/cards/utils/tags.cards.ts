@@ -15,3 +15,19 @@ worstPirates.en_name = 'Worst Generation';
 export const warlordPirates = new CardTag();
 warlordPirates.fr_name = '7 Grands Corsaires';
 warlordPirates.en_name = 'Seven Warlords';
+
+export const animal = new CardTag();
+animal.fr_name = 'Animal';
+animal.en_name = 'Animal';
+
+export const alabasta = new CardTag();
+alabasta.fr_name = "Royaume d'Alabasta";
+alabasta.en_name = 'Alabasta Kingdom';
+
+export const fishMan = new CardTag();
+fishMan.fr_name = 'Homme Poisson';
+fishMan.en_name = 'Fish-Man';
+
+export const rookie = new CardTag();
+rookie.fr_name = 'Super Rookie';
+rookie.en_name = 'Super Rookie';

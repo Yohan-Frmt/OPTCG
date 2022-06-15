@@ -27,6 +27,10 @@ export class CardService {
         'rarities',
         'status',
       ],
+      cache: {
+        id: 'cards',
+        milliseconds: 3000,
+      },
     });
   }
 }

@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterStraw } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { red } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { strawHatPirates } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+
+export const st1_004 = new Card();
+st1_004.serial_number = 'ST01-004';
+st1_004.fr_name = 'Sanji';
+st1_004.en_name = 'Sanji';
+st1_004.jp_name = 'サンジ';
+st1_004.power = 4000;
+st1_004.cost = 2;
+st1_004.fr_effect = '[DON!! x2] Ce Personnage gagne [Ruée]';
+st1_004.en_effect = '[DON!! x2] This Character gains [Rush]';
+st1_004.set = starterStraw;
+st1_004.type = character;
+st1_004.colors = [red];
+st1_004.tags = [strawHatPirates];
+st1_004.rarities = [common];
+st1_004.status = unlimited;

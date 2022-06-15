@@ -1,3 +1,4 @@
-import { character, leader, event, stage } from './cards/utils/types.cards';
+import { character, event, leader, stage } from './cards/utils/types.cards';
+import { CardType } from '../cards/cardtype/cardtype.entity';
 
-export const CardTypeSeed = [leader, character, event, stage];
+export const CardTypeSeed: CardType[] = [leader, character, event, stage];

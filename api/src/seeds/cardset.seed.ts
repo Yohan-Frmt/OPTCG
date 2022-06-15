@@ -1,3 +1,4 @@
-import { romance_dawn } from './cards/utils/sets.cards';
+import { romanceDawn } from './cards/utils/sets.cards';
+import { CardSet } from '../cards/cardset/cardset.entity';
 
-export const CardSetSeed = [romance_dawn];
+export const CardSetSeed: CardSet[] = [romanceDawn];

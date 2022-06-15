@@ -4,5 +4,11 @@ import {
   semiLimited,
   unlimited,
 } from './cards/utils/status.cards';
+import { CardStatus } from '../cards/cardstatus/cardstatus.entity';
 
-export const CardStatusSeed = [banned, limited, semiLimited, unlimited];
+export const CardStatusSeed: CardStatus[] = [
+  banned,
+  limited,
+  semiLimited,
+  unlimited,
+];

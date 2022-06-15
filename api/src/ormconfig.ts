@@ -18,7 +18,9 @@ const connectionOptions: ConnectionOptions[] = [
       migrationsDir: 'src/migrations',
     },
     cache: {
-      duration: 1000 * 60 * 60,
+      type: 'database',
+      tableName: 'query-cache',
+      duration: 3000,
     },
     dropSchema: false,
     migrationsRun: false,

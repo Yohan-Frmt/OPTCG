@@ -5,5 +5,12 @@ import {
   superRare,
   uncommon,
 } from './cards/utils/rarities.cards';
+import { CardRarity } from '../cards/cardrarity/cardrarity.entity';
 
-export const CardRaritySeed = [leaderRare, uncommon, common, rare, superRare];
+export const CardRaritySeed: CardRarity[] = [
+  leaderRare,
+  uncommon,
+  common,
+  rare,
+  superRare,
+];

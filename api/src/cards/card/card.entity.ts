@@ -52,30 +52,46 @@ export class Card extends BaseEntity {
   @Column({ nullable: true })
   counter?: number;
 
-  @ManyToOne(() => CardSet, (set: CardSet) => set.cards)
+  @ManyToOne(() => CardSet, (set: CardSet) => set.cards, {
+    cascade: true,
+  })
   set: CardSet;
 
-  @ManyToOne(() => CardType, (type: CardType) => type.cards)
+  @ManyToOne(() => CardType, (type: CardType) => type.cards, {
+    cascade: true,
+  })
   type: CardType;
 
-  @ManyToMany(() => CardColor, (color: CardColor) => color.cards)
+  @ManyToMany(() => CardColor, (color: CardColor) => color.cards, {
+    cascade: true,
+  })
   @JoinTable()
   colors: CardColor[];
 
-  @ManyToMany(() => CardTag, (tag: CardTag) => tag.cards)
+  @ManyToMany(() => CardTag, (tag: CardTag) => tag.cards, {
+    cascade: true,
+  })
   @JoinTable()
   tags: CardTag[];
 
-  @OneToMany(() => CardImage, (image: CardImage) => image.card)
+  @OneToMany(() => CardImage, (image: CardImage) => image.card, {
+    cascade: true,
+  })
   images: CardImage[];
 
-  @OneToMany(() => CardErrata, (errata: CardErrata) => errata.card)
+  @OneToMany(() => CardErrata, (errata: CardErrata) => errata.card, {
+    cascade: true,
+  })
   errata?: CardErrata[];
 
-  @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards)
+  @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards, {
+    cascade: true,
+  })
   @JoinTable()
   rarities: CardRarity[];
 
-  @ManyToOne(() => CardStatus, (status: CardStatus) => status.cards)
+  @ManyToOne(() => CardStatus, (status: CardStatus) => status.cards, {
+    cascade: true,
+  })
   status: CardStatus;
 }
