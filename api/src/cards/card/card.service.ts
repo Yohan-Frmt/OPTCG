@@ -36,4 +36,22 @@ export class CardService {
       },
     });
   }
+
+  public async findOneBySerial(serial: string): Promise<Card> {
+    return await this.repository.findOne({
+      where: {
+        serial_number: serial,
+      },
+      relations: [
+        'set',
+        'type',
+        'colors',
+        'tags',
+        'images',
+        'errata',
+        'rarities',
+        'status',
+      ],
+    });
+  }
 }

@@ -5,7 +5,6 @@ import { ApiService } from '../../core/api/api.service';
 import { IUser } from '../../shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { ICard } from '../../shared/models/card.model';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'card-details',
@@ -14,7 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class CardDetailsComponent {
   public user: IUser | null;
-  public card: Observable<any>;
+  public card: ICard | null = null;
   public serialNumber: string | null;
 
   constructor(
@@ -25,6 +24,8 @@ export class CardDetailsComponent {
   ) {
     this.user = this._authentication.currentUserValue();
     this.serialNumber = this._route.snapshot.paramMap.get('serial');
-    this.card = this._api.get<ICard>(`/card/${this.serialNumber}`);
+    this._api
+      .get<ICard>(`/card/${this.serialNumber}`)
+      .subscribe((card) => (this.card = card));
   }
 }
