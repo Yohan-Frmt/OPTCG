@@ -27,6 +27,9 @@ export class CardService {
         'rarities',
         'status',
       ],
+      order: {
+        serial_number: 'ASC',
+      },
       cache: {
         id: 'cards',
         milliseconds: 3000,
