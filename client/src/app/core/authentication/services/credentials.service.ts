@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../../storages/local.service';
 import { SessionStorageService } from '../../storages/session.service';
-import { Auth } from '../models/auth.model';
+import { IAuth } from '../models/auth.model';
 import { CREDENTIALS_KEY } from '../../tokens';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { CREDENTIALS_KEY } from '../../tokens';
 })
 export class CredentialsService {
   private readonly _storage: Storage;
-  private _credentials: Auth | null = null;
+  private _credentials: IAuth | null = null;
 
   constructor(
     private readonly _localStorage: LocalStorageService,
@@ -23,7 +23,7 @@ export class CredentialsService {
     return this._storage;
   }
 
-  get credentials(): Auth | null {
+  get credentials(): IAuth | null {
     return this._credentials;
   }
 
@@ -36,7 +36,7 @@ export class CredentialsService {
     this._localStorage.removeItem(CREDENTIALS_KEY);
   }
 
-  public setCredentials = (credentials?: Auth /*, rememberMe?: boolean*/) => {
+  public setCredentials = (credentials?: IAuth /*, rememberMe?: boolean*/) => {
     this._credentials = credentials || null;
     if (!credentials) return;
     const storage = this._localStorage; /* rememberMe or this._sessionStorage*/

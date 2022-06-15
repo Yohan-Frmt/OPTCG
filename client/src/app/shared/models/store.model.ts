@@ -1,4 +1,4 @@
-export interface Store {
+export interface IStore {
   readonly id: string;
   readonly address1: string;
   readonly address2: string;

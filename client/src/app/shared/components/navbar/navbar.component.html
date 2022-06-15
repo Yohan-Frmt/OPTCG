@@ -1,0 +1,47 @@
+<nav class="navbar">
+  <div class="clearfix">
+    <a class="navbar__brand" [routerLink]="[brand?.path]">
+      {{ brand?.title }}
+    </a>
+  </div>
+  <ul class="navbar__menu">
+    <li
+      *ngFor="let item of items"
+      class="navbar__menu__item"
+      routerLinkActive="active"
+    >
+      <a
+        class="navbar__menu__item__link"
+        [routerLink]="[item.path]"
+        routerLinkActive="active"
+        >{{ item.title }}</a
+      >
+    </li>
+    <li
+      *ngIf="user !== null; else guest"
+      class="navbar__menu__item"
+      routerLinkActive="active"
+    >
+      <a
+        class="navbar__menu__item__link"
+        [routerLink]="[logout.path]"
+        routerLinkActive="active"
+        >{{ logout.title }}</a
+      >
+    </li>
+    <ng-template #guest>
+      <li
+        *ngFor="let item of accounts"
+        class="navbar__menu__item"
+        routerLinkActive="active"
+      >
+        <a
+          class="navbar__menu__item__link"
+          [routerLink]="[item.path]"
+          routerLinkActive="active"
+          >{{ item.title }}</a
+        >
+      </li>
+    </ng-template>
+  </ul>
+</nav>

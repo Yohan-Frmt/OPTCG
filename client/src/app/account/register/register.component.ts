@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../core/authentication/services/authentication.service';
 import { AlertService } from '../../shared/services/alert.service';
-import { Register } from '../../core/authentication/models/register.model';
+import { IRegister } from '../../core/authentication/models/register.model';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -10,9 +10,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterComponent {
-  isLoading = false;
+  public isLoading = false;
 
   constructor(
     private readonly _router: Router,
@@ -24,7 +25,7 @@ export class RegisterComponent {
       this._router.navigate(['/'], { replaceUrl: true });
   }
 
-  public onSubmit = (form: Register): void => {
+  public onSubmit = (form: IRegister): void => {
     this.isLoading = true;
     this._alert.clear();
     this._authentication

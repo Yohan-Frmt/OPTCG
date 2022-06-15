@@ -1,4 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
 import { Alert } from '../../models/alert.model';
@@ -8,6 +14,7 @@ import { Subscription } from 'rxjs';
   selector: 'alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertComponent implements OnInit, OnDestroy {
   @Input() id = 'default';

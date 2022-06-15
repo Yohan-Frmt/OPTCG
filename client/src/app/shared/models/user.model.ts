@@ -1,15 +1,15 @@
-import { Country } from './country.model';
-import { Store } from './store.model';
-import { Pronoun } from './pronoun.model';
+import { IStore } from './store.model';
+import { ICountry } from './country.model';
+import { IPronoun } from './pronoun.model';
 
-export interface User {
+export interface IUser {
   readonly id: string;
   readonly email: string;
   readonly username: string;
   readonly discord?: string;
   readonly isStore: boolean;
   readonly isActive: boolean;
-  country: Country;
-  stores?: Store[];
-  pronouns: Pronoun[];
+  country: ICountry;
+  stores?: IStore[];
+  pronouns: IPronoun[];
 }

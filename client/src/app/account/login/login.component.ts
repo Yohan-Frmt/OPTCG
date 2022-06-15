@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from '../../core/authentication/services/authentication.service';
-import { Login } from '../../core/authentication/models/login.model';
+import { ILogin } from '../../core/authentication/models/login.model';
 import { AlertService } from '../../shared/services/alert.service';
 
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  isLoading = false;
+  public isLoading = false;
 
   constructor(
     private readonly _router: Router,
@@ -24,7 +25,7 @@ export class LoginComponent {
       this._router.navigate(['/'], { replaceUrl: true });
   }
 
-  public onSubmit = (form: Login): void => {
+  public onSubmit = (form: ILogin): void => {
     this.isLoading = true;
     this._alert.clear();
     this._authentication
@@ -36,18 +37,11 @@ export class LoginComponent {
       )
       .subscribe({
         next: () => {
-          this._alert.success('Login successful', {
-            keep: true,
-            autoClose: true,
-          });
-          this._router.navigate(
-            [this._route.snapshot.queryParams['redirect'] || '/profile'],
-            { replaceUrl: true },
-          );
+          this._alert.success('Login successful', { keep: true });
+          this._router.navigate([''], { relativeTo: this._route });
         },
-        error: ({ message }: HttpErrorResponse) => {
-          console.error(message, 'Error');
-          this._alert.error(message);
+        error: ({ error }: HttpErrorResponse) => {
+          this._alert.error('Error : ' + error.message);
         },
       });
   };
