@@ -1,6 +1,6 @@
 <nav class="navbar">
   <div class="clearfix">
-    <a class="navbar__brand" [routerLink]="[brand?.path]">
+    <a [routerLink]="[brand?.path]" class="navbar__brand">
       {{ brand?.title }}
     </a>
   </div>
@@ -11,8 +11,8 @@
       routerLinkActive="active"
     >
       <a
-        class="navbar__menu__item__link"
         [routerLink]="[item.path]"
+        class="navbar__menu__item__link"
         routerLinkActive="active"
         >{{ item.title }}</a
       >
@@ -23,10 +23,11 @@
       routerLinkActive="active"
     >
       <a
+        (click)="logout()"
         class="navbar__menu__item__link"
-        [routerLink]="[logout.path]"
+        href="#"
         routerLinkActive="active"
-        >{{ logout.title }}</a
+        >Logout</a
       >
     </li>
     <ng-template #guest>
@@ -36,8 +37,8 @@
         routerLinkActive="active"
       >
         <a
-          class="navbar__menu__item__link"
           [routerLink]="[item.path]"
+          class="navbar__menu__item__link"
           routerLinkActive="active"
           >{{ item.title }}</a
         >

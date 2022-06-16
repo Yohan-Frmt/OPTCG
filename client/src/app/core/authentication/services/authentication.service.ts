@@ -14,8 +14,8 @@ import { JwtService } from './jwt.service';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private _userSubject: BehaviorSubject<IUser | null>;
   public user: Observable<IUser | null>;
+  private _userSubject: BehaviorSubject<IUser | null>;
 
   constructor(
     private readonly _api: ApiService,
@@ -59,7 +59,6 @@ export class AuthenticationService {
       tap(() => {
         this._credentials.removeItem();
         this._userSubject.next(null);
-        this._router.navigate(['/auth/login'], { replaceUrl: true });
       }),
     );
   };

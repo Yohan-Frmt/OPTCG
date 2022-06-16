@@ -18,14 +18,12 @@ export class NavbarComponent implements OnInit, DoCheck {
   public user: IUser | null = null;
   public items: any[] = [];
   public accounts: any[] = [];
-  public logout: any = null;
   public brand: any = null;
 
   public routes = [
     { path: '', title: 'Brand (pas le perso de LoL)', type: 'brand' },
     { path: 'auth/register', title: 'Register', type: 'account' },
     { path: 'auth/login', title: 'Login', type: 'account' },
-    { path: 'auth/logout', title: 'Logout', type: 'logout' },
     { path: 'cards', title: 'Cards', type: 'item' },
   ];
 
@@ -39,10 +37,13 @@ export class NavbarComponent implements OnInit, DoCheck {
     this.items = this.routes.filter((item) => item.type === 'item');
     this.accounts = this.routes.filter((item) => item.type === 'account');
     this.brand = this.routes.filter((item) => item.type === 'brand')[0];
-    this.logout = this.routes.filter((item) => item.type === 'logout')[0];
   }
 
   ngDoCheck(): void {
     this.user = this._authentication.currentUserValue();
   }
+
+  public logout = () => {
+    this._authentication.logout().subscribe();
+  };
 }

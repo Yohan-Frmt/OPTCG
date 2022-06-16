@@ -1,54 +1,54 @@
-<form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" [formGroup]="registerForm" class="form">
   <div class="form__controls">
     <form-field>
       <label for="form-email">Email</label>
       <input
-        id="form-email"
-        type="email"
-        class="form__field"
-        spellcheck="false"
         autocapitalize="off"
+        autocomplete="username"
         autofocus="autofocus"
-        autocomplete="username email"
+        class="form__field"
         formControlName="email"
+        id="form-email"
+        spellcheck="false"
+        type="email"
       />
     </form-field>
     <form-field>
       <label for="form-name">Username</label>
       <input
-        id="form-name"
-        type="text"
-        class="form__field"
         autocomplete="off"
-        spellcheck="true"
+        class="form__field"
         formControlName="username"
+        id="form-name"
+        spellcheck="true"
+        type="text"
       />
     </form-field>
     <form-field>
       <label for="form-password">Password</label>
       <div class="form__toggle-wrapper">
         <input
-          id="form-password"
-          [type]="passwordType()"
-          class="form__field form__field_password"
-          autocomplete="new-password"
-          aria-autocomplete="list"
-          formControlName="password"
           (change)="onPasswordChange()"
+          [type]="passwordType()"
+          aria-autocomplete="list"
+          autocomplete="new-password"
+          class="form__field form__field__password"
+          formControlName="password"
+          id="form-password"
         />
         <button
-          type="button"
-          class="form__password-toggle"
           (click)="togglePasswordVisibility()"
+          class="form__password-toggle"
+          type="button"
         >
           <svg
             *ngIf="!showPassword"
             class="form__password-icon"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
             focusable="false"
+            height="24"
             role="presentation"
+            viewBox="0 0 24 24"
+            width="24"
           >
             <g fill="currentColor" fill-rule="evenodd">
               <path
@@ -60,11 +60,11 @@
           <svg
             *ngIf="showPassword"
             class="form__password-icon"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
             focusable="false"
+            height="24"
             role="presentation"
+            viewBox="0 0 24 24"
+            width="24"
           >
             <g fill="currentColor" fill-rule="evenodd">
               <path
@@ -82,26 +82,26 @@
       <label for="form-password">Password Confirmation</label>
       <div class="form__toggle-wrapper">
         <input
-          id="form-password-confirmation"
-          [type]="passwordConfirmationType()"
-          class="form__field form__field_password-confirmation"
-          aria-autocomplete="list"
-          formControlName="passwordConfirmation"
           (change)="onPasswordChange()"
+          [type]="passwordConfirmationType()"
+          aria-autocomplete="list"
+          class="form__field form__field__password-confirmation"
+          formControlName="passwordConfirmation"
+          id="form-password-confirmation"
         />
         <button
-          type="button"
-          class="form__password-confirmation-toggle"
           (click)="togglePasswordConfirmationVisibility()"
+          class="form__password-confirmation-toggle"
+          type="button"
         >
           <svg
             *ngIf="!showPasswordConfirmation"
             class="form__password-icon"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
             focusable="false"
+            height="24"
             role="presentation"
+            viewBox="0 0 24 24"
+            width="24"
           >
             <g fill="currentColor" fill-rule="evenodd">
               <path
@@ -113,11 +113,11 @@
           <svg
             *ngIf="showPasswordConfirmation"
             class="form__password-icon"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
             focusable="false"
+            height="24"
             role="presentation"
+            viewBox="0 0 24 24"
+            width="24"
           >
             <g fill="currentColor" fill-rule="evenodd">
               <path
@@ -141,7 +141,7 @@
       By signing up, you confirm that you've read and accepted our Terms of
       Service and Privacy Policy.
     </div>
-    <button type="submit" [disabled]="registerForm.invalid || isLoading">
+    <button [disabled]="registerForm.invalid || isLoading" type="submit">
       {{ isLoading ? 'Waiting...' : 'Continue' }}
     </button>
   </div>

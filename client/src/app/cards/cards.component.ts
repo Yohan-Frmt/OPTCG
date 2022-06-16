@@ -14,7 +14,7 @@ import { IUser } from '../shared/models/user.model';
 })
 export class CardsComponent {
   public user: IUser | null;
-  public cards: Observable<any>;
+  public cards: Observable<ICard[]>;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -22,6 +22,6 @@ export class CardsComponent {
     private readonly _api: ApiService,
   ) {
     this.user = this._authentication.currentUserValue();
-    this.cards = this._api.get<ICard>('/cards');
+    this.cards = this._api.get<ICard[]>('/cards');
   }
 }
