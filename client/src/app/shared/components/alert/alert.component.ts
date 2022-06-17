@@ -17,8 +17,8 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AlertComponent implements OnInit, OnDestroy {
-  @Input() id = 'default';
-  @Input() fade = true;
+  @Input() public id = 'default';
+  @Input() public fade = true;
 
   public alerts: Alert[] = [];
   public alertSub!: Subscription;

@@ -1,0 +1,13 @@
+<form-field>
+  <label for="form-filter">{{ source[1] }}</label>
+  <select
+    (change)="valueSelected()"
+    [(ngModel)]="selectedFilter"
+    id="form-filter"
+  >
+    <option value="">------------</option>
+    <option *ngFor="let item of source[0] | async">
+      {{ item.en_name }}
+    </option>
+  </select>
+</form-field>

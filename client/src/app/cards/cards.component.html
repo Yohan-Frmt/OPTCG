@@ -1,3 +1,16 @@
+<ng-container *ngIf="rarities | async">
+  <filter
+    (filterSubmit)="onFilterSubmit($event)"
+    [source]="[rarities, 'rarity']"
+  ></filter>
+</ng-container>
+<ng-container *ngIf="set | async">
+  <filter
+    (filterSubmit)="onFilterSubmit($event)"
+    [source]="[set, 'set']"
+  ></filter>
+</ng-container>
+
 <ng-container *ngFor="let card of cards | async">
   <card [card]="card" [size]="200"></card>
 </ng-container>
