@@ -10,6 +10,32 @@
     [source]="[set, 'set']"
   ></filter>
 </ng-container>
+<ng-container *ngIf="status | async">
+  <filter
+    (filterSubmit)="onFilterSubmit($event)"
+    [source]="[status, 'status']"
+  ></filter>
+</ng-container>
+<ng-container *ngIf="type | async">
+  <filter
+    (filterSubmit)="onFilterSubmit($event)"
+    [source]="[type, 'type']"
+  ></filter>
+</ng-container>
+<ng-container *ngIf="tags | async">
+  <filter
+    (filterSubmit)="onFilterSubmit($event)"
+    [multiple]="true"
+    [source]="[tags, 'tags']"
+  ></filter>
+</ng-container>
+<ng-container *ngIf="colors | async">
+  <filter
+    (filterSubmit)="onFilterSubmit($event)"
+    [multiple]="true"
+    [source]="[colors, 'colors']"
+  ></filter>
+</ng-container>
 
 <ng-container *ngFor="let card of cards | async">
   <card [card]="card" [size]="200"></card>

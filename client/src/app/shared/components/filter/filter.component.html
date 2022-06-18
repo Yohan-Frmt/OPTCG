@@ -3,6 +3,7 @@
   <select
     (change)="valueSelected()"
     [(ngModel)]="selectedFilter"
+    [multiple]="multiple"
     id="form-filter"
   >
     <option value="">------------</option>

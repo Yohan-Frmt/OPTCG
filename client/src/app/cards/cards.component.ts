@@ -7,6 +7,10 @@ import { ICard } from '../shared/models/card.model';
 import { IUser } from '../shared/models/user.model';
 import { ICardRarity } from '../shared/models/cardrarity.model';
 import { ICardSet } from '../shared/models/cardset.model';
+import { ICardStatus } from '../shared/models/cardstatus.model';
+import { ICardType } from '../shared/models/cardtype.model';
+import { ICardTag } from '../shared/models/cardtag.model';
+import { ICardColor } from '../shared/models/cardcolor.model';
 
 @Component({
   selector: 'cards',
@@ -19,6 +23,10 @@ export class CardsComponent {
   public cards: Observable<ICard[]>;
   public rarities: Observable<ICardRarity[]>;
   public set: Observable<ICardSet>;
+  public status: Observable<ICardStatus>;
+  public type: Observable<ICardType>;
+  public tags: Observable<ICardTag[]>;
+  public colors: Observable<ICardColor[]>;
   public query: any = {};
 
   constructor(
@@ -30,6 +38,10 @@ export class CardsComponent {
     this.cards = this._api.get<ICard[]>('/cards');
     this.rarities = this._api.get<ICardRarity[]>('/cardrarities');
     this.set = this._api.get<ICardSet>('/cardsets');
+    this.status = this._api.get<ICardStatus>('/cardstatus');
+    this.type = this._api.get<ICardType>('/cardtypes');
+    this.tags = this._api.get<ICardTag[]>('/cardtags');
+    this.colors = this._api.get<ICardColor[]>('/cardcolors');
   }
 
   public onFilterSubmit = ([value, type]: [string, string]) => {
@@ -41,6 +53,20 @@ export class CardsComponent {
       case 'set':
         this.query.set = value;
         if (!value) delete this.query.set;
+        break;
+      case 'status':
+        this.query.status = value;
+        if (!value) delete this.query.status;
+        break;
+      case 'type':
+        this.query.type = value;
+        if (!value) delete this.query.type;
+        break;
+      case 'tags':
+        this.query.tags = value;
+        break;
+      case 'colors':
+        this.query.colors = value;
         break;
     }
     const query: string = new URLSearchParams(this.query).toString();

@@ -10,6 +10,7 @@ export class FilterComponent implements OnInit {
   public filter: any;
   public type: string = '';
 
+  @Input() public multiple: boolean = false;
   @Input() public source: [any, string] = ['', ''];
   @Output() public filterSubmit: EventEmitter<any> = new EventEmitter<any>();
 

@@ -22,24 +22,57 @@ export class CardService {
         if (!value) continue;
         switch (type) {
           case 'rarity':
-            qb.andWhere('rarity.en_name = :r', { r: value });
+            qb.leftJoinAndSelect('card.rarities', 'rarity').andWhere(
+              'rarity.en_name = :r',
+              { r: value },
+            );
             break;
           case 'set':
-            qb.andWhere('set.en_name = :s', { s: value });
+            qb.leftJoinAndSelect('card.set', 'set').andWhere(
+              'set.en_name = :s',
+              { s: value },
+            );
+            break;
+          case 'status':
+            qb.leftJoinAndSelect('card.status', 'status').andWhere(
+              'status.en_name = :st',
+              { st: value },
+            );
+            break;
+          case 'type':
+            qb.leftJoinAndSelect('card.type', 'type').andWhere(
+              'type.en_name = :t',
+              { t: value },
+            );
+            break;
+          case 'tags':
+            for (const [idx, tag] of value.split(',').entries()) {
+              const params = {};
+              params[`t${idx}`] = tag;
+              qb.innerJoinAndSelect(`card.tags`, `tags${idx}`).andWhere(
+                `tags${idx}.en_name = :t${idx}`,
+                params,
+              );
+            }
+            break;
+          case 'colors':
+            for (const [idx, color] of value.split(',').entries()) {
+              const params = {};
+              params[`c${idx}`] = color;
+              qb.innerJoinAndSelect(`card.colors`, `colors${idx}`).andWhere(
+                `colors${idx}.en_name = :c${idx}`,
+                params,
+              );
+            }
             break;
         }
       }
     };
     return await getRepository(Card)
       .createQueryBuilder('card')
-      .leftJoinAndSelect('card.set', 'set')
-      .leftJoinAndSelect('card.type', 'type')
       .leftJoinAndSelect('card.colors', 'colors')
-      .leftJoinAndSelect('card.tags', 'tags')
       .leftJoinAndSelect('card.images', 'images')
       .leftJoinAndSelect('card.errata', 'errata')
-      .leftJoinAndSelect('card.rarities', 'rarity')
-      .leftJoinAndSelect('card.status', 'status')
       .where(wq)
       .orderBy('card.serial_number', 'ASC')
       .getMany();
