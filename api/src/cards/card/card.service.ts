@@ -65,12 +65,16 @@ export class CardService {
               );
             }
             break;
+          case 'search':
+            qb.andWhere('LOWER(card.en_name) LIKE LOWER(:c)', {
+              c: `%${value}%`,
+            });
+            break;
         }
       }
     };
     return await getRepository(Card)
       .createQueryBuilder('card')
-      .leftJoinAndSelect('card.colors', 'colors')
       .leftJoinAndSelect('card.images', 'images')
       .leftJoinAndSelect('card.errata', 'errata')
       .where(wq)

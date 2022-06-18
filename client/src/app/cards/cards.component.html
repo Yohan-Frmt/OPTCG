@@ -1,3 +1,5 @@
+<searchbar (searchSubmit)="onSearchSubmit($event)"></searchbar>
+
 <ng-container *ngIf="rarities | async">
   <filter
     (filterSubmit)="onFilterSubmit($event)"

@@ -44,6 +44,13 @@ export class CardsComponent {
     this.colors = this._api.get<ICardColor[]>('/cardcolors');
   }
 
+  public onSearchSubmit = (value: string) => {
+    this.query.search = value;
+    if (!value) delete this.query.search;
+    const query: string = new URLSearchParams(this.query).toString();
+    this.cards = this._api.get<ICard[]>(`/cards?${query}`);
+  };
+
   public onFilterSubmit = ([value, type]: [string, string]) => {
     switch (type) {
       case 'rarity':
