@@ -1,10 +1,10 @@
-import { ICardColor } from './cardcolor.model';
-import { ICardType } from './cardtype.model';
-import { ICardRarity } from './cardrarity.model';
-import { ICardSet } from './cardset.model';
-import { ICardImage } from './cardimage.model';
-import { ICardErrata } from './carderrata.model';
-import { ICardStatus } from './cardstatus.model';
+import { ICardColor } from './card-color.model';
+import { ICardType } from './card-type.model';
+import { ICardRarity } from './card-rarity.model';
+import { ICardSet } from './card-set.model';
+import { ICardImage } from './card-image.model';
+import { ICardErrata } from './card-errata.model';
+import { ICardStatus } from './card-status.model';
 
 export interface ICard {
   readonly id: string;
