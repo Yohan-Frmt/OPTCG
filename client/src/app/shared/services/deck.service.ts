@@ -22,6 +22,9 @@ export class DeckService {
 
   public decksQuery = (query: IDeckQuery): Observable<IDeck[]> =>
     this._api.get<IDeck[]>(
-      `/cards?${new URLSearchParams(<any>query).toString()}`,
+      `/decks?${new URLSearchParams(<any>query).toString()}`,
     );
+
+  public deck = (id: string): Observable<IDeck> =>
+    this._api.get<IDeck>(`/deck/${id}`);
 }

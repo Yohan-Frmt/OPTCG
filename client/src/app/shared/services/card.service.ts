@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/api/api.service';
 import { ICard } from '../models/card.model';
 import { Observable } from 'rxjs';
-import { ICardRarity } from '../models/cardrarity.model';
-import { ICardSet } from '../models/cardset.model';
-import { ICardStatus } from '../models/cardstatus.model';
-import { ICardType } from '../models/cardtype.model';
-import { ICardTag } from '../models/cardtag.model';
-import { ICardColor } from '../models/cardcolor.model';
+import { ICardRarity } from '../models/card-rarity.model';
+import { ICardSet } from '../models/card-set.model';
+import { ICardStatus } from '../models/card-status.model';
+import { ICardType } from '../models/card-type.model';
+import { ICardTag } from '../models/card-tag.model';
+import { ICardColor } from '../models/card-color.model';
 import { ICardQuery } from '../models/card-query.model';
 
 @Injectable({
@@ -43,6 +43,9 @@ export class CardService {
   public get colors(): Observable<ICardColor[]> {
     return this._api.get<ICardColor[]>('/cardcolors');
   }
+
+  public getCard = (serial: string): Observable<ICard> =>
+    this._api.get<ICard>('/card/' + serial);
 
   public cardsQuery = (query: ICardQuery): Observable<ICard[]> =>
     this._api.get<ICard[]>(

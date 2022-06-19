@@ -1,7 +1,7 @@
 import {
   Body,
-  Controller,
   Get,
+  Param,
   Post,
   UsePipes,
   ValidationPipe,
@@ -9,13 +9,17 @@ import {
 import { DeckDto } from './deck.dto';
 import { DeckService } from './deck.service';
 
-@Controller('decks')
 export class DeckController {
   constructor(private readonly service: DeckService) {}
 
-  @Get()
+  @Get('/decks')
   public async findAll(): Promise<DeckDto[]> {
     return await this.service.findAll();
+  }
+
+  @Get('/deck/:id')
+  public async findOneById(@Param('id') id: string): Promise<DeckDto> {
+    return await this.service.findOneById(id);
   }
 
   @Post()

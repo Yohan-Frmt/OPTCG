@@ -19,10 +19,6 @@ export class CardController {
   @Get('/cards')
   public async findAll(@Req() request: Request): Promise<CardDto[]> {
     return await this.service.findAll(Object.entries(request.query));
-    // switch (type[0]) {
-    //   case 'rarity':
-    //     return await this.service.findByRarity(value[0] as string);
-    // }
   }
 
   @Get('/card/:serial')

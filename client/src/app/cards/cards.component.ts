@@ -4,12 +4,12 @@ import { AuthenticationService } from '../core/authentication/services/authentic
 import { AlertService } from '../shared/services/alert.service';
 import { ICard } from '../shared/models/card.model';
 import { IUser } from '../shared/models/user.model';
-import { ICardRarity } from '../shared/models/cardrarity.model';
-import { ICardSet } from '../shared/models/cardset.model';
-import { ICardStatus } from '../shared/models/cardstatus.model';
-import { ICardType } from '../shared/models/cardtype.model';
-import { ICardTag } from '../shared/models/cardtag.model';
-import { ICardColor } from '../shared/models/cardcolor.model';
+import { ICardRarity } from '../shared/models/card-rarity.model';
+import { ICardSet } from '../shared/models/card-set.model';
+import { ICardStatus } from '../shared/models/card-status.model';
+import { ICardType } from '../shared/models/card-type.model';
+import { ICardTag } from '../shared/models/card-tag.model';
+import { ICardColor } from '../shared/models/card-color.model';
 import { CardService } from '../shared/services/card.service';
 
 @Component({
