@@ -15,9 +15,14 @@ const routes: Routes = [
       import('./cards/cards.module').then((m) => m.CardsModule),
   },
   {
+    path: 'decks',
+    loadChildren: () =>
+      import('./decks/decks.module').then((m) => m.DecksModule),
+    canActivate: [AuthenticationGuard],
+  },
+  {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthenticationGuard],
   },
   {
     path: '**',

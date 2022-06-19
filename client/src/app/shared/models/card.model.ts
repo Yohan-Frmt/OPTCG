@@ -7,7 +7,7 @@ import { ICardErrata } from './carderrata.model';
 import { ICardStatus } from './cardstatus.model';
 
 export interface ICard {
-  readonly id?: string;
+  readonly id: string;
   readonly serial_number: string;
   readonly fr_name: string;
   readonly en_name: string;

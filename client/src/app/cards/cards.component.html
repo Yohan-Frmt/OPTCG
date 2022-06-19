@@ -3,13 +3,13 @@
 <ng-container *ngIf="rarities | async">
   <filter
     (filterSubmit)="onFilterSubmit($event)"
-    [source]="[rarities, 'rarity']"
+    [source]="[rarities, 'rarities']"
   ></filter>
 </ng-container>
-<ng-container *ngIf="set | async">
+<ng-container *ngIf="sets | async">
   <filter
     (filterSubmit)="onFilterSubmit($event)"
-    [source]="[set, 'set']"
+    [source]="[sets, 'set']"
   ></filter>
 </ng-container>
 <ng-container *ngIf="status | async">
@@ -18,10 +18,10 @@
     [source]="[status, 'status']"
   ></filter>
 </ng-container>
-<ng-container *ngIf="type | async">
+<ng-container *ngIf="types | async">
   <filter
     (filterSubmit)="onFilterSubmit($event)"
-    [source]="[type, 'type']"
+    [source]="[types, 'type']"
   ></filter>
 </ng-container>
 <ng-container *ngIf="tags | async">
