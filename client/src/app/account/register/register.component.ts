@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../core/authentication/services/authentication.service';
 import { AlertService } from '../../shared/services/alert.service';
-import { IRegister } from '../../core/authentication/models/register.model';
+import { IRegister } from '../../core/authentication/models';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 

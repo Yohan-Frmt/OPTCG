@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../../api/api.service';
 import { Router } from '@angular/router';
 import { CredentialsService } from './credentials.service';
-import { IRegister } from '../models/register.model';
-import { IUser } from '../../../shared/models/user.model';
-import { ILogin } from '../models/login.model';
-import { IAuth } from '../models/auth.model';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { CREDENTIALS_KEY } from '../../tokens';
 import { JwtService } from './jwt.service';
+import { IUser } from '../../../shared/models';
+import { IAuth, ILogin, IRegister } from '../models';
 
 @Injectable({
   providedIn: 'root',

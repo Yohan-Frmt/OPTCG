@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ICard } from '../../models';
 
 @Component({
   selector: 'card',
@@ -18,7 +19,7 @@ export class CardComponent implements OnInit {
   public size: number = 0;
 
   @Input()
-  public card: any;
+  public card: ICard | null = null;
 
   public path: string = '';
   public alt: string = '';
@@ -26,6 +27,7 @@ export class CardComponent implements OnInit {
   constructor(private readonly _router: Router) {}
 
   ngOnInit() {
+    if (!this.card) return;
     this.size ||= 150;
     this.path = 'assets/images/' + this.card.images[0].path;
     this.alt = this.card.en_name || 'card';
@@ -33,6 +35,6 @@ export class CardComponent implements OnInit {
 
   @HostListener('click')
   public onClick() {
-    this._router.navigate(['/cards', this.card.serial_number]);
+    this._router.navigate(['/cards', this.card!.serial_number]);
   }
 }

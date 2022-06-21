@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { IUser } from '../shared/models/user.model';
+import { IDeck, IDeckVisibility, IUser } from '../shared/models';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import { Observable } from 'rxjs';
-import { IDeck } from '../shared/models/deck.model';
 import { DeckService } from '../shared/services/deck.service';
-import { IDeckVisibility } from '../shared/models/deck-visibility.model';
 
 @Component({
   selector: 'decks',
@@ -14,8 +12,8 @@ import { IDeckVisibility } from '../shared/models/deck-visibility.model';
 })
 export class DecksComponent implements OnInit {
   public user: IUser | null;
-  public decks: Observable<IDeck[]> | null = null;
-  public visibilities: Observable<IDeckVisibility[]> | null = null;
+  public decks!: Observable<IDeck[]>;
+  public visibilities!: Observable<IDeckVisibility[]>;
 
   constructor(
     private readonly _authentication: AuthenticationService,

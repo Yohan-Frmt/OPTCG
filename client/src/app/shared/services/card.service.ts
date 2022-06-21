@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/api/api.service';
-import { ICard } from '../models/card.model';
+import {
+  ICard,
+  ICardColor,
+  ICardQuery,
+  ICardRarity,
+  ICardSet,
+  ICardStatus,
+  ICardTag,
+  ICardType,
+} from '../models';
 import { Observable } from 'rxjs';
-import { ICardRarity } from '../models/card-rarity.model';
-import { ICardSet } from '../models/card-set.model';
-import { ICardStatus } from '../models/card-status.model';
-import { ICardType } from '../models/card-type.model';
-import { ICardTag } from '../models/card-tag.model';
-import { ICardColor } from '../models/card-color.model';
-import { ICardQuery } from '../models/card-query.model';
 
 @Injectable({
   providedIn: 'root',

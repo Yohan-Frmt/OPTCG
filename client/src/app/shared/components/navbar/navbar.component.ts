@@ -4,8 +4,8 @@ import {
   DoCheck,
   OnInit,
 } from '@angular/core';
-import { IUser } from '../../models/user.model';
 import { AuthenticationService } from '../../../core/authentication/services/authentication.service';
+import { INavbarLinks, IUser } from '../../models';
 import { AlertService } from '../../services/alert.service';
 
 @Component({
@@ -16,15 +16,16 @@ import { AlertService } from '../../services/alert.service';
 })
 export class NavbarComponent implements OnInit, DoCheck {
   public user: IUser | null = null;
-  public items: any[] = [];
-  public accounts: any[] = [];
-  public brand: any = null;
+  public items: INavbarLinks[] = [];
+  public accounts: INavbarLinks[] = [];
+  public brand: INavbarLinks | null = null;
 
-  public routes = [
+  public routes: INavbarLinks[] = [
     { path: '', title: 'Brand (pas le perso de LoL)', type: 'brand' },
     { path: 'auth/register', title: 'Register', type: 'account' },
     { path: 'auth/login', title: 'Login', type: 'account' },
     { path: 'cards', title: 'Cards', type: 'item' },
+    { path: 'decks', title: 'Decks', type: 'item' },
   ];
 
   constructor(

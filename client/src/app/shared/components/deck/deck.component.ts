@@ -4,9 +4,8 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { ICard } from '../../models/card.model';
+import { ICard, IDeck, IDeckContent } from '../../models';
 import { CardService } from '../../services/card.service';
-import { IDeckContent } from '../../models/deck-content.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,15 +16,16 @@ import { Observable } from 'rxjs';
 })
 export class DeckComponent implements OnInit {
   @Input()
-  public cards: string = '';
-
-  public leader: Observable<ICard> | null = null;
+  public deck: IDeck | null = null;
+  public name!: string;
+  public cards!: IDeckContent;
+  public leader!: Observable<ICard>;
 
   constructor(private readonly _card: CardService) {}
 
   ngOnInit(): void {
-    this.leader = this._card.getCard(
-      (JSON.parse(this.cards) as IDeckContent).leader,
-    );
+    if (!this.deck) return;
+    this.cards = <IDeckContent>JSON.parse(this.deck?.content);
+    this.leader = this._card.getCard(this.cards.leader);
   }
 }

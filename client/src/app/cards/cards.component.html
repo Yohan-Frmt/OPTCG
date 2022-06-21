@@ -9,7 +9,7 @@
 <ng-container *ngIf="sets | async">
   <filter
     (filterSubmit)="onFilterSubmit($event)"
-    [source]="[sets, 'set']"
+    [source]="[sets, 'sets']"
   ></filter>
 </ng-container>
 <ng-container *ngIf="status | async">
@@ -21,7 +21,7 @@
 <ng-container *ngIf="types | async">
   <filter
     (filterSubmit)="onFilterSubmit($event)"
-    [source]="[types, 'type']"
+    [source]="[types, 'types']"
   ></filter>
 </ng-container>
 <ng-container *ngIf="tags | async">

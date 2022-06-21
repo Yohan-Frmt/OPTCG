@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../../storages/local.service';
 import { SessionStorageService } from '../../storages/session.service';
-import { IAuth } from '../models/auth.model';
 import { CREDENTIALS_KEY } from '../../tokens';
+import { IAuth } from '../models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CredentialsService {
   private readonly _storage: Storage;
-  private _credentials: IAuth | null = null;
 
   constructor(
     private readonly _localStorage: LocalStorageService,
@@ -19,12 +18,14 @@ export class CredentialsService {
     this._setSavedItem();
   }
 
-  get storage(): Storage {
-    return this._storage;
-  }
+  private _credentials: IAuth | null = null;
 
   get credentials(): IAuth | null {
     return this._credentials;
+  }
+
+  get storage(): Storage {
+    return this._storage;
   }
 
   getAccessToken = (): string | undefined => this.credentials?.access_token;

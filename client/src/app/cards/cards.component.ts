@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
+import {
+  ICard,
+  ICardColor,
+  ICardRarity,
+  ICardSet,
+  ICardStatus,
+  ICardTag,
+  ICardType,
+  IUser,
+} from '../shared/models';
 import { AlertService } from '../shared/services/alert.service';
-import { ICard } from '../shared/models/card.model';
-import { IUser } from '../shared/models/user.model';
-import { ICardRarity } from '../shared/models/card-rarity.model';
-import { ICardSet } from '../shared/models/card-set.model';
-import { ICardStatus } from '../shared/models/card-status.model';
-import { ICardType } from '../shared/models/card-type.model';
-import { ICardTag } from '../shared/models/card-tag.model';
-import { ICardColor } from '../shared/models/card-color.model';
 import { CardService } from '../shared/services/card.service';
 
 @Component({
@@ -20,13 +22,13 @@ import { CardService } from '../shared/services/card.service';
 })
 export class CardsComponent implements OnInit {
   public user: IUser | null;
-  public cards: Observable<ICard[]> | null = null;
-  public rarities: Observable<ICardRarity[]> | null = null;
-  public sets: Observable<ICardSet> | null = null;
-  public status: Observable<ICardStatus> | null = null;
-  public types: Observable<ICardType> | null = null;
-  public tags: Observable<ICardTag[]> | null = null;
-  public colors: Observable<ICardColor[]> | null = null;
+  public cards!: Observable<ICard[]>;
+  public rarities!: Observable<ICardRarity[]>;
+  public sets!: Observable<ICardSet>;
+  public status!: Observable<ICardStatus>;
+  public types!: Observable<ICardType>;
+  public tags!: Observable<ICardTag[]>;
+  public colors!: Observable<ICardColor[]>;
   public query: any = {};
 
   constructor(
@@ -59,16 +61,16 @@ export class CardsComponent implements OnInit {
         this.query.rarities = value;
         if (!value) delete this.query.rarities;
         break;
-      case 'set':
-        this.query.set = value;
+      case 'sets':
+        this.query.sets = value;
         if (!value) delete this.query.set;
         break;
       case 'status':
         this.query.status = value;
         if (!value) delete this.query.status;
         break;
-      case 'type':
-        this.query.type = value;
+      case 'types':
+        this.query.types = value;
         if (!value) delete this.query.type;
         break;
       case 'tags':

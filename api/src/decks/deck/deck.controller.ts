@@ -1,5 +1,6 @@
 import {
   Body,
+  Controller,
   Get,
   Param,
   Post,
@@ -9,6 +10,7 @@ import {
 import { DeckDto } from './deck.dto';
 import { DeckService } from './deck.service';
 
+@Controller()
 export class DeckController {
   constructor(private readonly service: DeckService) {}
 

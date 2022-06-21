@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../../core/authentication/services/authentication.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { ApiService } from '../../core/api/api.service';
-import { IUser } from '../../shared/models/user.model';
 import { ActivatedRoute } from '@angular/router';
-import { ICard } from '../../shared/models/card.model';
+import { ICard, IUser } from '../../shared/models';
 
 @Component({
   selector: 'card-details',

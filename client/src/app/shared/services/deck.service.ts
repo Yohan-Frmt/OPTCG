@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/api/api.service';
 import { Observable } from 'rxjs';
-import { IDeck } from '../models/deck.model';
-import { IDeckVisibility } from '../models/deck-visibility.model';
+import { IDeck, IDeckVisibility } from '../models';
 
 interface IDeckQuery {}
 

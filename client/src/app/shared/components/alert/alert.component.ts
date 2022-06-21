@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { AlertService } from '../../services/alert.service';
-import { Alert } from '../../models/alert.model';
+import { Alert } from '../../models';
 import { Subscription } from 'rxjs';
 
 @Component({
