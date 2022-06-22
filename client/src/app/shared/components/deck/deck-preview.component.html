@@ -1,0 +1,3 @@
+<ng-container *ngIf="leader | async as card">
+  <card [card]="card" [deckId]="deck.id"></card>
+</ng-container>

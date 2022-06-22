@@ -6,7 +6,7 @@ const db =
     ? process.env.DATABASE_URL
     : 'postgres://user:password@localhost:35000/db';
 
-const connectionOptions: ConnectionOptions[] = [
+export const connectionOptions: ConnectionOptions[] = [
   {
     type: 'postgres',
     url: db,
@@ -42,5 +42,3 @@ const connectionOptions: ConnectionOptions[] = [
     logger: process.env.NODE_ENV === PROD_ENV ? 'file' : 'advanced-console',
   },
 ];
-
-export = connectionOptions;
