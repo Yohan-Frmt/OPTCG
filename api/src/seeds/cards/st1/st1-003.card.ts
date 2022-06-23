@@ -1,0 +1,22 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterStraw } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { red } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { alabasta, animal } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+
+export const st1_003 = new Card();
+st1_003.serial_number = 'ST01-003';
+st1_003.fr_name = 'Karoo';
+st1_003.en_name = 'Karoo';
+st1_003.jp_name = 'カルー';
+st1_003.power = 3000;
+st1_003.cost = 1;
+st1_003.counter = 1000;
+st1_003.set = starterStraw;
+st1_003.type = character;
+st1_003.colors = [red];
+st1_003.tags = [animal, alabasta];
+st1_003.rarities = [common];
+st1_003.status = unlimited;

@@ -17,6 +17,11 @@ const connectionOptions: ConnectionOptions[] = [
     cli: {
       migrationsDir: 'src/migrations',
     },
+    cache: {
+      type: 'database',
+      tableName: 'query-cache',
+      duration: 3000,
+    },
     dropSchema: false,
     migrationsRun: false,
     logger: process.env.NODE_ENV === PROD_ENV ? 'file' : 'advanced-console',

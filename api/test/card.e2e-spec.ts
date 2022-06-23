@@ -8,14 +8,14 @@ import { CardModule } from '../src/cards/card/card.module';
 import { CardService } from '../src/cards/card/card.service';
 import { CardController } from '../src/cards/card/card.controller';
 import { Card } from '../src/cards/card/card.entity';
-import { CardSetDto } from '../src/cards/cardset/cardset.dto';
-import { CardTypeDto } from '../src/cards/cardtype/cardtype.dto';
-import { CardStatusDto } from '../src/cards/cardstatus/cardstatus.dto';
-import { CardTagDto } from '../src/cards/cardtag/cardtag.dto';
-import { CardRarityDto } from '../src/cards/cardrarity/cardrarity.dto';
-import { CardColorDto } from '../src/cards/cardcolor/cardcolor.dto';
-import { CardImageDto } from '../src/cards/cardimage/cardimage.dto';
-import { CardErrataDto } from '../src/cards/carderrata/carderrata.dto';
+import { CardType } from '../src/cards/cardtype/cardtype.entity';
+import { CardTag } from '../src/cards/cardtag/cardtag.entity';
+import { CardImage } from '../src/cards/cardimage/cardimage.entity';
+import { CardColor } from '../src/cards/cardcolor/cardcolor.entity';
+import { CardErrata } from '../src/cards/carderrata/carderrata.entity';
+import { CardStatus } from '../src/cards/cardstatus/cardstatus.entity';
+import { CardSet } from '../src/cards/cardset/cardset.entity';
+import { CardRarity } from '../src/cards/cardrarity/cardrarity.entity';
 
 describe('CardController (e2e)', () => {
   let app: INestApplication;
@@ -23,35 +23,35 @@ describe('CardController (e2e)', () => {
   let service: CardService;
   let repository: Repository<Card>;
 
-  const set = new CardSetDto();
+  const set = new CardSet();
   set.fr_name = 'test';
   set.en_name = 'test';
 
-  const type = new CardTypeDto();
+  const type = new CardType();
   type.fr_name = 'test';
   type.en_name = 'test';
 
-  const tag = new CardTagDto();
+  const tag = new CardTag();
   tag.fr_name = 'test';
   tag.en_name = 'test';
 
-  const rarity = new CardRarityDto();
+  const rarity = new CardRarity();
   rarity.fr_name = 'test';
   rarity.en_name = 'test';
   rarity.abbr = 'test';
 
-  const image = new CardImageDto();
+  const image = new CardImage();
   image.path = 'test';
 
-  const errata = new CardErrataDto();
+  const errata = new CardErrata();
   errata.description = 'test';
 
-  const status = new CardStatusDto();
+  const status = new CardStatus();
   status.fr_name = 'test';
   status.en_name = 'test';
   status.max_amount = 1;
 
-  const color = new CardColorDto();
+  const color = new CardColor();
   color.fr_name = 'test';
   color.en_name = 'test';
   color.hex_color = '#000000';
@@ -386,37 +386,6 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/cards (POST) --> Validation Error cost is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      power: 1,
-      life: 1,
-      fr_effect: 'test',
-      en_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [errata],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain('cost should not be empty');
-      });
-  });
-
   it('/cards (POST) --> Validation Error cost is not a number ', () => {
     const dto = {
       serial_number: '123456789',
@@ -448,37 +417,6 @@ describe('CardController (e2e)', () => {
         expect(response.body.message).toContain(
           'cost must be a number conforming to the specified constraints',
         );
-      });
-  });
-
-  it('/cards (POST) --> Validation Error power is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      life: 1,
-      fr_effect: 'test',
-      en_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [errata],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain('power should not be empty');
       });
   });
 
@@ -516,37 +454,6 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/cards (POST) --> Validation Error life is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      power: 1,
-      fr_effect: 'test',
-      en_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [errata],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain('life should not be empty');
-      });
-  });
-
   it('/cards (POST) --> Validation Error life is not a number ', () => {
     const dto = {
       serial_number: '123456789',
@@ -577,39 +484,6 @@ describe('CardController (e2e)', () => {
       .then((response) => {
         expect(response.body.message).toContain(
           'life must be a number conforming to the specified constraints',
-        );
-      });
-  });
-
-  it('/cards (POST) --> Validation Error fr_effect is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      power: 1,
-      life: 1,
-      en_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [errata],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain(
-          'fr_effect should not be empty',
         );
       });
   });
@@ -646,39 +520,6 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/cards (POST) --> Validation Error en_effect is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      power: 1,
-      life: 1,
-      fr_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [errata],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain(
-          'en_effect should not be empty',
-        );
-      });
-  });
-
   it('/cards (POST) --> Validation Error en_effect is not a string ', () => {
     const dto = {
       serial_number: '123456789',
@@ -708,37 +549,6 @@ describe('CardController (e2e)', () => {
       .expect(400)
       .then((response) => {
         expect(response.body.message).toContain('en_effect must be a string');
-      });
-  });
-
-  it('/cards (POST) --> Validation Error counter is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      power: 1,
-      life: 1,
-      fr_effect: 'test',
-      en_effect: 'test',
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [errata],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain('counter should not be empty');
       });
   });
 
@@ -1307,39 +1117,6 @@ describe('CardController (e2e)', () => {
       });
   });
 
-  it('/cards (POST) --> Validation Error errata is not defined ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      power: 1,
-      life: 1,
-      fr_effect: 'test',
-      en_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain(
-          'errata should not be null or undefined',
-        );
-      });
-  });
-
   it('/cards (POST) --> Validation Error errata is not a DTO ', () => {
     const dto = {
       serial_number: '123456789',
@@ -1371,38 +1148,6 @@ describe('CardController (e2e)', () => {
         expect(response.body.message).toContain(
           'errata.each value in nested property errata must be either object or array',
         );
-      });
-  });
-
-  it('/cards (POST) --> Validation Error errata is empty ', () => {
-    const dto = {
-      serial_number: '123456789',
-      fr_name: 'tester',
-      en_name: 'test',
-      jp_name: 'testo',
-      cost: 1,
-      power: 1,
-      life: 1,
-      fr_effect: 'test',
-      en_effect: 'test',
-      counter: 1,
-      set,
-      type,
-      colors: [color],
-      tags: [tag],
-      images: [image],
-      rarities: [rarity],
-      errata: [],
-      status,
-    };
-
-    return request(app.getHttpServer())
-      .post('/cards')
-      .send(dto)
-      .expect('Content-type', /json/)
-      .expect(400)
-      .then((response) => {
-        expect(response.body.message).toContain('errata should not be empty');
       });
   });
 

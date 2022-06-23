@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Login } from '../../../core/authentication/models/login.model';
+import { ILogin } from '../../../core/authentication/models/login.model';
 
 @Component({
   selector: 'login-form',
@@ -24,10 +24,10 @@ export class LoginFormComponent {
   public isLoading: boolean = false;
 
   @Output()
-  public formSubmit: EventEmitter<Login> = new EventEmitter<Login>();
+  public formSubmit: EventEmitter<ILogin> = new EventEmitter<ILogin>();
 
   public onSubmit = (): void => {
     if (this.loginForm.invalid) return;
-    this.formSubmit.emit(this.loginForm.value as Login);
+    this.formSubmit.emit(this.loginForm.value as ILogin);
   };
 }

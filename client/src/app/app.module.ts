@@ -8,10 +8,12 @@ import { CoreModule } from './core/core.module';
 import { SkeletonModule } from './shared/components/skeleton/skeleton.module';
 import { AccountModule } from './account/account.module';
 import { HomeComponent } from './home/home.component';
-import { AlertComponent } from './shared/components/alert/alert.component';
+import { AlertModule } from './shared/components/alert/alert.module';
+import { CardModule } from './shared/components/card/card.module';
+import { NavbarModule } from './shared/components/navbar/navbar.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, AlertComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,6 +21,9 @@ import { AlertComponent } from './shared/components/alert/alert.component';
     CoreModule,
     SkeletonModule,
     AccountModule,
+    NavbarModule,
+    AlertModule,
+    CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

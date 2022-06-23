@@ -28,7 +28,8 @@
     "migration:generate": "npm run build && npm run typeorm migration:generate -- -n",
     "seed:create": "npm run build &&  npm run typeorm migration:create -- -c seed -n",
     "seed:run": "npm run build && npm run typeorm migration:run -- -c seed",
-    "seed:show": "npm run build && npm run typeorm migration:show -- -c seed"
+    "seed:show": "npm run build && npm run typeorm migration:show -- -c seed",
+    "database:reset": "npm run migration:run && npm run seed:run"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",

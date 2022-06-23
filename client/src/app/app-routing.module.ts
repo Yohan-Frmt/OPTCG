@@ -10,6 +10,11 @@ const routes: Routes = [
       import('./account/account.module').then((m) => m.AccountModule),
   },
   {
+    path: 'cards',
+    loadChildren: () =>
+      import('./cards/cards.module').then((m) => m.CardsModule),
+  },
+  {
     path: '',
     component: HomeComponent,
     canActivate: [AuthenticationGuard],

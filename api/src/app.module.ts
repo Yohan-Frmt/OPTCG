@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
 import { JwtMiddleware } from './shared/middlewares/jwt.middleware';
+import { DeckModule } from './decks/deck/deck.module';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(JwtMiddleware)
-      .exclude('api/auth/(.*)')
-      .forRoutes({ path: '*', method: RequestMethod.ALL });
+      .exclude({ path: '*', method: RequestMethod.ALL })
+      .forRoutes(DeckModule);
   }
 }

@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterStraw } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { red } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { rookie, strawHatPirates } from '../utils/tags.cards';
+import { superRare } from '../utils/rarities.cards';
+
+export const st1_013 = new Card();
+st1_013.serial_number = 'ST01-013';
+st1_013.fr_name = 'Roronoa Zoro';
+st1_013.en_name = 'Roronoa Zoro';
+st1_013.jp_name = 'ロロノア・ゾロ';
+st1_013.power = 5000;
+st1_013.cost = 3;
+st1_013.fr_effect = '[DON!! x1] Ce Personnage gagne +1000 de Puissance.';
+st1_013.en_effect = '[DON!! x1] This Character gains +1000 Power.';
+st1_013.set = starterStraw;
+st1_013.type = character;
+st1_013.colors = [red];
+st1_013.tags = [strawHatPirates, rookie];
+st1_013.rarities = [superRare];
+st1_013.status = unlimited;

@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Register } from '../../../core/authentication/models/register.model';
+import { IRegister } from '../../../core/authentication/models/register.model';
 
 @Component({
   selector: 'register-form',
@@ -35,7 +35,7 @@ export class RegisterFormComponent {
   public isLoading: boolean = false;
 
   @Output()
-  public formSubmit: EventEmitter<Register> = new EventEmitter<Register>();
+  public formSubmit: EventEmitter<IRegister> = new EventEmitter<IRegister>();
 
   public togglePasswordVisibility = (): void => {
     this.showPassword = !this.showPassword;
@@ -64,6 +64,6 @@ export class RegisterFormComponent {
 
   public onSubmit = (): void => {
     if (this.registerForm.invalid) return;
-    this.formSubmit.emit(this.registerForm.value as Register);
+    this.formSubmit.emit(this.registerForm.value as IRegister);
   };
 }

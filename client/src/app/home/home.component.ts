@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { User } from '../shared/models/user.model';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
+import { AlertService } from '../shared/services/alert.service';
+import { IUser } from '../shared/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +10,12 @@ import { AuthenticationService } from '../core/authentication/services/authentic
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  public user: User;
-  constructor(private readonly _authenticate: AuthenticationService) {
-    this.user = this._authenticate.currentUserValue()!;
+  public user: IUser | null;
+
+  constructor(
+    private readonly _authentication: AuthenticationService,
+    private readonly _alert: AlertService,
+  ) {
+    this.user = this._authentication.currentUserValue();
   }
 }

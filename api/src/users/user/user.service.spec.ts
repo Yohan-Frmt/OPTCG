@@ -3,9 +3,6 @@ import { UserService } from './user.service';
 import { randomUUID } from 'crypto';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { UserCountry } from '../usercountry/usercountry.entity';
-import { UserRegion } from '../userregion/userregion.entity';
-import { UserPronoun } from '../userpronoun/userpronoun.entity';
 
 describe('UserService', () => {
   let service: UserService;
@@ -22,20 +19,20 @@ describe('UserService', () => {
     ),
   };
 
-  const country = new UserCountry();
-  country.fr_name = 'France';
-  country.en_name = 'France';
-  country.iso_code = 'FR';
-
-  const region = new UserRegion();
-  region.fr_name = 'Auvergne-Rhône-Alpes';
-  region.en_name = 'Auverne-Rhone-Alpes';
-
-  const stores = [];
-
-  const pronouns = new UserPronoun();
-  pronouns.fr_name = 'il';
-  pronouns.en_name = 'he';
+  // const country = new UserCountry();
+  // country.fr_name = 'France';
+  // country.en_name = 'France';
+  // country.iso_code = 'FR';
+  //
+  // const region = new UserRegion();
+  // region.fr_name = 'Auvergne-Rhône-Alpes';
+  // region.en_name = 'Auverne-Rhone-Alpes';
+  //
+  // const stores = [];
+  //
+  // const pronouns = new UserPronoun();
+  // pronouns.fr_name = 'il';
+  // pronouns.en_name = 'he';
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -63,21 +60,13 @@ describe('UserService', () => {
       email: 'john@Doe.com',
       username: 'John',
       password: '123456',
-      isActive: true,
-      discord: 'John#1234',
-      isStore: false,
-      createdAt: new Date(),
-      last_login: new Date(),
-      country,
-      region,
-      stores,
-      pronouns: [pronouns],
     };
     expect(await service.create(dto)).toEqual({
       id: expect.stringMatching(
         /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,
       ),
       ...dto,
+      password: expect.stringMatching(/^\$2[ayb]\$.{56}$/),
     });
   });
 });

@@ -2,20 +2,34 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
+  Req,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { CardService } from './card.service';
 import { CardDto } from './card.dto';
+import { Request } from 'express';
 
-@Controller('cards')
+@Controller()
 export class CardController {
   constructor(private readonly service: CardService) {}
 
-  @Get()
-  public async findAll(): Promise<CardDto[]> {
-    return await this.service.findAll();
+  @Get('/cards')
+  public async findAll(@Req() request: Request): Promise<CardDto[]> {
+    return await this.service.findAll(Object.entries(request.query));
+    // switch (type[0]) {
+    //   case 'rarity':
+    //     return await this.service.findByRarity(value[0] as string);
+    // }
+  }
+
+  @Get('/card/:serial')
+  public async findOneBySerial(
+    @Param('serial') serial: string,
+  ): Promise<CardDto> {
+    return await this.service.findOneBySerial(serial);
   }
 
   @Post()

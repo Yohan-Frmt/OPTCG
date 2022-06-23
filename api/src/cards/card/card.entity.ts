@@ -34,48 +34,64 @@ export class Card extends BaseEntity {
   @Column()
   jp_name: string;
 
-  @Column()
-  cost: number;
+  @Column({ nullable: true })
+  cost?: number;
 
-  @Column()
-  power: number;
+  @Column({ nullable: true })
+  power?: number;
 
-  @Column()
-  life: number;
+  @Column({ nullable: true })
+  life?: number;
 
-  @Column()
-  fr_effect: string;
+  @Column({ nullable: true })
+  fr_effect?: string;
 
-  @Column()
-  en_effect: string;
+  @Column({ nullable: true })
+  en_effect?: string;
 
-  @Column()
-  counter: number;
+  @Column({ nullable: true })
+  counter?: number;
 
-  @ManyToOne(() => CardSet, (set: CardSet) => set.cards)
+  @ManyToOne(() => CardSet, (set: CardSet) => set.cards, {
+    cascade: true,
+  })
   set: CardSet;
 
-  @ManyToOne(() => CardType, (type: CardType) => type.cards)
+  @ManyToOne(() => CardType, (type: CardType) => type.cards, {
+    cascade: true,
+  })
   type: CardType;
 
-  @ManyToMany(() => CardColor, (color: CardColor) => color.cards)
+  @ManyToMany(() => CardColor, (color: CardColor) => color.cards, {
+    cascade: true,
+  })
   @JoinTable()
   colors: CardColor[];
 
-  @ManyToMany(() => CardTag, (tag: CardTag) => tag.cards)
+  @ManyToMany(() => CardTag, (tag: CardTag) => tag.cards, {
+    cascade: true,
+  })
   @JoinTable()
   tags: CardTag[];
 
-  @OneToMany(() => CardImage, (image: CardImage) => image.card)
+  @OneToMany(() => CardImage, (image: CardImage) => image.card, {
+    cascade: true,
+  })
   images: CardImage[];
 
-  @OneToMany(() => CardErrata, (errata: CardErrata) => errata.card)
-  errata: CardErrata[];
+  @OneToMany(() => CardErrata, (errata: CardErrata) => errata.card, {
+    cascade: true,
+  })
+  errata?: CardErrata[];
 
-  @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards)
+  @ManyToMany(() => CardRarity, (rarity: CardRarity) => rarity.cards, {
+    cascade: true,
+  })
   @JoinTable()
   rarities: CardRarity[];
 
-  @ManyToOne(() => CardStatus, (status: CardStatus) => status.cards)
+  @ManyToOne(() => CardStatus, (status: CardStatus) => status.cards, {
+    cascade: true,
+  })
   status: CardStatus;
 }

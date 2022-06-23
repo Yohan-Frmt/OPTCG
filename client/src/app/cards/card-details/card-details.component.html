@@ -1,0 +1,14 @@
+<ng-container *ngIf="this.card">
+  <card [card]="card" [size]="200"></card>
+  {{ card.serial_number }}
+  {{ card.en_name }}
+  {{ card.fr_name }}
+  {{ card.jp_name }}
+  {{ card.rarities[0].en_name }}
+  {{ card.rarities[0].fr_name }}
+  {{ card.rarities[0].abbr }}
+  {{ card.set.en_name }}
+  {{ card.set.fr_name }}
+  {{ card.fr_effect }}
+  {{ card.en_effect }}
+</ng-container>
