@@ -1,7 +1,11 @@
 <div class="navbar">
   <div class="navbar__header">
     <div class="navbar__header__title">
-      <logo (click)="redirectToHome()" [path]="brand?.image"></logo>
+      <logo
+        (click)="redirectToHome()"
+        [path]="brand?.image"
+        [size]="150"
+      ></logo>
     </div>
   </div>
   <div class="navbar__collapse-button">

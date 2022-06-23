@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit, DoCheck {
       path: '',
       title: 'Brand (pas le perso de LoL)',
       type: 'brand',
-      // image: 'assets/images/logo/brand.png',
+      image: 'assets/images/logo/logo.png',
     },
     { path: 'auth/register', title: 'Register', type: 'account' },
     { path: 'auth/login', title: 'Login', type: 'account' },
@@ -56,6 +56,6 @@ export class NavbarComponent implements OnInit, DoCheck {
   };
 
   public logout = () => {
-    this._authentication.logout().subscribe();
+    this._authentication.logout().subscribe((_) => {});
   };
 }

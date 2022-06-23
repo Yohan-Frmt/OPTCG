@@ -57,6 +57,7 @@ export class AuthenticationService {
       tap(() => {
         this._credentials.removeItem();
         this._userSubject.next(null);
+        this._router.navigate(['/auth/login']);
       }),
     );
   };
