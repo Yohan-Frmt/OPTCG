@@ -1,4 +1,5 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
+import * as path from 'path';
 
 const PROD_ENV = 'production';
 const db =
@@ -9,7 +10,8 @@ const db =
 const connectionOptions: DataSourceOptions = {
   type: 'postgres',
   url: db,
-  entities: ['dist/**/**.entity{.ts,.js}'],
+  entities: [path.join(__dirname, '..', '**', '**.entity.js')],
+  relationLoadStrategy: 'query',
   synchronize: false,
   logging: true,
   migrations: ['dist/migrations/**/*{.ts,.js}'],

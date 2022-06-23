@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './card.entity';
-import { Repository, SelectQueryBuilder } from 'typeorm';
+import { DataSource, Repository, SelectQueryBuilder } from 'typeorm';
 import { CardDto } from './card.dto';
-import { dataSourceMain } from '../../datasource-config-default';
 
 @Injectable()
 export class CardService {
   constructor(
     @InjectRepository(Card) private readonly repository: Repository<Card>,
+    private readonly _dataSource: DataSource,
   ) {}
 
   public async create(card: CardDto): Promise<Card> {
@@ -23,25 +23,25 @@ export class CardService {
         if (!value) continue;
         switch (type) {
           case 'rarities':
-            qb.innerJoinAndSelect('card.rarities', 'rarity').andWhere(
+            qb.leftJoinAndSelect('card.rarities', 'rarity').andWhere(
               'rarity.en_name = :r',
               { r: value },
             );
             break;
           case 'sets':
-            qb.innerJoinAndSelect('card.set', 'set').andWhere(
+            qb.leftJoinAndSelect('card.set', 'set').andWhere(
               'set.en_name = :s',
               { s: value },
             );
             break;
           case 'status':
-            qb.innerJoinAndSelect('card.status', 'status').andWhere(
+            qb.leftJoinAndSelect('card.status', 'status').andWhere(
               'status.en_name = :st',
               { st: value },
             );
             break;
           case 'types':
-            qb.innerJoinAndSelect('card.type', 'type').andWhere(
+            qb.leftJoinAndSelect('card.type', 'type').andWhere(
               'type.en_name = :t',
               { t: value },
             );
@@ -50,7 +50,7 @@ export class CardService {
             for (const [idx, tag] of value.split(',').entries()) {
               const params = {};
               params[`t${idx}`] = tag;
-              qb.innerJoinAndSelect(`card.tags`, `tags${idx}`).andWhere(
+              qb.leftJoinAndSelect(`card.tags`, `tags${idx}`).andWhere(
                 `tags${idx}.en_name = :t${idx}`,
                 params,
               );
@@ -60,7 +60,7 @@ export class CardService {
             for (const [idx, color] of value.split(',').entries()) {
               const params = {};
               params[`c${idx}`] = color;
-              qb.innerJoinAndSelect(`card.colors`, `colors${idx}`).andWhere(
+              qb.leftJoinAndSelect(`card.colors`, `colors${idx}`).andWhere(
                 `colors${idx}.en_name = :c${idx}`,
                 params,
               );
@@ -74,22 +74,31 @@ export class CardService {
         }
       }
     };
-    return await dataSourceMain
+    return await this._dataSource
       .getRepository(Card)
       .createQueryBuilder('card')
-      .innerJoinAndSelect('card.images', 'images')
-      .innerJoinAndSelect('card.errata', 'errata')
+      .leftJoinAndSelect('card.images', 'images')
+      .leftJoinAndSelect('card.errata', 'errata')
       .where(wq)
       .orderBy('card.serial_number', 'ASC')
       .getMany();
   }
 
   public async findOneBySerial(serial: string): Promise<Card> {
-    return await dataSourceMain
+    return await this._dataSource
       .getRepository(Card)
       .createQueryBuilder('card')
+      .leftJoinAndSelect('card.images', 'images')
+      .leftJoinAndSelect('card.set', 'set')
+      .leftJoinAndSelect('card.type', 'type')
+      .leftJoinAndSelect('card.colors', 'colors')
+      .leftJoinAndSelect('card.tags', 'tags')
+      .leftJoinAndSelect('card.errata', 'errata')
+      .leftJoinAndSelect('card.rarities', 'rarities')
+      .leftJoinAndSelect('card.status', 'status')
       .where({ serial_number: serial })
-      .cache(`card-${serial}`, 86400000)
-      .getOne();
+      .cache(`card-${serial}`, 3000)
+      // .cache(`card-${serial}`, 86400000)
+      .getOneOrFail();
   }
 }
