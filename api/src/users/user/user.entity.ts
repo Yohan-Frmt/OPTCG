@@ -29,7 +29,7 @@ export class User {
   @Column({ default: true })
   isActive: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   discord: string;
 
   @Column({ default: false })
@@ -50,9 +50,9 @@ export class User {
   )
   pronouns: UserPronoun[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ select: false })
   created_at: Date;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: 'timestamptz', nullable: true, select: false })
   last_login: Date;
 }

@@ -13,5 +13,6 @@ import { UserModule } from './user/user.module';
     UserStoreModule,
     UserModule,
   ],
+  exports: [UserModule],
 })
 export class UsersModule {}

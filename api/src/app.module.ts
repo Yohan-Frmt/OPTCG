@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
@@ -7,6 +7,9 @@ import { CardsModule } from './cards/cards.module';
 import { DecksModule } from './decks/decks.module';
 import * as options from './ormconfig';
 import { UsersModule } from './users/users.module';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { SharedModule } from './shared/shared.module';
+import { JwtMiddleware } from './shared/middlewares/jwt.middleware';
 
 @Module({
   imports: [
@@ -15,8 +18,17 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     CardsModule,
     DecksModule,
+    AuthenticationModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(JwtMiddleware)
+      .exclude('api/auth/(.*)')
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+  }
+}

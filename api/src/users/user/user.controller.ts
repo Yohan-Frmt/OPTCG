@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UsePipes,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserDto } from './user.dto';
 
@@ -18,9 +11,10 @@ export class UserController {
     return await this.userService.findAll();
   }
 
-  @Post()
-  @UsePipes(new ValidationPipe({ transform: true }))
-  public async create(@Body() user: UserDto): Promise<UserDto> {
-    return await this.userService.create(user);
+  @Get('protected')
+  public async protected() {
+    return {
+      title: 'This is protected',
+    };
   }
 }

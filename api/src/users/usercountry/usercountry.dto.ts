@@ -1,12 +1,12 @@
 import {
+  ArrayNotEmpty,
+  IsArray,
+  IsISO31661Alpha2,
   IsNotEmpty,
   IsOptional,
   IsString,
   IsUUID,
-  IsArray,
-  ArrayNotEmpty,
   ValidateNested,
-  IsISO31661Alpha2,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { UserRegionDto } from '../userregion/userregion.dto';

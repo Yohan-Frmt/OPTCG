@@ -42,9 +42,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-*.http
 api/package-lock.json
 api/yarn.lock
-client/yarn.lock
 package-lock.json
+yarn.lock
+client/yarn.lock

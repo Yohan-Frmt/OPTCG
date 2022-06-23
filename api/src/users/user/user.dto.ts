@@ -15,6 +15,8 @@ import {
   IsOptional,
   IsString,
   IsUUID,
+  Length,
+  Matches,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -42,7 +44,6 @@ export class UserDto {
   readonly isActive: boolean = true;
 
   @IsString()
-  @IsNotEmpty()
   readonly discord: string;
 
   @IsBoolean()
@@ -82,4 +83,32 @@ export class UserDto {
   @IsDate()
   @IsOptional()
   readonly last_login?: Date;
+}
+
+export class CreateUserDto {
+  @IsString()
+  @IsNotEmpty()
+  @IsEmail()
+  readonly email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly username: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Length(8, 24)
+  @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+  readonly password: string;
+}
+
+export class CredentialsDto {
+  @IsString()
+  @IsNotEmpty()
+  @IsEmail()
+  readonly email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly password: string;
 }

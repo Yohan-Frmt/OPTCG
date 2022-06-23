@@ -1,15 +1,14 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
-  Generated,
   CreateDateColumn,
-  UpdateDateColumn,
+  Entity,
   ManyToOne,
-  JoinColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { DeckVisibility } from '../deckvisibility/deckvisibility.entity';
 import { User } from '../../users/user/user.entity';
+
 @Entity()
 export class Deck {
   @PrimaryGeneratedColumn('uuid')
@@ -18,7 +17,7 @@ export class Deck {
   @Column({ length: 50 })
   name: string;
 
-  @ManyToOne((type) => User)
+  @ManyToOne(() => User)
   author: User;
 
   @Column()
@@ -30,7 +29,7 @@ export class Deck {
   @UpdateDateColumn()
   updated_at;
 
-  @ManyToOne((type) => DeckVisibility)
+  @ManyToOne(() => DeckVisibility)
   visibility: DeckVisibility;
 
   @Column()

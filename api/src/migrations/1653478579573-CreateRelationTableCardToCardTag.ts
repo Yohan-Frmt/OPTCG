@@ -5,7 +5,12 @@ export class CreateRelationTableCardToCardTag1653478579573
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE "card_tags_cardtag" ("cardId" uuid NOT NULL, "cardtagId" uuid NOT NULL, CONSTRAINT "PK_e344cdb985b720b674de19fd430" PRIMARY KEY ("cardId", "cardtagId"))`,
+      `CREATE TABLE "card_tags_cardtag"
+       (
+           "cardId"    uuid NOT NULL,
+           "cardtagId" uuid NOT NULL,
+           CONSTRAINT "PK_e344cdb985b720b674de19fd430" PRIMARY KEY ("cardId", "cardtagId")
+       )`,
     );
     await queryRunner.query(
       `CREATE INDEX "IDX_d4656a4bd792fc9c85b2378da5" ON "card_tags_cardtag" ("cardId") `,
