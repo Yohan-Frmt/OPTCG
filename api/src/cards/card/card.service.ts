@@ -21,13 +21,13 @@ export class CardService {
         const [type, value] = items;
         if (!value) continue;
         switch (type) {
-          case 'rarity':
+          case 'rarities':
             qb.leftJoinAndSelect('card.rarities', 'rarity').andWhere(
               'rarity.en_name = :r',
               { r: value },
             );
             break;
-          case 'set':
+          case 'sets':
             qb.leftJoinAndSelect('card.set', 'set').andWhere(
               'set.en_name = :s',
               { s: value },
@@ -39,7 +39,7 @@ export class CardService {
               { st: value },
             );
             break;
-          case 'type':
+          case 'types':
             qb.leftJoinAndSelect('card.type', 'type').andWhere(
               'type.en_name = :t',
               { t: value },

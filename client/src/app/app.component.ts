@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './core/authentication/services/authentication.service';
-import { IUser } from './shared/models/user.model';
+import { IUser } from './shared/models';
 
 @Component({
   selector: 'app-root',

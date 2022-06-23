@@ -15,14 +15,14 @@ const routes: Routes = [
       import('./cards/cards.module').then((m) => m.CardsModule),
   },
   {
-    path: '',
-    component: HomeComponent,
+    path: 'decks',
+    loadChildren: () =>
+      import('./decks/decks.module').then((m) => m.DecksModule),
     canActivate: [AuthenticationGuard],
   },
   {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
+    path: '',
+    component: HomeComponent,
   },
 ];
 

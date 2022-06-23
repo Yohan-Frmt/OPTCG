@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CardsModule } from './cards/cards.module';
 import { DecksModule } from './decks/decks.module';
-import * as options from './ormconfig';
+import { connectionOptions as options } from './ormconfig';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';

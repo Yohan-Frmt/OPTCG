@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IRegister } from '../../../core/authentication/models/register.model';
+import { IRegister } from '../../../core/authentication/models';
 
 @Component({
   selector: 'register-form',

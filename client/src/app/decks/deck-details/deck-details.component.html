@@ -1,0 +1,21 @@
+<!--<ng-container *ngIf="deck | async as d">-->
+<!--  <ng-container *ngFor="let card of (d.content | deckParser).main">-->
+<!--    {{ card }}-->
+<!--    &lt;!&ndash;    <card [card]="c" [size]="200"></card>&ndash;&gt;-->
+<!--  </ng-container>-->
+<!--</ng-container>-->
+
+<ng-container *ngIf="leader | async as l">
+  <card [card]="l"></card>
+</ng-container>
+<hr />
+<hr />
+<hr />
+<hr />
+<ng-container *ngIf="main">
+  <ng-container *ngFor="let card of main">
+    <ng-container *ngIf="card | async as c">
+      <card [card]="c"></card>
+    </ng-container>
+  </ng-container>
+</ng-container>

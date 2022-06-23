@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { finalize } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from '../../core/authentication/services/authentication.service';
-import { ILogin } from '../../core/authentication/models/login.model';
+import { ILogin } from '../../core/authentication/models';
 import { AlertService } from '../../shared/services/alert.service';
 
 @Component({

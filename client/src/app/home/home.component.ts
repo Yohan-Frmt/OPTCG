@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import { AlertService } from '../shared/services/alert.service';
-import { IUser } from '../shared/models/user.model';
+import { IUser } from '../shared/models';
 
 @Component({
   selector: 'app-home',

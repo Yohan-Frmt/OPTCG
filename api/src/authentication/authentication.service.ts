@@ -19,7 +19,7 @@ export class AuthenticationService {
     private readonly _jwt: JwtService,
   ) {}
 
-  public generateJsonWebToken = async (user: User): Promise<TokenDto> => {
+  public async generateJsonWebToken(user: User): Promise<TokenDto> {
     const access: PayloadDto = {
       sub: () => user.id,
       email: user.email,
@@ -41,11 +41,9 @@ export class AuthenticationService {
       access_token: accessToken,
       refresh_token: refreshToken,
     };
-  };
+  }
 
-  public refreshJsonWebToken = async (
-    token: RefreshTokenDto,
-  ): Promise<TokenDto> => {
+  public async refreshJsonWebToken(token: RefreshTokenDto): Promise<TokenDto> {
     let payload: PayloadDto;
     try {
       payload = this._jwt.verify(token.refreshToken);
@@ -57,23 +55,23 @@ export class AuthenticationService {
     if (!user) throw new Error('Invalid user');
     if (!user.isActive) throw new Error('Inactive user');
     return await this.generateJsonWebToken(user);
-  };
+  }
 
-  public validate = async (payload: any): Promise<TokenDto> => {
+  public async validate(payload: any): Promise<TokenDto> {
     const user = await this._user.findByEmail(payload.email);
     if (user) return this.generateJsonWebToken(user);
     else throw new UnauthorizedException();
-  };
+  }
 
-  public register = async (user: CreateUserDto): Promise<User> => {
+  public async register(user: CreateUserDto): Promise<User> {
     if (await this._user.findByEmail(user.email))
       throw new Error('Email is already used');
     if (await this._user.findByUsername(user.username))
       throw new Error('Username is already used');
     return this._user.create(user);
-  };
+  }
 
-  public login = async (credentials: CredentialsDto): Promise<TokenDto> => {
+  public async login(credentials: CredentialsDto): Promise<TokenDto> {
     let user = await this._user.findByEmail(credentials.email);
     if (!user) throw new Error('Invalid username or password');
     const isValid = await this._user.compare(
@@ -85,5 +83,5 @@ export class AuthenticationService {
     if (!user.isActive) throw new Error('Inactive user');
     user = await this._user.findById(user.id);
     return await this.generateJsonWebToken(user);
-  };
+  }
 }

@@ -1,14 +1,14 @@
-<ng-container *ngIf="this.card">
-  <card [card]="card" [size]="200"></card>
-  {{ card.serial_number }}
-  {{ card.en_name }}
-  {{ card.fr_name }}
-  {{ card.jp_name }}
-  {{ card.rarities[0].en_name }}
-  {{ card.rarities[0].fr_name }}
-  {{ card.rarities[0].abbr }}
-  {{ card.set.en_name }}
-  {{ card.set.fr_name }}
-  {{ card.fr_effect }}
-  {{ card.en_effect }}
+<ng-container *ngIf="card | async as c">
+  <card [card]="c" [size]="200"></card>
+  {{ c.serial_number }}
+  {{ c.en_name }}
+  {{ c.fr_name }}
+  {{ c.jp_name }}
+  {{ c.rarities[0].en_name }}
+  {{ c.rarities[0].fr_name }}
+  {{ c.rarities[0].abbr }}
+  {{ c.set.en_name }}
+  {{ c.set.fr_name }}
+  {{ c.fr_effect }}
+  {{ c.en_effect }}
 </ng-container>

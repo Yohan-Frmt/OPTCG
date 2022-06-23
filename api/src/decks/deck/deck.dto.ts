@@ -29,7 +29,7 @@ export class DeckDto {
   @IsNotEmptyObject()
   @ValidateNested({ each: true })
   @Type(() => UserDto)
-  @IsOptional() // TODO: REMOVE ISOPTIONAL QUAND TESTS COMPLETS
+  @IsOptional()
   readonly author?: UserDto;
 
   @IsString()
@@ -50,6 +50,7 @@ export class DeckDto {
   @IsNotEmptyObject()
   @ValidateNested({ each: true })
   @Type(() => DeckVisibilityDto)
+  @IsOptional()
   readonly visibility: DeckVisibilityDto;
 
   @IsString()

@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ILogin } from '../../../core/authentication/models/login.model';
+import { ILogin } from '../../../core/authentication/models';
 
 @Component({
   selector: 'login-form',

@@ -5,12 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
-import { SkeletonModule } from './shared/components/skeleton/skeleton.module';
 import { AccountModule } from './account/account.module';
 import { HomeComponent } from './home/home.component';
-import { AlertModule } from './shared/components/alert/alert.module';
-import { CardModule } from './shared/components/card/card.module';
-import { NavbarModule } from './shared/components/navbar/navbar.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -19,11 +16,8 @@ import { NavbarModule } from './shared/components/navbar/navbar.module';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
-    SkeletonModule,
     AccountModule,
-    NavbarModule,
-    AlertModule,
-    CardModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
