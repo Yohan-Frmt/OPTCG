@@ -1,27 +1,24 @@
-<nav class="navbar">
-  <div class="clearfix">
-    <a [routerLink]="[brand?.path]" class="navbar__brand">
-      {{ brand?.title }}
-    </a>
+<div class="navbar">
+  <div class="navbar__header">
+    <div class="navbar__header__title">
+      <logo (click)="redirectToHome()" [path]="brand?.image"></logo>
+    </div>
   </div>
-  <ul class="navbar__menu">
-    <li
-      *ngFor="let item of items"
-      class="navbar__menu__item"
-      routerLinkActive="active"
-    >
+  <div class="navbar__collapse-button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="navbar__menu">
+    <ng-container *ngFor="let item of items" class="navbar__menu__item">
       <a
         [routerLink]="[item.path]"
         class="navbar__menu__item__link"
         routerLinkActive="active"
         >{{ item.title }}</a
       >
-    </li>
-    <li
-      *ngIf="user !== null; else guest"
-      class="navbar__menu__item"
-      routerLinkActive="active"
-    >
+    </ng-container>
+    <ng-container *ngIf="user !== null; else guest" class="navbar__menu__item">
       <a
         (click)="logout()"
         class="navbar__menu__item__link"
@@ -29,9 +26,9 @@
         routerLinkActive="active"
         >Logout</a
       >
-    </li>
+    </ng-container>
     <ng-template #guest>
-      <li
+      <ng-container
         *ngFor="let item of accounts"
         class="navbar__menu__item"
         routerLinkActive="active"
@@ -42,7 +39,7 @@
           routerLinkActive="active"
           >{{ item.title }}</a
         >
-      </li>
+      </ng-container>
     </ng-template>
-  </ul>
-</nav>
+  </div>
+</div>

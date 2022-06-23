@@ -7,6 +7,7 @@ import {
 import { AuthenticationService } from '../../../core/authentication/services/authentication.service';
 import { INavbarLinks, IUser } from '../../models';
 import { AlertService } from '../../services/alert.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'navbar',
@@ -18,10 +19,15 @@ export class NavbarComponent implements OnInit, DoCheck {
   public user: IUser | null = null;
   public items: INavbarLinks[] = [];
   public accounts: INavbarLinks[] = [];
-  public brand: INavbarLinks | null = null;
+  public brand!: INavbarLinks;
 
   public routes: INavbarLinks[] = [
-    { path: '', title: 'Brand (pas le perso de LoL)', type: 'brand' },
+    {
+      path: '',
+      title: 'Brand (pas le perso de LoL)',
+      type: 'brand',
+      // image: 'assets/images/logo/brand.png',
+    },
     { path: 'auth/register', title: 'Register', type: 'account' },
     { path: 'auth/login', title: 'Login', type: 'account' },
     { path: 'cards', title: 'Cards', type: 'item' },
@@ -31,6 +37,7 @@ export class NavbarComponent implements OnInit, DoCheck {
   constructor(
     private readonly _authentication: AuthenticationService,
     private readonly _alert: AlertService,
+    private readonly _router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +50,10 @@ export class NavbarComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     this.user = this._authentication.currentUserValue();
   }
+
+  public redirectToHome = () => {
+    this._router.navigate(['/']);
+  };
 
   public logout = () => {
     this._authentication.logout().subscribe();

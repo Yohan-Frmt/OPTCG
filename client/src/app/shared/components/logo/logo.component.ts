@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'logo',
@@ -6,7 +11,13 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrls: ['./logo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogoComponent {
-  @Input()
-  size = 60;
+export class LogoComponent implements OnInit {
+  @Input() public size: number = 60;
+  @Input() public path: string | undefined;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.path ||= '/assets/images/logo/logo-random.png';
+  }
 }
