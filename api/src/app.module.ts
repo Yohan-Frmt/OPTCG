@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CardsModule } from './cards/cards.module';
 import { DecksModule } from './decks/decks.module';
-import { connectionOptions as options } from './ormconfig';
+import { dataSourceMain } from './datasource-config-default';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SharedModule } from './shared/shared.module';
@@ -15,7 +15,7 @@ import { DeckModule } from './decks/deck/deck.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(options[0]),
+    TypeOrmModule.forRoot(dataSourceMain.options),
     UsersModule,
     CardsModule,
     DecksModule,

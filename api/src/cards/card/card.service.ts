@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './card.entity';
-import { getRepository, Repository, SelectQueryBuilder } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { CardDto } from './card.dto';
+import { dataSourceMain } from '../../datasource-config-default';
 
 @Injectable()
 export class CardService {
@@ -22,25 +23,25 @@ export class CardService {
         if (!value) continue;
         switch (type) {
           case 'rarities':
-            qb.leftJoinAndSelect('card.rarities', 'rarity').andWhere(
+            qb.innerJoinAndSelect('card.rarities', 'rarity').andWhere(
               'rarity.en_name = :r',
               { r: value },
             );
             break;
           case 'sets':
-            qb.leftJoinAndSelect('card.set', 'set').andWhere(
+            qb.innerJoinAndSelect('card.set', 'set').andWhere(
               'set.en_name = :s',
               { s: value },
             );
             break;
           case 'status':
-            qb.leftJoinAndSelect('card.status', 'status').andWhere(
+            qb.innerJoinAndSelect('card.status', 'status').andWhere(
               'status.en_name = :st',
               { st: value },
             );
             break;
           case 'types':
-            qb.leftJoinAndSelect('card.type', 'type').andWhere(
+            qb.innerJoinAndSelect('card.type', 'type').andWhere(
               'type.en_name = :t',
               { t: value },
             );
@@ -73,30 +74,22 @@ export class CardService {
         }
       }
     };
-    return await getRepository(Card)
+    return await dataSourceMain
+      .getRepository(Card)
       .createQueryBuilder('card')
-      .leftJoinAndSelect('card.images', 'images')
-      .leftJoinAndSelect('card.errata', 'errata')
+      .innerJoinAndSelect('card.images', 'images')
+      .innerJoinAndSelect('card.errata', 'errata')
       .where(wq)
       .orderBy('card.serial_number', 'ASC')
       .getMany();
   }
 
   public async findOneBySerial(serial: string): Promise<Card> {
-    return await this.repository.findOne({
-      where: {
-        serial_number: serial,
-      },
-      relations: [
-        'set',
-        'type',
-        'colors',
-        'tags',
-        'images',
-        'errata',
-        'rarities',
-        'status',
-      ],
-    });
+    return await dataSourceMain
+      .getRepository(Card)
+      .createQueryBuilder('card')
+      .where({ serial_number: serial })
+      .cache(`card-${serial}`, 86400000)
+      .getOne();
   }
 }

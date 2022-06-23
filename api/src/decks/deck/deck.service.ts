@@ -18,6 +18,6 @@ export class DeckService {
   }
 
   public async findOneById(id: string): Promise<Deck> {
-    return await this.repository.findOne(id);
+    return await this.repository.findOne({ where: { id } });
   }
 }

@@ -38,7 +38,7 @@ export class UserService {
   }
 
   public async findById(id: string): Promise<User> {
-    return await this.userRepository.findOne(id);
+    return await this.userRepository.findOne({ where: { id } });
   }
 
   public async findByEmail(email: string): Promise<User> {
