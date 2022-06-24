@@ -1,44 +1,65 @@
-<searchbar (searchSubmit)="onSearchSubmit($event)"></searchbar>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-3 filters">
+      <span class="filters__title">Filters</span>
+      <hr />
+      <ng-container *ngIf="rarities | async">
+        <div class="filters__subtitle"><span>Rarity</span></div>
+        <filter
+          (filterSubmit)="onFilterSubmit($event)"
+          [source]="[rarities, 'rarities']"
+        ></filter>
+      </ng-container>
+      <ng-container *ngIf="sets | async">
+        <div class="filters__subtitle"><span>Set</span></div>
+        <filter
+          (filterSubmit)="onFilterSubmit($event)"
+          [source]="[sets, 'sets']"
+        ></filter>
+      </ng-container>
+      <ng-container *ngIf="status | async">
+        <div class="filters__subtitle"><span>Status</span></div>
+        <filter
+          (filterSubmit)="onFilterSubmit($event)"
+          [source]="[status, 'status']"
+        ></filter>
+      </ng-container>
+      <ng-container *ngIf="types | async">
+        <div class="filters__subtitle"><span>Type</span></div>
+        <filter
+          (filterSubmit)="onFilterSubmit($event)"
+          [source]="[types, 'types']"
+        ></filter>
+      </ng-container>
+      <ng-container *ngIf="tags | async">
+        <div class="filters__subtitle"><span>Tags</span></div>
+        <filter
+          (filterSubmit)="onFilterSubmit($event)"
+          [multiple]="true"
+          [source]="[tags, 'tags']"
+        ></filter>
+      </ng-container>
+      <ng-container *ngIf="colors | async">
+        <div class="filters__subtitle"><span>Colors</span></div>
+        <filter
+          (filterSubmit)="onFilterSubmit($event)"
+          [multiple]="true"
+          [source]="[colors, 'colors']"
+        ></filter>
+      </ng-container>
+    </div>
 
-<ng-container *ngIf="rarities | async">
-  <filter
-    (filterSubmit)="onFilterSubmit($event)"
-    [source]="[rarities, 'rarities']"
-  ></filter>
-</ng-container>
-<ng-container *ngIf="sets | async">
-  <filter
-    (filterSubmit)="onFilterSubmit($event)"
-    [source]="[sets, 'sets']"
-  ></filter>
-</ng-container>
-<ng-container *ngIf="status | async">
-  <filter
-    (filterSubmit)="onFilterSubmit($event)"
-    [source]="[status, 'status']"
-  ></filter>
-</ng-container>
-<ng-container *ngIf="types | async">
-  <filter
-    (filterSubmit)="onFilterSubmit($event)"
-    [source]="[types, 'types']"
-  ></filter>
-</ng-container>
-<ng-container *ngIf="tags | async">
-  <filter
-    (filterSubmit)="onFilterSubmit($event)"
-    [multiple]="true"
-    [source]="[tags, 'tags']"
-  ></filter>
-</ng-container>
-<ng-container *ngIf="colors | async">
-  <filter
-    (filterSubmit)="onFilterSubmit($event)"
-    [multiple]="true"
-    [source]="[colors, 'colors']"
-  ></filter>
-</ng-container>
-
-<ng-container *ngFor="let card of cards | async">
-  <card [card]="card"></card>
-</ng-container>
+    <div class="col-md-12 col-lg-9">
+      <div class="row">
+        <searchbar (searchSubmit)="onSearchSubmit($event)"></searchbar>
+      </div>
+      <div class="row card-list">
+        <ng-container *ngFor="let card of cards | async">
+          <div class="col-3">
+            <card [card]="card"></card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

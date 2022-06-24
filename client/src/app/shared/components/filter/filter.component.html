@@ -1,9 +1,9 @@
 <form-field>
-  <label for="filter-{{ source[1] }}">{{ source[1] }}</label>
   <select
     (change)="valueSelected()"
     [(ngModel)]="selectedFilter"
     [multiple]="multiple"
+    class="select"
     id="filter-{{ source[1] }}"
   >
     <option value="">------------</option>

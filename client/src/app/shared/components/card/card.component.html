@@ -1,3 +1,10 @@
-<div class="card">
-  <img [alt]="alt" [src]="this.path" [width]="size" />
+<div class="col scene">
+  <div class="flip">
+    <div class="front">
+      <img [alt]="alt" [src]="this.path" [width]="size" />
+    </div>
+    <div class="back">
+      <img [alt]="alt" [width]="size" src="assets/images/back.png" />
+    </div>
+  </div>
 </div>
