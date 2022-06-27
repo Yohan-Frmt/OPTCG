@@ -5,7 +5,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { IRegister } from '../../../core/authentication/models';
 
 @Component({
@@ -15,14 +19,17 @@ import { IRegister } from '../../../core/authentication/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegisterFormComponent {
-  public registerForm: FormGroup = new FormGroup({
-    username: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [
+  public registerForm: UntypedFormGroup = new UntypedFormGroup({
+    username: new UntypedFormControl(null, [Validators.required]),
+    email: new UntypedFormControl(null, [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new UntypedFormControl(null, [
       Validators.required,
       Validators.minLength(8),
     ]),
-    passwordConfirmation: new FormControl(null, [
+    passwordConfirmation: new UntypedFormControl(null, [
       Validators.required,
       Validators.minLength(8),
     ]),
