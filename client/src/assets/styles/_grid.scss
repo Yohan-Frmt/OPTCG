@@ -610,6 +610,11 @@
     width: 16.66666667%;
   }
 
+  .col-md-2-5 {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+
   .col-md-3 {
     flex: 0 0 auto;
     width: 25%;
@@ -643,6 +648,11 @@
   .col-md-9 {
     flex: 0 0 auto;
     width: 75%;
+  }
+
+  .col-md-9-5 {
+    flex: 0 0 auto;
+    width: 80%;
   }
 
   .col-md-10 {

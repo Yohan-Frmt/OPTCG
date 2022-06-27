@@ -1,3 +1,1 @@
-<ng-container *ngFor="let deck of decks | async">
-  <deck-preview [deck]="deck"></deck-preview>
-</ng-container>
+<deck-preview *ngFor="let deck of decks | async" [deck]="deck"></deck-preview>

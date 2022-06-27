@@ -7,7 +7,7 @@ import { DeckService } from '../../shared/services/deck.service';
 import { CardService } from '../../shared/services/card.service';
 
 @Component({
-  selector: 'deck-details',
+  selector: 'deck-preview-details',
   templateUrl: './deck-details.component.html',
   styleUrls: ['./deck-details.component.scss'],
 })

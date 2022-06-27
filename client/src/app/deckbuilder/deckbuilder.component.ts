@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthenticationService } from '../core/authentication/services/authentication.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   ICard,
   ICardColor,
@@ -11,16 +9,19 @@ import {
   ICardType,
   IUser,
 } from '../shared/models';
+import { Observable } from 'rxjs';
+import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import { AlertService } from '../shared/services/alert.service';
 import { CardService } from '../shared/services/card.service';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss'],
+  selector: 'deckbuilder',
+  templateUrl: './deckbuilder.component.html',
+  styleUrls: ['./deckbuilder.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardsComponent implements OnInit {
+export class DeckbuilderComponent {
   public user: IUser | null;
   public cards!: Observable<ICard[]>;
   public rarities!: Observable<ICardRarity[]>;
@@ -29,6 +30,8 @@ export class CardsComponent implements OnInit {
   public types!: Observable<ICardType>;
   public tags!: Observable<ICardTag[]>;
   public colors!: Observable<ICardColor[]>;
+  public inLeader: ICard[] = [];
+  public inList: ICard[] = [];
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -38,21 +41,21 @@ export class CardsComponent implements OnInit {
     this.user = this._authentication.currentUserValue();
   }
 
-  ngOnInit(): void {
-    this.cards = this._card.cards;
-    this.rarities = this._card.rarities;
-    this.sets = this._card.sets;
-    this.status = this._card.status;
-    this.types = this._card.types;
-    this.tags = this._card.tags;
-    this.colors = this._card.colors;
+  noReturnPredicate() {
+    return false;
   }
 
-  public onSearchSubmit = ([value, type]: [string, string]) => {
-    this.cards = this._card.cardsQuery([value, type]);
-  };
+  onePerSpotPredicate(drag: any, drop: any) {
+    return drop.data.length < 1;
+  }
 
-  public onFilterSubmit = ([value, type]: [string, string]) => {
-    this.cards = this._card.cardsQuery([value, type]);
-  };
+  drop(event: CdkDragDrop<ICard[]>) {
+    // event.item.data.inPlay = true;
+    // transferArrayItem(
+    //   event.previousContainer.data,
+    //   event.container.data,
+    //   event.previousIndex,
+    //   event.currentIndex,
+    // );
+  }
 }

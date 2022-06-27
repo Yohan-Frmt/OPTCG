@@ -5,6 +5,11 @@ import { AlertModule } from './components/alert/alert.module';
 import { CardModule } from './components/card/card.module';
 import { SkeletonModule } from './components/skeleton/skeleton.module';
 import { DeckParserPipe } from './pipes/json-parser.pipe';
+import { DeckPreviewModule } from './components/deck-preview/deck-preview.module';
+import { FilterModule } from './components/filter/filter.module';
+import { FormFieldModule } from './components/form-field/form-field.module';
+import { LogoModule } from './components/logo/logo.module';
+import { SearchbarModule } from './components/searchbar/searchbar.module';
 
 @NgModule({
   declarations: [DeckParserPipe],
@@ -13,14 +18,23 @@ import { DeckParserPipe } from './pipes/json-parser.pipe';
     NavbarModule,
     AlertModule,
     CardModule,
+    FormFieldModule,
+    LogoModule,
+    FilterModule,
     SkeletonModule,
+    DeckPreviewModule,
+    SearchbarModule,
   ],
   exports: [
     NavbarModule,
     AlertModule,
     CardModule,
+    FormFieldModule,
+    LogoModule,
+    FilterModule,
     SkeletonModule,
-    DeckParserPipe,
+    DeckPreviewModule,
+    SearchbarModule,
   ],
 })
 export class SharedModule {}

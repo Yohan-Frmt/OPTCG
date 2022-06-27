@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListData]="inList"
+      [cdkDropListEnterPredicate]="noReturnPredicate"
+      cdkDropList
+      class="card-zone"
+    >
+      <cards class="col-md-9-5"></cards>
+    </div>
+    <div class="col-md-2-5 build-zone">
+      <div class="row chart-zone"></div>
+      <div
+        (cdkDropListDropped)="drop($event)"
+        [cdkDropListData]="inLeader"
+        [cdkDropListEnterPredicate]="onePerSpotPredicate"
+        cdkDropList
+        class="row leader-zone"
+      ></div>
+      <div class="row deck-zone"></div>
+    </div>
+  </div>
+</div>

@@ -14,36 +14,29 @@
     <span></span>
   </div>
   <div class="navbar__menu">
-    <ng-container *ngFor="let item of items" class="navbar__menu__item">
+    <a
+      *ngFor="let item of items"
+      [routerLink]="[item.path]"
+      class="navbar__menu__item__link"
+      routerLinkActive="active"
+      >{{ item.title }}</a
+    >
+    <a
+      (click)="logout()"
+      *ngIf="user !== null; else guest"
+      class="navbar__menu__item__link"
+      href="#"
+      routerLinkActive="active"
+      >Logout</a
+    >
+    <ng-template #guest>
       <a
+        *ngFor="let item of accounts"
         [routerLink]="[item.path]"
         class="navbar__menu__item__link"
         routerLinkActive="active"
         >{{ item.title }}</a
       >
-    </ng-container>
-    <ng-container *ngIf="user !== null; else guest" class="navbar__menu__item">
-      <a
-        (click)="logout()"
-        class="navbar__menu__item__link"
-        href="#"
-        routerLinkActive="active"
-        >Logout</a
-      >
-    </ng-container>
-    <ng-template #guest>
-      <ng-container
-        *ngFor="let item of accounts"
-        class="navbar__menu__item"
-        routerLinkActive="active"
-      >
-        <a
-          [routerLink]="[item.path]"
-          class="navbar__menu__item__link"
-          routerLinkActive="active"
-          >{{ item.title }}</a
-        >
-      </ng-container>
     </ng-template>
   </div>
 </div>

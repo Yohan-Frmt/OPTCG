@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/api/api.service';
 import { Observable } from 'rxjs';
-import { IDeck, IDeckVisibility } from '../models';
+import { IDeck, IDeckContent, IDeckVisibility } from '../models';
 
 interface IDeckQuery {}
 
@@ -26,4 +26,10 @@ export class DeckService {
 
   public deck = (id: string): Observable<IDeck> =>
     this._api.get<IDeck>(`/deck/${id}`);
+
+  public encode = (content: IDeckContent): string =>
+    btoa(JSON.stringify(content));
+
+  public decode = (content: string): IDeckContent =>
+    JSON.parse(atob(content)) as IDeckContent;
 }

@@ -1,0 +1,25 @@
+@import "_variables";
+
+.build-zone {
+  margin-top: 7px;
+  background-color: $color-gold;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.chart-zone {
+  height: 15%;
+  background-color: $color-white;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.leader-zone {
+  height: 10%;
+  background-color: $color-dark-blue;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.deck-zone {
+  height: 75%;
+  background-color: $color-light-blue;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}

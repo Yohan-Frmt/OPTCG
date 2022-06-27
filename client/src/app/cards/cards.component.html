@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-12 col-lg-3 filters">
+    <div class="col-md-2-5 filters">
       <span class="filters__title">Filters</span>
       <hr />
       <ng-container *ngIf="rarities | async">
@@ -49,16 +49,16 @@
       </ng-container>
     </div>
 
-    <div class="col-md-12 col-lg-9">
+    <div class="col-md-9-5">
       <div class="row">
         <searchbar (searchSubmit)="onSearchSubmit($event)"></searchbar>
       </div>
-      <div class="row card-list">
-        <ng-container *ngFor="let card of cards | async">
-          <div class="col-3">
+      <div class="row card-list mx-0">
+        <div *ngFor="let card of cards | async" class="col-3">
+          <div [cdkDragData]="card" cdkDrag class="card-list__card">
             <card [card]="card"></card>
           </div>
-        </ng-container>
+        </div>
       </div>
     </div>
   </div>
