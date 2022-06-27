@@ -23,10 +23,7 @@ export class CardService {
         if (!value) continue;
         switch (type) {
           case 'rarities':
-            qb.leftJoinAndSelect('card.rarities', 'rarity').andWhere(
-              'rarity.en_name = :r',
-              { r: value },
-            );
+            qb.andWhere('rarity.en_name = :r', { r: value });
             break;
           case 'sets':
             qb.leftJoinAndSelect('card.set', 'set').andWhere(
@@ -78,7 +75,13 @@ export class CardService {
       .getRepository(Card)
       .createQueryBuilder('card')
       .leftJoinAndSelect('card.images', 'images')
+      .leftJoinAndSelect('card.set', 'set')
+      .leftJoinAndSelect('card.type', 'type')
+      .leftJoinAndSelect('card.colors', 'colors')
+      .leftJoinAndSelect('card.tags', 'tags')
       .leftJoinAndSelect('card.errata', 'errata')
+      .leftJoinAndSelect('card.rarities', 'rarities')
+      .leftJoinAndSelect('card.status', 'status')
       .where(wq)
       .orderBy('card.serial_number', 'ASC')
       .getMany();

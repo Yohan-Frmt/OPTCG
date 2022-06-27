@@ -55,4 +55,8 @@ export class CardsComponent implements OnInit {
   public onFilterSubmit = ([value, type]: [string, string]) => {
     this.cards = this._card.cardsQuery([value, type]);
   };
+
+  public onDrop = () => {
+    this.cards = this._card.cards;
+  };
 }

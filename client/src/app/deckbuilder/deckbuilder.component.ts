@@ -13,7 +13,11 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import { AlertService } from '../shared/services/alert.service';
 import { CardService } from '../shared/services/card.service';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  copyArrayItem,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'deckbuilder',
@@ -39,6 +43,7 @@ export class DeckbuilderComponent {
     private readonly _card: CardService,
   ) {
     this.user = this._authentication.currentUserValue();
+    this._initCards();
   }
 
   noReturnPredicate() {
@@ -50,12 +55,47 @@ export class DeckbuilderComponent {
   }
 
   drop(event: CdkDragDrop<ICard[]>) {
-    // event.item.data.inPlay = true;
-    // transferArrayItem(
-    //   event.previousContainer.data,
-    //   event.container.data,
-    //   event.previousIndex,
-    //   event.currentIndex,
-    // );
+    this.onExited(event);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    } else {
+      copyArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+    this._initCards();
   }
+
+  public onClick = (event: any) => {
+    console.log(event);
+  };
+  public onRightclick = () => {};
+
+  public onEntered = (event: any) => {
+    const cardList = document.querySelectorAll('.card-list')[0];
+    const clone = event.item.element.nativeElement.cloneNode(true);
+    clone.removeAttribute('style');
+    cardList.prepend(clone);
+    console.log(event);
+  };
+
+  public onExited = (event: any) => {
+    const clones = document.querySelectorAll('.cdk-drag-dragging');
+    for (let i = 0; i < clones.length - 1; ++i) clones[i].remove();
+    console.log(event);
+  };
+
+  private _initCards = () => {
+    this._card.cards.subscribe((cards) => {
+      this.inList = cards;
+      console.log(this.inList);
+    });
+  };
 }

@@ -10,9 +10,10 @@ import { FilterModule } from './components/filter/filter.module';
 import { FormFieldModule } from './components/form-field/form-field.module';
 import { LogoModule } from './components/logo/logo.module';
 import { SearchbarModule } from './components/searchbar/searchbar.module';
+import { NumberToIterablePipe } from './pipes/number-to-iterable.pipe';
 
 @NgModule({
-  declarations: [DeckParserPipe],
+  declarations: [DeckParserPipe, NumberToIterablePipe],
   imports: [
     CommonModule,
     NavbarModule,
@@ -35,6 +36,7 @@ import { SearchbarModule } from './components/searchbar/searchbar.module';
     SkeletonModule,
     DeckPreviewModule,
     SearchbarModule,
+    NumberToIterablePipe,
   ],
 })
 export class SharedModule {}

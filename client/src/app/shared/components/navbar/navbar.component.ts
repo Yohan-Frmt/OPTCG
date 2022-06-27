@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit, DoCheck {
       type: 'brand',
       image: 'assets/images/logo/logo.png',
     },
+    { path: 'deckbuilder', title: 'Deckbuilder', type: 'item' },
     { path: 'auth/register', title: 'Register', type: 'account' },
     { path: 'auth/login', title: 'Login', type: 'account' },
     { path: 'cards', title: 'Cards', type: 'item' },

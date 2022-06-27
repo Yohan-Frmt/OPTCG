@@ -16,6 +16,11 @@
   height: 10%;
   background-color: $color-dark-blue;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+
+  .leader {
+    height: 10%;
+    background-color: $color-light-blue;
+  }
 }
 
 .deck-zone {
