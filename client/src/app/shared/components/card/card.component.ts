@@ -15,6 +15,7 @@ import { ICard } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent implements OnInit {
+  @Input() public fromDeckbuilder: boolean = false;
   @Input() public size: number = 200;
   @Input() public card!: ICard | null;
   @Input() public path: string = '';
@@ -32,6 +33,7 @@ export class CardComponent implements OnInit {
 
   @HostListener('click')
   public onClick() {
+    if (this.fromDeckbuilder) return;
     if (this.deckId) {
       this._router.navigate(['/decks', this.deckId]);
     } else {

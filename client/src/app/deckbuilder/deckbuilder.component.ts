@@ -81,9 +81,12 @@ export class DeckbuilderComponent {
   public onEntered = (event: any) => {
     const cardList = document.querySelectorAll('.card-list')[0];
     const clone = event.item.element.nativeElement.cloneNode(true);
+    const pCard = cardList.querySelector(
+      `#card-${parseInt(clone.id.split('-')[1], 10) - 1}`,
+    );
     clone.removeAttribute('style');
-    cardList.prepend(clone);
-    console.log(event);
+    if (pCard) pCard.parentNode!.insertBefore(clone, pCard.nextSibling);
+    else cardList.prepend(clone);
   };
 
   public onExited = (event: any) => {
@@ -95,7 +98,11 @@ export class DeckbuilderComponent {
   private _initCards = () => {
     this._card.cards.subscribe((cards) => {
       this.inList = cards;
-      console.log(this.inList);
+      const allCards = document.querySelectorAll('.card-list')[0].children;
+      for (let i = 0; i < allCards.length - 1; ++i)
+        allCards[i]
+          .querySelector('.scene')!
+          .firstElementChild!.classList.add('coucou');
     });
   };
 }

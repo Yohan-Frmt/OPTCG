@@ -56,11 +56,13 @@
       <div class="row card-list mx-0">
         <div *cdkDragPlaceholder class="custom-placeholder"></div>
         <card
-          *ngFor="let card of cards | async"
+          *ngFor="let card of cards | async; let i = index"
           [card]="card"
           [cdkDragData]="card"
+          [fromDeckbuilder]="fromDeckbuilder"
           cdkDrag
           class="col-3"
+          id="card-{{ i }}"
         ></card>
       </div>
     </div>

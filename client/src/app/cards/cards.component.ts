@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import {
@@ -21,6 +26,7 @@ import { CardService } from '../shared/services/card.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardsComponent implements OnInit {
+  @Input() public fromDeckbuilder: boolean = false;
   public user: IUser | null;
   public cards!: Observable<ICard[]>;
   public rarities!: Observable<ICardRarity[]>;
