@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
@@ -27,6 +29,7 @@ import { CardService } from '../shared/services/card.service';
 })
 export class CardsComponent implements OnInit {
   @Input() public fromDeckbuilder: boolean = false;
+  @Output() public cardClicked = new EventEmitter<ICard>();
   public user: IUser | null;
   public cards!: Observable<ICard[]>;
   public rarities!: Observable<ICardRarity[]>;
@@ -65,4 +68,8 @@ export class CardsComponent implements OnInit {
   public onDrop = () => {
     this.cards = this._card.cards;
   };
+
+  onCardClick(card: ICard) {
+    this.cardClicked.emit(card);
+  }
 }

@@ -4,16 +4,15 @@ import { NavbarModule } from './components/navbar/navbar.module';
 import { AlertModule } from './components/alert/alert.module';
 import { CardModule } from './components/card/card.module';
 import { SkeletonModule } from './components/skeleton/skeleton.module';
-import { DeckParserPipe } from './pipes/json-parser.pipe';
 import { DeckPreviewModule } from './components/deck-preview/deck-preview.module';
 import { FilterModule } from './components/filter/filter.module';
 import { FormFieldModule } from './components/form-field/form-field.module';
 import { LogoModule } from './components/logo/logo.module';
 import { SearchbarModule } from './components/searchbar/searchbar.module';
-import { NumberToIterablePipe } from './pipes/number-to-iterable.pipe';
+import { PipeModule } from './pipes/pipe.module';
 
 @NgModule({
-  declarations: [DeckParserPipe, NumberToIterablePipe],
+  declarations: [],
   imports: [
     CommonModule,
     NavbarModule,
@@ -25,6 +24,7 @@ import { NumberToIterablePipe } from './pipes/number-to-iterable.pipe';
     SkeletonModule,
     DeckPreviewModule,
     SearchbarModule,
+    PipeModule,
   ],
   exports: [
     NavbarModule,
@@ -36,7 +36,7 @@ import { NumberToIterablePipe } from './pipes/number-to-iterable.pipe';
     SkeletonModule,
     DeckPreviewModule,
     SearchbarModule,
-    NumberToIterablePipe,
+    PipeModule,
   ],
 })
 export class SharedModule {}

@@ -71,7 +71,7 @@ export class CardService {
       .leftJoinAndSelect('card.colors', 'colors')
       .leftJoinAndSelect('card.tags', 'tags')
       .leftJoinAndSelect('card.errata', 'errata')
-      .leftJoinAndSelect('card.rarities', 'rarities')
+      .leftJoinAndSelect('card.rarities', 'rarity')
       .leftJoinAndSelect('card.status', 'status')
       .where(wq)
       .orderBy('card.serial_number', 'ASC')

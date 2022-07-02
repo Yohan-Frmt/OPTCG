@@ -1,23 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {
-  ICard,
-  ICardColor,
-  ICardRarity,
-  ICardSet,
-  ICardStatus,
-  ICardTag,
-  ICardType,
-  IUser,
-} from '../shared/models';
+import { ICard, IUser } from '../shared/models';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import { AlertService } from '../shared/services/alert.service';
 import { CardService } from '../shared/services/card.service';
-import {
-  CdkDragDrop,
-  copyArrayItem,
-  moveItemInArray,
-} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'deckbuilder',
@@ -28,14 +14,8 @@ import {
 export class DeckbuilderComponent {
   public user: IUser | null;
   public cards!: Observable<ICard[]>;
-  public rarities!: Observable<ICardRarity[]>;
-  public sets!: Observable<ICardSet>;
-  public status!: Observable<ICardStatus>;
-  public types!: Observable<ICardType>;
-  public tags!: Observable<ICardTag[]>;
-  public colors!: Observable<ICardColor[]>;
   public inLeader: ICard[] = [];
-  public inList: ICard[] = [];
+  public inDeck: ICard[] = [];
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -43,66 +23,14 @@ export class DeckbuilderComponent {
     private readonly _card: CardService,
   ) {
     this.user = this._authentication.currentUserValue();
-    this._initCards();
+    this.cards = this._card.cards;
   }
 
-  noReturnPredicate() {
-    return false;
-  }
-
-  onePerSpotPredicate(drag: any, drop: any) {
-    return drop.data.length < 1;
-  }
-
-  drop(event: CdkDragDrop<ICard[]>) {
-    this.onExited(event);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    } else {
-      copyArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-    this._initCards();
-  }
-
-  public onClick = (event: any) => {
-    console.log(event);
-  };
-  public onRightclick = () => {};
-
-  public onEntered = (event: any) => {
-    const cardList = document.querySelectorAll('.card-list')[0];
-    const clone = event.item.element.nativeElement.cloneNode(true);
-    const pCard = cardList.querySelector(
-      `#card-${parseInt(clone.id.split('-')[1], 10) - 1}`,
-    );
-    clone.removeAttribute('style');
-    if (pCard) pCard.parentNode!.insertBefore(clone, pCard.nextSibling);
-    else cardList.prepend(clone);
+  public onClick = (card: any) => {
+    console.log(card as ICard);
   };
 
-  public onExited = (event: any) => {
-    const clones = document.querySelectorAll('.cdk-drag-dragging');
-    for (let i = 0; i < clones.length - 1; ++i) clones[i].remove();
-    console.log(event);
-  };
-
-  private _initCards = () => {
-    this._card.cards.subscribe((cards) => {
-      this.inList = cards;
-      const allCards = document.querySelectorAll('.card-list')[0].children;
-      for (let i = 0; i < allCards.length - 1; ++i)
-        allCards[i]
-          .querySelector('.scene')!
-          .firstElementChild!.classList.add('coucou');
-    });
+  public onSubmit = () => {
+    console.log(this.inDeck);
   };
 }

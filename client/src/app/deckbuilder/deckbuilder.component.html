@@ -1,42 +1,33 @@
 <div class="container">
   <div class="row">
-    <div
-      #cardZone="cdkDropList"
-      (cdkDropListDropped)="drop($event)"
-      [cdkDropListConnectedTo]="[leaderZone]"
-      [cdkDropListData]="inList"
-      [cdkDropListEnterPredicate]="noReturnPredicate"
-      cdkDropList
-      cdkDropListSortingDisabled
-      class="card-zone col-md-9-5"
-    >
-      <cards [fromDeckbuilder]="true"></cards>
+    <button (click)="onSubmit()" type="submit">Create</button>
+  </div>
+  <div class="row">
+    <div class="card-zone col-md-9-5">
+      <cards (cardClicked)="onClick($event)" [fromDeckbuilder]="true"></cards>
     </div>
     <div class="col-md-2-5 build-zone">
       <div class="row chart-zone"></div>
-      <div
-        #leaderZone="cdkDropList"
-        (cdkDropListDropped)="drop($event)"
-        (cdkDropListEntered)="onEntered($event)"
-        (cdkDropListExited)="onExited($event)"
-        [cdkDropListConnectedTo]="[cardZone]"
-        [cdkDropListData]="inLeader"
-        [cdkDropListEnterPredicate]="onePerSpotPredicate"
-        cdkDropList
-        class="row leader-zone"
-      >
+      <div class="row leader-zone">
         <div
           (click)="onClick($event)"
           *ngFor="let leader of inLeader"
-          [cdkDragData]="leader"
-          cdkDrag
           class="leader"
-          data-id="{{ leader }}"
+          data-id="{{ leader.id }}"
         >
           {{ leader.en_name }}
         </div>
       </div>
-      <div class="row deck-zone"></div>
+      <div class="row deck-zone">
+        <div
+          (click)="onClick($event)"
+          *ngFor="let card of inDeck"
+          class="card"
+          data-id="{{ card.id }}"
+        >
+          {{ card.en_name }}
+        </div>
+      </div>
     </div>
   </div>
 </div>

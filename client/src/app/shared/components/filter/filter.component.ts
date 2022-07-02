@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'filter',
@@ -11,7 +12,7 @@ export class FilterComponent implements OnInit {
   public type: string = '';
 
   @Input() public multiple: boolean = false;
-  @Input() public source: [any, string] = ['', ''];
+  @Input() public source!: [Observable<any>, string];
   @Output() public filterSubmit: EventEmitter<any> = new EventEmitter<any>();
 
   ngOnInit(): void {

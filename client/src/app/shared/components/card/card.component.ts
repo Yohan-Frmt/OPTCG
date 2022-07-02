@@ -27,7 +27,11 @@ export class CardComponent implements OnInit {
   ngOnInit() {
     if (!this.card) return;
     this.size ||= 150;
-    this.path ||= 'assets/images/' + this.card.images[0].path;
+    this.path ||=
+      'assets/images/' +
+      this.card.serial_number.split('-')[0] +
+      '/' +
+      this.card.images[0].path;
     this.alt = this.card.en_name || 'card';
   }
 

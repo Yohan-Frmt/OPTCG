@@ -54,15 +54,13 @@
         <searchbar (searchSubmit)="onSearchSubmit($event)"></searchbar>
       </div>
       <div class="row card-list mx-0">
-        <div *cdkDragPlaceholder class="custom-placeholder"></div>
+        <div class="custom-placeholder"></div>
         <card
-          *ngFor="let card of cards | async; let i = index"
+          (click)="onCardClick(card)"
+          *ngFor="let card of cards | async"
           [card]="card"
-          [cdkDragData]="card"
           [fromDeckbuilder]="fromDeckbuilder"
-          cdkDrag
           class="col-3"
-          id="card-{{ i }}"
         ></card>
       </div>
     </div>
