@@ -26,22 +26,13 @@ export class CardService {
             qb.andWhere('rarity.en_name = :r', { r: value });
             break;
           case 'sets':
-            qb.leftJoinAndSelect('card.set', 'set').andWhere(
-              'set.en_name = :s',
-              { s: value },
-            );
+            qb.andWhere('set.en_name = :s', { s: value });
             break;
           case 'status':
-            qb.leftJoinAndSelect('card.status', 'status').andWhere(
-              'status.en_name = :st',
-              { st: value },
-            );
+            qb.andWhere('status.en_name = :st', { st: value });
             break;
           case 'types':
-            qb.leftJoinAndSelect('card.type', 'type').andWhere(
-              'type.en_name = :t',
-              { t: value },
-            );
+            qb.andWhere('type.en_name = :t', { t: value });
             break;
           case 'tags':
             for (const [idx, tag] of value.split(',').entries()) {
