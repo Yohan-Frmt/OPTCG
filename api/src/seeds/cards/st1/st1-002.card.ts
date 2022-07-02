@@ -3,8 +3,9 @@ import { starterStraw } from '../utils/sets.cards';
 import { character } from '../utils/types.cards';
 import { red } from '../utils/colors.cards';
 import { unlimited } from '../utils/status.cards';
-import { strawHatPirates } from '../utils/tags.cards';
+import { strawHat } from '../utils/tags.cards';
 import { common } from '../utils/rarities.cards';
+import { ranged } from '../utils/attributes.cards';
 
 export const st1_002 = new Card();
 st1_002.serial_number = 'ST01-002';
@@ -21,6 +22,7 @@ st1_002.en_effect =
 st1_002.set = starterStraw;
 st1_002.type = character;
 st1_002.colors = [red];
-st1_002.tags = [strawHatPirates];
+st1_002.tags = [strawHat];
 st1_002.rarities = [common];
 st1_002.status = unlimited;
+st1_002.attribute = ranged;

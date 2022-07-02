@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWarlord } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { blue } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { delivery, warlord } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+import { slash } from '../utils/attributes.cards';
+
+export const st3_011 = new Card();
+st3_011.serial_number = 'ST03-011';
+st3_011.fr_name = 'Buggy';
+st3_011.en_name = 'Buggy';
+st3_011.jp_name = 'ヒート';
+st3_011.power = 3000;
+st3_011.cost = 1;
+st3_011.counter = 1000;
+st3_011.set = starterWarlord;
+st3_011.type = character;
+st3_011.colors = [blue];
+st3_011.tags = [warlord, delivery];
+st3_011.rarities = [common];
+st3_011.status = unlimited;
+st3_011.attribute = slash;

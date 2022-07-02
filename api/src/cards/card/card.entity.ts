@@ -2,10 +2,12 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { CardSet } from '../cardset/cardset.entity';
@@ -16,6 +18,7 @@ import { CardTag } from '../cardtag/cardtag.entity';
 import { CardImage } from '../cardimage/cardimage.entity';
 import { CardRarity } from '../cardrarity/cardrarity.entity';
 import { CardErrata } from '../carderrata/carderrata.entity';
+import { CardAttribute } from '../cardattribute/cardattribute.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -50,7 +53,19 @@ export class Card extends BaseEntity {
   en_effect?: string;
 
   @Column({ nullable: true })
+  fr_trigger_effect?: string;
+
+  @Column({ nullable: true })
+  en_trigger_effect?: string;
+
+  @Column({ nullable: true })
   counter?: number;
+
+  @OneToOne(() => CardAttribute, (attribute: CardAttribute) => attribute.card, {
+    cascade: true,
+  })
+  @JoinColumn()
+  attribute: CardAttribute;
 
   @ManyToOne(() => CardSet, (set: CardSet) => set.cards, {
     cascade: true,

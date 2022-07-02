@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { character } from '../utils/types.cards';
+import { unlimited } from '../utils/status.cards';
+import { common } from '../utils/rarities.cards';
+import { slash } from '../utils/attributes.cards';
+import { starterAnimal } from '../utils/sets.cards';
+import { purple } from '../utils/colors.cards';
+import { beast, drake, navy } from '../utils/tags.cards';
+
+export const st4_013 = new Card();
+st4_013.serial_number = 'ST04-013';
+st4_013.fr_name = 'X.Drake';
+st4_013.en_name = 'X.Drake';
+st4_013.jp_name = 'クロコダイル';
+st4_013.power = 5000;
+st4_013.cost = 3;
+st4_013.set = starterAnimal;
+st4_013.type = character;
+st4_013.colors = [purple];
+st4_013.tags = [navy, drake, beast];
+st4_013.rarities = [common];
+st4_013.status = unlimited;
+st4_013.attribute = slash;

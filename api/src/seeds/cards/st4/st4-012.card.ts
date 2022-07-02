@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { character } from '../utils/types.cards';
+import { unlimited } from '../utils/status.cards';
+import { common } from '../utils/rarities.cards';
+import { strike } from '../utils/attributes.cards';
+import { purple } from '../utils/colors.cards';
+import { starterAnimal } from '../utils/sets.cards';
+import { beast } from '../utils/tags.cards';
+
+export const st4_012 = new Card();
+st4_012.serial_number = 'ST04-012';
+st4_012.fr_name = 'Page One';
+st4_012.en_name = 'Page One';
+st4_012.jp_name = 'クロコダイル';
+st4_012.power = 6000;
+st4_012.cost = 4;
+st4_012.set = starterAnimal;
+st4_012.type = character;
+st4_012.colors = [purple];
+st4_012.tags = [beast];
+st4_012.rarities = [common];
+st4_012.status = unlimited;
+st4_012.attribute = strike;

@@ -19,6 +19,7 @@ import { CardRarityDto } from '../cardrarity/cardrarity.dto';
 import { CardStatusDto } from '../cardstatus/cardstatus.dto';
 import { Type } from 'class-transformer';
 import { CardErrataDto } from '../carderrata/carderrata.dto';
+import { CardAttributeDto } from '../cardattribute/cardattribute.dto';
 
 export class CardDto {
   @IsUUID()
@@ -62,9 +63,24 @@ export class CardDto {
   @IsOptional()
   readonly en_effect?: string;
 
+  @IsString()
+  @IsOptional()
+  readonly fr_trigger_effect?: string;
+
+  @IsString()
+  @IsOptional()
+  readonly en_trigger_effect?: string;
+
   @IsNumber()
   @IsOptional()
   readonly counter?: number;
+
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested({ each: true })
+  @Type(() => CardAttributeDto)
+  readonly attribute: CardAttributeDto;
 
   @IsDefined()
   @IsNotEmptyObject()

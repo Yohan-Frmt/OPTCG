@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWarlord } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { blue } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { common } from '../utils/rarities.cards';
+import { fishMan, sun, warlord } from '../utils/tags.cards';
+import { strike } from '../utils/attributes.cards';
+
+export const st3_006 = new Card();
+st3_006.serial_number = 'ST03-006';
+st3_006.fr_name = 'Jinbe';
+st3_006.en_name = 'Jinbe';
+st3_006.jp_name = 'コビー';
+st3_006.power = 4000;
+st3_006.cost = 2;
+st3_006.counter = 1000;
+st3_006.set = starterWarlord;
+st3_006.type = character;
+st3_006.colors = [blue];
+st3_006.tags = [warlord, fishMan, sun];
+st3_006.rarities = [common];
+st3_006.status = unlimited;
+st3_006.attribute = strike;

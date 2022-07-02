@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWorst } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { green } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { firetank } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+import { ranged } from '../utils/attributes.cards';
+
+export const st2_002 = new Card();
+st2_002.serial_number = 'ST02-002';
+st2_002.fr_name = 'Vito';
+st2_002.en_name = 'Vito';
+st2_002.jp_name = 'ヴィト';
+st2_002.power = 5000;
+st2_002.cost = 3;
+st2_002.counter = 1000;
+st2_002.set = starterWorst;
+st2_002.type = character;
+st2_002.colors = [green];
+st2_002.tags = [firetank];
+st2_002.rarities = [common];
+st2_002.status = unlimited;
+st2_002.attribute = ranged;

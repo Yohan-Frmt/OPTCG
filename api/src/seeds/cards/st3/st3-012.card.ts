@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWarlord } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { blue } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { navy, weapon } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+import { special } from '../utils/attributes.cards';
+
+export const st3_012 = new Card();
+st3_012.serial_number = 'ST03-012';
+st3_012.fr_name = 'Pacifista';
+st3_012.en_name = 'Pacifista';
+st3_012.jp_name = 'ベポ';
+st3_012.power = 6000;
+st3_012.cost = 4;
+st3_012.counter = 1000;
+st3_012.set = starterWarlord;
+st3_012.type = character;
+st3_012.colors = [blue];
+st3_012.tags = [weapon, navy];
+st3_012.rarities = [common];
+st3_012.status = unlimited;
+st3_012.attribute = special;

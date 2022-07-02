@@ -8,6 +8,7 @@ import { CardImageModule } from './cardimage/cardimage.module';
 import { CardTagModule } from './cardtag/cardtag.module';
 import { CardRarityModule } from './cardrarity/cardrarity.module';
 import { CardErrataModule } from './carderrata/carderrata.module';
+import { CardAttributeModule } from './cardattribute/cardattribute.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { CardErrataModule } from './carderrata/carderrata.module';
     CardTagModule,
     CardRarityModule,
     CardErrataModule,
+    CardAttributeModule,
   ],
 })
 export class CardsModule {}
