@@ -1,0 +1,27 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { beast, hawkin } from '../utils/tags.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { uncommon } from '../utils/rarities.cards';
+import { purple } from '../utils/colors.cards';
+import { slash } from '../utils/attributes.cards';
+
+export const op1_106 = new Card();
+op1_106.serial_number = 'OP01-106';
+op1_106.fr_name = 'Basil Hawkins';
+op1_106.en_name = 'Basil Hawkins';
+op1_106.jp_name = 'クロコダイル';
+op1_106.power = 2000;
+op1_106.cost = 4;
+op1_106.fr_effect = "flemme de trad pour l'instant";
+op1_106.en_effect = '[On Play] Add 1 card from your DON!! deck and rest it.';
+op1_106.fr_trigger_effect = "flemme de trad pour l'instant";
+op1_106.en_trigger_effect = 'Play this card.';
+op1_106.set = romanceDawn;
+op1_106.type = character;
+op1_106.colors = [purple];
+op1_106.tags = [beast, hawkin];
+op1_106.rarities = [uncommon];
+op1_106.status = unlimited;
+op1_106.attribute = slash;

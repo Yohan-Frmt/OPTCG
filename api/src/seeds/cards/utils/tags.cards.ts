@@ -104,6 +104,10 @@ export const kuja = new CardTag();
 kuja.fr_name = 'Équipage des Pirates Kuja';
 kuja.en_name = 'Kuja Pirates';
 
+export const buggy = new CardTag();
+buggy.fr_name = 'Équipage du Clown';
+buggy.en_name = 'Buggy Pirates';
+
 export const black = new CardTag();
 black.fr_name = 'Équipage de Barbe Noire';
 black.en_name = 'Blackbeard Pirates';
@@ -115,3 +119,43 @@ emperors.en_name = 'The Four Emperors';
 export const smile = new CardTag();
 smile.fr_name = 'Smile';
 smile.en_name = 'Smile';
+
+export const wano = new CardTag();
+wano.fr_name = 'Pays des Wa';
+wano.en_name = 'Wano Country';
+
+export const beautiful = new CardTag();
+beautiful.fr_name = 'Équipage des Magnifiques Pirates';
+beautiful.en_name = 'Beautiful Pirates';
+
+export const happo = new CardTag();
+happo.fr_name = 'Flotte de Happou';
+happo.en_name = 'Happo Navy';
+
+export const barto = new CardTag();
+barto.fr_name = 'Barto Club';
+barto.en_name = 'Barto Club';
+
+export const scabbards = new CardTag();
+scabbards.fr_name = 'Neuf Fourreaux Rouges';
+scabbards.en_name = 'Nine Red Scabbards';
+
+export const punk = new CardTag();
+punk.fr_name = 'Punk Hazard';
+punk.en_name = 'Punk Hazard';
+
+export const science = new CardTag();
+science.fr_name = 'Scientifique';
+science.en_name = 'Scientist';
+
+export const dressrosa = new CardTag();
+dressrosa.fr_name = 'Dressrosa';
+dressrosa.en_name = 'Dressrosa';
+
+export const thriller = new CardTag();
+thriller.fr_name = 'Thriller Bark';
+thriller.en_name = 'Thriller Bark Pirates';
+
+export const redhair = new CardTag();
+redhair.fr_name = 'Équipage du Roux';
+redhair.en_name = 'Red Hair Pirates';

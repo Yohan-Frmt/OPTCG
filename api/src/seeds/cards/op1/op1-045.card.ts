@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { heart } from '../utils/tags.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { green } from '../utils/colors.cards';
+import { common } from '../utils/rarities.cards';
+import { strike } from '../utils/attributes.cards';
+
+export const op1_045 = new Card();
+op1_045.serial_number = 'OP01-045';
+op1_045.fr_name = 'Jean Bart';
+op1_045.en_name = 'Jean Bart';
+op1_045.jp_name = 'クロコダイル';
+op1_045.power = 6000;
+op1_045.cost = 4;
+op1_045.set = romanceDawn;
+op1_045.type = character;
+op1_045.colors = [green];
+op1_045.tags = [heart];
+op1_045.rarities = [common];
+op1_045.status = unlimited;
+op1_045.attribute = strike;

@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { strawHat, supernovas } from '../utils/tags.cards';
+import { red } from '../utils/colors.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { slash } from '../utils/attributes.cards';
+
+export const op1_025 = new Card();
+op1_025.serial_number = 'OP01-025';
+op1_025.fr_name = 'Roronoa Zoro';
+op1_025.en_name = 'Roronoa Zoro';
+op1_025.jp_name = 'クロコダイル';
+op1_025.power = 5000;
+op1_025.cost = 3;
+op1_025.fr_effect = "flemme de trad pour l'instant";
+op1_025.en_effect = '[Rush] (This card can attack on the turn it is played.)';
+op1_025.set = romanceDawn;
+op1_025.type = character;
+op1_025.colors = [red];
+op1_025.tags = [supernovas, strawHat];
+op1_025.status = unlimited;
+op1_025.attribute = slash;

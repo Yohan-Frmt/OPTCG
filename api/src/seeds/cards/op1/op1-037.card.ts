@@ -1,0 +1,25 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { fishMan, scabbards, wano } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { green } from '../utils/colors.cards';
+import { slash } from '../utils/attributes.cards';
+
+export const op1_037 = new Card();
+op1_037.serial_number = 'OP01-037';
+op1_037.fr_name = 'Kawamatsu';
+op1_037.en_name = 'Kawamatsu';
+op1_037.jp_name = 'クロコダイル';
+op1_037.power = 3000;
+op1_037.cost = 2;
+op1_037.fr_trigger_effect = "flemme de trad pour l'instant";
+op1_037.en_trigger_effect = 'Play this card.';
+op1_037.set = romanceDawn;
+op1_037.type = character;
+op1_037.colors = [green];
+op1_037.tags = [fishMan, wano, scabbards];
+op1_037.rarities = [common];
+op1_037.status = unlimited;
+op1_037.attribute = slash;

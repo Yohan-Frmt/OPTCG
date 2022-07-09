@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { happo } from '../utils/tags.cards';
+import { red } from '../utils/colors.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { common } from '../utils/rarities.cards';
+import { slash } from '../utils/attributes.cards';
+
+export const op1_012 = new Card();
+op1_012.serial_number = 'OP01-012';
+op1_012.fr_name = 'Sai';
+op1_012.en_name = 'Sai';
+op1_012.jp_name = 'クロコダイル';
+op1_012.power = 4000;
+op1_012.cost = 2;
+op1_012.set = romanceDawn;
+op1_012.type = character;
+op1_012.colors = [red];
+op1_012.tags = [happo];
+op1_012.rarities = [common];
+op1_012.status = unlimited;
+op1_012.attribute = slash;

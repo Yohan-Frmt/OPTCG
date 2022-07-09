@@ -4,6 +4,10 @@ export const romanceDawn = new CardSet();
 romanceDawn.fr_name = 'Romance Dawn';
 romanceDawn.en_name = 'Romance Dawn';
 
+export const promotion = new CardSet();
+promotion.fr_name = 'Promotion';
+promotion.en_name = 'Promotion';
+
 export const starterStraw = new CardSet();
 starterStraw.fr_name = 'Deck de démarrage -Équipage au chapeau de paille-';
 starterStraw.en_name = 'STARTER DECK -Straw Hat Crew-';

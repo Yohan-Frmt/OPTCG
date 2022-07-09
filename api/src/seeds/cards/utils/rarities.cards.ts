@@ -24,3 +24,13 @@ export const superRare = new CardRarity();
 superRare.fr_name = 'Super Rare';
 superRare.en_name = 'Super Rare';
 superRare.abbr = 'SR';
+
+export const specialRare = new CardRarity();
+specialRare.fr_name = 'Special Rare';
+specialRare.en_name = 'Special Rare';
+specialRare.abbr = 'SEC';
+
+export const promotionRare = new CardRarity();
+promotionRare.fr_name = 'Promotion Rare';
+promotionRare.en_name = 'Promotion Rare';
+promotionRare.abbr = 'P';
