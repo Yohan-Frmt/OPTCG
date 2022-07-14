@@ -1,16 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeckDto } from './deck.dto';
+import { CreateDeckDto } from './deck.dto';
 import { Deck } from './deck.entity';
 import { DeckRepository } from './deck.repository';
+import { User } from '../../users/user/user.entity';
+import { DeckVisibility } from '../deckvisibility/deckvisibility.entity';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class DeckService {
-  constructor(@InjectRepository(Deck) private repository: DeckRepository) {}
+  constructor(
+    @InjectRepository(Deck) private repository: DeckRepository,
+    private readonly _dataSource: DataSource,
+  ) {}
 
-  public async create(deck: DeckDto): Promise<Deck> {
-    const returnedDeck: Deck = await this.repository.create(deck);
-    return await this.repository.save(returnedDeck);
+  public async create(createDeck: CreateDeckDto): Promise<Deck> {
+    const user = await this._dataSource.getRepository(User).findOneOrFail({
+      where: { id: createDeck.author_id },
+    });
+    const visibility = await this._dataSource
+      .getRepository(DeckVisibility)
+      .findOneOrFail({
+        where: { en_name: createDeck.visibility },
+      });
+    const deck = new Deck();
+    deck.name = createDeck.name;
+    deck.author = user;
+    deck.content = this.encode(createDeck.content);
+    deck.visibility = visibility;
+    deck.description = createDeck.description;
+    console.log(deck);
+    return await this.repository.save(deck);
   }
 
   public async findAll(): Promise<Deck[]> {
@@ -20,4 +40,7 @@ export class DeckService {
   public async findOneById(id: string): Promise<Deck> {
     return await this.repository.findOne({ where: { id } });
   }
+
+  public encode = (content: string): string =>
+    Buffer.from(JSON.stringify(content), 'utf8').toString('base64');
 }

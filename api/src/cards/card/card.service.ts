@@ -48,7 +48,7 @@ export class CardService {
             for (const [idx, color] of value.split(',').entries()) {
               const params = {};
               params[`c${idx}`] = color;
-              qb.leftJoinAndSelect(`card.colors`, `colors${idx}`).andWhere(
+              qb.leftJoinAndSelect(`card.colors`, `colors${idx}`).orWhere(
                 `colors${idx}.en_name = :c${idx}`,
                 params,
               );

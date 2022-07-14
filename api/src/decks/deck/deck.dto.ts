@@ -56,3 +56,25 @@ export class DeckDto {
   @IsString()
   readonly description: string;
 }
+
+export class CreateDeckDto {
+  @IsString()
+  @IsNotEmpty()
+  readonly name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly content: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly description: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly author_id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly visibility: string;
+}

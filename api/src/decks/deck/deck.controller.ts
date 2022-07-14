@@ -7,7 +7,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { DeckDto } from './deck.dto';
+import { CreateDeckDto, DeckDto } from './deck.dto';
 import { DeckService } from './deck.service';
 
 @Controller()
@@ -26,7 +26,7 @@ export class DeckController {
 
   @Post('/deck')
   @UsePipes(new ValidationPipe({ transform: true }))
-  public async create(@Body() deck: DeckDto): Promise<DeckDto> {
+  public async create(@Body() deck: CreateDeckDto): Promise<DeckDto> {
     return await this.service.create(deck);
   }
 }
