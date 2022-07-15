@@ -21,6 +21,9 @@ export class Deck {
   author: User;
 
   @Column()
+  leader: string;
+
+  @Column()
   content: string;
 
   @CreateDateColumn()

@@ -2,7 +2,6 @@ import { Type } from 'class-transformer';
 import {
   IsDate,
   IsDefined,
-  IsJSON,
   IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
@@ -13,6 +12,7 @@ import {
 } from 'class-validator';
 import { DeckVisibilityDto } from '../deckvisibility/deckvisibility.dto';
 import { UserDto } from '../../users/user/user.dto';
+import { TDeck } from '../../shared/encoder/types';
 
 export class DeckDto {
   @IsUUID()
@@ -34,7 +34,10 @@ export class DeckDto {
 
   @IsString()
   @IsNotEmpty()
-  @IsJSON()
+  readonly leader: string;
+
+  @IsString()
+  @IsNotEmpty()
   readonly content: string;
 
   @IsDate()
@@ -64,7 +67,10 @@ export class CreateDeckDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly content: string;
+  readonly leader: string;
+
+  @IsNotEmpty()
+  readonly content: TDeck;
 
   @IsString()
   @IsNotEmpty()

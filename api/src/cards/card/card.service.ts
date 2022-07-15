@@ -91,8 +91,7 @@ export class CardService {
       .leftJoinAndSelect('card.rarities', 'rarities')
       .leftJoinAndSelect('card.status', 'status')
       .where({ serial_number: serial })
-      .cache(`card-${serial}`, 3000)
-      // .cache(`card-${serial}`, 86400000)
+      .cache(`card-${serial}`, 86400000)
       .getOneOrFail();
   }
 }

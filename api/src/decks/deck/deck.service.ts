@@ -6,6 +6,8 @@ import { DeckRepository } from './deck.repository';
 import { User } from '../../users/user/user.entity';
 import { DeckVisibility } from '../deckvisibility/deckvisibility.entity';
 import { DataSource } from 'typeorm';
+import { getCodeFromDeck } from '../../shared/encoder/deck-encoder';
+import { TDeck } from '../../shared/encoder/types';
 
 @Injectable()
 export class DeckService {
@@ -26,6 +28,7 @@ export class DeckService {
     const deck = new Deck();
     deck.name = createDeck.name;
     deck.author = user;
+    deck.leader = createDeck.leader;
     deck.content = this.encode(createDeck.content);
     deck.visibility = visibility;
     deck.description = createDeck.description;
@@ -41,6 +44,5 @@ export class DeckService {
     return await this.repository.findOne({ where: { id } });
   }
 
-  public encode = (content: string): string =>
-    Buffer.from(JSON.stringify(content), 'utf8').toString('base64');
+  public encode = (content: TDeck): string => getCodeFromDeck(content);
 }
