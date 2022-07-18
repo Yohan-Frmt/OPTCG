@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './card.entity';
-import { DataSource, Repository, SelectQueryBuilder } from 'typeorm';
+import { Brackets, DataSource, Repository, SelectQueryBuilder } from 'typeorm';
 import { CardDto } from './card.dto';
 
 @Injectable()
@@ -32,7 +32,9 @@ export class CardService {
             qb.andWhere('status.en_name = :st', { st: value });
             break;
           case 'types':
-            qb.andWhere('type.en_name = :t', { t: value });
+            if (value[0] === '!')
+              qb.andWhere('type.en_name != :t', { t: value.substring(1) });
+            else qb.andWhere('type.en_name = :t', { t: value });
             break;
           case 'tags':
             for (const [idx, tag] of value.split(',').entries()) {
@@ -45,14 +47,16 @@ export class CardService {
             }
             break;
           case 'colors':
-            for (const [idx, color] of value.split(',').entries()) {
-              const params = {};
-              params[`c${idx}`] = color;
-              qb.leftJoinAndSelect(`card.colors`, `colors${idx}`).orWhere(
-                `colors${idx}.en_name = :c${idx}`,
-                params,
-              );
-            }
+            qb.andWhere(
+              new Brackets((q) => {
+                for (const [idx, color] of value.split(',').entries()) {
+                  const params = {};
+                  params[`c${idx}`] = color;
+                  qb.leftJoinAndSelect(`card.colors`, `colors${idx}`);
+                  q.orWhere(`colors${idx}.en_name = :c${idx}`, params);
+                }
+              }),
+            );
             break;
           case 'search':
             qb.andWhere('LOWER(card.en_name) LIKE LOWER(:c)', {

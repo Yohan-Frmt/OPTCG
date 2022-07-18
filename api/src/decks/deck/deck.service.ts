@@ -28,11 +28,9 @@ export class DeckService {
     const deck = new Deck();
     deck.name = createDeck.name;
     deck.author = user;
-    deck.leader = createDeck.leader;
     deck.content = this.encode(createDeck.content);
     deck.visibility = visibility;
     deck.description = createDeck.description;
-    console.log(deck);
     return await this.repository.save(deck);
   }
 

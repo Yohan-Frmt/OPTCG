@@ -34,10 +34,6 @@ export class DeckDto {
 
   @IsString()
   @IsNotEmpty()
-  readonly leader: string;
-
-  @IsString()
-  @IsNotEmpty()
   readonly content: string;
 
   @IsDate()
@@ -64,10 +60,6 @@ export class CreateDeckDto {
   @IsString()
   @IsNotEmpty()
   readonly name: string;
-
-  @IsString()
-  @IsNotEmpty()
-  readonly leader: string;
 
   @IsNotEmpty()
   readonly content: TDeck;
