@@ -28,7 +28,7 @@ export class CardComponent implements OnInit {
     if (!this.card) return;
     this.size ||= 150;
     this.path ||=
-      'assets/images/cards' +
+      'assets/images/cards/' +
       this.card.serial_number.split('-')[0] +
       '/' +
       this.card.images[0].path;

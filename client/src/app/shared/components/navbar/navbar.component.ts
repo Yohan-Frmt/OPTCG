@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit, DoCheck {
   public user: IUser | null = null;
   public items: INavbarLinks[] = [];
   public accounts: INavbarLinks[] = [];
-  public brand!: INavbarLinks;
+  public brand: INavbarLinks | null = null;
 
   public routes: INavbarLinks[] = [
     {
