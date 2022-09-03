@@ -4,9 +4,9 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { ICard, IDeck, IDeckContent } from '../../models';
+import { ICard, IDeck } from '../../models';
 import { CardService } from '../../services/card.service';
-import { Observable } from 'rxjs';
+import { DeckService } from '../../services/deck.service';
 
 @Component({
   selector: 'deck-preview',
@@ -17,13 +17,14 @@ import { Observable } from 'rxjs';
 export class DeckPreviewComponent implements OnInit {
   @Input() public deck!: IDeck;
   public name!: string;
-  public cards!: IDeckContent;
-  public leader!: Observable<ICard>;
+  public leader!: Promise<ICard>;
 
-  constructor(private readonly _card: CardService) {}
+  constructor(
+    private readonly _card: CardService,
+    private readonly _deck: DeckService,
+  ) {}
 
   ngOnInit(): void {
-    this.cards = JSON.parse(this.deck.content) as IDeckContent;
-    this.leader = this._card.getCard(this.cards.leader);
+    this.leader = this._deck.getLeader(this.deck);
   }
 }

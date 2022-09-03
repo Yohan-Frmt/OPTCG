@@ -26,4 +26,5 @@ export interface ICard {
   readonly rarities: ICardRarity[];
   readonly errata?: ICardErrata[];
   readonly status: ICardStatus;
+  readonly count?: number;
 }

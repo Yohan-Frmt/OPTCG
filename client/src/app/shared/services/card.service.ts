@@ -48,38 +48,39 @@ export class CardService {
   public getCard = (serial: string): Observable<ICard> =>
     this._api.get<ICard>('/card/' + serial);
 
-  public cardsQuery = ([value, type]: [string, string]): Observable<
-    ICard[]
-  > => {
+  public cardsQuery = (queries: [string, string][]): Observable<ICard[]> => {
     let query: any = {};
-    switch (type) {
-      case 'rarities':
-        query.rarities = value;
-        if (!value) delete query.rarities;
-        break;
-      case 'sets':
-        query.sets = value;
-        if (!value) delete query.set;
-        break;
-      case 'status':
-        query.status = value;
-        if (!value) delete query.status;
-        break;
-      case 'types':
-        query.types = value;
-        if (!value) delete query.type;
-        break;
-      case 'tags':
-        query.tags = value;
-        break;
-      case 'colors':
-        query.colors = value;
-        break;
-      case 'search':
-        query.search = value;
-        if (!value) delete query.search;
-        break;
+    for (const [value, type] of queries) {
+      switch (type) {
+        case 'rarities':
+          query.rarities = value;
+          if (!value) delete query.rarities;
+          break;
+        case 'sets':
+          query.sets = value;
+          if (!value) delete query.set;
+          break;
+        case 'status':
+          query.status = value;
+          if (!value) delete query.status;
+          break;
+        case 'types':
+          query.types = value;
+          if (!value) delete query.type;
+          break;
+        case 'tags':
+          query.tags = value;
+          break;
+        case 'colors':
+          query.colors = value;
+          break;
+        case 'search':
+          query.search = value;
+          if (!value) delete query.search;
+          break;
+      }
     }
+
     return this._api.get<ICard[]>(
       `/cards?${new URLSearchParams(<any>query).toString()}`,
     );

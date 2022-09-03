@@ -19,7 +19,7 @@ export class CardComponent implements OnInit {
   @Input() public size: number = 200;
   @Input() public card!: ICard | null;
   @Input() public path: string = '';
-  @Input() public deckId: string = '';
+  @Input() public deckId!: string;
   public alt: string = '';
 
   constructor(private readonly _router: Router) {}

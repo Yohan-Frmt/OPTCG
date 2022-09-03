@@ -10,9 +10,13 @@ import { FormFieldModule } from './components/form-field/form-field.module';
 import { LogoModule } from './components/logo/logo.module';
 import { SearchbarModule } from './components/searchbar/searchbar.module';
 import { PipeModule } from './pipes/pipe.module';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ErrorDialogService } from './services/error-dialog.service';
 
 @NgModule({
-  declarations: [],
+  declarations: [ErrorDialogComponent],
   imports: [
     CommonModule,
     NavbarModule,
@@ -25,6 +29,8 @@ import { PipeModule } from './pipes/pipe.module';
     DeckPreviewModule,
     SearchbarModule,
     PipeModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   exports: [
     NavbarModule,
@@ -37,6 +43,8 @@ import { PipeModule } from './pipes/pipe.module';
     DeckPreviewModule,
     SearchbarModule,
     PipeModule,
+    ErrorDialogComponent,
   ],
+  providers: [ErrorDialogService],
 })
 export class SharedModule {}

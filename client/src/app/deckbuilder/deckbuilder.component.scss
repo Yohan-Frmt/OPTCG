@@ -1,5 +1,9 @@
 @import "_variables";
 
+* {
+  user-select: none;
+}
+
 .build-zone {
   margin-top: 7px;
   background-color: $color-gold;
@@ -7,24 +11,40 @@
 }
 
 .chart-zone {
-  height: 15%;
   background-color: $color-white;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-top: 3px;
+
+  .pie {
+    width: 108px;
+    margin: auto;
+  }
+
+  .doughnut {
+    width: 108px;
+    margin: auto;
+  }
 }
 
 .leader-zone {
-  height: 10%;
   background-color: $color-dark-blue;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 
   .leader {
-    height: 10%;
+    height: 5vh;
     background-color: $color-light-blue;
   }
 }
 
 .deck-zone {
-  height: 75%;
-  background-color: $color-light-blue;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #0dcaf0;
+
+  .card {
+    display: grid;
+    height: 5vh;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+    justify-items: end;
+    align-items: center;
+  }
 }

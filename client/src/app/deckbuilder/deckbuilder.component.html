@@ -3,15 +3,36 @@
     <button (click)="onSubmit()" type="submit">Create</button>
   </div>
   <div class="row">
+    <div>{{ step }}</div>
+  </div>
+  <div class="row">
     <div class="card-zone col-md-9-5">
-      <cards (cardClicked)="onClick($event)" [fromDeckbuilder]="true"></cards>
+      <cards
+        (cardClicked)="onClick($event)"
+        (cardRightClicked)="onRightClick($event)"
+        [cardsPreload]="cards"
+        [fromDeckbuilder]="true"
+      ></cards>
     </div>
     <div class="col-md-2-5 build-zone">
-      <div class="row chart-zone"></div>
+      <div class="row deck-count">{{ manager.deck.length }} / 50</div>
+      <div class="chart-zone">
+        <div class="col">
+          <div class="chart doughnut">
+            <span>Types</span>
+            <canvas height="20" id="doughnut" width="20"></canvas>
+          </div>
+        </div>
+        <div class="col">
+          <div class="chart pie">
+            <span>Colors</span>
+            <canvas height="20" id="pie" width="20"></canvas>
+          </div>
+        </div>
+      </div>
       <div class="row leader-zone">
         <div
-          (click)="onClick($event)"
-          *ngFor="let leader of inLeader"
+          *ngIf="manager.deck.leader as leader"
           class="leader"
           data-id="{{ leader.id }}"
         >
@@ -20,12 +41,14 @@
       </div>
       <div class="row deck-zone">
         <div
-          (click)="onClick($event)"
-          *ngFor="let card of inDeck"
+          (click)="onClick(card)"
+          (contextmenu)="onRightClick(card)"
+          *ngFor="let card of manager.deck.cards"
+          [style]="{ backgroundColor: '' + card.colors[0].en_name + '' }"
           class="card"
           data-id="{{ card.id }}"
         >
-          {{ card.en_name }}
+          {{ card.en_name }} -- {{ card.count }}/{{ card.status.max_amount }}
         </div>
       </div>
     </div>

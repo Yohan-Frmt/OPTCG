@@ -1,10 +1,10 @@
-<card *ngIf="leader | async as l" [card]="l"></card>
+<card *ngIf="leader" [card]="leader"></card>
 <hr />
 <hr />
 <hr />
 <hr />
-<ng-container *ngIf="main">
-  <ng-container *ngFor="let card of main">
-    <card *ngIf="card | async as c" [card]="c"></card>
+<ng-container *ngIf="cards">
+  <ng-container *ngFor="let card of cards">
+    <card *ngIf="card" [card]="card"></card>
   </ng-container>
 </ng-container>
