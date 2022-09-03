@@ -1,0 +1,43 @@
+@import "_variables";
+
+.navbar {
+  height: 80px;
+  width: auto;
+  background-color: $primary-color;
+  position: relative;
+
+  &__header {
+    display: inline;
+
+    &__title {
+      display: inline-block;
+      font-size: 18px;
+      color: $text-primary-color;
+      padding: 20px;
+    }
+  }
+
+  &__collapse-button {
+    display: none;
+  }
+
+  &__menu {
+    display: inline;
+    float: right;
+    font-size: 20px;
+    padding-top: 20px;
+
+    &__item {
+      &__link {
+        display: inline-block;
+        padding: 10px;
+        text-decoration: none;
+        color: $text-primary-color;
+
+        &:hover {
+          background-color: $secondary-color;
+        }
+      }
+    }
+  }
+}

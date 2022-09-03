@@ -1,0 +1,50 @@
+@import "_variables";
+
+* {
+  user-select: none;
+}
+
+.build-zone {
+  margin-top: 7px;
+  background-color: $color-gold;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.chart-zone {
+  background-color: $color-white;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-top: 3px;
+
+  .pie {
+    width: 108px;
+    margin: auto;
+  }
+
+  .doughnut {
+    width: 108px;
+    margin: auto;
+  }
+}
+
+.leader-zone {
+  background-color: $color-dark-blue;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+
+  .leader {
+    height: 5vh;
+    background-color: $color-light-blue;
+  }
+}
+
+.deck-zone {
+  background-color: #0dcaf0;
+
+  .card {
+    display: grid;
+    height: 5vh;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+    justify-items: end;
+    align-items: center;
+  }
+}

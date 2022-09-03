@@ -3,7 +3,7 @@ import { starterStraw } from '../utils/sets.cards';
 import { event } from '../utils/types.cards';
 import { red } from '../utils/colors.cards';
 import { unlimited } from '../utils/status.cards';
-import { animal, strawHatPirates } from '../utils/tags.cards';
+import { animal, strawHat } from '../utils/tags.cards';
 import { common } from '../utils/rarities.cards';
 
 export const st1_014 = new Card();
@@ -19,6 +19,6 @@ st1_014.en_effect =
 st1_014.set = starterStraw;
 st1_014.type = event;
 st1_014.colors = [red];
-st1_014.tags = [strawHatPirates, animal];
+st1_014.tags = [strawHat, animal];
 st1_014.rarities = [common];
 st1_014.status = unlimited;

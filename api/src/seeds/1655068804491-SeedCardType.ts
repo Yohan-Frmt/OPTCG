@@ -1,12 +1,12 @@
-import { getRepository, MigrationInterface } from 'typeorm';
+import { MigrationInterface, QueryRunner } from 'typeorm';
 import { CardTypeSeed } from './cardtype.seed';
 
 export class SeedCardType1655068804491 implements MigrationInterface {
-  public async up(): Promise<void> {
-    await getRepository('cardtype', 'seed').save(CardTypeSeed);
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.manager.getRepository('cardtype').save(CardTypeSeed);
   }
 
-  public async down(): Promise<void> {
-    await getRepository('cardtype', 'seed').clear();
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.manager.getRepository('cardtype').clear();
   }
 }

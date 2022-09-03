@@ -10,6 +10,6 @@ export class SearchbarComponent {
   @Output() public searchSubmit: EventEmitter<any> = new EventEmitter<any>();
 
   public submit = () => {
-    this.searchSubmit.emit(this.search);
+    this.searchSubmit.emit([this.search, 'search']);
   };
 }

@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWarlord } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { blue } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { warlord } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+import { slash } from '../utils/attributes.cards';
+
+export const st3_002 = new Card();
+st3_002.serial_number = 'ST03-002';
+st3_002.fr_name = 'Edward Weevil';
+st3_002.en_name = 'Edward Weevil';
+st3_002.jp_name = 'ヴィト';
+st3_002.power = 5000;
+st3_002.cost = 3;
+st3_002.counter = 1000;
+st3_002.set = starterWarlord;
+st3_002.type = character;
+st3_002.colors = [blue];
+st3_002.tags = [warlord];
+st3_002.rarities = [common];
+st3_002.status = unlimited;
+st3_002.attribute = slash;

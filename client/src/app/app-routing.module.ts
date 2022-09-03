@@ -18,6 +18,13 @@ const routes: Routes = [
     path: 'decks',
     loadChildren: () =>
       import('./decks/decks.module').then((m) => m.DecksModule),
+  },
+  {
+    path: 'deckbuilder',
+    loadChildren: () =>
+      import('./deckbuilder/deckbuilder.module').then(
+        (m) => m.DeckbuilderModule,
+      ),
     canActivate: [AuthenticationGuard],
   },
   {

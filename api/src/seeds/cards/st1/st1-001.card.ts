@@ -2,9 +2,10 @@ import { Card } from '../../../cards/card/card.entity';
 import { leader } from '../utils/types.cards';
 import { red } from '../utils/colors.cards';
 import { unlimited } from '../utils/status.cards';
-import { strawHatPirates, worstPirates } from '../utils/tags.cards';
+import { strawHat, supernovas } from '../utils/tags.cards';
 import { leaderRare } from '../utils/rarities.cards';
 import { starterStraw } from '../utils/sets.cards';
+import { strike } from '../utils/attributes.cards';
 
 export const st1_001 = new Card();
 st1_001.serial_number = 'ST01-001';
@@ -20,6 +21,7 @@ st1_001.en_effect =
 st1_001.set = starterStraw;
 st1_001.type = leader;
 st1_001.colors = [red];
-st1_001.tags = [strawHatPirates, worstPirates];
+st1_001.tags = [strawHat, supernovas];
 st1_001.rarities = [leaderRare];
 st1_001.status = unlimited;
+st1_001.attribute = strike;

@@ -23,9 +23,7 @@ export class JwtService {
   ): Date | null => {
     const decoded = this.decode(token);
     if (!decoded || !decoded.hasOwnProperty('exp')) return null;
-    const date = new Date();
-    date.setUTCSeconds(decoded.exp);
-    return date;
+    return new Date(decoded.exp * 1000);
   };
 
   public decode<T = any>(

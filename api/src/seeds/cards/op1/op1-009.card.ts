@@ -1,0 +1,25 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { minks } from '../utils/tags.cards';
+import { red } from '../utils/colors.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { common } from '../utils/rarities.cards';
+import { strike } from '../utils/attributes.cards';
+
+export const op1_009 = new Card();
+op1_009.serial_number = 'OP01-009';
+op1_009.fr_name = 'Carrot';
+op1_009.en_name = 'Carrot';
+op1_009.jp_name = 'クロコダイル';
+op1_009.power = 3000;
+op1_009.cost = 2;
+op1_009.fr_trigger_effect = "flemme de trad pour l'instant";
+op1_009.en_trigger_effect = 'Play this card.';
+op1_009.set = romanceDawn;
+op1_009.type = character;
+op1_009.colors = [red];
+op1_009.tags = [minks];
+op1_009.rarities = [common];
+op1_009.status = unlimited;
+op1_009.attribute = strike;

@@ -1,4 +1,4 @@
-import { st1_001_champion_image, st1_001_image } from './st1_001.image';
+import { st1_001_image } from './st1_001.image';
 import { st1_012_image } from './st1_012.image';
 import { st1_002_image } from './st1_002.image';
 import { st1_003_image } from './st1_003.image';
@@ -18,7 +18,6 @@ import { st1_017_image } from './st1_017.image';
 
 export const st1_images = [
   st1_001_image,
-  st1_001_champion_image,
   st1_002_image,
   st1_003_image,
   st1_004_image,

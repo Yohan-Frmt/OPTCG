@@ -5,7 +5,11 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormControl,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { ILogin } from '../../../core/authentication/models';
 
 @Component({
@@ -15,9 +19,12 @@ import { ILogin } from '../../../core/authentication/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {
-  public loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required]),
+  public loginForm: UntypedFormGroup = new UntypedFormGroup({
+    email: new UntypedFormControl(null, [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new UntypedFormControl(null, [Validators.required]),
   });
 
   @Input()

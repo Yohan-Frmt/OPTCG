@@ -7,6 +7,7 @@ import { CREDENTIALS_KEY } from '../../tokens';
 import { JwtService } from './jwt.service';
 import { IUser } from '../../../shared/models';
 import { IAuth, ILogin, IRegister } from '../models';
+import { IRefresh } from '../models/refresh.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,7 @@ import { IAuth, ILogin, IRegister } from '../models';
 export class AuthenticationService {
   public user: Observable<IUser | null>;
   private _userSubject: BehaviorSubject<IUser | null>;
+  private refreshTokenTimeout: string | number | NodeJS.Timeout | undefined;
 
   constructor(
     private readonly _api: ApiService,
@@ -38,6 +40,21 @@ export class AuthenticationService {
       ...data,
     });
 
+  public refresh = (): Observable<IAuth> =>
+    this._api
+      .post<IAuth, IRefresh>('/auth/refresh-token', {
+        refresh_token: this._credentials.getRefreshToken()!,
+      })
+      .pipe(
+        map((data) => {
+          this._credentials.setCredentials(data);
+          const decoded = this._jwt.decode();
+          this._userSubject.next(decoded.user);
+          this.startRefreshTokenTimer();
+          return data;
+        }),
+      );
+
   public login = (data: ILogin): Observable<IAuth> =>
     this._api
       .post<IAuth, ILogin>('/auth/login', {
@@ -57,7 +74,25 @@ export class AuthenticationService {
       tap(() => {
         this._credentials.removeItem();
         this._userSubject.next(null);
+        this.stopRefreshTokenTimer();
+        this._router.navigate(['/auth/login']);
       }),
     );
   };
+
+  private startRefreshTokenTimer() {
+    const jwtToken = JSON.parse(
+      atob(this._credentials.getAccessToken()!.split('.')[1]),
+    );
+    const expires = new Date(jwtToken.exp * 1000);
+    const timeout = expires.getTime() - Date.now() - 60 * 1000;
+    this.refreshTokenTimeout = setTimeout(
+      () => this.refresh().subscribe(),
+      timeout,
+    );
+  }
+
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
+  }
 }

@@ -5,6 +5,7 @@ import { red } from '../utils/colors.cards';
 import { unlimited } from '../utils/status.cards';
 import { alabasta, animal } from '../utils/tags.cards';
 import { common } from '../utils/rarities.cards';
+import { strike } from '../utils/attributes.cards';
 
 export const st1_003 = new Card();
 st1_003.serial_number = 'ST01-003';
@@ -20,3 +21,4 @@ st1_003.colors = [red];
 st1_003.tags = [animal, alabasta];
 st1_003.rarities = [common];
 st1_003.status = unlimited;
+st1_003.attribute = strike;

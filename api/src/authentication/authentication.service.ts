@@ -10,7 +10,6 @@ import { UserService } from '../users/user/user.service';
 import { User } from '../users/user/user.entity';
 import { TokenDto } from './dto/token.dto';
 import { PayloadDto } from './dto/payload.dto';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 @Injectable()
 export class AuthenticationService {
@@ -43,17 +42,19 @@ export class AuthenticationService {
     };
   }
 
-  public async refreshJsonWebToken(token: RefreshTokenDto): Promise<TokenDto> {
+  public async refreshJsonWebToken(token: string): Promise<TokenDto> {
     let payload: PayloadDto;
     try {
-      payload = this._jwt.verify(token.refreshToken);
+      payload = this._jwt.verify(token);
     } catch (error) {
       throw new Error('Invalid refresh token');
     }
     if (payload.type !== 'refresh') throw new Error('Wrong token type');
+    console.log('suite');
     const user = await this._user.findById(payload.sub());
     if (!user) throw new Error('Invalid user');
     if (!user.isActive) throw new Error('Inactive user');
+    console.log('suite suite');
     return await this.generateJsonWebToken(user);
   }
 

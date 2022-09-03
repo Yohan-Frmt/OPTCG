@@ -1,0 +1,25 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { beast, smile } from '../utils/tags.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { common } from '../utils/rarities.cards';
+import { strike } from '../utils/attributes.cards';
+import { purple } from '../utils/colors.cards';
+
+export const op1_104 = new Card();
+op1_104.serial_number = 'OP01-104';
+op1_104.fr_name = 'Speed';
+op1_104.en_name = 'Speed';
+op1_104.jp_name = 'クロコダイル';
+op1_104.power = 3000;
+op1_104.cost = 2;
+op1_104.fr_trigger_effect = "flemme de trad pour l'instant";
+op1_104.en_trigger_effect = 'Play this card.';
+op1_104.set = romanceDawn;
+op1_104.type = character;
+op1_104.colors = [purple];
+op1_104.tags = [beast, smile];
+op1_104.rarities = [common];
+op1_104.status = unlimited;
+op1_104.attribute = strike;

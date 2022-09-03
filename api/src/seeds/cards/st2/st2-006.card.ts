@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWorst } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { green } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { common } from '../utils/rarities.cards';
+import { navy } from '../utils/tags.cards';
+import { strike } from '../utils/attributes.cards';
+
+export const st2_006 = new Card();
+st2_006.serial_number = 'ST02-006';
+st2_006.fr_name = 'Koby';
+st2_006.en_name = 'Koby';
+st2_006.jp_name = 'コビー';
+st2_006.power = 6000;
+st2_006.cost = 4;
+st2_006.counter = 1000;
+st2_006.set = starterWorst;
+st2_006.type = character;
+st2_006.colors = [green];
+st2_006.tags = [navy];
+st2_006.rarities = [common];
+st2_006.status = unlimited;
+st2_006.attribute = strike;

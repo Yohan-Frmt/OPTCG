@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { DecksRoutingModule } from './decks-routing.module';
 import { DecksComponent } from './decks.component';
-import { DeckPreviewModule } from '../shared/components/deck/deck-preview.module';
+import { DeckPreviewModule } from '../shared/components/deck-preview/deck-preview.module';
 import { DeckDetailsComponent } from './deck-details/deck-details.component';
 import { CardModule } from '../shared/components/card/card.module';
 import { SharedModule } from '../shared/shared.module';

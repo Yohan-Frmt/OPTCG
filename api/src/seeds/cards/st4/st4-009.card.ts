@@ -1,0 +1,23 @@
+import { Card } from '../../../cards/card/card.entity';
+import { character } from '../utils/types.cards';
+import { unlimited } from '../utils/status.cards';
+import { strike } from '../utils/attributes.cards';
+import { purple } from '../utils/colors.cards';
+import { common } from '../utils/rarities.cards';
+import { starterAnimal } from '../utils/sets.cards';
+import { beast, smile } from '../utils/tags.cards';
+
+export const st4_009 = new Card();
+st4_009.serial_number = 'ST04-009';
+st4_009.fr_name = 'Ginrummy';
+st4_009.en_name = 'Ginrummy';
+st4_009.jp_name = 'クロコダイル';
+st4_009.power = 3000;
+st4_009.cost = 1;
+st4_009.set = starterAnimal;
+st4_009.type = character;
+st4_009.colors = [purple];
+st4_009.tags = [beast, smile];
+st4_009.rarities = [common];
+st4_009.status = unlimited;
+st4_009.attribute = strike;

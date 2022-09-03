@@ -1,0 +1,25 @@
+import { Card } from '../../../cards/card/card.entity';
+import { unlimited } from '../utils/status.cards';
+import { donquixote, punk } from '../utils/tags.cards';
+import { special } from '../utils/attributes.cards';
+import { romanceDawn } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { blue } from '../utils/colors.cards';
+import { common } from '../utils/rarities.cards';
+
+export const op1_082 = new Card();
+op1_082.serial_number = 'OP01-082';
+op1_082.fr_name = 'Monet';
+op1_082.en_name = 'Monet';
+op1_082.jp_name = 'クロコダイル';
+op1_082.power = 3000;
+op1_082.cost = 2;
+op1_082.fr_trigger_effect = "flemme de trad pour l'instant";
+op1_082.en_trigger_effect = 'Play this card.';
+op1_082.set = romanceDawn;
+op1_082.type = character;
+op1_082.colors = [blue];
+op1_082.tags = [donquixote, punk];
+op1_082.rarities = [common];
+op1_082.status = unlimited;
+op1_082.attribute = special;

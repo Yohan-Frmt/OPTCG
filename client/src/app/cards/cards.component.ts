@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import {
@@ -20,8 +28,13 @@ import { CardService } from '../shared/services/card.service';
   styleUrls: ['./cards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent implements OnInit, OnChanges {
+  @Input() public fromDeckbuilder: boolean = false;
+  @Input() public cardsPreload!: Observable<ICard[]>;
+  @Output() public cardClicked = new EventEmitter<ICard>();
+  @Output() public cardRightClicked = new EventEmitter<ICard>();
   public user: IUser | null;
+  public query: any = [];
   public cards!: Observable<ICard[]>;
   public rarities!: Observable<ICardRarity[]>;
   public sets!: Observable<ICardSet>;
@@ -29,7 +42,6 @@ export class CardsComponent implements OnInit {
   public types!: Observable<ICardType>;
   public tags!: Observable<ICardTag[]>;
   public colors!: Observable<ICardColor[]>;
-  public query: any = {};
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -39,8 +51,12 @@ export class CardsComponent implements OnInit {
     this.user = this._authentication.currentUserValue();
   }
 
+  ngOnChanges(changes: any): void {
+    if (changes.cardsPreload) this.cards = changes.cardsPreload.currentValue;
+  }
+
   ngOnInit(): void {
-    this.cards = this._card.cards;
+    this._isCardsPreloaded(this._card.cards);
     this.rarities = this._card.rarities;
     this.sets = this._card.sets;
     this.status = this._card.status;
@@ -49,37 +65,20 @@ export class CardsComponent implements OnInit {
     this.colors = this._card.colors;
   }
 
-  public onSearchSubmit = (value: string) => {
-    this.query.search = value;
-    if (!value) delete this.query.search;
+  public onSubmit = ([value, type]: [string, string]) => {
+    this.query.push([value, type]);
     this.cards = this._card.cardsQuery(this.query);
   };
 
-  public onFilterSubmit = ([value, type]: [string, string]) => {
-    switch (type) {
-      case 'rarities':
-        this.query.rarities = value;
-        if (!value) delete this.query.rarities;
-        break;
-      case 'sets':
-        this.query.sets = value;
-        if (!value) delete this.query.set;
-        break;
-      case 'status':
-        this.query.status = value;
-        if (!value) delete this.query.status;
-        break;
-      case 'types':
-        this.query.types = value;
-        if (!value) delete this.query.type;
-        break;
-      case 'tags':
-        this.query.tags = value;
-        break;
-      case 'colors':
-        this.query.colors = value;
-        break;
-    }
-    this.cards = this._card.cardsQuery(this.query);
-  };
+  public onCardClick(card: ICard) {
+    this.cardClicked.emit(card);
+  }
+
+  public onCardRightClick(card: ICard) {
+    this.cardRightClicked.emit(card);
+    return false;
+  }
+
+  private _isCardsPreloaded = (cards: Observable<ICard[]>) =>
+    this.cardsPreload ? (this.cards = this.cardsPreload) : (this.cards = cards);
 }

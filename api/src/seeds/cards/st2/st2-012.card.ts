@@ -1,0 +1,24 @@
+import { Card } from '../../../cards/card/card.entity';
+import { starterWorst } from '../utils/sets.cards';
+import { character } from '../utils/types.cards';
+import { green } from '../utils/colors.cards';
+import { unlimited } from '../utils/status.cards';
+import { heart, minks } from '../utils/tags.cards';
+import { common } from '../utils/rarities.cards';
+import { strike } from '../utils/attributes.cards';
+
+export const st2_012 = new Card();
+st2_012.serial_number = 'ST02-012';
+st2_012.fr_name = 'Bepo';
+st2_012.en_name = 'Bepo';
+st2_012.jp_name = 'ベポ';
+st2_012.power = 3000;
+st2_012.cost = 1;
+st2_012.counter = 1000;
+st2_012.set = starterWorst;
+st2_012.type = character;
+st2_012.colors = [green];
+st2_012.tags = [minks, heart];
+st2_012.rarities = [common];
+st2_012.status = unlimited;
+st2_012.attribute = strike;

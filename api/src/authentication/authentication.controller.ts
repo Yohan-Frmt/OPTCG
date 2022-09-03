@@ -10,6 +10,7 @@ import {
 import { AuthenticationService } from './authentication.service';
 import { CreateUserDto, CredentialsDto, UserDto } from '../users/user/user.dto';
 import { TokenDto } from './dto/token.dto';
+import { RefreshTokenDto } from './dto/refresh-token.dto';
 
 @Controller('auth')
 export class AuthenticationController {
@@ -34,16 +35,16 @@ export class AuthenticationController {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }
   }
-  //
-  // @Post('refresh-token')
-  // public async refreshToken(@Body() token: RefreshTokenDto): Promise<TokenDto> {
-  //   try {
-  //     return this._authentication.refreshToken(token);
-  //   } catch (error) {
-  //     this._logger.warn('Refresh token attempt failed', token);
-  //     throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-  //   }
-  // }
+
+  @Post('refresh-token')
+  public async refreshToken(@Body() token: RefreshTokenDto): Promise<TokenDto> {
+    try {
+      return this._authentication.refreshJsonWebToken(token.refreshToken);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   //
   // @Post('forgot-password')
   // public async forgotPassword(
