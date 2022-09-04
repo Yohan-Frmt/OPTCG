@@ -3,8 +3,8 @@
 // Navigation Variables
 $content-width: 1300px;
 $breakpoint: 799px;
-$nav-height: 100px;
-$nav-height-menu: 70px;
+$nav-height: 75px;
+$nav-height-menu: 45px;
 $nav-height-top-menu: 28px;
 
 // Outer navigation wrapper
@@ -59,6 +59,8 @@ nav {
         background: $primary-color;
         color: $text-secondary-color;
         text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 600;
         &:hover {
           background: $tertiary-color;
           color: $text-secondary-color;
@@ -84,12 +86,10 @@ nav {
   .top-nav {
     text-align: right;
     height: $nav-height-top-menu;
+    color: $text-tertiary-color;
     a {
-      color: $text-secondary-color;
-      margin: 0 5px;
-    }
-    a:hover {
       color: $text-tertiary-color;
+      margin: 0 5px;
     }
   }
 }

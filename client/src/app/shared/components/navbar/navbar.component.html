@@ -5,7 +5,7 @@
     </div>
     <nav>
       <div class="top-nav">
-        {{ user?.username }} - 
+        {{ user?.username }} -
         <a (click)="logout()" *ngIf="user !== null; else guest" href="#" routerLinkActive="active">Logout</a>
         <ng-template #guest>
           <a *ngFor="let item of accounts" [routerLink]="[item.path]" routerLinkActive="active">
