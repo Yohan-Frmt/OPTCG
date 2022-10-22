@@ -3,12 +3,12 @@
 .select {
   border: none;
   border-bottom: 1px solid $secondary-color;
-  color: #000;
+  color: $text-secondary-color;
   font-size: 1rem;
   padding: 10px 0 10px 10px;
   text-align: left;
   margin-top: -5px;
   border-radius: 2px;
   width: 100%;
-  background: $tertiary-color;
+  background: $secondary-color;
 }

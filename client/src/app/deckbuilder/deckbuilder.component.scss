@@ -10,12 +10,13 @@
 
 .build-zone {
   margin-top: 7px;
-  background-color: $color-gold;
+  color: $text-secondary-color;
+  background-color: $primary-color;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .chart-zone {
-  background-color: $color-white;
+  background-color: $secondary-color;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
   margin-top: 3px;
