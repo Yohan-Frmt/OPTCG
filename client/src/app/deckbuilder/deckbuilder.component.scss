@@ -4,6 +4,11 @@
   user-select: none;
 }
 
+.container {
+  max-width: unset;
+  padding: 0;
+}
+
 .build-zone {
   margin-top: 7px;
   background-color: $color-gold;

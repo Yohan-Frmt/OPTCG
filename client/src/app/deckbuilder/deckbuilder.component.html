@@ -6,7 +6,7 @@
     <div>{{ step }}</div>
   </div>
   <div class="row">
-    <div class="card-zone col-md-9-5">
+    <div class="card-zone col-md-8">
       <cards
         (cardClicked)="onClick($event)"
         (cardRightClicked)="onRightClick($event)"
@@ -14,7 +14,7 @@
         [fromDeckbuilder]="true"
       ></cards>
     </div>
-    <div class="col-md-2-5 build-zone">
+    <div class="col-md-4 build-zone">
       <div class="row deck-count">{{ manager.deck.length }} / 50</div>
       <div class="chart-zone">
         <div class="col">
