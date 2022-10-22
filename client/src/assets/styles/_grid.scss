@@ -5084,3 +5084,10 @@
     display: none !important;
   }
 }
+
+@media (min-width: 2000px) {
+  .col-xxxl-2-5 {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+}
