@@ -68,4 +68,17 @@ export class DeckbuilderComponent implements OnInit {
       },
     });
   };
+
+  public getHexaColor(color: string) : string {
+    if (color === 'Red'){
+      return '#b8051a';
+    } else if (color === 'Blue') {
+      return '#016fb5';
+    } else if (color === 'Green') {
+      return '#198b63';
+    } else if (color === 'Purple') {
+      return '#8c1b7d';
+    }
+    return '';
+  }
 }
