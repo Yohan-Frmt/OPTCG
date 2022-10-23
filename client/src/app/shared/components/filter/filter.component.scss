@@ -5,10 +5,26 @@
   border-bottom: 1px solid $secondary-color;
   color: $text-secondary-color;
   font-size: 1rem;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0 10px 0;
   text-align: left;
   margin-top: -5px;
   border-radius: 2px;
   width: 100%;
   background: $secondary-color;
+
+  &:focus {
+    option::checked {
+      background-color: #f7b91e;
+    }
+  }
+  option {
+    padding-left: 10px;
+
+    &:checked {
+      background-color: #f7b91e;
+    }
+  }
+  
+
 }
+

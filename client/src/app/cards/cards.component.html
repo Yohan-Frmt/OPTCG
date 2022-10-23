@@ -32,16 +32,16 @@
         ></filter>
       </ng-container>
       <ng-container *ngIf="tags | async">
-        <div class="filters__subtitle"><span>Tags</span></div>
-        <filter
+        <div class="filters__subtitle "><span>Tags</span></div>
+        <filter class="filters-multiple"
           (filterSubmit)="onSubmit($event)"
           [multiple]="true"
           [source]="[tags, 'tags']"
         ></filter>
       </ng-container>
       <ng-container *ngIf="colors | async">
-        <div class="filters__subtitle"><span>Colors</span></div>
-        <filter
+        <div class="filters__subtitle filters-multiple"><span>Colors</span></div>
+        <filter class="filters-multiple"
           (filterSubmit)="onSubmit($event)"
           [multiple]="true"
           [source]="[colors, 'colors']"
