@@ -4,15 +4,21 @@
   user-select: none;
 }
 
+.deckbuilder {
+  position: relative;
+  top: -35px;
+}
+
 .container {
   max-width: unset;
 }
 
 .build-zone {
-  margin-top: 7px;
   color: $text-secondary-color;
   background-color: $primary-color;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  right: 0;
 }
 
 .chart-zone {
@@ -33,16 +39,38 @@
 }
 
 .leader-zone {
-  background-color: $color-dark-blue;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  .card {
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding-top: 3px;
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-position: 104% 11%;
+    margin-top: 10px;
+  }
 
-  .leader {
-    height: 5vh;
-    background-color: $color-light-blue;
+  span {
+    position: relative;
+    top: 6px;
+
+    &.type {
+      background: white;
+      color: black;
+      padding: 1px 3px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-right: 10px;
+    }
   }
 }
 
 .deck-zone {
+  max-height: 71vh;
+  overflow: auto;
 
   .cost {
     border-radius: 50%;
@@ -51,22 +79,6 @@
     text-align: center;
     font-weight: 600;
     font-size: 21px;
-  }
-
-  .card-Red {
-    background-color: $op-red;
-  }
-
-  .card-Blue {
-    background-color: $op-blue;
-  }
-
-  .card-Green {
-    background-color: $op-green;
-  }
-
-  .card-Purple {
-    background-color: $op-purple;
   }
 
   .card {
@@ -146,4 +158,32 @@
       }
   }
   }
+}
+
+.card-Red {
+  background-color: $op-red;
+}
+
+.card-Blue {
+  background-color: $op-blue;
+}
+
+.card-Green {
+  background-color: $op-green;
+}
+
+.card-Purple {
+  background-color: $op-purple;
+}
+
+
+.footerBuilder {
+  position: fixed;
+  background-color: $secondary-color;
+  border-top: 2px solid $tertiary-color;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  text-align: center;
+  color: $text-secondary-color;
 }

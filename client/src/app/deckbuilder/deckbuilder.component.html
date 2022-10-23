@@ -1,7 +1,4 @@
-<div class="container">
-  <div class="row">
-    <button (click)="onSubmit()" type="submit">Create</button>
-  </div>
+<div class="container deckbuilder">
   <div class="row">
     <div>{{ step }}</div>
   </div>
@@ -33,12 +30,9 @@
         </div>
       </div>
       <div class="row leader-zone">
-        <div
-          *ngIf="manager.deck.leader as leader"
-          class="leader"
-          data-id="{{ leader.id }}"
-        >
-          {{ leader.en_name }}
+        <div *ngIf="manager.deck.leader as leader" [ngClass]="['card', 'card-' + leader.colors[0].en_name]" data-id="{{ leader.id }}" [style.background-image]="'linear-gradient(to right,' + getHexaColor(leader.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(leader.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'">
+          <span class="type">Leader</span>
+          <span>{{ leader.en_name }}</span>
         </div>
       </div>
       <div class="row deck-zone">
@@ -65,6 +59,13 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="footerBuilder">
+  <div class="row">
+    <div class="col">
+      <button (click)="onSubmit()" type="submit">Create</button>
     </div>
   </div>
 </div>

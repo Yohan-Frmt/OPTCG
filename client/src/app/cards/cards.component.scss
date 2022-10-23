@@ -2,8 +2,11 @@
 
 .filters {
   background-color: $primary-color;
-  margin-top: 7px;
   color: $text-secondary-color;
+  position: sticky;
+  top: 75px;
+  margin-left: -12px;
+  height: 87vh;
 
   hr {
     margin: 20px -12px;
@@ -62,6 +65,7 @@
 
 .card-list {
   padding: 20px 0 0 0;
+  margin-bottom: 50px;
 }
 
 
