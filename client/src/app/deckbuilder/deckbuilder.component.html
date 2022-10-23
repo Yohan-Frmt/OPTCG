@@ -30,23 +30,26 @@
         </div>
       </div>
       <div class="row leader-zone">
-        <div *ngIf="manager.deck.leader as leader" [ngClass]="['card', 'card-' + leader.colors[0].en_name]" data-id="{{ leader.id }}" [style.background-image]="'linear-gradient(to right,' + getHexaColor(leader.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(leader.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'">
+        <div *ngIf="manager.deck.leader as leader" [ngClass]="['card', 'card-' + leader.colors[0].en_name]"
+             [style.background-image]="'linear-gradient(to right,' + getHexaColor(leader.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(leader.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'"
+             data-id="{{ leader.id }}">
           <span class="type">Leader</span>
           <span>{{ leader.en_name }}</span>
         </div>
       </div>
       <div class="row deck-zone">
-        <div (click)="onClick(card)" (contextmenu)="onRightClick(card)" *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}">
+        <div *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}">
           <div class="row">
             <div class="col-1 col-md-1-5 col-xl-1">
               <div [ngClass]="['cost', 'card-' + card.colors[0].en_name]">{{ card.cost }}</div>
             </div>
             <div class="col-11 col-md-10-5 col-xl-11">
-              <div [ngClass]="['card', 'card-' + card.colors[0].en_name]" [style.background-image]="'linear-gradient(to right,' + getHexaColor(card.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(card.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'">
+              <div [ngClass]="['card', 'card-' + card.colors[0].en_name]"
+                   [style.background-image]="'linear-gradient(to right,' + getHexaColor(card.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(card.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'">
                 <div class="row">
                   <div class="col-2 col-md-4 col-lg-3 col-xl-2-5 col-xxl-2">
-                    <button>-</button>
-                    <button>+</button>
+                    <button (click)="onRightClick(card)">-</button>
+                    <button (click)="onClick(card)">+</button>
                   </div>
                   <div class="col-10 col-md-8 col-lg-9 col-xl-9-5 col-xxl-10">
                     <span class="name">{{ card.en_name }}</span>
