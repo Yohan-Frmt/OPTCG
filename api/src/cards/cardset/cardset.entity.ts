@@ -17,6 +17,9 @@ export class CardSet extends BaseEntity {
 
   @Column()
   en_name: string;
+  
+  @Column()
+  set_number: string;
 
   @OneToMany(() => Card, (card: Card) => card.set)
   cards: Card[];
