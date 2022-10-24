@@ -24,6 +24,11 @@ export class DeckController {
     return await this.service.findOneById(id);
   }
 
+  @Get('/deck/code/:code')
+  public async findOneByCode(@Param('code') code: string): Promise<DeckDto> {
+    return await this.service.findOneByCode(code);
+  }
+
   @Post('/deck')
   @UsePipes(new ValidationPipe({ transform: true }))
   public async create(@Body() deck: CreateDeckDto): Promise<DeckDto> {

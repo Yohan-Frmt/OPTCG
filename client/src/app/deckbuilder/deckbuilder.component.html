@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row deck-zone">
-        <div (click)="onClick(card)" (contextmenu)="onRightClick(card)" *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}">
+        <div *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}">
           <div class="row">
             <div class="col-1 col-md-1-5 col-xl-1">
               <div class="cost" [style.background-color]="card.colors[0].hex_color">{{ card.cost }}</div>
@@ -51,8 +51,8 @@
               <div class="card" [style.background-color]="card.colors[0].hex_color" [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'">
                 <div class="row">
                   <div class="col-2 col-md-4 col-lg-3 col-xl-2-5 col-xxl-2">
-                    <button>-</button>
-                    <button>+</button>
+                    <button (click)="onRightClick(card)">-</button>
+                    <button (click)="onClick(card)">+</button>
                   </div>
                   <div class="col-10 col-md-8 col-lg-9 col-xl-9-5 col-xxl-10">
                     <span class="name">{{ card.en_name }}</span>

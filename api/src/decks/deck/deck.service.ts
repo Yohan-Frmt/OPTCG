@@ -42,5 +42,9 @@ export class DeckService {
     return await this.repository.findOne({ where: { id } });
   }
 
+  public async findOneByCode(code: string): Promise<Deck> {
+    return await this.repository.findOne({ where: { content: code } });
+  }
+
   public encode = (content: TDeck): string => getCodeFromDeck(content);
 }
