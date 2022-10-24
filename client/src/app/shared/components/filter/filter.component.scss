@@ -13,18 +13,23 @@
   background: $secondary-color;
 
   &:focus {
-    option::checked {
-      background-color: #f7b91e;
+    option:checked {
+      background: linear-gradient($tertiary-color, $tertiary-color);
+      color: $text-secondary-color;
     }
   }
   option {
     padding-left: 10px;
 
     &:checked {
-      background-color: #f7b91e;
+      background-color: $tertiary-color;
+      color: $text-secondary-color;
     }
   }
-  
 
+}
+
+select:active, select:hover, select:focus-within, select:focus {
+  outline: none;
 }
 

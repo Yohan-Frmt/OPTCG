@@ -33,24 +33,34 @@ export class DeckbuilderManager {
     this._chartArray = value;
   }
 
-  private _pie!: Chart;
+  private _cardColors!: Chart;
 
-  get pie(): Chart {
-    return this._pie;
+  get cardColors(): Chart {
+    return this._cardColors;
   }
 
-  set pie(value: Chart) {
-    this._pie = value;
+  set cardColors(value: Chart) {
+    this._cardColors = value;
   }
 
-  private _doughnut!: Chart;
+  private _cardTypes!: Chart;
 
-  get doughnut(): Chart {
-    return this._doughnut;
+  get cardTypes(): Chart {
+    return this._cardTypes;
   }
 
-  set doughnut(value: Chart) {
-    this._doughnut = value;
+  set cardTypes(value: Chart) {
+    this._cardTypes = value;
+  }
+
+  private _cardCounters!: Chart;
+
+  get cardCounters(): Chart {
+    return this._cardCounters;
+  }
+
+  set cardCounters(value: Chart) {
+    this._cardCounters = value;
   }
 
   private _ctx!: HTMLCanvasElement;
@@ -107,16 +117,16 @@ export class DeckbuilderManager {
 
   public initChart = (element: HTMLCanvasElement) => {
     switch (element.id) {
-      case 'pie':
-        this.pie = new Chart(element, {
+      case 'cardColors':
+        this.cardColors = new Chart(element, {
           type: 'pie',
           data: {
             labels: ['Red', 'Blue', 'Green', 'Purple'],
             datasets: [
               {
                 data: [0, 0, 0, 0],
-                backgroundColor: ['red', 'blue', 'green', 'purple'],
-                borderWidth: 4,
+                backgroundColor: ['#b8051a', '#016fb5', '#198b63', '#8c1b7d'],
+                borderWidth: 2,
                 borderColor: '#0F1416',
                 label: 'Colors',
               },
@@ -140,16 +150,16 @@ export class DeckbuilderManager {
           },
         });
         break;
-      case 'doughnut':
-        this.doughnut = new Chart(element, {
+      case 'cardTypes':
+        this.cardTypes = new Chart(element, {
           type: 'pie',
           data: {
             labels: ['Characters', 'Events', 'Stages'],
             datasets: [
               {
                 data: [0, 0, 0],
-                backgroundColor: ['#FF6311', '#36A211', '#E32626'],
-                borderWidth: 4,
+                backgroundColor: ['#f4f2f3', '#c4a04e', '#002454'],
+                borderWidth: 2,
                 borderColor: '#0F1416',
                 label: 'Cards',
               },
@@ -172,12 +182,45 @@ export class DeckbuilderManager {
             },
           },
         });
-        break;
+      break;
+      case 'cardCounters':
+        this.cardCounters = new Chart(element, {
+          type: 'pie',
+          data: {
+            labels: ['0', '+1000', '+2000'],
+            datasets: [
+              {
+                data: [0, 0, 0],
+                backgroundColor: ['#b8051a', '#016fb5', '#198b63'],
+                borderWidth: 2,
+                borderColor: '#0F1416',
+                label: 'Colors',
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            scales: {
+              y: {
+                display: false,
+              },
+              x: {
+                display: false,
+              },
+            },
+          },
+        });
+      break;
     }
   };
 
   public updateChart = () => {
-    this.doughnut.data.datasets.forEach((dataset: ChartDataset) => {
+    this.cardTypes.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [
         this.activeFormat.deck.getNumberOfCardsByType('Character'),
         this.activeFormat.deck.getNumberOfCardsByType('Event'),
@@ -185,7 +228,7 @@ export class DeckbuilderManager {
       ];
     });
 
-    this.pie.data.datasets.forEach((dataset: ChartDataset) => {
+    this.cardColors.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [
         this.activeFormat.deck.getNumberOfCardsByColor('Red'),
         this.activeFormat.deck.getNumberOfCardsByColor('Blue'),
@@ -194,7 +237,16 @@ export class DeckbuilderManager {
       ];
     });
 
-    this.doughnut.update();
-    this.pie.update();
+    this.cardCounters.data.datasets.forEach((dataset: ChartDataset) => {
+      dataset.data = [
+        this.activeFormat.deck.getNumberOfCardsByCounter(0),
+        this.activeFormat.deck.getNumberOfCardsByCounter(1000),
+        this.activeFormat.deck.getNumberOfCardsByCounter(2000),
+      ];
+    });
+
+    this.cardTypes.update();
+    this.cardColors.update();
+    this.cardCounters.update();
   };
 }

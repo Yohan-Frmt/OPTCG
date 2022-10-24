@@ -140,15 +140,23 @@ export class Deck {
     this._validate();
   };
 
-  public getNumberOfCardsByType = (type: string): number =>
-    this.cards
-      .filter((c) => c.type.en_name === type)
-      .reduce((a, b) => a + b.count!, 0);
+  public getNumberOfCardsByType = (type: string): number => this.cards.filter((c) => c.type.en_name === type).reduce((a, b) => a + b.count!, 0);
 
-  public getNumberOfCardsByColor = (color: string): number =>
-    this.cards
-      .filter((c) => c.colors.map((c) => c.en_name).includes(color))
-      .reduce((a, b) => a + b.count!, 0);
+  public getNumberOfCardsByColor = (color: string): number => this.cards.filter((c) => c.colors.map((c) => c.en_name).includes(color)).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByCounter = (counter: number): number => {
+    var count = 0;
+    this.cards.forEach(card => {
+      if (card.counter && counter != 0) {
+        if (card.counter === counter) {
+          count++;
+        }
+      } else if (counter == 0) {
+        count++;
+      }
+    });
+    return count;
+  }
 
   public removeAllCardsFromDeck = (): void => {
     this.cards.length = 0;

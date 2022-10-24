@@ -15,22 +15,28 @@
       <div class="row deck-count">{{ manager.deck.length }} / 50</div>
       <div class="chart-zone">
         <div class="row">
-          <div class="col-md">
-            <div class="chart doughnut">
+          <div class="col-md-4">
+            <div class="chart cardTypes">
               <span>Types</span>
-              <canvas height="20" id="doughnut" width="20"></canvas>
+              <canvas height="20" id="cardTypes" width="20"></canvas>
             </div>
           </div>
-          <div class="col-md">
-            <div class="chart pie">
+          <div class="col-md-4">
+            <div class="chart cardCounters">
+              <span>Counters</span>
+              <canvas height="20" id="cardCounters" width="20"></canvas>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="chart cardColors">
               <span>Colors</span>
-              <canvas height="20" id="pie" width="20"></canvas>
+              <canvas height="20" id="cardColors" width="20"></canvas>
             </div>
           </div>
         </div>
       </div>
       <div class="row leader-zone">
-        <div *ngIf="manager.deck.leader as leader" [ngClass]="['card', 'card-' + leader.colors[0].en_name]" data-id="{{ leader.id }}" [style.background-image]="'linear-gradient(to right,' + getHexaColor(leader.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(leader.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'">
+        <div *ngIf="manager.deck.leader as leader" class="card" [style.background-color]="leader.colors[0].hex_color" data-id="{{ leader.id }}" [style.background-image]="'linear-gradient(to right,' + leader.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + leader.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'">
           <span class="type">Leader</span>
           <span>{{ leader.en_name }}</span>
         </div>
@@ -39,10 +45,10 @@
         <div (click)="onClick(card)" (contextmenu)="onRightClick(card)" *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}">
           <div class="row">
             <div class="col-1 col-md-1-5 col-xl-1">
-              <div [ngClass]="['cost', 'card-' + card.colors[0].en_name]">{{ card.cost }}</div>
+              <div class="cost" [style.background-color]="card.colors[0].hex_color">{{ card.cost }}</div>
             </div>
             <div class="col-11 col-md-10-5 col-xl-11">
-              <div [ngClass]="['card', 'card-' + card.colors[0].en_name]" [style.background-image]="'linear-gradient(to right,' + getHexaColor(card.colors[0].en_name) + ' 10%, rgba(15,20,22,0) 80%, ' + getHexaColor(card.colors[0].en_name) + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'">
+              <div class="card" [style.background-color]="card.colors[0].hex_color" [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'">
                 <div class="row">
                   <div class="col-2 col-md-4 col-lg-3 col-xl-2-5 col-xxl-2">
                     <button>-</button>

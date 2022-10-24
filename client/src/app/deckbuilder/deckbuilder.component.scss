@@ -27,13 +27,13 @@
   text-align: center;
   margin-top: 3px;
 
-  .pie {
-    width: 108px;
+  .cardColors canvas, .cardTypes canvas, .cardCounters canvas {
+    width: 90px;
     margin: auto;
   }
 
   .doughnut {
-    width: 108px;
+    width: 80px;
     margin: auto;
   }
 }
@@ -159,23 +159,6 @@
   }
   }
 }
-
-.card-Red {
-  background-color: $op-red;
-}
-
-.card-Blue {
-  background-color: $op-blue;
-}
-
-.card-Green {
-  background-color: $op-green;
-}
-
-.card-Purple {
-  background-color: $op-purple;
-}
-
 
 .footerBuilder {
   position: fixed;
