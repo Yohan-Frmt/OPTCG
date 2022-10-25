@@ -40,7 +40,7 @@ export class DeckbuilderComponent implements OnInit {
     if (card.rarities.some((rarity: ICardRarity) => rarity.abbr === 'L')) {
       this.manager.setLeader(card);
       this.cards = this._card.cardsQuery([
-        ['!LEADER', 'types'],
+        ['!Leader', 'types'],
         [card.colors.map((c) => c.en_name).join(), 'colors'],
       ]);
     } else {
