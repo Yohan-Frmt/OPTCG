@@ -4,47 +4,196 @@
   user-select: none;
 }
 
+.deckbuilder {
+  position: relative;
+  top: -35px;
+}
+
+.container {
+  max-width: unset;
+}
+
 .build-zone {
-  margin-top: 7px;
-  background-color: $color-gold;
+  color: $text-secondary-color;
+  background-color: $primary-color;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  position: fixed;
+  right: 0;
+  max-height: 87vh;
+  overflow: auto;
 }
 
 .chart-zone {
-  background-color: $color-white;
+  background-color: $secondary-color;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
   text-align: center;
   margin-top: 3px;
 
-  .pie {
-    width: 108px;
-    margin: auto;
+  .chart {
+    margin: 5px 0;
+
+    &.cardColors canvas, &.cardTypes canvas, &.cardCounters canvas, &.cardAttributes canvas, &.cardRarities canvas  {
+      width: 100px;
+      margin: auto;
+    }
+
+    &.cardCosts canvas, &.cardPowers canvas {
+      height: 100px;
+      margin: auto;
+    }
   }
 
-  .doughnut {
-    width: 108px;
+  .moreCharts {
+    font-weight: 600;
+    cursor: pointer;
+    width: 90%;
     margin: auto;
+
+    &:hover {
+      background: rgba(0,0,0,0.2);
+    }
   }
 }
 
 .leader-zone {
-  background-color: $color-dark-blue;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  .card {
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding-top: 3px;
+    background-repeat: no-repeat;
+    background-size: 150px;
+    background-position: 90% 11%;
+    margin-top: 10px;
+  }
 
-  .leader {
-    height: 5vh;
-    background-color: $color-light-blue;
+  span {
+    position: relative;
+    top: 6px;
+
+    &.type {
+      background: white;
+      color: black;
+      padding: 1px 3px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    
+    &.count {
+      float: right;
+      margin-right: 5px;
+      position: relative;
+      font-size: 14px;
+      bottom: 2px;
+      font-weight: 600;
+      padding: 1px 2px;
+      border-radius: 3px;
+      background-color: rgba(0,0,0,0.5);
+    }
   }
 }
 
 .deck-zone {
-  background-color: #0dcaf0;
+
+  .cost {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 21px;
+  }
 
   .card {
     display: grid;
-    height: 5vh;
-    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
-    justify-items: end;
-    align-items: center;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    padding-top: 3px;
+    background-repeat: no-repeat;
+    background-size: 120px;
+    background-position: 104% 19%;
+
+    button {
+      width: 12px;
+      height: 15px;
+      background: $tertiary-color;
+      color: $text-secondary-color;
+      display: inline;
+      border: 0;
+      text-decoration: none;
+      padding: 0px;
+      margin-left: 2px;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    span.id {
+      font-size: 9px;
+      font-weight: 600;
+      color: #000;
+      background: #fff;
+      border-radius: 2px;
+      padding: 0 1px;
+      position: relative;
+      bottom: 6px;
+      left: 5px;
+    }
+
+    span.count {
+      float: right;
+      margin-right: 5px;
+      position: relative;
+      font-size: 14px;
+      bottom: 2px;
+      font-weight: 600;
+      padding: 1px 2px;
+      border-radius: 3px;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    span.name {
+      text-overflow: ellipsis;
+      max-width: 160px;
+      overflow: hidden;
+      white-space: nowrap;
+      display: inline-block;
+
+      @media (max-width: 1400px) {
+        max-width: 120px;
+      }
+
+      @media (max-width: 1200px) {
+        max-width: 70px;
+      }
+
+      @media (max-width: 992px) {
+        max-width: 35px;
+      }
+
+      @media (max-width: 850px) {
+        max-width: 15px;
+      }
+
+      @media (max-width: 767px) {
+        max-width: 200px;
+      }
   }
+  }
+}
+
+.footerBuilder {
+  position: fixed;
+  background-color: $secondary-color;
+  border-top: 2px solid $tertiary-color;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  text-align: center;
+  color: $text-secondary-color;
 }

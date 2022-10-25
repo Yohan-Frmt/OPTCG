@@ -1,4 +1,5 @@
 @import "_grid";
+@import "variables";
 
 * {
   box-sizing: border-box;
@@ -7,4 +8,54 @@
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
+  background-color: $background-color;
+}
+
+html {
+  height: calc(100% - 63px)
+}
+
+body {
+  height: calc(100% - 75px)
+}
+
+app-root {
+  height: 100%
+}
+
+skeleton {
+  height: 100%
+}
+
+deckbuilder {
+  height: 100%
+}
+
+deckbuilder .container {
+  height: 100%
+}
+
+deckbuilder .container .builder {
+  height: 100%
+}
+deckbuilder .container .card-zone {
+  height: auto
+}
+deckbuilder .container .card-zone cards {
+  height: 100%
+}
+deckbuilder div .build-zone {
+  height: 100%
+}
+
+cards {
+  height: 100%
+}
+
+cards>div {
+  height: 100%
+}
+
+.cards-view {
+  height: 100%
 }

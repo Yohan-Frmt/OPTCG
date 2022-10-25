@@ -1,12 +1,9 @@
-<div class="container">
-  <div class="row">
-    <button (click)="onSubmit()" type="submit">Create</button>
-  </div>
+<div class="container deckbuilder">
   <div class="row">
     <div>{{ step }}</div>
   </div>
-  <div class="row">
-    <div class="card-zone col-md-9-5">
+  <div class="row builder">
+    <div class="card-zone col-md-9">
       <cards
         (cardClicked)="onClick($event)"
         (cardRightClicked)="onRightClick($event)"
@@ -14,43 +11,93 @@
         [fromDeckbuilder]="true"
       ></cards>
     </div>
-    <div class="col-md-2-5 build-zone">
-      <div class="row deck-count">{{ manager.deck.length }} / 50</div>
+    <div class="col-md-3 build-zone">
       <div class="chart-zone">
-        <div class="col">
-          <div class="chart doughnut">
-            <span>Types</span>
-            <canvas height="20" id="doughnut" width="20"></canvas>
+        <div class="row">
+          <div class="col-lg-6 col-xl-4">
+            <div class="chart cardTypes">
+              <span>Types</span>
+              <canvas height="95" width="95" id="cardTypes"></canvas>
+            </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="chart pie">
-            <span>Colors</span>
-            <canvas height="20" id="pie" width="20"></canvas>
+          <div class="col-lg-6 col-xl-4">
+            <div class="chart cardCounters">
+              <span>Counters</span>
+              <canvas height="95" width="95" id="cardCounters"></canvas>
+            </div>
           </div>
+          <div class="col-lg-6 col-xl-4">
+            <div class="chart cardColors">
+              <span>Colors</span>
+              <canvas height="95" width="95" id="cardColors"></canvas>
+            </div>
+          </div>
+          <div [hidden]="!moreCharts" class="col-lg-6 col-xl-4">
+            <div class="chart cardAttributes">
+              <span>Attributes</span>
+              <canvas height="95" width="95" id="cardAttributes"></canvas>
+            </div>
+          </div>
+          <div [hidden]="!moreCharts" class="col-lg-12 col-xl-8">
+            <div class="chart cardCosts">
+              <span>Costs</span>
+              <canvas height="95" width="270" id="cardCosts"></canvas>
+            </div>
+          </div>
+          <div [hidden]="!moreCharts" class="col-lg-6 col-xl-4">
+            <div class="chart cardRarities">
+              <span>Rarities</span>
+              <canvas height="95" width="95" id="cardRarities"></canvas>
+            </div>
+          </div>
+          <div [hidden]="!moreCharts" class="col-lg-12 col-xl-8">
+            <div class="chart cardPowers">
+              <span>Powers</span>
+              <canvas height="95" width="270" id="cardPowers"></canvas>
+            </div>
+          </div>
+          <div *ngIf="!moreCharts" class="moreCharts" (click)="displayCharts()">+</div>
+          <div *ngIf="moreCharts" class="moreCharts" (click)="displayCharts()">-</div>
         </div>
       </div>
       <div class="row leader-zone">
-        <div
-          *ngIf="manager.deck.leader as leader"
-          class="leader"
-          data-id="{{ leader.id }}"
-        >
-          {{ leader.en_name }}
+        <div *ngIf="manager.deck.leader as leader" class="card" [style.background-color]="leader.colors[0].hex_color" data-id="{{ leader.id }}" [style.background-image]="'linear-gradient(to right,' + leader.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 60%, ' + leader.colors[0].hex_color + ' 80%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'">
+          <span class="type">Leader</span>
+          <span>{{ leader.en_name }}</span>
+          <span class="count">{{ manager.deck.length }} / 50</span>
         </div>
       </div>
       <div class="row deck-zone">
-        <div
-          (click)="onClick(card)"
-          (contextmenu)="onRightClick(card)"
-          *ngFor="let card of manager.deck.cards"
-          [style]="{ backgroundColor: '' + card.colors[0].en_name + '' }"
-          class="card"
-          data-id="{{ card.id }}"
-        >
-          {{ card.en_name }} -- {{ card.count }}/{{ card.status.max_amount }}
+        <div *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}">
+          <div class="row">
+            <div class="col-1 col-md-1-5 col-xl-1">
+              <div class="cost" [style.background-color]="card.colors[0].hex_color">{{ card.cost }}</div>
+            </div>
+            <div class="col-11 col-md-10-5 col-xl-11">
+              <div class="card" [style.background-color]="card.colors[0].hex_color" [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'">
+                <div class="row">
+                  <div class="col-2 col-md-4 col-lg-3 col-xl-2-5 col-xxl-2">
+                    <button (click)="onRightClick(card)">-</button>
+                    <button (click)="onClick(card)">+</button>
+                  </div>
+                  <div class="col-10 col-md-8 col-lg-9 col-xl-9-5 col-xxl-10">
+                    <span class="name">{{ card.en_name }}</span>
+                    <span class="id">{{ card.serial_number }}</span>
+                    <span class="count">{{ card.count }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="footerBuilder">
+  <div class="row">
+    <div class="col">
+      <button (click)="onSubmit()" type="submit">Create</button>
     </div>
   </div>
 </div>

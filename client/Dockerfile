@@ -9,8 +9,9 @@ WORKDIR /usr/client/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
 RUN npm install -g @angular/cli@latest
+RUN rm -rf node_modules
+RUN npm install
 
 # Bundle the application
 COPY . .

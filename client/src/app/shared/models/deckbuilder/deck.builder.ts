@@ -140,15 +140,26 @@ export class Deck {
     this._validate();
   };
 
-  public getNumberOfCardsByType = (type: string): number =>
-    this.cards
-      .filter((c) => c.type.en_name === type)
-      .reduce((a, b) => a + b.count!, 0);
+  public getNumberOfCardsByType = (type: string): number => this.cards.filter((c) => c.type.en_name === type).reduce((a, b) => a + b.count!, 0);
 
-  public getNumberOfCardsByColor = (color: string): number =>
-    this.cards
-      .filter((c) => c.colors.map((c) => c.en_name).includes(color))
-      .reduce((a, b) => a + b.count!, 0);
+  public getNumberOfCardsByColor = (color: string): number => this.cards.filter((c) => c.colors.map((c) => c.en_name).includes(color)).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByCounter = (counter: number): number => {
+    if(counter == 0) {
+      return this.cards.filter((c) => c.counter === counter || c.counter == undefined).reduce((a, b) => a + b.count!, 0)
+    }
+    else {
+      return this.cards.filter((c) => c.counter === counter).reduce((a, b) => a + b.count!, 0)
+    }
+  }
+
+  public getNumberOfCardsByAttributes = (attribute: string): number => this.cards.filter((c) => c.attribute && c.attribute.en_name === attribute).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByCosts = (cost: number): number => this.cards.filter((c) => c.cost === cost).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByRarity = (rarity: string): number => this.cards.filter((c) => c.rarities.map((c) => c.abbr).includes(rarity)).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByPowers = (power: number): number => this.cards.filter((c) => c.power === power).reduce((a, b) => a + b.count!, 0);
 
   public removeAllCardsFromDeck = (): void => {
     this.cards.length = 0;

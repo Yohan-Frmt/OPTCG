@@ -1,43 +1,190 @@
 @import "_variables";
 
-.navbar {
-  height: 80px;
-  width: auto;
-  background-color: $primary-color;
-  position: relative;
+// Navigation Variables
+$content-width: 1300px;
+$breakpoint: 799px;
+$nav-height: 75px;
+$nav-height-menu: 45px;
+$nav-height-top-menu: 28px;
 
-  &__header {
-    display: inline;
+// Outer navigation wrapper
+.navigation {
+  height: $nav-height;
+  background: $primary-color;
+  border-bottom: 2px solid $tertiary-color;
+  color: $text-secondary-color;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
 
-    &__title {
-      display: inline-block;
-      font-size: 18px;
-      color: $text-primary-color;
-      padding: 20px;
-    }
+// Logo and branding
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: $nav-height;
+  text-transform: uppercase;
+  font-size: 3.4em;
+  cursor: pointer;
+  a,
+  a:visited {
+    color: $text-secondary-color;
+    text-decoration: none;
   }
+}
 
-  &__collapse-button {
-    display: none;
-  }
+// Container with no padding for navbar
+.nav-container {
+  max-width: $content-width;
+  margin: 0 auto;
+}
 
-  &__menu {
-    display: inline;
-    float: right;
-    font-size: 20px;
-    padding-top: 20px;
-
-    &__item {
-      &__link {
-        display: inline-block;
-        padding: 10px;
+// Navigation 
+nav {
+  float: right;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      float: left;
+      position: relative;
+      a,
+      a:visited {
+        display: block;
+        padding: 0 20px;
+        line-height: $nav-height-menu;
+        background: $primary-color;
+        color: $text-secondary-color;
         text-decoration: none;
-        color: $text-primary-color;
-
+        text-transform: uppercase;
+        font-weight: 600;
         &:hover {
-          background-color: $secondary-color;
+          background: $tertiary-color;
+          color: $text-secondary-color;
+        }
+        &:not(:only-child):after {
+          padding-left: 4px;
+          content: ' ▾';
+        }
+      }
+      a.top,
+      a.top:visited {
+        line-height: $nav-height-top-menu;
+      } // Dropdown list
+      ul li {
+        min-width: 190px;
+        a {
+          padding: 15px;
+          line-height: 20px;
         }
       }
     }
   }
+  .top-nav {
+    text-align: right;
+    height: $nav-height-top-menu;
+    color: $text-tertiary-color;
+    a {
+      color: $text-tertiary-color;
+      margin: 0 5px;
+    }
+  }
+}
+
+// Dropdown list binds to JS toggle event
+.nav-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile navigation */
+
+// Binds to JS Toggle
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $primary-color;
+  height: $nav-height;
+  width: $nav-height;
+}
+@media only screen and (max-width: 798px) {
+  // Hamburger nav visible on mobile only
+  .nav-mobile {
+    display: block;
+  }
+  nav {
+   width: 100%;
+    padding: $nav-height 0 15px;
+    ul {
+      display: none;
+      li {
+        float: none;
+        a {
+          padding: 15px;
+          line-height: 20px;
+        }
+        ul li a {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+  .nav-dropdown {
+    position: static;
+  }
+}
+@media screen and (min-width: $breakpoint) {
+  .nav-list {
+    display: block !important;
+  }
+}
+#nav-toggle {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+  span,
+  span:before,
+  span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: $text-secondary-color;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 300ms ease-in-out;
+  }
+  span:before {
+    top: -10px;
+  }
+  span:after {
+    bottom: -10px;
+  }
+  &.active span {
+    background-color: transparent;
+    &:before,
+    &:after {
+      top: 0;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.blank {
+  margin-top: 110px;
 }

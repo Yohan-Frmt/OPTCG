@@ -605,6 +605,11 @@
     width: 8.33333333%;
   }
 
+  .col-md-1-5 {
+    flex: 0 0 auto;
+    width: 12.499999995%;
+  }
+
   .col-md-2 {
     flex: 0 0 auto;
     width: 16.66666667%;
@@ -658,6 +663,10 @@
   .col-md-10 {
     flex: 0 0 auto;
     width: 83.33333333%;
+  }
+
+  .col-md-10-5 {
+    width: 87.499999995%;
   }
 
   .col-md-11 {
@@ -1048,6 +1057,11 @@
     width: 16.66666667%;
   }
 
+  .col-xl-2-5 {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+
   .col-xl-3 {
     flex: 0 0 auto;
     width: 25%;
@@ -1081,6 +1095,11 @@
   .col-xl-9 {
     flex: 0 0 auto;
     width: 75%;
+  }
+
+  .col-xl-9-5 {
+    flex: 0 0 auto;
+    width: 80%;
   }
 
   .col-xl-10 {
@@ -5082,5 +5101,12 @@
 
   .d-print-none {
     display: none !important;
+  }
+}
+
+@media (min-width: 2000px) {
+  .col-xxxl-2-5 {
+    flex: 0 0 auto;
+    width: 20%;
   }
 }

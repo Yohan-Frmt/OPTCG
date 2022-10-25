@@ -5,6 +5,7 @@ import { ICardSet } from './card-set.model';
 import { ICardImage } from './card-image.model';
 import { ICardErrata } from './card-errata.model';
 import { ICardStatus } from './card-status.model';
+import { ICardAttribute } from './card-attribute.model';
 
 export interface ICard {
   readonly id: string;
@@ -27,4 +28,5 @@ export interface ICard {
   readonly errata?: ICardErrata[];
   readonly status: ICardStatus;
   readonly count?: number;
+  readonly attribute: ICardAttribute;
 }

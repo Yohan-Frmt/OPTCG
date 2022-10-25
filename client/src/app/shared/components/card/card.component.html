@@ -1,17 +1,5 @@
 <div class="col scene">
-  <ng-container *ngIf="fromDeckbuilder; else notDB">
-    <div class="front">
-      <img [alt]="alt" [src]="this.path" [width]="size" />
-    </div>
-  </ng-container>
-  <ng-template #notDB>
-    <div class="flip">
-      <div class="front">
-        <img [alt]="alt" [src]="this.path" [width]="size" />
-      </div>
-      <div class="back">
-        <img [alt]="alt" [width]="size" src="assets/images/cards/back.png" />
-      </div>
-    </div>
-  </ng-template>
+  <div class="front">
+    <img [alt]="alt" [src]="this.path" [width]="size" />
+  </div>
 </div>

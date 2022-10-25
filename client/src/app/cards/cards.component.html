@@ -1,52 +1,54 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-2-5 filters">
-      <span class="filters__title">Filters</span>
-      <hr />
-      <ng-container *ngIf="rarities | async">
-        <div class="filters__subtitle"><span>Rarity</span></div>
-        <filter
-          (filterSubmit)="onSubmit($event)"
-          [source]="[rarities, 'rarities']"
-        ></filter>
-      </ng-container>
-      <ng-container *ngIf="sets | async">
-        <div class="filters__subtitle"><span>Set</span></div>
-        <filter
-          (filterSubmit)="onSubmit($event)"
-          [source]="[sets, 'sets']"
-        ></filter>
-      </ng-container>
-      <ng-container *ngIf="status | async">
-        <div class="filters__subtitle"><span>Status</span></div>
-        <filter
-          (filterSubmit)="onSubmit($event)"
-          [source]="[status, 'status']"
-        ></filter>
-      </ng-container>
-      <ng-container *ngIf="types | async">
-        <div class="filters__subtitle"><span>Type</span></div>
-        <filter
-          (filterSubmit)="onSubmit($event)"
-          [source]="[types, 'types']"
-        ></filter>
-      </ng-container>
-      <ng-container *ngIf="tags | async">
-        <div class="filters__subtitle"><span>Tags</span></div>
-        <filter
-          (filterSubmit)="onSubmit($event)"
-          [multiple]="true"
-          [source]="[tags, 'tags']"
-        ></filter>
-      </ng-container>
-      <ng-container *ngIf="colors | async">
-        <div class="filters__subtitle"><span>Colors</span></div>
-        <filter
-          (filterSubmit)="onSubmit($event)"
-          [multiple]="true"
-          [source]="[colors, 'colors']"
-        ></filter>
-      </ng-container>
+<div [class.container] = "!fromDeckbuilder">
+  <div class="row cards-view">
+    <div class="col-md-2-5">
+      <div class="filters">
+        <span class="filters__title">Filters</span>
+        <hr />
+        <ng-container *ngIf="sets | async">
+          <div class="filters__subtitle"><span>Set</span></div>
+          <filter
+            (filterSubmit)="onSubmit($event)"
+            [source]="[sets, 'sets']"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="types | async">
+          <div class="filters__subtitle"><span>Type</span></div>
+          <filter
+            (filterSubmit)="onSubmit($event)"
+            [source]="[types, 'types']"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="colors | async">
+          <div class="filters__subtitle filters-multiple"><span>Colors</span></div>
+          <filter class="filters-multiple"
+            (filterSubmit)="onSubmit($event)"
+            [multiple]="true"
+            [source]="[colors, 'colors']"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="rarities | async">
+          <div class="filters__subtitle"><span>Rarity</span></div>
+          <filter
+            (filterSubmit)="onSubmit($event)"
+            [source]="[rarities, 'rarities']"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="tags | async">
+          <div class="filters__subtitle "><span>Tags</span></div>
+          <filter class="filters-multiple"
+            (filterSubmit)="onSubmit($event)"
+            [multiple]="true"
+            [source]="[tags, 'tags']"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="status | async">
+          <div class="filters__subtitle"><span>Status</span></div>
+          <filter
+            (filterSubmit)="onSubmit($event)"
+            [source]="[status, 'status']"
+          ></filter>
+        </ng-container>
+      </div>
     </div>
 
     <div class="col-md-9-5">
@@ -60,7 +62,7 @@
           *ngFor="let card of cards | async"
           [card]="card"
           [fromDeckbuilder]="fromDeckbuilder"
-          class="col-3"
+          class="col col-sm-6 col-lg-6 col-xl-4 col-xxl-3 col-xxxl-2-5"
         ></card>
       </div>
     </div>
