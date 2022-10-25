@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../../core/api/api.service';
 import {
   ICard,
+  ICardAttribute,
   ICardColor,
   ICardRarity,
   ICardSet,

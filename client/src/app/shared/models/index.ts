@@ -1,5 +1,6 @@
 export { ICard } from './card/card.model';
 export { Alert } from './alert.model';
+export { ICardAttribute } from './card/card-attribute.model';
 export { ICardColor } from './card/card-color.model';
 export { ICardErrata } from './card/card-errata.model';
 export { ICardImage } from './card/card-image.model';
