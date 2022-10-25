@@ -46,6 +46,8 @@
   .moreCharts {
     font-weight: 600;
     cursor: pointer;
+    width: 90%;
+    margin: auto;
 
     &:hover {
       background: rgba(0,0,0,0.2);
