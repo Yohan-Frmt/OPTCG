@@ -145,17 +145,12 @@ export class Deck {
   public getNumberOfCardsByColor = (color: string): number => this.cards.filter((c) => c.colors.map((c) => c.en_name).includes(color)).reduce((a, b) => a + b.count!, 0);
 
   public getNumberOfCardsByCounter = (counter: number): number => {
-    var count = 0;
-    this.cards.forEach(card => {
-      if (card.counter && counter != 0) {
-        if (card.counter === counter) {
-          count++;
-        }
-      } else if (counter == 0) {
-        count++;
-      }
-    });
-    return count;
+    if(counter == 0) {
+      return this.cards.filter((c) => c.counter === counter || c.counter == undefined).reduce((a, b) => a + b.count!, 0)
+    }
+    else {
+      return this.cards.filter((c) => c.counter === counter).reduce((a, b) => a + b.count!, 0)
+    }
   }
 
   public removeAllCardsFromDeck = (): void => {
