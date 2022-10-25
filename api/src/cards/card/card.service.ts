@@ -22,6 +22,9 @@ export class CardService {
         const [type, value] = items;
         if (!value) continue;
         switch (type) {
+          case 'attribute':
+            qb.andWhere('attribute.en_name = :a', { a: value });
+            break;
           case 'rarities':
             qb.andWhere('rarity.en_name = :r', { r: value });
             break;
@@ -71,6 +74,7 @@ export class CardService {
       .createQueryBuilder('card')
       .leftJoinAndSelect('card.images', 'images')
       .leftJoinAndSelect('card.set', 'set')
+      .leftJoinAndSelect('card.attribute', 'attribute')
       .leftJoinAndSelect('card.type', 'type')
       .leftJoinAndSelect('card.colors', 'colors')
       .leftJoinAndSelect('card.tags', 'tags')
@@ -88,6 +92,7 @@ export class CardService {
       .createQueryBuilder('card')
       .leftJoinAndSelect('card.images', 'images')
       .leftJoinAndSelect('card.set', 'set')
+      .leftJoinAndSelect('card.attribute', 'attribute')
       .leftJoinAndSelect('card.type', 'type')
       .leftJoinAndSelect('card.colors', 'colors')
       .leftJoinAndSelect('card.tags', 'tags')

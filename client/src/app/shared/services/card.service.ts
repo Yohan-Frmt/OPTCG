@@ -33,6 +33,10 @@ export class CardService {
     return this._api.get<ICardStatus>('/cardstatus');
   }
 
+  public get attribute(): Observable<ICardAttribute> {
+    return this._api.get<ICardAttribute>('/cardattribute');
+  }
+
   public get types(): Observable<ICardType> {
     return this._api.get<ICardType>('/cardtypes');
   }
@@ -63,6 +67,10 @@ export class CardService {
         case 'status':
           query.status = value;
           if (!value) delete query.status;
+          break;
+        case 'attribute':
+          query.attribute = value;
+          if (!value) delete query.attribute;
           break;
         case 'types':
           query.types = value;
