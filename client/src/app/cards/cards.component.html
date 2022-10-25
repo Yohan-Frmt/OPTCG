@@ -53,9 +53,15 @@
 
     <div class="col-md-9-5">
       <div class="row">
-        <searchbar (searchSubmit)="onSubmit($event)"></searchbar>
+        <div class="col-md-3">
+          <span (click)="setShowList(false)">Normal</span>
+          <span (click)="setShowList(true)">En liste</span>
+        </div>
+        <div class="col-md-9">
+          <searchbar (searchSubmit)="onSubmit($event)"></searchbar>
+        </div>
       </div>
-      <div class="row card-list mx-0" style="user-select: none">
+      <div class="row card-list mx-0" style="user-select: none" [style.display]="showList ? 'none!important' : 'flex'">
         <card
           (click)="onCardClick(card)"
           (contextmenu)="onCardRightClick(card)"
@@ -65,6 +71,29 @@
           class="col col-sm-6 col-lg-6 col-xl-4 col-xxl-3 col-xxxl-2-5"
         ></card>
       </div>
+
+      <table [hidden]="!showList">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Cost/Life</th>
+            <th>Power</th>
+            <th>Rarity</th>
+            <th>Code</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let card of cards | async">
+            <th>{{ card.type.en_name }}</th>
+            <th>{{ card.en_name }}</th>
+            <th>{{ card.cost }}{{ card.life }}</th>
+            <th>{{ card.power }}</th>
+            <th><span *ngFor="let rarity of card.rarities">{{ rarity.abbr }}</span></th>
+            <th>{{ card.serial_number}}</th>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

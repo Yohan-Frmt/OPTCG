@@ -42,6 +42,7 @@ export class CardsComponent implements OnInit, OnChanges {
   public types!: Observable<ICardType>;
   public tags!: Observable<ICardTag[]>;
   public colors!: Observable<ICardColor[]>;
+  public showList: boolean = false;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -81,4 +82,8 @@ export class CardsComponent implements OnInit, OnChanges {
 
   private _isCardsPreloaded = (cards: Observable<ICard[]>) =>
     this.cardsPreload ? (this.cards = this.cardsPreload) : (this.cards = cards);
+
+  public setShowList(option: boolean) {
+    this.showList = option;
+  }
 }
