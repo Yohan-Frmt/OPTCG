@@ -153,6 +153,14 @@ export class Deck {
     }
   }
 
+  public getNumberOfCardsByAttributes = (attribute: string): number => this.cards.filter((c) => c.attribute && c.attribute.en_name === attribute).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByCosts = (cost: number): number => this.cards.filter((c) => c.cost === cost).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByRarity = (rarity: string): number => this.cards.filter((c) => c.rarities.map((c) => c.abbr).includes(rarity)).reduce((a, b) => a + b.count!, 0);
+
+  public getNumberOfCardsByPowers = (power: number): number => this.cards.filter((c) => c.power === power).reduce((a, b) => a + b.count!, 0);
+
   public removeAllCardsFromDeck = (): void => {
     this.cards.length = 0;
   };

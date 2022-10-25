@@ -19,6 +19,8 @@
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
   position: fixed;
   right: 0;
+  max-height: 87vh;
+  overflow: auto;
 }
 
 .chart-zone {
@@ -27,14 +29,27 @@
   text-align: center;
   margin-top: 3px;
 
-  .cardColors canvas, .cardTypes canvas, .cardCounters canvas {
-    width: 90px;
-    margin: auto;
+  .chart {
+    margin: 5px 0;
+
+    &.cardColors canvas, &.cardTypes canvas, &.cardCounters canvas, &.cardAttributes canvas, &.cardRarities canvas  {
+      width: 100px;
+      margin: auto;
+    }
+
+    &.cardCosts canvas, &.cardPowers canvas {
+      height: 100px;
+      margin: auto;
+    }
   }
 
-  .doughnut {
-    width: 80px;
-    margin: auto;
+  .moreCharts {
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(0,0,0,0.2);
+    }
   }
 }
 
@@ -48,7 +63,7 @@
     padding-top: 3px;
     background-repeat: no-repeat;
     background-size: 150px;
-    background-position: 104% 11%;
+    background-position: 90% 11%;
     margin-top: 10px;
   }
 
@@ -65,12 +80,22 @@
       font-weight: 600;
       margin-right: 10px;
     }
+    
+    &.count {
+      float: right;
+      margin-right: 5px;
+      position: relative;
+      font-size: 14px;
+      bottom: 2px;
+      font-weight: 600;
+      padding: 1px 2px;
+      border-radius: 3px;
+      background-color: rgba(0,0,0,0.5);
+    }
   }
 }
 
 .deck-zone {
-  max-height: 71vh;
-  overflow: auto;
 
   .cost {
     border-radius: 50%;

@@ -18,6 +18,7 @@ export class DeckbuilderComponent implements OnInit {
   public manager: DeckbuilderManager;
   public cards!: Observable<ICard[]>;
   public step!: string | void;
+  public moreCharts: boolean = false;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -34,6 +35,10 @@ export class DeckbuilderComponent implements OnInit {
     this.manager.initChart(document.getElementById('cardTypes') as HTMLCanvasElement);
     this.manager.initChart(document.getElementById('cardColors') as HTMLCanvasElement);
     this.manager.initChart(document.getElementById('cardCounters') as HTMLCanvasElement);
+    this.manager.initChart(document.getElementById('cardAttributes') as HTMLCanvasElement);
+    this.manager.initChart(document.getElementById('cardCosts') as HTMLCanvasElement);
+    this.manager.initChart(document.getElementById('cardRarities') as HTMLCanvasElement);
+    this.manager.initChart(document.getElementById('cardPowers') as HTMLCanvasElement);
   }
 
   public onClick = (card: ICard) => {
@@ -67,4 +72,8 @@ export class DeckbuilderComponent implements OnInit {
       },
     });
   };
+
+  public displayCharts() {
+    this.moreCharts = !this.moreCharts;
+  }
 }

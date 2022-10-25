@@ -6,7 +6,7 @@
   position: sticky;
   top: 75px;
   margin-left: -12px;
-  height: 87vh;
+  height: 89vh;
 
   hr {
     margin: 20px -12px;
@@ -97,8 +97,4 @@
 
 .card-list.cdk-drop-list-dragging .card-list:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
-
-.filters {
-  height: 100%
 }
