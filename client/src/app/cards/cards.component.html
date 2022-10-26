@@ -86,7 +86,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let card of cards | async" [style.background-color]="card.colors[0].hex_color">
+          <tr *ngFor="let card of cards | async" [style.background-color]="card.colors[0].hex_color" (click)="onCardClick(card)" (contextmenu)="onCardRightClick(card)">
             <th class="cardImage" [style.background-image]="'linear-gradient(to right, rgba(15,20,22,0) 0%,' + card.colors[0].hex_color + ' 90%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'"></th>
             <th>{{ card.type.en_name }}</th>
             <th>{{ card.en_name }}</th>
