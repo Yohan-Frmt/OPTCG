@@ -1,0 +1,12 @@
+@import "_variables";
+
+.row {
+    &.cardDetails {
+        background-color: $primary-color;
+        color: $text-secondary-color;
+
+        img {
+            width: 100%;
+        }
+    }
+}

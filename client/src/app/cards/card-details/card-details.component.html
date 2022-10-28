@@ -1,15 +1,37 @@
 <ng-container *ngIf="card | async as c">
-  <card [card]="c" [size]="200"></card>
-  {{ c.serial_number }}
-  {{ c.en_name }}
-  {{ c.fr_name }}
-  {{ c.jp_name }}
-  {{ c.rarities[0].en_name }}
-  {{ c.rarities[0].fr_name }}
-  {{ c.rarities[0].abbr }}
-  {{ c.set.en_name }}
-  {{ c.set.fr_name }}
-  {{ c.set.id }}
-  {{ c.fr_effect }}
-  {{ c.en_effect }}
+  <div class="container">
+    <div class="row cardDetails">
+      <div class="col-md-3">
+        <img [src]="'/assets/images/cards/' + c.serial_number.split('-')[0] + '/' + c.images[0].path">
+        <table>
+          <tr>
+            <td>Type :</td>
+            <td>{{ c.type.en_name }}</td>
+          </tr>
+          <tr>
+            <td>Attribute :</td>
+            <td>{{ c.attribute.en_name }}</td>
+          </tr>
+          <tr>
+            <td>Rarity :</td>
+            <td>{{ c.rarities[0].en_name }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-9">
+        {{ c.serial_number }}
+        {{ c.en_name }}
+        {{ c.fr_name }}
+        {{ c.jp_name }}
+        {{ c.rarities[0].en_name }}
+        {{ c.rarities[0].fr_name }}
+        {{ c.rarities[0].abbr }}
+        {{ c.set.en_name }}
+        {{ c.set.fr_name }}
+        {{ c.set.id }}
+        {{ c.fr_effect }}
+        {{ c.en_effect }}
+      </div>
+    </div>
+  </div>
 </ng-container>
