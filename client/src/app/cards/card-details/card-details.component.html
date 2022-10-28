@@ -5,6 +5,10 @@
         <img [src]="'/assets/images/cards/' + c.serial_number.split('-')[0] + '/' + c.images[0].path">
         <table>
           <tr>
+            <td>Rarity :</td>
+            <td>{{ c.rarities[0].en_name }}</td>
+          </tr>
+          <tr>
             <td>Type :</td>
             <td>{{ c.type.en_name }}</td>
           </tr>
@@ -13,8 +17,23 @@
             <td>{{ c.attribute.en_name }}</td>
           </tr>
           <tr>
-            <td>Rarity :</td>
-            <td>{{ c.rarities[0].en_name }}</td>
+            <td *ngIf="!c.colors[1]">Color :</td>
+            <td *ngIf="c.colors[1]">Colors :</td>
+            <td><span *ngFor="let color of c.colors">{{ color.en_name }} </span></td>
+          </tr>
+          <tr>
+            <td *ngIf="c.type.en_name == 'Leader'">Life :</td>
+            <td *ngIf="c.type.en_name != 'Leader'">Cost :</td>
+            <td>{{ c.cost }}{{ c.life }}</td>
+          </tr>
+          <tr *ngIf="c.power">
+            <td>Power :</td>
+            <td>{{ c.power }}</td>
+          </tr>
+          <tr *ngIf="c.type.en_name == 'Character'">
+            <td>Counter :</td>
+            <td *ngIf="c.counter">{{ c.counter }}</td>
+            <td *ngIf="!c.counter">0</td>
           </tr>
         </table>
       </div>
