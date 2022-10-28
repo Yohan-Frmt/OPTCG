@@ -2,7 +2,11 @@
   <div class="container">
     <div class="row cardDetails">
       <div class="col-md-4">
-        <div class="details">
+        <div class="details left">
+          <div class="serialSet">
+            <div class="serial">{{ c.serial_number }}</div>
+            <div class="set">{{ c.set.en_name }}</div>
+          </div>
           <img [src]="'/assets/images/cards/' + c.serial_number.split('-')[0] + '/' + c.images[imageNumber].path">
           <div *ngIf="c.images.length > 1" class="imgChoice">
             <span class="arrow" (click)="previousImage()"><-</span>
@@ -28,6 +32,11 @@
               <td class="right"><span *ngFor="let color of c.colors">{{ color.en_name }} </span></td>
             </tr>
             <tr>
+              <td class="left"*ngIf="!c.tags[1]">Tag :</td>
+              <td class="left" *ngIf="c.tags[1]">Tags :</td>
+              <td class="right"><div *ngFor="let tag of c.tags">{{ tag.en_name }} </div></td>
+            </tr>
+            <tr>
               <td class="left" *ngIf="c.type.en_name == 'Leader'">Life :</td>
               <td class="left" *ngIf="c.type.en_name != 'Leader'">Cost :</td>
               <td class="right">{{ c.cost }}{{ c.life }}</td>
@@ -46,18 +55,12 @@
       </div>
       <div class="col-md-8">
         <div class="details">
-          {{ c.serial_number }}
-          {{ c.en_name }}
-          {{ c.fr_name }}
-          {{ c.jp_name }}
-          {{ c.rarities[0].en_name }}
-          {{ c.rarities[0].fr_name }}
-          {{ c.rarities[0].abbr }}
-          {{ c.set.en_name }}
-          {{ c.set.fr_name }}
-          {{ c.set.id }}
-          {{ c.fr_effect }}
-          {{ c.en_effect }}
+          <div class="topName" [style.background-color]="c.colors[0].hex_color">
+            <div class="name">{{ c.en_name }}</div>
+            <div class="serial">{{ c.serial_number }}</div>
+          </div>
+          <span class="title">Description</span>
+          <div class="description">{{ c.en_effect }}</div>
         </div>
       </div>
     </div>
