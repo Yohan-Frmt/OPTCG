@@ -15,6 +15,7 @@ export class CardDetailsComponent {
   public user: IUser | null;
   public card!: Observable<ICard>;
   public serialNumber: string = '';
+  public imageNumber: number = 0;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -24,5 +25,17 @@ export class CardDetailsComponent {
     this.user = this._authentication.currentUserValue();
     this.serialNumber = this._route.snapshot.paramMap.get('serial')!;
     this.card = this._card.getCard(this.serialNumber);
+  }
+
+  public previousImage() : void {
+    if (this.imageNumber != 0) {
+      this.imageNumber--;
+    }
+  }
+
+  public nextImage(max: number) : void {
+    if (this.imageNumber != max - 1) {
+      this.imageNumber++;
+    }
   }
 }
