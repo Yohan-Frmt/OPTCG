@@ -14,6 +14,7 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorDialogService } from './services/error-dialog.service';
+import { PopupModule } from './components/popup/popup.module';
 
 @NgModule({
   declarations: [ErrorDialogComponent],
@@ -44,6 +45,7 @@ import { ErrorDialogService } from './services/error-dialog.service';
     SearchbarModule,
     PipeModule,
     ErrorDialogComponent,
+    PopupModule
   ],
   providers: [ErrorDialogService],
 })

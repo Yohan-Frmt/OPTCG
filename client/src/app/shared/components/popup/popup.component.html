@@ -1,0 +1,8 @@
+<div *ngIf="opened" class="popUp" [style.width]="width" [style.height]="height">
+    <div class="close" (click)="closePopUp()">X</div>
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+</div>
+
+<div *ngIf="opened" class="blur"></div>
