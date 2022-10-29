@@ -1,35 +1,8 @@
 @import '_variables';
 
 .select {
-  border: none;
-  border-bottom: 1px solid $secondary-color;
-  color: $text-secondary-color;
-  font-size: 1rem;
-  padding: 10px 0 10px 0;
-  text-align: left;
-  margin-top: -5px;
-  border-radius: 2px;
-  width: 100%;
-  background: $secondary-color;
-
-  &:focus {
-    option:checked {
-      background: linear-gradient($tertiary-color, $tertiary-color);
-      color: $text-secondary-color;
-    }
-  }
-  option {
-    padding-left: 10px;
-
-    &:checked {
-      background-color: $tertiary-color;
-      color: $text-secondary-color;
-    }
-  }
-
+    padding: 10px 0 10px 0;
+    text-align: left;
+    margin-top: -5px;
+    width: 100%;
 }
-
-select:active, select:hover, select:focus-within, select:focus {
-  outline: none;
-}
-

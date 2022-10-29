@@ -59,3 +59,46 @@ cards>div {
 .cards-view {
   height: 100%
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $background-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $tertiary-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $text-tertiary-color;
+}
+
+select {
+  border: none;
+  border-bottom: 1px solid $secondary-color;
+  background: $secondary-color;
+  color: $text-secondary-color;
+  font-size: 1rem;
+  border-radius: 2px;
+
+  &:focus {
+    option:checked {
+      background: linear-gradient($tertiary-color, $tertiary-color);
+    }
+  }
+  option {
+    padding-left: 10px;
+
+    &:checked, &:hover {
+      background-color: $tertiary-color;
+    }
+  }
+
+}
+
+select:active, select:hover, select:focus-within, select:focus {
+  outline: none;
+}
