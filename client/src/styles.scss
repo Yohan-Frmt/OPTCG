@@ -111,9 +111,10 @@ button {
   border: 1px solid $tertiary-color;
   cursor: pointer;
   border-radius: 5px;
+  font-weight: 600;
 
   &.main {
-    background-color: $tertiary-color ;
+    background-color: $tertiary-color;
     color: $text-primary-color;
 
     &:hover {

@@ -2,8 +2,10 @@
   <div class="row cards-view">
     <div class="col-md-2-5">
       <div class="filters">
-        <span class="filters__title">Filters</span>
-        <hr />
+        <div class="buttons">
+          <button *ngIf="fromDeckbuilder">Reset the deckbuilder</button>
+          <button>Reset all filters</button>
+        </div>
         <ng-container *ngIf="sets | async">
           <div class="filters__subtitle"><span>Set</span></div>
           <filter
