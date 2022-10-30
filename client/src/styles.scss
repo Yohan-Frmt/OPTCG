@@ -102,3 +102,26 @@ select {
 select:active, select:hover, select:focus-within, select:focus, input {
   outline: none;
 }
+
+button {
+  color: $text-secondary-color;
+  background-color: $secondary-color;
+  font-size: 16px;
+  padding: 5px 15px;
+  border: 1px solid $tertiary-color;
+  cursor: pointer;
+  border-radius: 5px;
+
+  &.main {
+    background-color: $tertiary-color ;
+    color: $text-primary-color;
+
+    &:hover {
+      background-color: $text-tertiary-color;
+    }
+  }
+
+  &:hover {
+    background-color: $tertiary-color;
+  }
+}
