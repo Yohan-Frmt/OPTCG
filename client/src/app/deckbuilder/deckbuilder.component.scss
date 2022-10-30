@@ -55,6 +55,21 @@
   }
 }
 
+.deckName {
+  text-align: center;
+  margin-top: 10px;
+
+  input[type="text"] {
+    color: $text-secondary-color;
+    background: none;
+    border: none;
+    border-bottom: 1px solid $text-secondary-color;
+    font-size: 17px;
+    width: 75%;
+    text-align: center;
+}
+}
+
 .leader-zone {
   .card {
     display: block;
@@ -67,6 +82,13 @@
     background-size: 150px;
     background-position: 90% 11%;
     margin-top: 10px;
+
+    &.withoutLeader {
+      text-align: center;
+      border-top: 1px solid $tertiary-color;
+      border-bottom: 1px solid $tertiary-color;
+      background-color: $secondary-color;
+  }
   }
 
   span {
@@ -98,6 +120,9 @@
 }
 
 .deck-zone {
+  background-color: $secondary-color!important;
+  margin-top: -6px;
+  padding-top: 6px;
 
   .cost {
     border-radius: 50%;

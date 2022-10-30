@@ -99,6 +99,6 @@ select {
 
 }
 
-select:active, select:hover, select:focus-within, select:focus {
+select:active, select:hover, select:focus-within, select:focus, input {
   outline: none;
 }
