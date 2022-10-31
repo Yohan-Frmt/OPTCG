@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { last, map, Observable, Subscriber } from 'rxjs';
 import { AuthenticationService } from '../core/authentication/services/authentication.service';
 import {
   ICard,
@@ -43,6 +43,7 @@ export class CardsComponent implements OnInit, OnChanges {
   public tags!: Observable<ICardTag[]>;
   public colors!: Observable<ICardColor[]>;
   public showList: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -85,5 +86,34 @@ export class CardsComponent implements OnInit, OnChanges {
 
   public setShowList(option: boolean) {
     this.showList = option;
+  }
+
+  public sortCardsByType() : void {
+    this.cards = this.cards.pipe( map(card => card.sort((a, b) => (a.type.en_name < b.type.en_name ? -1 : 1))));
+  }
+
+  public sortCardsByEnName() : void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.en_name < b.en_name ? -1 : 1))));
+  }
+
+  public sortCardsByCostLife() : void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.life ? 1 : !b.life|| a.life > b.life ? -1 : 1))));
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.cost ? 1 : !b.cost|| a.cost > b.cost ? -1 : 1))));
+  }
+
+  public sortCardsByPower() : void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.power ? 1 : !b.power|| a.power > b.power ? -1 : 1))));
+  }
+
+  public sortCardsByCounter() : void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.counter ? 1 : !b.counter|| a.counter > b.counter ? -1 : 1))));
+  }
+
+  public sortCardsByRarity() : void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.rarities[0].abbr < b.rarities[0].abbr ? -1 : 1))));
+  }
+
+  public sortCardsBySerialNumber() : void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.serial_number < b.serial_number ? -1 : 1))));
   }
 }

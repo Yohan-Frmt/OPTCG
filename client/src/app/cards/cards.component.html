@@ -72,17 +72,17 @@
         ></card>
       </div>
 
-      <table [hidden]="!showList">
+      <table [hidden]="!showList || isLoading">
         <thead>
           <tr>
             <th></th>
-            <th>Type</th>
-            <th>Name</th>
-            <th>Cost/Life</th>
-            <th>Power</th>
-            <th>Counter</th>
-            <th>Rarity</th>
-            <th>Code</th>
+            <th (click)="sortCardsByType()">Type</th>
+            <th (click)="sortCardsByEnName()">Name</th>
+            <th (click)="sortCardsByCostLife()">Cost/Life</th>
+            <th (click)="sortCardsByPower()">Power</th>
+            <th (click)="sortCardsByCounter()">Counter</th>
+            <th (click)="sortCardsByRarity()">Rarity</th>
+            <th (click)="sortCardsBySerialNumber()">Code</th>
           </tr>
         </thead>
         <tbody>
@@ -98,6 +98,7 @@
           </tr>
         </tbody>
       </table>
+      <span *ngIf="isLoading">ça charge lol</span>
     </div>
   </div>
 </div>
