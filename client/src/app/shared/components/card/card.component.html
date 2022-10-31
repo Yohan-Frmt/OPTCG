@@ -1,4 +1,4 @@
-<div class="col scene">
+<div class="col scene" (mouseenter) ="zoomCard(true)" (mouseleave) ="zoomCard(false)">
   <div class="front">
     <img [alt]="alt" [src]="this.path" [width]="size" />
   </div>

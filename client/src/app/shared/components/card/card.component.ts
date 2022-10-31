@@ -21,6 +21,7 @@ export class CardComponent implements OnInit {
   @Input() public path: string = '';
   @Input() public deckId!: string;
   public alt: string = '';
+  public isZoomed: boolean = false;
 
   constructor(private readonly _router: Router) {}
 
