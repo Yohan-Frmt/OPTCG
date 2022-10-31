@@ -1,4 +1,4 @@
-<div [class.container] = "!fromDeckbuilder">
+<div [class.container]="!fromDeckbuilder">
   <div class="row cards-view">
     <div class="col-md-2-5">
       <div class="filters">
@@ -20,10 +20,10 @@
         </ng-container>
         <ng-container *ngIf="colors | async">
           <div class="filters__subtitle filters-multiple"><span>Colors</span></div>
-          <filter class="filters-multiple"
-            (filterSubmit)="onSubmit($event)"
-            [multiple]="true"
-            [source]="[colors, 'colors']"
+          <filter (filterSubmit)="onSubmit($event)"
+                  [multiple]="true"
+                  [source]="[colors, 'colors']"
+                  class="filters-multiple"
           ></filter>
         </ng-container>
         <ng-container *ngIf="rarities | async">
@@ -35,10 +35,10 @@
         </ng-container>
         <ng-container *ngIf="tags | async">
           <div class="filters__subtitle "><span>Tags</span></div>
-          <filter class="filters-multiple"
-            (filterSubmit)="onSubmit($event)"
-            [multiple]="true"
-            [source]="[tags, 'tags']"
+          <filter (filterSubmit)="onSubmit($event)"
+                  [multiple]="true"
+                  [source]="[tags, 'tags']"
+                  class="filters-multiple"
           ></filter>
         </ng-container>
         <ng-container *ngIf="status | async">
@@ -55,13 +55,14 @@
       <div class="row">
         <div class="col-md-3">
           <span (click)="setShowList(false)">Normal</span>
+          <fa-icon [icon]="FontAwesomeIcon.faList"></fa-icon>
           <span (click)="setShowList(true)">En liste</span>
         </div>
         <div class="col-md-9">
           <searchbar (searchSubmit)="onSubmit($event)"></searchbar>
         </div>
       </div>
-      <div class="row card-list mx-0" style="user-select: none" [style.display]="showList ? 'none!important' : 'flex'">
+      <div [style.display]="showList ? 'none!important' : 'flex'" class="row card-list mx-0" style="user-select: none">
         <card
           (click)="onCardClick(card)"
           (contextmenu)="onCardRightClick(card)"
@@ -74,28 +75,31 @@
 
       <table [hidden]="!showList || isLoading">
         <thead>
-          <tr>
-            <th></th>
-            <th (click)="sortCardsByType()">Type</th>
-            <th (click)="sortCardsByEnName()">Name</th>
-            <th (click)="sortCardsByCostLife()">Cost/Life</th>
-            <th (click)="sortCardsByPower()">Power</th>
-            <th (click)="sortCardsByCounter()">Counter</th>
-            <th (click)="sortCardsByRarity()">Rarity</th>
-            <th (click)="sortCardsBySerialNumber()">Code</th>
-          </tr>
+        <tr>
+          <th></th>
+          <th (click)="sortCardsByType()">Type</th>
+          <th (click)="sortCardsByEnName()">Name</th>
+          <th (click)="sortCardsByCostLife()">Cost/Life</th>
+          <th (click)="sortCardsByPower()">Power</th>
+          <th (click)="sortCardsByCounter()">Counter</th>
+          <th (click)="sortCardsByRarity()">Rarity</th>
+          <th (click)="sortCardsBySerialNumber()">Code</th>
+        </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let card of cards | async" [style.background-color]="card.colors[0].hex_color" (click)="onCardClick(card)" (contextmenu)="onCardRightClick(card)">
-            <th class="cardImage" [style.background-image]="'linear-gradient(to right, rgba(15,20,22,0) 0%,' + card.colors[0].hex_color + ' 90%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'"></th>
-            <th>{{ card.type.en_name }}</th>
-            <th>{{ card.en_name }}</th>
-            <th>{{ card.cost }}{{ card.life }}</th>
-            <th>{{ card.power }}</th>
-            <th>{{ card.counter }}</th>
-            <th><span *ngFor="let rarity of card.rarities">{{ rarity.abbr }}</span></th>
-            <th>{{ card.serial_number}}</th>
-          </tr>
+        <tr (click)="onCardClick(card)" (contextmenu)="onCardRightClick(card)"
+            *ngFor="let card of cards | async" [style.background-color]="card.colors[0].hex_color">
+          <th
+            [style.background-image]="'linear-gradient(to right, rgba(15,20,22,0) 0%,' + card.colors[0].hex_color + ' 90%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'"
+            class="cardImage"></th>
+          <th>{{ card.type.en_name }}</th>
+          <th>{{ card.en_name }}</th>
+          <th>{{ card.cost }}{{ card.life }}</th>
+          <th>{{ card.power }}</th>
+          <th>{{ card.counter }}</th>
+          <th><span *ngFor="let rarity of card.rarities">{{ rarity.abbr }}</span></th>
+          <th>{{ card.serial_number}}</th>
+        </tr>
         </tbody>
       </table>
       <span *ngIf="isLoading">ça charge lol</span>

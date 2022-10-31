@@ -1,32 +1,16 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { last, map, Observable, Subscriber } from 'rxjs';
-import { AuthenticationService } from '../core/authentication/services/authentication.service';
-import {
-  ICard,
-  ICardColor,
-  ICardRarity,
-  ICardSet,
-  ICardStatus,
-  ICardTag,
-  ICardType,
-  IUser,
-} from '../shared/models';
-import { AlertService } from '../shared/services/alert.service';
-import { CardService } from '../shared/services/card.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
+import { map, Observable } from "rxjs";
+import { AuthenticationService } from "../core/authentication/services/authentication.service";
+import { ICard, ICardColor, ICardRarity, ICardSet, ICardStatus, ICardTag, ICardType, IUser } from "../shared/models";
+import { AlertService } from "../shared/services/alert.service";
+import { CardService } from "../shared/services/card.service";
+import * as Fa from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "cards",
+  templateUrl: "./cards.component.html",
+  styleUrls: ["./cards.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardsComponent implements OnInit, OnChanges {
   @Input() public fromDeckbuilder: boolean = false;
@@ -44,11 +28,12 @@ export class CardsComponent implements OnInit, OnChanges {
   public colors!: Observable<ICardColor[]>;
   public showList: boolean = false;
   public isLoading: boolean = false;
+  public FontAwesomeIcon = Fa;
 
   constructor(
     private readonly _authentication: AuthenticationService,
     private readonly _alert: AlertService,
-    private readonly _card: CardService,
+    private readonly _card: CardService
   ) {
     this.user = this._authentication.currentUserValue();
   }
@@ -81,39 +66,39 @@ export class CardsComponent implements OnInit, OnChanges {
     return false;
   }
 
-  private _isCardsPreloaded = (cards: Observable<ICard[]>) =>
-    this.cardsPreload ? (this.cards = this.cardsPreload) : (this.cards = cards);
-
   public setShowList(option: boolean) {
     this.showList = option;
   }
 
-  public sortCardsByType() : void {
-    this.cards = this.cards.pipe( map(card => card.sort((a, b) => (a.type.en_name < b.type.en_name ? -1 : 1))));
+  public sortCardsByType(): void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.type.en_name < b.type.en_name ? -1 : 1))));
   }
 
-  public sortCardsByEnName() : void {
+  public sortCardsByEnName(): void {
     this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.en_name < b.en_name ? -1 : 1))));
   }
 
-  public sortCardsByCostLife() : void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.life ? 1 : !b.life|| a.life > b.life ? -1 : 1))));
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.cost ? 1 : !b.cost|| a.cost > b.cost ? -1 : 1))));
+  public sortCardsByCostLife(): void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.life ? 1 : !b.life || a.life > b.life ? -1 : 1))));
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.cost ? 1 : !b.cost || a.cost > b.cost ? -1 : 1))));
   }
 
-  public sortCardsByPower() : void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.power ? 1 : !b.power|| a.power > b.power ? -1 : 1))));
+  public sortCardsByPower(): void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.power ? 1 : !b.power || a.power > b.power ? -1 : 1))));
   }
 
-  public sortCardsByCounter() : void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.counter ? 1 : !b.counter|| a.counter > b.counter ? -1 : 1))));
+  public sortCardsByCounter(): void {
+    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.counter ? 1 : !b.counter || a.counter > b.counter ? -1 : 1))));
   }
 
-  public sortCardsByRarity() : void {
+  public sortCardsByRarity(): void {
     this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.rarities[0].abbr < b.rarities[0].abbr ? -1 : 1))));
   }
 
-  public sortCardsBySerialNumber() : void {
+  public sortCardsBySerialNumber(): void {
     this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.serial_number < b.serial_number ? -1 : 1))));
   }
+
+  private _isCardsPreloaded = (cards: Observable<ICard[]>) =>
+    this.cardsPreload ? (this.cards = this.cardsPreload) : (this.cards = cards);
 }
