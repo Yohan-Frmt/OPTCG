@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorDialogService } from './services/error-dialog.service';
 import { PopupModule } from './components/popup/popup.module';
+import { FilterButtonsModule } from './components/filter-buttons/filter-buttons.module';
 
 @NgModule({
   declarations: [ErrorDialogComponent],
@@ -40,6 +41,7 @@ import { PopupModule } from './components/popup/popup.module';
     FormFieldModule,
     LogoModule,
     FilterModule,
+    FilterButtonsModule,
     SkeletonModule,
     DeckPreviewModule,
     SearchbarModule,

@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss'],
+  selector: 'filter-buttons',
+  templateUrl: './filter-buttons.component.html',
+  styleUrls: ['./filter-buttons.component.scss'],
 })
-export class FilterComponent implements OnInit {
-  public selectedFilter: string = '';
+export class FilterButtonsComponent implements OnInit {
+  public selectedFilter: string[] = [];
   public filter: any;
   public type: string = '';
 
@@ -20,8 +20,12 @@ export class FilterComponent implements OnInit {
     this.type = this.source[1];
   }
 
-  public valueSelected = () => {
-    console.log(this.selectedFilter);
+  public valueSelected(selectedFilter: string): void {
+    if(this.selectedFilter.includes(selectedFilter)) {
+      this.selectedFilter.splice(this.selectedFilter.findIndex(x=>x == selectedFilter),1);
+    } else {
+      this.selectedFilter.push(selectedFilter);
+    }
     this.filterSubmit.emit([this.selectedFilter, this.source[1]]);
   };
 }

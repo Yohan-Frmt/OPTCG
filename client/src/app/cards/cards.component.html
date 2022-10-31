@@ -15,10 +15,10 @@
         </ng-container>
         <ng-container *ngIf="types | async">
           <div class="filters__subtitle"><span>Type</span></div>
-          <filter
+          <filter-buttons
             (filterSubmit)="onSubmit($event)"
             [source]="[types, 'types']"
-          ></filter>
+          ></filter-buttons>
         </ng-container>
         <ng-container *ngIf="colors | async">
           <div class="filters__subtitle filters-multiple"><span>Colors</span></div>

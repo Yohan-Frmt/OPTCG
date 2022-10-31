@@ -35,9 +35,16 @@ export class CardService {
             qb.andWhere('status.en_name = :st', { st: value });
             break;
           case 'types':
-            if (value[0] === '!')
-              qb.andWhere('type.en_name != :t', { t: value.substring(1) });
-            else qb.andWhere('type.en_name = :t', { t: value });
+            qb.andWhere(
+              new Brackets((q) => {
+                for (const [idx, type] of value.split(',').entries()) {
+                  const params = {};
+                  params[`c${idx}`] = type;
+                  qb.leftJoinAndSelect(`card.type`, `type${idx}`);
+                  q.orWhere(`type${idx}.en_name = :c${idx}`, params);
+                }
+              }),
+            );
             break;
           case 'tags':
             for (const [idx, tag] of value.split(',').entries()) {
