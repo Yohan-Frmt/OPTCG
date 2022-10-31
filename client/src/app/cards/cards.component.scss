@@ -104,6 +104,7 @@ table {
   color: $text-secondary-color;
   border-collapse: collapse;
   margin: 20px 0 50px;
+  user-select: none;
 
   th.cardImage {
     width: 80px;
@@ -118,5 +119,11 @@ table {
   tr {
     border: 1px solid $background-color;
     height: 35px;
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+    }
   }
 }
