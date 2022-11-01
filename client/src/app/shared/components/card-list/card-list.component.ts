@@ -16,6 +16,10 @@ export class CardListComponent {
   @Output() public cardClicked = new EventEmitter<ICard>();
   @Output() public cardRightClicked = new EventEmitter<ICard>();
   public card!: ICard | null;
+  public isZoomed: boolean = false;
+  public imgCardZoomed!: string | undefined;
+  public isMouseRight: boolean = false;
+  public mouseY!: number;
 
   constructor(private readonly _router: Router) {
   }
@@ -63,4 +67,15 @@ export class CardListComponent {
     this.cardRightClicked.emit(card);
     return false;
   }
+
+  public zoomCard(value: boolean, card?: ICard) : void {
+    this.isZoomed = value;
+    this.imgCardZoomed = '/assets/images/cards/' + card?.serial_number.split('-')[0] + '/' + card?.images[0].path;
+  }
+
+  mouseMoved(event: MouseEvent) {
+    this.mouseY = event.pageY;
+  }
+
+  getMouseYZoomedCard = () : number => this.mouseY - 120;
 }
