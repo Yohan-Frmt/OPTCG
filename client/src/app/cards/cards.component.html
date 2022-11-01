@@ -1,4 +1,4 @@
-<div [class.container] = "!fromDeckbuilder">
+<div [class.container]="!fromDeckbuilder">
   <div class="row cards-view">
     <div class="col-md-2-5">
       <div class="filters">
@@ -22,10 +22,10 @@
         </ng-container>
         <ng-container *ngIf="colors | async">
           <div class="filters__subtitle filters-multiple"><span>Colors</span></div>
-          <filter class="filters-multiple"
-            (filterSubmit)="onSubmit($event)"
-            [multiple]="true"
-            [source]="[colors, 'colors']"
+          <filter (filterSubmit)="onSubmit($event)"
+                  [multiple]="true"
+                  [source]="[colors, 'colors']"
+                  class="filters-multiple"
           ></filter>
         </ng-container>
         <ng-container *ngIf="rarities | async">
@@ -37,10 +37,10 @@
         </ng-container>
         <ng-container *ngIf="tags | async">
           <div class="filters__subtitle "><span>Tags</span></div>
-          <filter class="filters-multiple"
-            (filterSubmit)="onSubmit($event)"
-            [multiple]="true"
-            [source]="[tags, 'tags']"
+          <filter (filterSubmit)="onSubmit($event)"
+                  [multiple]="true"
+                  [source]="[tags, 'tags']"
+                  class="filters-multiple"
           ></filter>
         </ng-container>
         <ng-container *ngIf="status | async">
@@ -55,9 +55,15 @@
 
     <div class="col-md-9-5">
       <div class="row">
-        <searchbar (searchSubmit)="onSubmit($event)"></searchbar>
+        <div class="col-md-2" style="text-align: center">
+          <fa-icon (click)="setShowList(false)" [class.active]="!showList" [icon]="FontAwesomeIcon.faGripVertical"></fa-icon>
+          <fa-icon (click)="setShowList(true)" [class.active]="showList" [icon]="FontAwesomeIcon.faList"></fa-icon>
+        </div>
+        <div class="col-md-10">
+          <searchbar (searchSubmit)="onSubmit($event)"></searchbar>
+        </div>
       </div>
-      <div class="row card-list mx-0" style="user-select: none">
+      <div [style.display]="showList ? 'none!important' : 'flex'" class="row card-list mx-0" style="user-select: none">
         <card
           (click)="onCardClick(card)"
           (contextmenu)="onCardRightClick(card)"
@@ -67,6 +73,13 @@
           class="col col-sm-6 col-lg-6 col-xl-4 col-xxl-3 col-xxxl-2-5"
         ></card>
       </div>
+
+      <card-list
+        (cardClicked)="onCardClick($event)"
+        (cardRightClicked)="onCardRightClick($event)"
+        [cards]="cards"
+        [fromDeckbuilder]="fromDeckbuilder"
+        [hidden]="!showList || isLoading"></card-list>
     </div>
   </div>
 </div>

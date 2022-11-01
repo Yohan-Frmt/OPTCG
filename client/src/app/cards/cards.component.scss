@@ -72,6 +72,23 @@
   margin-bottom: 50px;
 }
 
+fa-icon.ng-fa-icon {
+  font-size: 20px;
+  background: $primary-color;
+  color: $text-secondary-color;
+  width: 29px;
+  height: 29px;
+  margin: 0 2px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover, &.active {
+    background: $tertiary-color;
+  }
+}
+
 
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -101,4 +118,33 @@
 
 .card-list.cdk-drop-list-dragging .card-list:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+table {
+  width: 100%;
+  color: $text-secondary-color;
+  border-collapse: collapse;
+  margin: 20px 0 50px;
+  user-select: none;
+
+  th.cardImage {
+    width: 80px;
+    background-position: 29% 16%;
+    background-size: 120%;
+  }
+
+  thead {
+    color: $text-primary-color;
+  }
+
+  tr {
+    border: 1px solid $background-color;
+    height: 35px;
+  }
+
+  tbody {
+    tr {
+      cursor: pointer;
+    }
+  }
 }
