@@ -1,32 +1,16 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthenticationService } from '../core/authentication/services/authentication.service';
-import {
-  ICard,
-  ICardColor,
-  ICardRarity,
-  ICardSet,
-  ICardStatus,
-  ICardTag,
-  ICardType,
-  IUser,
-} from '../shared/models';
-import { AlertService } from '../shared/services/alert.service';
-import { CardService } from '../shared/services/card.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
+import { Observable } from "rxjs";
+import { AuthenticationService } from "../core/authentication/services/authentication.service";
+import { ICard, ICardColor, ICardRarity, ICardSet, ICardStatus, ICardTag, ICardType, IUser } from "../shared/models";
+import { AlertService } from "../shared/services/alert.service";
+import { CardService } from "../shared/services/card.service";
+import * as Fa from "@fortawesome/free-solid-svg-icons";
 
 @Component({
-  selector: 'cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "cards",
+  templateUrl: "./cards.component.html",
+  styleUrls: ["./cards.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardsComponent implements OnInit, OnChanges {
   @Input() public fromDeckbuilder: boolean = false;
@@ -42,11 +26,14 @@ export class CardsComponent implements OnInit, OnChanges {
   public types!: Observable<ICardType>;
   public tags!: Observable<ICardTag[]>;
   public colors!: Observable<ICardColor[]>;
+  public showList: boolean = false;
+  public isLoading: boolean = false;
+  public FontAwesomeIcon = Fa;
 
   constructor(
     private readonly _authentication: AuthenticationService,
     private readonly _alert: AlertService,
-    private readonly _card: CardService,
+    private readonly _card: CardService
   ) {
     this.user = this._authentication.currentUserValue();
   }
@@ -77,6 +64,10 @@ export class CardsComponent implements OnInit, OnChanges {
   public onCardRightClick(card: ICard) {
     this.cardRightClicked.emit(card);
     return false;
+  }
+
+  public setShowList(option: boolean) {
+    this.showList = option;
   }
 
   private _isCardsPreloaded = (cards: Observable<ICard[]>) =>
