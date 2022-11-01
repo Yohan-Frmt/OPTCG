@@ -19,6 +19,8 @@ export class DeckbuilderComponent implements OnInit {
   public cards!: Observable<ICard[]>;
   public step!: string | void;
   public moreCharts: boolean = false;
+  public isZoomed: boolean = false;
+  public imgCardZoomed!: string | undefined;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -75,5 +77,10 @@ export class DeckbuilderComponent implements OnInit {
 
   public displayCharts() {
     this.moreCharts = !this.moreCharts;
+  }
+
+  public zoomCard(value: boolean, card?: ICard) : void {
+    this.isZoomed = value;
+    this.imgCardZoomed = '/assets/images/cards/' + card?.serial_number.split('-')[0] + '/' + card?.images[0].path;
   }
 }

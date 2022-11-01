@@ -24,7 +24,7 @@
   position: fixed;
   right: 0;
   max-height: 87vh;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .chart-zone {
@@ -226,4 +226,10 @@
   text-align: center;
   color: $text-secondary-color;
   padding-top: 9px;
+}
+
+.zoomedCard {
+  position: absolute;
+  right: 25%;
+  top: 100px;
 }
