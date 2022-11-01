@@ -1,3 +1,7 @@
+<div [style.top]="getMouseYZoomedCard() + 'px'" *ngIf="isZoomed" class="zoomedCard">
+  <img [src]="imgCardZoomed" [width]="300"/>
+</div>
+
 <table>
   <thead>
   <tr>
@@ -16,7 +20,10 @@
     (click)="onCardClick(card)"
     (contextmenu)="onCardRightClick(card)"
     *ngFor="let card of cards | async"
-    [style.background-color]="card.colors[0].hex_color"
+    [style.background-color]="card.colors[0].hex_color" 
+    (mousemove)="mouseMoved($event)" 
+    (mouseenter)="zoomCard(true, card)" 
+    (mouseleave)="zoomCard(false)"
   >
     <th
       [style.background-image]="
