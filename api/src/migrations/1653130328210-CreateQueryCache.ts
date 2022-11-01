@@ -5,7 +5,7 @@ export class CreateQueryCache1653130328210 implements MigrationInterface {
     await queryRunner.query(
       `CREATE TABLE "query-cache"
        (
-           "id"       integer NOT NULL,
+           "id"       serial NOT NULL,
            identifier character varying,
            "time"     bigint  NOT NULL,
            duration   integer NOT NULL,
