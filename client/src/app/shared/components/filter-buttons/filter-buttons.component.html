@@ -1,5 +1,5 @@
 <div class="filter">
-  <div class="filterButton" *ngFor="let item of source[0] | async | sort: 'en_name'">
+  <div [style.active]="selectedFilter.includes(item.en_name)" class="filterButton" *ngFor="let item of source[0] | async | sort: 'en_name'">
     <span  (click)="valueSelected(item.en_name)">{{ item.en_name }}</span>
   </div>
 </div>

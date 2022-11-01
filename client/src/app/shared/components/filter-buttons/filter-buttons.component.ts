@@ -23,9 +23,14 @@ export class FilterButtonsComponent implements OnInit {
   public valueSelected(selectedFilter: string): void {
     if(this.selectedFilter.includes(selectedFilter)) {
       this.selectedFilter.splice(this.selectedFilter.findIndex(x=>x == selectedFilter),1);
+
     } else {
       this.selectedFilter.push(selectedFilter);
     }
     this.filterSubmit.emit([this.selectedFilter, this.source[1]]);
   };
+
+  public isActive(value: string): boolean {
+    return this.selectedFilter.includes(value);
+  }
 }
