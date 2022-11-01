@@ -22,18 +22,17 @@
         </ng-container>
         <ng-container *ngIf="colors | async">
           <div class="filters__subtitle filters-multiple"><span>Colors</span></div>
-          <filter (filterSubmit)="onSubmit($event)"
-                  [multiple]="true"
+          <filter-buttons (filterSubmit)="onSubmit($event)"
                   [source]="[colors, 'colors']"
                   class="filters-multiple"
-          ></filter>
+          ></filter-buttons>
         </ng-container>
         <ng-container *ngIf="rarities | async">
           <div class="filters__subtitle"><span>Rarity</span></div>
-          <filter
+          <filter-buttons-rarities
             (filterSubmit)="onSubmit($event)"
             [source]="[rarities, 'rarities']"
-          ></filter>
+          ></filter-buttons-rarities>
         </ng-container>
         <ng-container *ngIf="tags | async">
           <div class="filters__subtitle "><span>Tags</span></div>
@@ -41,6 +40,20 @@
                   [multiple]="true"
                   [source]="[tags, 'tags']"
                   class="filters-multiple"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="costs | async">
+          <div class="filters__subtitle"><span>Cost</span></div>
+          <filter
+            (filterSubmit)="onSubmit($event)"
+            [source]="[costs, 'costs']"
+          ></filter>
+        </ng-container>
+        <ng-container *ngIf="powers | async">
+          <div class="filters__subtitle"><span>Power</span></div>
+          <filter
+            (filterSubmit)="onSubmit($event)"
+            [source]="[powers, 'powers']"
           ></filter>
         </ng-container>
         <ng-container *ngIf="status | async">

@@ -50,6 +50,12 @@ export class CardService {
     return this._api.get<ICardColor[]>('/cardcolors');
   }
 
+  public get costs(): Observable<string[]> {
+    return this._api.get<string[]>('/cardcosts');
+  }
+  public get powers(): Observable<string[]> {
+    return this._api.get<string[]>('/cardpowers');
+  }
   public getCard = (serial: string): Observable<ICard> =>
     this._api.get<ICard>('/card/' + serial);
 
@@ -82,6 +88,12 @@ export class CardService {
           break;
         case 'colors':
           query.colors = value;
+          break;
+        case 'costs':
+          query.costs = value;
+          break;
+        case 'powers':
+          query.powers = value;
           break;
         case 'search':
           query.search = value;
