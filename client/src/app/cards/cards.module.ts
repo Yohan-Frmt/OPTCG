@@ -10,6 +10,7 @@ import { SearchbarModule } from "../shared/components/searchbar/searchbar.module
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { SharedModule } from "../shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { CardListModule } from "../shared/components/card-list/card-list.module";
 
 @NgModule({
   declarations: [CardsComponent, CardDetailsComponent],
@@ -21,7 +22,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     SearchbarModule,
     DragDropModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CardListModule
   ],
   exports: [CardsComponent]
 })
