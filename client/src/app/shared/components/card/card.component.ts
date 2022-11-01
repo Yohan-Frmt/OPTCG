@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICard } from '../../models';
+import { fromEvent, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'card',
@@ -22,6 +23,8 @@ export class CardComponent implements OnInit {
   @Input() public deckId!: string;
   public alt: string = '';
   public isZoomed: boolean = false;
+  public isMouseRight: boolean = false;
+  private mouseXPercentage!: number;
 
   constructor(private readonly _router: Router) {}
 
@@ -45,4 +48,17 @@ export class CardComponent implements OnInit {
       this._router.navigate(['/cards', this.card!.serial_number]);
     }
   }
+
+  public zoomCard(value: boolean) : void {
+    this.isZoomed = value;
+  }
+
+  mouseMoved(event: MouseEvent) {
+    this.setMouseXPercentage(event);
+    this.isMouseRight = this.mouseXPercentage > 58;
+  }
+
+  private setMouseXPercentage(event: MouseEvent) : void {
+    this.mouseXPercentage = event.pageX * 100 / window.innerWidth;
+  } 
 }
