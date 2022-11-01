@@ -26,6 +26,8 @@ export class CardsComponent implements OnInit, OnChanges {
   public types!: Observable<ICardType>;
   public tags!: Observable<ICardTag[]>;
   public colors!: Observable<ICardColor[]>;
+  public costs!: Observable<string[]>;
+  public powers!: Observable<string[]>;
   public showList: boolean = false;
   public isLoading: boolean = false;
   public FontAwesomeIcon = Fa;
@@ -50,6 +52,8 @@ export class CardsComponent implements OnInit, OnChanges {
     this.types = this._card.types;
     this.tags = this._card.tags;
     this.colors = this._card.colors;
+    this.costs = this._card.costs;
+    this.powers = this._card.powers;
   }
 
   public onSubmit = ([value, type]: [string, string]) => {

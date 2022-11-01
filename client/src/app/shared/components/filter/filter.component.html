@@ -7,7 +7,7 @@
     id="filter-{{ source[1] }}"
   >
     <option value="">------------</option>
-    <option *ngFor="let item of source[0] | async | sort: 'en_name'">
+    <option value="{{item.en_name}}" *ngFor="let item of source[0] | async | sort: 'en_name'">
       {{ item.en_name }}
     </option>
   </select>

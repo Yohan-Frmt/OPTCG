@@ -60,6 +60,9 @@
           <div *ngIf="moreCharts" class="moreCharts" (click)="displayCharts()">-</div>
         </div>
       </div>
+      <div class="deckName">
+        <input type="text" placeholder="enter your deck name here">
+      </div>
       <div class="row leader-zone">
         <div 
           *ngIf="manager.deck.leader as leader" 
@@ -74,8 +77,13 @@
           <span>{{ leader.en_name }}</span>
           <span class="count">{{ manager.deck.length }} / 50</span>
         </div>
+        <div *ngIf="!manager.deck.leader as leader" class="card withoutLeader">
+          <span>You must pick a </span>
+          <span class="type">Leader</span>
+        </div>
       </div>
-      <div class="row deck-zone">
+      <div class="row deck-zone" [style.background]="!manager.deck.cards[0] ? 'none!important' : 'inherit'">
+        <span *ngIf="!manager.deck.cards[0]">You must add cards to your deck</span>
         <div *ngFor="let card of manager.deck.cards" data-id="{{ card.id }}" (mouseenter)="zoomCard(true, card)" (mouseleave)="zoomCard(false)">
           <div class="row">
             <div class="col-1 col-md-1-5 col-xl-1">
@@ -107,8 +115,20 @@
 </div>
 <div class="footerBuilder">
   <div class="row">
-    <div class="col">
-      <button (click)="onSubmit()" type="submit">Create</button>
+    <div class="col-md-2 offset-md-2">
+      Visibilité
+      <select></select>
+    </div>
+    <div class="col-md-2">
+      <button (click)="onSubmit()" type="submit">Add description</button>
+    </div>
+    <div class="col-md-2">
+      <button (click)="onSubmit()" type="submit">Simulate mulligan</button>
+    </div>
+    <div class="col-md-2">
+      <button class="main" (click)="onSubmit()" type="submit">Create this deck</button>
     </div>
   </div>
 </div>
+
+<popup [width]="'600px'" [height]="'300px'" [opened]="false">Bite</popup>
