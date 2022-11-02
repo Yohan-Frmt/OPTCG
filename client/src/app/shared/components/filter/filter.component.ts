@@ -22,7 +22,6 @@ export class FilterComponent implements OnInit {
   }
 
   public valueSelected = () => {
-    console.log(this.selectedFilter);
     this.filterSubmit.emit([this.selectedFilter, this.source[1]]);
   };
 }
