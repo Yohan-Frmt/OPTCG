@@ -20,7 +20,11 @@
     (click)="onCardClick(card)"
     (contextmenu)="onCardRightClick(card)"
     *ngFor="let card of cards | async"
-    [style.background-color]="card.colors[0].hex_color" 
+    [style.background-image]="!card.colors[1] ? 
+      'linear-gradient(to right, ' + card.colors[0].hex_color + ' 45%, ' + card.colors[0].hex_color + ' 55%)' 
+      :
+      'linear-gradient(to right, ' + card.colors[0].hex_color + ' 45%, ' + card.colors[1].hex_color + ' 55%)' 
+    "
     (mousemove)="mouseMoved($event)" 
     (mouseenter)="zoomCard(true, card)" 
     (mouseleave)="zoomCard(false)"
