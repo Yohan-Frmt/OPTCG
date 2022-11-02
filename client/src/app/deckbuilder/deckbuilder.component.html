@@ -64,9 +64,12 @@
         <div 
           *ngIf="manager.deck.leader as leader" 
           class="card" 
-          [style.background-color]="leader.colors[0].hex_color" 
           data-id="{{ leader.id }}" 
-          [style.background-image]="'linear-gradient(to right,' + leader.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 60%, ' + leader.colors[0].hex_color + ' 80%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png)'"
+          [style.background-image]="!leader.colors[1] ? 
+            'linear-gradient(to right,' + leader.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 60%, ' + leader.colors[0].hex_color + ' 80%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png), linear-gradient(to right, ' + leader.colors[0].hex_color +', ' + leader.colors[0].hex_color + ')'
+            : 
+            'linear-gradient(to right,' + leader.colors[1].hex_color + ' 10%, rgba(15,20,22,0) 60%, ' + leader.colors[1].hex_color + ' 80%), url(/assets/images/cards/' + leader.serial_number.split('-')[0] + '/' + leader.serial_number + '.png), linear-gradient(to right, ' + leader.colors[0].hex_color +' 40%, ' + leader.colors[1].hex_color + ' 60%)'
+          "
           (mouseenter)="zoomCard(true, leader)" 
           (mouseleave)="zoomCard(false)"
         >
