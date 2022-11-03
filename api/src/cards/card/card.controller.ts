@@ -11,6 +11,7 @@ import {
 import { CardService } from './card.service';
 import { CardDto } from './card.dto';
 import { Request } from 'express';
+import { get } from 'http';
 
 @Controller()
 export class CardController {
@@ -26,6 +27,16 @@ export class CardController {
     @Param('serial') serial: string,
   ): Promise<CardDto> {
     return await this.service.findOneBySerial(serial);
+  }
+
+  @Get('/cardcosts')
+  public async getAllCosts(): Promise<string[]> {
+    return await this.service.getAllCosts();
+  }
+
+  @Get('/cardpowers')
+  public async getAllPowers(): Promise<string[]> {
+    return await this.service.getAllPowers();
   }
 
   @Post()

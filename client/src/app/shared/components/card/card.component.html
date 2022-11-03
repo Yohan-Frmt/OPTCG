@@ -1,5 +1,8 @@
 <div class="col scene">
-  <div class="front">
-    <img [alt]="alt" [src]="this.path" [width]="size" />
+  <div class="front" (mousemove)="mouseMoved($event)" (mouseenter)="zoomCard(true)" (mouseleave)="zoomCard(false)">
+    <img [alt]="alt" [src]="this.path" [width]="size"/>
+  </div>
+  <div class="zoomedCard" *ngIf="isZoomed" [class.left]="isMouseRight" [class.right]="!isMouseRight">
+    <img [alt]="alt" [src]="this.path" [width]="300"/>
   </div>
 </div>

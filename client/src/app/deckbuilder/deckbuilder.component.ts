@@ -22,6 +22,8 @@ export class DeckbuilderComponent implements OnInit {
   public cards!: Observable<ICard[]>;
   public step!: string | void;
   public moreCharts: boolean = false;
+  public isZoomed: boolean = false;
+  public imgCardZoomed!: string | undefined;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -65,7 +67,7 @@ export class DeckbuilderComponent implements OnInit {
 
   public onSubmit = () => {
     this._deckbuilder.create(this.name, this.manager.deck.parse(), "Public", "").subscribe({
-      next: async (deck) => {
+      next: (deck) => {
         console.log(deck);
         this._alert.success(deck.name + " created");
       },
@@ -75,6 +77,10 @@ export class DeckbuilderComponent implements OnInit {
     });
   };
 
+  public zoomCard(value: boolean, card?: ICard) : void {
+    this.isZoomed = value;
+    this.imgCardZoomed = '/assets/images/cards/' + card?.serial_number.split('-')[0] + '/' + card?.images[0].path;
+  }
   public displayCharts = () => (this.moreCharts = !this.moreCharts);
   public displayDescription = () => (this.showDescription = !this.showDescription);
 }

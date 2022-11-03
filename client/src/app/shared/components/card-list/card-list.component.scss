@@ -10,7 +10,7 @@ table {
     th.cardImage {
       width: 80px;
       background-position: 29% 16%;
-      background-size: 120%;
+      background-size: 120%, 120%;
     }
   
     thead {
@@ -27,4 +27,9 @@ table {
         cursor: pointer;
       }
     }
+  }
+
+  .zoomedCard {
+    position: absolute;
+    left: 0;
   }

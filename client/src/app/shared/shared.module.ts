@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ErrorDialogService } from './services/error-dialog.service';
 import { PopupModule } from './components/popup/popup.module';
 import { FilterButtonsModule } from './components/filter-buttons/filter-buttons.module';
+import { FilterButtonsRaritiesModule } from './components/filter-buttons-rarities/filter-buttons-rarities.module';
 
 @NgModule({
   declarations: [ErrorDialogComponent],
@@ -42,6 +43,7 @@ import { FilterButtonsModule } from './components/filter-buttons/filter-buttons.
     LogoModule,
     FilterModule,
     FilterButtonsModule,
+    FilterButtonsRaritiesModule,
     SkeletonModule,
     DeckPreviewModule,
     SearchbarModule,

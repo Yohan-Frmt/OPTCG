@@ -17,11 +17,11 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.filter = this.source[0];
+    this.filter.subscribe(value => {console.log(value)});
     this.type = this.source[1];
   }
 
   public valueSelected = () => {
-    console.log(this.selectedFilter);
     this.filterSubmit.emit([this.selectedFilter, this.source[1]]);
   };
 }

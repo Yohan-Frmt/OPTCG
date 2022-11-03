@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'filter-buttons',
-  templateUrl: './filter-buttons.component.html',
-  styleUrls: ['./filter-buttons.component.scss'],
+  selector: 'filter-buttons-rarities',
+  templateUrl: './filter-buttons-rarities.component.html',
+  styleUrls: ['./filter-buttons-rarities.component.scss'],
 })
-export class FilterButtonsComponent implements OnInit {
+export class FilterButtonsRaritiesComponent implements OnInit {
   public selectedFilter: string[] = [];
   public filter: any;
   public type: string = '';

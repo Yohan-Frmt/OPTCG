@@ -6,6 +6,27 @@ import { CardDto } from "./card.dto";
 
 @Injectable()
 export class CardService {
+  async getAllPowers(): Promise<string[]> 
+  { 
+    return await this._dataSource
+    .getRepository(Card)
+    .createQueryBuilder("card")
+    .select('card.power as en_name')
+    .distinct(true)
+    .orderBy('en_name')
+    .getRawMany();
+  }
+
+  async getAllCosts(): Promise<string[]> {
+    return await this._dataSource
+    .getRepository(Card)
+    .createQueryBuilder("card")
+    .select('card.cost as en_name')
+    .distinct(true)
+    .orderBy('en_name')
+    .getRawMany();  
+  }
+  
   constructor(
     @InjectRepository(Card) private readonly repository: Repository<Card>,
     private readonly _dataSource: DataSource
@@ -46,6 +67,12 @@ export class CardService {
               break;
             case "status":
               qb.andWhere("status.en_name = :st", { st: value });
+              break;
+            case "costs":
+              qb.andWhere("card.cost = :c", {c: value});
+              break;
+            case "powers":
+              qb.andWhere("card.power = :p", {p: value})
               break;
             case "types":
               if (value[0] === "!")
