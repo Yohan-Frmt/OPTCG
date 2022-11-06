@@ -126,4 +126,6 @@
 </div>
 
 <popup [height]="'300px'" [opened]="false" [width]="'600px'">Bite</popup>
-<popup [height]="'300px'" [opened]="showDescription" [width]="'600px'">Bite</popup>
+<popup [height]="'600px'" [opened]="showDescription" [width]="'1200px'">
+  <ckeditor (ready)="OnEditorReady($event)" [data]="description" [editor]="editor"></ckeditor>
+</popup>

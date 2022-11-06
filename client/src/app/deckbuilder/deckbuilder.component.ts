@@ -6,6 +6,7 @@ import { CardService } from "../shared/services/card.service";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
 import { DeckbuilderManager } from "../shared/models/deckbuilder/manager.builder";
 import { Observable } from "rxjs";
+import * as CKE from "@ckeditor/ckeditor5-build-decoupled-document";
 
 @Component({
   selector: "deckbuilder",
@@ -17,7 +18,8 @@ export class DeckbuilderComponent implements OnInit {
   public user: IUser | null;
   public manager: DeckbuilderManager;
   public name: string = "";
-  public description;
+  public editor = CKE;
+  public description: string = "Coucou c'est moi";
   public showDescription: boolean = false;
   public cards!: Observable<ICard[]>;
   public step!: string | void;
@@ -77,10 +79,18 @@ export class DeckbuilderComponent implements OnInit {
     });
   };
 
-  public zoomCard(value: boolean, card?: ICard) : void {
+  public zoomCard(value: boolean, card?: ICard): void {
     this.isZoomed = value;
-    this.imgCardZoomed = '/assets/images/cards/' + card?.serial_number.split('-')[0] + '/' + card?.images[0].path;
+    this.imgCardZoomed = "/assets/images/cards/" + card?.serial_number.split("-")[0] + "/" + card?.images[0].path;
   }
+
   public displayCharts = () => (this.moreCharts = !this.moreCharts);
   public displayDescription = () => (this.showDescription = !this.showDescription);
+
+  public OnEditorReady = (editor: CKE.Editor) => {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    );
+  };
 }

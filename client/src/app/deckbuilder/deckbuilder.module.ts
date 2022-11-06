@@ -6,6 +6,7 @@ import { CardsModule } from "../cards/cards.module";
 import { SharedModule } from "../shared/shared.module";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { FormsModule } from "@angular/forms";
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
   declarations: [DeckbuilderComponent],
@@ -15,7 +16,8 @@ import { FormsModule } from "@angular/forms";
     DeckbuilderRoutingModule,
     CardsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ]
 })
 export class DeckbuilderModule {
