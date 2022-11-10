@@ -85,7 +85,7 @@ export class DeckbuilderComponent implements OnInit {
   }
 
   public displayCharts = () => (this.moreCharts = !this.moreCharts);
-  public displayDescription = () => (this.showDescription = !this.showDescription);
+  public displayDescription = (opened: boolean) => this.showDescription = opened;
 
   public OnEditorReady = (editor: CKE.Editor) => {
     editor.ui.getEditableElement().parentElement.insertBefore(
