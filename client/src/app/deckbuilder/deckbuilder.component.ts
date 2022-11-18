@@ -46,13 +46,15 @@ export class DeckbuilderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.manager.initChart(document.getElementById("cardTypes") as HTMLCanvasElement);
-    this.manager.initChart(document.getElementById("cardColors") as HTMLCanvasElement);
-    this.manager.initChart(document.getElementById("cardCounters") as HTMLCanvasElement);
-    this.manager.initChart(document.getElementById("cardAttributes") as HTMLCanvasElement);
-    this.manager.initChart(document.getElementById("cardCosts") as HTMLCanvasElement);
-    this.manager.initChart(document.getElementById("cardRarities") as HTMLCanvasElement);
-    this.manager.initChart(document.getElementById("cardPowers") as HTMLCanvasElement);
+    this.manager.initCharts(
+      document.getElementById("cardTypes")!,
+      document.getElementById("cardColors")!,
+      document.getElementById("cardCounters")!,
+      document.getElementById("cardAttributes")!,
+      document.getElementById("cardCosts")!,
+      document.getElementById("cardRarities")!,
+      document.getElementById("cardPowers")!
+    );
   }
 
   public onClick = (card: ICard) => {
@@ -60,7 +62,7 @@ export class DeckbuilderComponent implements OnInit {
       this.manager.setLeader(card);
       this.cards = this._card.cardsQuery([
         ["!Leader", "types"],
-        [card.colors.map((c) => c.en_name).join(), "colors"]
+        [card.colors.map((color) => color.en_name).join(), "colors"]
       ]);
     } else {
       this.manager.addCard(card);

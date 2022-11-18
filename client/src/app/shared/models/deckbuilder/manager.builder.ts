@@ -1,6 +1,6 @@
-import { Deck } from './deck.builder';
-import Chart, { ChartDataset } from 'chart.js/auto';
-import { ICard } from '../card/card.model';
+import { Deck } from "./deck.builder";
+import Chart, { ChartDataset } from "chart.js/auto";
+import { ICard } from "../card/card.model";
 
 interface IFormat {
   readonly name: string;
@@ -15,12 +15,12 @@ export class DeckbuilderManager {
     }
     this._format = [
       {
-        name: 'Standard',
-        deck: this.deck,
-      },
+        name: "Standard",
+        deck: this.deck
+      }
     ];
     this._activeFormat = this._format[format];
-    this._chartArray = ['pie', 'doughnut'];
+    this._chartArray = ["pie", "doughnut"];
   }
 
   private _chartArray: string[];
@@ -62,7 +62,7 @@ export class DeckbuilderManager {
   set cardCounters(value: Chart) {
     this._cardCounters = value;
   }
-  
+
   private _cardAttributes!: Chart;
 
   get cardAttributes(): Chart {
@@ -155,271 +155,195 @@ export class DeckbuilderManager {
     this.activeFormat.deck.removeCardFromDeck(card);
   };
 
-  public initChart = (element: HTMLCanvasElement) => {
+  public initCharts = (...charts: HTMLElement[]) => {
+    charts.forEach((chart: HTMLElement) => this.initChart(chart));
+  };
+  public initChart = (element: HTMLElement) => {
+    const canvas = element as HTMLCanvasElement;
+    const pieOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          display: false
+        },
+        x: {
+          display: false
+        }
+      }
+    };
+    const barOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          display: true,
+          ticks: {
+            stepSize: 1
+          }
+        },
+        x: {
+          display: true,
+          ticks: {
+            stepSize: 1,
+            autoSkip: false
+          }
+        }
+      }
+    };
     switch (element.id) {
-      case 'cardColors':
-        this.cardColors = new Chart(element, {
-          type: 'pie',
+      case "cardColors":
+        this.cardColors = new Chart(canvas, {
+          type: "pie",
           data: {
-            labels: ['Red', 'Blue', 'Green', 'Purple', 'Black', 'Yellow'],
+            labels: ["Red", "Blue", "Green", "Purple", "Black", "Yellow"],
             datasets: [
               {
                 data: [0, 0, 0, 0, 0, 0],
-                backgroundColor: ['#b8051a', '#016fb5', '#198b63', '#8c1b7d', '#201c18', '#d8c94c'],
+                backgroundColor: ["#b8051a", "#016fb5", "#198b63", "#8c1b7d", "#201c18", "#d8c94c"],
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Colors',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Colors"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: false,
-              },
-              x: {
-                display: false,
-              },
-            },
-          },
+          options: pieOptions
         });
         break;
-      case 'cardTypes':
-        this.cardTypes = new Chart(element, {
-          type: 'pie',
+      case "cardTypes":
+        this.cardTypes = new Chart(canvas, {
+          type: "pie",
           data: {
-            labels: ['Characters', 'Events', 'Stages'],
+            labels: ["Characters", "Events", "Stages"],
             datasets: [
               {
                 data: [0, 0, 0],
-                backgroundColor: ['#f4f2f3', '#c4a04e', '#002454'],
+                backgroundColor: ["#f4f2f3", "#c4a04e", "#002454"],
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Cards',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Cards"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: false,
-              },
-              x: {
-                display: false,
-              },
-            },
-          },
+          options: pieOptions
         });
-      break;
-      case 'cardCounters':
-        this.cardCounters = new Chart(element, {
-          type: 'pie',
+        break;
+      case "cardCounters":
+        this.cardCounters = new Chart(canvas, {
+          type: "pie",
           data: {
-            labels: ['0', '+1000', '+2000'],
+            labels: ["0", "+1000", "+2000"],
             datasets: [
               {
                 data: [0, 0, 0],
-                backgroundColor: ['#ACD4FF', '#7575FF', '#434391'],
+                backgroundColor: ["#ACD4FF", "#7575FF", "#434391"],
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Cards',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Cards"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: false,
-              },
-              x: {
-                display: false,
-              },
-            },
-          },
+          options: pieOptions
         });
-      break;
-      case 'cardAttributes':
-        this.cardAttributes = new Chart(element, {
-          type: 'pie',
+        break;
+      case "cardAttributes":
+        this.cardAttributes = new Chart(canvas, {
+          type: "pie",
           data: {
-            labels: ['Ranged', 'Slash', 'Special', 'Strike', 'Wisdom'],
+            labels: ["Ranged", "Slash", "Special", "Strike", "Wisdom"],
             datasets: [
               {
                 data: [0, 0, 0, 0, 0],
-                backgroundColor: ['#b94144', '#58a6be', '#9e4185', '#cfa82a', '#0da277'],
+                backgroundColor: ["#b94144", "#58a6be", "#9e4185", "#cfa82a", "#0da277"],
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Cards',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Cards"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: false,
-              },
-              x: {
-                display: false,
-              },
-            },
-          },
+          options: pieOptions
         });
-      break;
-      case 'cardCosts':
-        this.cardCosts = new Chart(element, {
-          type: 'bar',
+        break;
+      case "cardCosts":
+        this.cardCosts = new Chart(canvas, {
+          type: "bar",
           data: {
-            labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            labels: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
             datasets: [
               {
                 data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                backgroundColor: '#ACD4FF',
+                backgroundColor: "#ACD4FF",
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Cards',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Cards"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: true,
-                ticks : {
-                  stepSize: 1
-                }
-              },
-              x: {
-                display: true,
-                ticks : {
-                  stepSize: 1,
-                  autoSkip: false
-                }
-              },
-            },
-          },
+          options: barOptions
         });
-      break;
-      case 'cardRarities':
-        this.cardRarities = new Chart(element, {
-          type: 'pie',
+        break;
+      case "cardRarities":
+        this.cardRarities = new Chart(canvas, {
+          type: "pie",
           data: {
-            labels: ['C', 'UC', 'R', 'SR', 'SEC', 'P'],
+            labels: ["C", "UC", "R", "SR", "SEC", "P"],
             datasets: [
               {
                 data: [0, 0, 0, 0, 0, 0],
-                backgroundColor: ['#8494AD', '#B1CEFA', '#9561AD', '#DA98FA', '#FAEFA6', '#FAA498'],
+                backgroundColor: ["#8494AD", "#B1CEFA", "#9561AD", "#DA98FA", "#FAEFA6", "#FAA498"],
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Cards',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Cards"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: false,
-              },
-              x: {
-                display: false,
-              },
-            },
-          },
+          options: pieOptions
         });
-      break;
-      case 'cardPowers':
-        this.cardPowers = new Chart(element, {
-          type: 'bar',
+        break;
+      case "cardPowers":
+        this.cardPowers = new Chart(canvas, {
+          type: "bar",
           data: {
-            labels: ['0', '1k', '2k', '3k', '4k', '5k', '6k', '7k', '8k', '9k', '10k', '11k', '12k', '13k', '14k', '15k'],
+            labels: ["0", "1k", "2k", "3k", "4k", "5k", "6k", "7k", "8k", "9k", "10k", "11k", "12k", "13k", "14k", "15k"],
             datasets: [
               {
                 data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                backgroundColor: '#F76C6A',
+                backgroundColor: "#F76C6A",
                 borderWidth: 2,
-                borderColor: '#0F1416',
-                label: 'Cards',
-              },
-            ],
+                borderColor: "#0F1416",
+                label: "Cards"
+              }
+            ]
           },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false,
-              },
-            },
-            scales: {
-              y: {
-                display: true,
-                ticks : {
-                  stepSize: 1
-                }
-              },
-              x: {
-                display: true,
-                ticks : {
-                  stepSize: 1,
-                  autoSkip: false
-                }
-              },
-            },
-          },
+          options: barOptions
         });
-      break;
+        break;
     }
   };
 
   public updateChart = () => {
     this.cardTypes.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [
-        this.activeFormat.deck.getNumberOfCardsByType('Character'),
-        this.activeFormat.deck.getNumberOfCardsByType('Event'),
-        this.activeFormat.deck.getNumberOfCardsByType('Stage'),
+        this.activeFormat.deck.getNumberOfCardsByType("Character"),
+        this.activeFormat.deck.getNumberOfCardsByType("Event"),
+        this.activeFormat.deck.getNumberOfCardsByType("Stage")
       ];
     });
 
     this.cardColors.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [
-        this.activeFormat.deck.getNumberOfCardsByColor('Red'),
-        this.activeFormat.deck.getNumberOfCardsByColor('Blue'),
-        this.activeFormat.deck.getNumberOfCardsByColor('Green'),
-        this.activeFormat.deck.getNumberOfCardsByColor('Purple'),
+        this.activeFormat.deck.getNumberOfCardsByColor("Red"),
+        this.activeFormat.deck.getNumberOfCardsByColor("Blue"),
+        this.activeFormat.deck.getNumberOfCardsByColor("Green"),
+        this.activeFormat.deck.getNumberOfCardsByColor("Purple")
       ];
     });
 
@@ -427,42 +351,42 @@ export class DeckbuilderManager {
       dataset.data = [
         this.activeFormat.deck.getNumberOfCardsByCounter(0),
         this.activeFormat.deck.getNumberOfCardsByCounter(1000),
-        this.activeFormat.deck.getNumberOfCardsByCounter(2000),
+        this.activeFormat.deck.getNumberOfCardsByCounter(2000)
       ];
     });
 
     this.cardAttributes.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [
-        this.activeFormat.deck.getNumberOfCardsByAttributes('Ranged'),
-        this.activeFormat.deck.getNumberOfCardsByAttributes('Slash'),
-        this.activeFormat.deck.getNumberOfCardsByAttributes('Special'),
-        this.activeFormat.deck.getNumberOfCardsByAttributes('Strike'),
-        this.activeFormat.deck.getNumberOfCardsByAttributes('Wisdom'),
+        this.activeFormat.deck.getNumberOfCardsByAttributes("Ranged"),
+        this.activeFormat.deck.getNumberOfCardsByAttributes("Slash"),
+        this.activeFormat.deck.getNumberOfCardsByAttributes("Special"),
+        this.activeFormat.deck.getNumberOfCardsByAttributes("Strike"),
+        this.activeFormat.deck.getNumberOfCardsByAttributes("Wisdom")
       ];
     });
 
     this.cardCosts.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [];
       for (let i = 0; i < 11; i++) {
-          dataset.data.push(this.activeFormat.deck.getNumberOfCardsByCosts(i))
+        dataset.data.push(this.activeFormat.deck.getNumberOfCardsByCosts(i));
       }
     });
 
     this.cardRarities.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [
-        this.activeFormat.deck.getNumberOfCardsByRarity('C'),
-        this.activeFormat.deck.getNumberOfCardsByRarity('UC'),
-        this.activeFormat.deck.getNumberOfCardsByRarity('R'),
-        this.activeFormat.deck.getNumberOfCardsByRarity('SR'),
-        this.activeFormat.deck.getNumberOfCardsByRarity('SEC'),
-        this.activeFormat.deck.getNumberOfCardsByRarity('P'),
+        this.activeFormat.deck.getNumberOfCardsByRarity("C"),
+        this.activeFormat.deck.getNumberOfCardsByRarity("UC"),
+        this.activeFormat.deck.getNumberOfCardsByRarity("R"),
+        this.activeFormat.deck.getNumberOfCardsByRarity("SR"),
+        this.activeFormat.deck.getNumberOfCardsByRarity("SEC"),
+        this.activeFormat.deck.getNumberOfCardsByRarity("P")
       ];
     });
 
     this.cardPowers.data.datasets.forEach((dataset: ChartDataset) => {
       dataset.data = [];
       for (let i = 0; i < 16000; i = i + 1000) {
-          dataset.data.push(this.activeFormat.deck.getNumberOfCardsByPowers(i))
+        dataset.data.push(this.activeFormat.deck.getNumberOfCardsByPowers(i));
       }
     });
 
