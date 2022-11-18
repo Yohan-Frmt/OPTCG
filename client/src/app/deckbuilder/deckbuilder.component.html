@@ -110,8 +110,12 @@
 <div class="footerBuilder">
   <div class="row">
     <div class="col-md-2 offset-md-2">
-      Visibilité
-      <select></select>
+      Visibility
+      <select [(ngModel)]="visibility" class="select" name="visibility">
+        <option value="------------">------------</option>
+        <option *ngFor="let deckVisibility of visibilities | async | sort: 'en_name'"
+                value="{{deckVisibility.en_name}}">{{deckVisibility.en_name}}</option>
+      </select>
     </div>
     <div class="col-md-2">
       <button (click)="displayDescription(true)">Add description</button>
@@ -125,7 +129,6 @@
   </div>
 </div>
 
-<popup [height]="'300px'" [opened]="false" [width]="'600px'">Bite</popup>
 <popup (closed)="displayDescription($event)" [height]="'600px'" [opened]="showDescription" [width]="'1200px'">
   <ckeditor (ready)="OnEditorReady($event)" [data]="description" [editor]="editor"></ckeditor>
 </popup>

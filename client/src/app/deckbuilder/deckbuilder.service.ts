@@ -29,7 +29,6 @@ export class DeckbuilderService {
   }
 
   public create = (name: string, { cards }: IDeckStringContent, visibility: string, description: string): Observable<IDeck> => {
-    console.log(this._authentication.currentUserValue()!);
     const deck: IDeck = {
       name,
       author_id: this._authentication.currentUserValue()!.id,

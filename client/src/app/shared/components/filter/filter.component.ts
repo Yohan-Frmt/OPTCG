@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'filter',
-  templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss'],
+  selector: "filter",
+  templateUrl: "./filter.component.html",
+  styleUrls: ["./filter.component.scss"]
 })
 export class FilterComponent implements OnInit {
-  public selectedFilter: string = '';
+  public selectedFilter: string = "";
   public filter: any;
-  public type: string = '';
+  public type: string = "";
 
   @Input() public multiple: boolean = false;
   @Input() public source!: [Observable<any>, string];
@@ -17,7 +17,6 @@ export class FilterComponent implements OnInit {
 
   ngOnInit(): void {
     this.filter = this.source[0];
-    this.filter.subscribe(value => {console.log(value)});
     this.type = this.source[1];
   }
 
