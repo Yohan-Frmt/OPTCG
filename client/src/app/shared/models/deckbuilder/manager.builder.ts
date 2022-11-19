@@ -155,10 +155,10 @@ export class DeckbuilderManager {
     this.activeFormat.deck.removeCardFromDeck(card);
   };
 
-  public initCharts = (...charts: HTMLElement[]) => {
-    charts.forEach((chart: HTMLElement) => this.initChart(chart));
+  public initCharts = (charts: HTMLCollectionOf<Element>) => {
+    for (const chart of charts) this.initChart(chart);
   };
-  public initChart = (element: HTMLElement) => {
+  public initChart = (element: Element) => {
     const canvas = element as HTMLCanvasElement;
     const pieOptions = {
       responsive: true,

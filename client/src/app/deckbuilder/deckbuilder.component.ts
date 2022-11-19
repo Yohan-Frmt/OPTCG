@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { DeckbuilderService } from "./deckbuilder.service";
 import { AlertService } from "../shared/services/alert.service";
-import { ICard, ICardRarity, IDeckVisibility, IUser } from "../shared/models";
+import { ICard, IDeckVisibility, IUser } from "../shared/models";
 import { CardService } from "../shared/services/card.service";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
 import { DeckbuilderManager } from "../shared/models/deckbuilder/manager.builder";
@@ -20,10 +20,12 @@ export class DeckbuilderComponent implements OnInit {
   public user: IUser | null;
   public manager: DeckbuilderManager;
   public name: string = "";
+  public deckCode: string = "";
   public visibility: string = "------------";
   public editor = CKE;
   public description: string = "Coucou c'est moi";
   public showDescription: boolean = false;
+  public showImport: boolean = false;
   public cards!: Observable<ICard[]>;
   public visibilities!: Observable<IDeckVisibility[]>;
   public step!: string | void;
@@ -41,38 +43,21 @@ export class DeckbuilderComponent implements OnInit {
   ) {
     this.user = this._authentication.currentUserValue();
     this.manager = this._deckbuilder.manager;
-    this.cards = this._card.cardsQuery([["Leader", "rarities"]]);
+    this.cards = this._deckbuilder.cards;
     this.visibilities = this._deck.visibilities;
   }
 
   ngOnInit(): void {
-    this.manager.initCharts(
-      document.getElementById("cardTypes")!,
-      document.getElementById("cardColors")!,
-      document.getElementById("cardCounters")!,
-      document.getElementById("cardAttributes")!,
-      document.getElementById("cardCosts")!,
-      document.getElementById("cardRarities")!,
-      document.getElementById("cardPowers")!
-    );
+    this.manager.initCharts(document.getElementsByClassName("chart"));
   }
 
   public onClick = (card: ICard) => {
-    if (card.rarities.some((rarity: ICardRarity) => rarity.abbr === "L")) {
-      this.manager.setLeader(card);
-      this.cards = this._card.cardsQuery([
-        ["!Leader", "types"],
-        [card.colors.map((color) => color.en_name).join(), "colors"]
-      ]);
-    } else {
-      this.manager.addCard(card);
-    }
-    this.manager.updateChart();
+    this._deckbuilder.addCard(card);
+    this.cards = this._deckbuilder.cards;
   };
 
   public onRightClick = (card: ICard) => {
-    this.manager.removeCard(card);
-    this.manager.updateChart();
+    this._deckbuilder.removeCard(card);
     return false;
   };
 
@@ -95,10 +80,17 @@ export class DeckbuilderComponent implements OnInit {
 
   public displayCharts = () => (this.moreCharts = !this.moreCharts);
   public displayDescription = (opened: boolean) => this.showDescription = opened;
+  public displayImport = (imported: boolean) => this.showImport = imported;
   public OnEditorReady = (editor: CKE.Editor) => {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
   };
+  public importDeck = () => {
+    this.displayImport(false);
+    this._deckbuilder.import(this.deckCode);
+  };
+
+
 }

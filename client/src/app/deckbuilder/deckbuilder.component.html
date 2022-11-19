@@ -12,48 +12,49 @@
       ></cards>
     </div>
     <div class="col-md-3 build-zone">
+      <button (click)="displayImport(true)">Import Deck</button>
       <div class="chart-zone">
         <div class="row">
           <div class="col-lg-6 col-xl-4">
-            <div class="chart cardTypes">
+            <div class="charts pieCharts">
               <span>Types</span>
-              <canvas height="95" id="cardTypes" width="95"></canvas>
+              <canvas class="chart" height="95" id="cardTypes" width="95"></canvas>
             </div>
           </div>
           <div class="col-lg-6 col-xl-4">
-            <div class="chart cardCounters">
+            <div class="charts pieCharts">
               <span>Counters</span>
-              <canvas height="95" id="cardCounters" width="95"></canvas>
+              <canvas class="chart" height="95" id="cardCounters" width="95"></canvas>
             </div>
           </div>
           <div class="col-lg-6 col-xl-4">
-            <div class="chart cardColors">
+            <div class="charts pieCharts">
               <span>Colors</span>
-              <canvas height="95" id="cardColors" width="95"></canvas>
+              <canvas class="chart" height="95" id="cardColors" width="95"></canvas>
             </div>
           </div>
           <div [hidden]="!moreCharts" class="col-lg-6 col-xl-4">
-            <div class="chart cardAttributes">
+            <div class="charts pieCharts">
               <span>Attributes</span>
-              <canvas height="95" id="cardAttributes" width="95"></canvas>
+              <canvas class="chart" height="95" id="cardAttributes" width="95"></canvas>
             </div>
           </div>
           <div [hidden]="!moreCharts" class="col-lg-12 col-xl-8">
-            <div class="chart cardCosts">
+            <div class="charts barCharts">
               <span>Costs</span>
-              <canvas height="95" id="cardCosts" width="270"></canvas>
+              <canvas class="chart" height="95" id="cardCosts" width="270"></canvas>
             </div>
           </div>
           <div [hidden]="!moreCharts" class="col-lg-6 col-xl-4">
-            <div class="chart cardRarities">
+            <div class="charts pieCharts">
               <span>Rarities</span>
-              <canvas height="95" id="cardRarities" width="95"></canvas>
+              <canvas class="chart" height="95" id="cardRarities" width="95"></canvas>
             </div>
           </div>
           <div [hidden]="!moreCharts" class="col-lg-12 col-xl-8">
-            <div class="chart cardPowers">
+            <div class="charts barCharts">
               <span>Powers</span>
-              <canvas height="95" id="cardPowers" width="270"></canvas>
+              <canvas class="chart" height="95" id="cardPowers" width="270"></canvas>
             </div>
           </div>
           <div (click)="displayCharts()" *ngIf="!moreCharts" class="moreCharts">+</div>
@@ -85,9 +86,9 @@
               <div [style.background-color]="card.colors[0].hex_color" class="cost">{{ card.cost }}</div>
             </div>
             <div class="col-11 col-md-10-5 col-xl-11">
-              <div [style.background-color]="card.colors[0].hex_color"
-                   [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'"
-                   class="card">
+              <div [id]="card.en_name"
+                   [style.background-color]="card.colors[0].hex_color"
+                   [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'" class="card">
                 <div class="row">
                   <div class="col-2 col-md-4 col-lg-3 col-xl-2-5 col-xxl-2">
                     <button (click)="onRightClick(card)">-</button>
@@ -131,4 +132,9 @@
 
 <popup (closed)="displayDescription($event)" [height]="'600px'" [opened]="showDescription" [width]="'1200px'">
   <ckeditor (ready)="OnEditorReady($event)" [data]="description" [editor]="editor"></ckeditor>
+</popup>
+
+<popup (closed)="displayImport($event)" [height]="'100px'" [opened]="showImport" [width]="'300px'">
+  <input [(ngModel)]="deckCode" placeholder="enter deck code here" type="text">
+  <button (click)="importDeck()" type="submit">Import</button>
 </popup>
