@@ -1,13 +1,6 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { DeckVisibility } from '../deckvisibility/deckvisibility.entity';
-import { User } from '../../users/user/user.entity';
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { DeckVisibility } from "../deckvisibility/deckvisibility.entity";
+import { User } from "../../users/user/user.entity";
 
 @Entity()
 export class Deck {
@@ -22,6 +15,9 @@ export class Deck {
 
   @Column()
   content: string;
+
+  @Column()
+  leader: string;
 
   @CreateDateColumn()
   created_at;

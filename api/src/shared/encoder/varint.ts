@@ -32,4 +32,22 @@ export default class VarInt {
     }
     return buffer.slice(0, idx);
   };
+
+  public Pop = (): number => {
+    let result = 0;
+    let nbShift = 0;
+    let nbPopped = 0;
+
+    for (let i = 0; i < this.bytes.length; i++) {
+      nbPopped++;
+      const current = this.bytes[i] & VarInt.AllButMSB;
+      result |= current << nbShift;
+      if ((this.bytes[i] & VarInt.JustMSB) != VarInt.JustMSB) {
+        this.bytes = this.bytes.slice(nbPopped);
+        return result;
+      }
+      nbShift += 7;
+    }
+    throw "Byte array did not contain valid varints.";
+  };
 }

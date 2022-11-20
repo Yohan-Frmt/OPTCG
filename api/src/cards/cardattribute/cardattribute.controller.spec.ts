@@ -1,18 +1,18 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { CardattributeController } from './cardattribute.controller';
+import { Test, TestingModule } from "@nestjs/testing";
+import { CardAttributeController } from "./cardattribute.controller";
 
-describe('CardattributeController', () => {
-  let controller: CardattributeController;
+describe("CardattributeController", () => {
+  let controller: CardAttributeController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [CardattributeController],
+      controllers: [CardAttributeController]
     }).compile();
 
-    controller = module.get<CardattributeController>(CardattributeController);
+    controller = module.get<CardAttributeController>(CardAttributeController);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(controller).toBeDefined();
   });
 });

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CardService } from "../shared/services/card.service";
-import { DeckbuilderManager } from "../shared/models/deckbuilder/manager.builder";
+import { DeckbuilderManager } from "./builder/manager.builder";
 import { ApiService } from "../core/api/api.service";
 import { ICard, ICardRarity, IDeck, IDeckStringContent } from "../shared/models";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";

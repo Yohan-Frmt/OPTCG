@@ -1,9 +1,7 @@
 import { MaxCardInDeckException } from "./errors/MaxCardInDeckException.error";
 import { XCopiesMaxException } from "./errors/XCopiesMaxException.error";
-import { ICard } from "../card/card.model";
-import { IDeckStringContent } from "../deck/deck-string-content.model";
+import { ICard, ICardColor, IDeckStringContent } from "../../shared/models";
 import { TDeck } from "./encoder/types";
-import { ICardColor } from "../card/card-color.model";
 
 export class Deck {
   constructor(min: number, max: number) {

@@ -1,6 +1,6 @@
 import { Deck } from "./deck.builder";
 import Chart, { ChartDataset } from "chart.js/auto";
-import { ICard } from "../card/card.model";
+import { ICard } from "../../shared/models";
 
 interface IFormat {
   readonly name: string;

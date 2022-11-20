@@ -30,6 +30,7 @@ export class DeckService {
     deck.name = createDeck.name;
     deck.author = user;
     deck.content = this.encode(createDeck.content);
+    deck.leader = createDeck.content.find(c => c.count === 99).code;
     deck.visibility = visibility;
     deck.description = createDeck.description;
     const deckCreated = this.repository.create(deck);

@@ -4,7 +4,7 @@ import { AlertService } from "../shared/services/alert.service";
 import { ICard, IDeckVisibility, IUser } from "../shared/models";
 import { CardService } from "../shared/services/card.service";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
-import { DeckbuilderManager } from "../shared/models/deckbuilder/manager.builder";
+import { DeckbuilderManager } from "./builder/manager.builder";
 import { Observable } from "rxjs";
 import * as CKE from "@ckeditor/ckeditor5-build-decoupled-document";
 import { DeckService } from "../shared/services/deck.service";

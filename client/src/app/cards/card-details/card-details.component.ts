@@ -1,39 +1,42 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthenticationService } from '../../core/authentication/services/authentication.service';
-import { ActivatedRoute } from '@angular/router';
-import { ICard, IUser } from '../../shared/models';
-import { CardService } from '../../shared/services/card.service';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { AuthenticationService } from "../../core/authentication/services/authentication.service";
+import { ActivatedRoute } from "@angular/router";
+import { ICard, IUser } from "../../shared/models";
+import { CardService } from "../../shared/services/card.service";
+import { Observable } from "rxjs";
+import { TCardCodeAndCount } from "../../deckbuilder/builder/encoder/types";
 
 @Component({
-  selector: 'card-details',
-  templateUrl: './card-details.component.html',
-  styleUrls: ['./card-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "card-details",
+  templateUrl: "./card-details.component.html",
+  styleUrls: ["./card-details.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardDetailsComponent {
   public user: IUser | null;
   public card!: Observable<ICard>;
-  public serialNumber: string = '';
+  public commonUsedCard!: Observable<TCardCodeAndCount[]>;
+  public serialNumber: string = "";
   public imageNumber: number = 0;
 
   constructor(
     private readonly _authentication: AuthenticationService,
     private readonly _card: CardService,
-    private readonly _route: ActivatedRoute,
+    private readonly _route: ActivatedRoute
   ) {
     this.user = this._authentication.currentUserValue();
-    this.serialNumber = this._route.snapshot.paramMap.get('serial')!;
+    this.serialNumber = this._route.snapshot.paramMap.get("serial")!;
     this.card = this._card.getCard(this.serialNumber);
+    this.commonUsedCard = this._card.getAssociatedCard(this.serialNumber);
   }
 
-  public previousImage() : void {
+  public previousImage(): void {
     if (this.imageNumber != 0) {
       this.imageNumber--;
     }
   }
 
-  public nextImage(max: number) : void {
+  public nextImage(max: number): void {
     if (this.imageNumber != max - 1) {
       this.imageNumber++;
     }

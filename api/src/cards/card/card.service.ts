@@ -3,30 +3,12 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Card } from "./card.entity";
 import { Brackets, DataSource, Repository, SelectQueryBuilder } from "typeorm";
 import { CardDto } from "./card.dto";
+import { Deck } from "../../decks/deck/deck.entity";
+import { getDeckFromCode } from "../../shared/encoder/deck-encoder";
+import { TCardCodeAndCount } from "../../shared/encoder/types";
 
 @Injectable()
 export class CardService {
-  async getAllPowers(): Promise<string[]> 
-  { 
-    return await this._dataSource
-    .getRepository(Card)
-    .createQueryBuilder("card")
-    .select('card.power as en_name')
-    .distinct(true)
-    .orderBy('en_name')
-    .getRawMany();
-  }
-
-  async getAllCosts(): Promise<string[]> {
-    return await this._dataSource
-    .getRepository(Card)
-    .createQueryBuilder("card")
-    .select('card.cost as en_name')
-    .distinct(true)
-    .orderBy('en_name')
-    .getRawMany();  
-  }
-  
   constructor(
     @InjectRepository(Card) private readonly repository: Repository<Card>,
     private readonly _dataSource: DataSource
@@ -38,8 +20,47 @@ export class CardService {
     return await this.repository.save(cardCreated);
   };
 
-  public findAll = async (query?: any): Promise<Card[]> =>
-    await this._dataSource
+  public findAssociatedCards = async (serial: string) => {
+    const card: Card = await this.repository.findOneOrFail({ where: { serial_number: serial }, relations: ["type"] });
+    const mostUsedCards: TCardCodeAndCount[] = [];
+    if (card.type.en_name === "Leader") {
+      const [decks, count] = await this._dataSource.getRepository(Deck).findAndCount({ where: { leader: card.serial_number } });
+      if (!count) return null;
+      for (const deck of decks) {
+        let cards: TCardCodeAndCount[] = getDeckFromCode(deck.content);
+        cards.pop();
+        for (const card of cards) {
+          const cardExist = mostUsedCards.find(x => x.code === card.code);
+          cardExist ?
+            mostUsedCards[mostUsedCards.findIndex(x => x.code === card.code)] = {
+              ...card,
+              count: card.count + cardExist.count
+            } :
+            mostUsedCards.push(card);
+        }
+      }
+    } else {
+      const decks = await this._dataSource.getRepository(Deck).find();
+      for (const deck of decks) {
+        const found = getDeckFromCode(deck.content).find(x => x.code === card.serial_number);
+        if (!found) return null;
+        const cardExist = mostUsedCards.find(x => x.code === deck.leader);
+        cardExist ?
+          mostUsedCards[mostUsedCards.findIndex(x => x.code === deck.leader)] = {
+            code: deck.leader,
+            count: ++cardExist.count
+          } :
+          mostUsedCards.push({
+            code: deck.leader,
+            count: 1
+          });
+      }
+    }
+    return mostUsedCards.sort((a, b) => b.count - a.count).slice(0, 5);
+  };
+  public findAll = async (query?: any): Promise<Card[]> => {
+    console.log(query);
+    return await this._dataSource
       .getRepository(Card)
       .createQueryBuilder("card")
       .leftJoinAndSelect("card.images", "images")
@@ -52,8 +73,7 @@ export class CardService {
       .leftJoinAndSelect("card.rarities", "rarity")
       .leftJoinAndSelect("card.status", "status")
       .where((qb: SelectQueryBuilder<Card>) => {
-        for (const items of query) {
-          const [type, value] = items;
+        for (const [type, value] of query) {
           if (!value) continue;
           switch (type) {
             case "attribute":
@@ -69,10 +89,10 @@ export class CardService {
               qb.andWhere("status.en_name = :st", { st: value });
               break;
             case "costs":
-              qb.andWhere("card.cost = :c", {c: value});
+              qb.andWhere("card.cost = :c", { c: value });
               break;
             case "powers":
-              qb.andWhere("card.power = :p", {p: value})
+              qb.andWhere("card.power = :p", { p: value });
               break;
             case "types":
               if (value[0] === "!")
@@ -121,6 +141,7 @@ export class CardService {
       })
       .orderBy("card.serial_number", "ASC")
       .getMany();
+  };
 
   public findOneBySerial = async (serial: string): Promise<Card> =>
     await this._dataSource
@@ -138,4 +159,21 @@ export class CardService {
       .where({ serial_number: serial })
       .cache(`card-${serial}`, 86400000)
       .getOneOrFail();
+
+  public getAllPowers = async (): Promise<string[]> => await this._dataSource
+    .getRepository(Card)
+    .createQueryBuilder("card")
+    .select("card.power as en_name")
+    .distinct(true)
+    .orderBy("en_name")
+    .getRawMany();
+
+  public getAllCosts = async (): Promise<string[]> => await this._dataSource
+    .getRepository(Card)
+    .createQueryBuilder("card")
+    .select("card.cost as en_name")
+    .distinct(true)
+    .orderBy("en_name")
+    .getRawMany();
+
 }
