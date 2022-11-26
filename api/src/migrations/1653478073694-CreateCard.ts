@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner } from 'typeorm';
+import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class CreateCard1653478073694 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -13,6 +13,8 @@ export class CreateCard1653478073694 implements MigrationInterface {
            "cost"              integer,
            "power"             integer,
            "life"              integer,
+           "prev"              character varying,
+           "next"              character varying,
            "fr_effect"         character varying,
            "en_effect"         character varying,
            "fr_trigger_effect" character varying,
@@ -23,7 +25,7 @@ export class CreateCard1653478073694 implements MigrationInterface {
            "statusId"          uuid,
            "attributeId"       uuid,
            CONSTRAINT "PK_9451069b6f1199730791a7f4ae4" PRIMARY KEY ("id")
-       )`,
+       )`
     );
   }
 

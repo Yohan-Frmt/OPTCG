@@ -43,7 +43,7 @@ export class CardService {
       const decks = await this._dataSource.getRepository(Deck).find();
       for (const deck of decks) {
         const found = getDeckFromCode(deck.content).find(x => x.code === card.serial_number);
-        if (!found) return null;
+        if (!found) continue;
         const cardExist = mostUsedCards.find(x => x.code === deck.leader);
         cardExist ?
           mostUsedCards[mostUsedCards.findIndex(x => x.code === deck.leader)] = {
@@ -58,9 +58,8 @@ export class CardService {
     }
     return mostUsedCards.sort((a, b) => b.count - a.count).slice(0, 5);
   };
-  public findAll = async (query?: any): Promise<Card[]> => {
-    console.log(query);
-    return await this._dataSource
+  public findAll = async (query?: any): Promise<Card[]> =>
+    await this._dataSource
       .getRepository(Card)
       .createQueryBuilder("card")
       .leftJoinAndSelect("card.images", "images")
@@ -141,10 +140,9 @@ export class CardService {
       })
       .orderBy("card.serial_number", "ASC")
       .getMany();
-  };
 
   public findOneBySerial = async (serial: string): Promise<Card> =>
-    await this._dataSource
+    this._dataSource
       .getRepository(Card)
       .createQueryBuilder("card")
       .leftJoinAndSelect("card.images", "images")
@@ -157,7 +155,7 @@ export class CardService {
       .leftJoinAndSelect("card.rarities", "rarities")
       .leftJoinAndSelect("card.status", "status")
       .where({ serial_number: serial })
-      .cache(`card-${serial}`, 86400000)
+      // .cache(`card-${serial}`, 86400000)
       .getOneOrFail();
 
   public getAllPowers = async (): Promise<string[]> => await this._dataSource
@@ -175,5 +173,4 @@ export class CardService {
     .distinct(true)
     .orderBy("en_name")
     .getRawMany();
-
 }

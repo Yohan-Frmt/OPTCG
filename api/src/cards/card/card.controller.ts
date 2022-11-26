@@ -3,6 +3,7 @@ import { CardService } from "./card.service";
 import { CardDto } from "./card.dto";
 import { Request } from "express";
 import { TCardCodeAndCount } from "../../shared/encoder/types";
+import { Card } from "./card.entity";
 
 @Controller()
 export class CardController {
@@ -17,7 +18,7 @@ export class CardController {
   @Get("/card/:serial")
   public async findOneBySerial(
     @Param("serial") serial: string
-  ): Promise<CardDto> {
+  ): Promise<Card> {
     return await this.service.findOneBySerial(serial);
   }
 

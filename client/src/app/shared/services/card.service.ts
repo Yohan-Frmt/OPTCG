@@ -51,9 +51,7 @@ export class CardService {
     return this._api.get<string[]>("/cardpowers");
   }
 
-  public getAssociatedCard(serial: string): Observable<TCardCodeAndCount[]> {
-    return this._api.post<TCardCodeAndCount[], {}>(`/card/${serial}`, {});
-  }
+  public getAssociatedCard = (serial: string): Observable<TCardCodeAndCount[]> => this._api.post<TCardCodeAndCount[], {}>(`/card/${serial}`, {});
 
   public getCard = (serial: string): Observable<ICard> =>
     this._api.get<ICard>("/card/" + serial);
