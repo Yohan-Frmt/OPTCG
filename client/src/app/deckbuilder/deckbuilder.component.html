@@ -12,7 +12,6 @@
       ></cards>
     </div>
     <div class="col-md-3 build-zone">
-      <button (click)="displayImport(true)">Import Deck</button>
       <div class="chart-zone">
         <div class="row">
           <div class="col-lg-6 col-xl-4">
@@ -110,7 +109,10 @@
 </div>
 <div class="footerBuilder">
   <div class="row">
-    <div class="col-md-2 offset-md-2">
+    <div class="col">
+      <button (click)="displayImport(true)">Import Deck</button>
+    </div>
+    <div class="col">
       Visibility
       <select [(ngModel)]="visibility" class="select" name="visibility">
         <option value="------------">------------</option>
@@ -118,13 +120,13 @@
                 value="{{deckVisibility.en_name}}">{{deckVisibility.en_name}}</option>
       </select>
     </div>
-    <div class="col-md-2">
+    <div class="col">
       <button (click)="displayDescription(true)">Add description</button>
     </div>
-    <div class="col-md-2">
+    <div class="col">
       <button type="submit">Simulate mulligan</button>
     </div>
-    <div class="col-md-2">
+    <div class="col">
       <button (click)="onSubmit()" class="main" type="submit">Create this deck</button>
     </div>
   </div>
