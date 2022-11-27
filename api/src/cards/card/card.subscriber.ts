@@ -17,6 +17,7 @@ export class CardSubscriber implements EntitySubscriberInterface<Card> {
                      LAG(SERIAL_NUMBER) OVER (ORDER BY SERIAL_NUMBER) AS PREV, LEAD(SERIAL_NUMBER) OVER (ORDER BY SERIAL_NUMBER) AS NEXT
               FROM CARD) CARD
         WHERE SERIAL_NUMBER = $1`, [entity.serial_number]);
+    entity.images = entity.images?.sort((a, b) => a.path >= b.path ? 1 : -1);
     entity.prev = data[0].prev;
     entity.next = data[0].next;
   }

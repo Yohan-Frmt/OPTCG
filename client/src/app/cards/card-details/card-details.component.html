@@ -9,7 +9,7 @@
             <div class="serial">{{ card.serial_number }}</div>
             <div class="set">{{ card.set.en_name }}</div>
           </div>
-          <img [src]="'/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.images[imageNumber].path"
+          <img [src]="'/assets/images/cards/' + card.set.set_number + '/' + card.images[imageNumber].path"
                alt="{{card.serial_number}}">
           <div *ngIf="card.images.length > 1" class="imgChoice">
             <span (click)="previousImage()" class="arrow"><-</span>

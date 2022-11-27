@@ -87,7 +87,8 @@
             <div class="col-11 col-md-10-5 col-xl-11">
               <div [id]="card.en_name"
                    [style.background-color]="card.colors[0].hex_color"
-                   [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'" class="card">
+                   [style.background-image]="'linear-gradient(to right,' + card.colors[0].hex_color + ' 10%, rgba(15,20,22,0) 80%, ' + card.colors[0].hex_color + ' 100%), url(/assets/images/cards/' + card.serial_number.split('-')[0] + '/' + card.serial_number + '.png)'"
+                   class="card">
                 <div class="row">
                   <div class="col-2 col-md-4 col-lg-3 col-xl-2-5 col-xxl-2">
                     <button (click)="onRightClick(card)">-</button>
@@ -116,7 +117,7 @@
       Visibility
       <select [(ngModel)]="visibility" class="select" name="visibility">
         <option value="------------">------------</option>
-        <option *ngFor="let deckVisibility of visibilities | async | sort: 'en_name'"
+        <option *ngFor="let deckVisibility of visibilities | async | sort: 'asc' :'en_name'"
                 value="{{deckVisibility.en_name}}">{{deckVisibility.en_name}}</option>
       </select>
     </div>
