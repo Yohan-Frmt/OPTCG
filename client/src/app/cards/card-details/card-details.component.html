@@ -70,13 +70,18 @@
           </div>
           <span class="title">Description</span>
           <div class="description">{{ card.en_effect }}</div>
-        </div>
-        <div *ngFor="let commonCard of commonUsedCard | async">
-          <img (click)="changeCard(commonCard.code)"
-               [src]="'assets/images/cards/' + commonCard.code.split('-')[0] +'/' + commonCard.code + '.png'"
-               [width]="50"
-               alt="{{commonCard.code}}"
-          />
+
+          <div class="row stats">
+            <span *ngIf="card.type.en_name != 'Leader'" class="title">Carte utilisée avec les leaders</span>
+            <span *ngIf="card.type.en_name == 'Leader'" class="title">Cartes utilisées avec ce leader</span>
+            <div class="col-md-2" *ngFor="let commonCard of commonUsedCard | async">
+              <img (click)="changeCard(commonCard.code)"
+                  [src]="'assets/images/cards/' + commonCard.code.split('-')[0] +'/' + commonCard.code + '.png'"
+                  [width]="50"
+                  alt="{{commonCard.code}}"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

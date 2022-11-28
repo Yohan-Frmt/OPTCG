@@ -125,6 +125,13 @@
                 border: 2px solid $primary-color;
                 border-radius: 10px;
             }
+
+            .row.stats {
+                img {
+                    width: 100%;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
