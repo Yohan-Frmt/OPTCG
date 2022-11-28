@@ -1,7 +1,5 @@
 <ng-container *ngIf="card | async as card">
   <div class="container">
-    <button (click)="changeCard(card.prev!)">PREV</button>
-    <button (click)="changeCard(card.next!)">NEXT</button>
     <div class="row cardDetails">
       <div class="col-md-4">
         <div class="details left">
@@ -12,9 +10,9 @@
           <img [src]="'/assets/images/cards/' + card.set.set_number + '/' + card.images[imageNumber].path"
                alt="{{card.serial_number}}">
           <div *ngIf="card.images.length > 1" class="imgChoice">
-            <span (click)="previousImage()" class="arrow"><-</span>
+            <fa-icon [icon]="FontAwesomeIcon.faArrowLeft" (click)="previousImage()"></fa-icon>
             <span>{{ imageNumber + 1}}/{{ card.images.length}}</span>
-            <span (click)="nextImage(card.images.length)" class="arrow">-></span>
+            <fa-icon [icon]="FontAwesomeIcon.faArrowRight" (click)="nextImage(card.images.length)"></fa-icon>
           </div>
           <table>
             <tr>
@@ -64,7 +62,11 @@
         <div class="details">
           <div [style.background-color]="card.colors[0].hex_color" class="topName">
             <div class="name">{{ card.en_name }}</div>
-            <div class="serial">{{ card.serial_number }}</div>
+            <div class="serial">
+              <fa-icon *ngIf="card.prev" [icon]="FontAwesomeIcon.faArrowLeft" (click)="changeCard(card.prev)"></fa-icon>
+              {{ card.serial_number }}
+              <fa-icon *ngIf="card.next" [icon]="FontAwesomeIcon.faArrowRight" (click)="changeCard(card.next)"></fa-icon>
+            </div>
           </div>
           <span class="title">Description</span>
           <div class="description">{{ card.en_effect }}</div>

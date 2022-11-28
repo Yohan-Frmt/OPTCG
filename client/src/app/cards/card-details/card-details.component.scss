@@ -34,6 +34,7 @@
             .imgChoice {
                 text-align: center;
                 font-weight: 600;
+                user-select: none;
     
                 span.arrow {
                     cursor: pointer;
@@ -125,5 +126,14 @@
                 border-radius: 10px;
             }
         }
+    }
+}
+
+fa-icon {
+    cursor: pointer;
+    margin: 0 3px;
+
+    &:hover {
+        color: $tertiary-color;
     }
 }
