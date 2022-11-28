@@ -1,0 +1,23 @@
+@import '_variables';
+
+.filter {
+
+    text-align: center;
+    
+    .filterButton {
+        background-color: $secondary-color;
+        display: inline-block;
+        text-align: center;
+        margin: 3px 5px;
+        width: 100px;
+        border-radius: 5px;
+        font-weight: 600;
+        padding: 3px;
+        border: 1px solid $secondary-color;
+        cursor: pointer;
+
+        &:hover, &.active {
+            border-color: $background-color!important;
+        }
+    }
+}

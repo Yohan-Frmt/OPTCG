@@ -5,18 +5,19 @@ import {
   HttpException,
   HttpStatus,
   Post,
-  UseInterceptors,
-} from '@nestjs/common';
-import { AuthenticationService } from './authentication.service';
-import { CreateUserDto, CredentialsDto, UserDto } from '../users/user/user.dto';
-import { TokenDto } from './dto/token.dto';
-import { RefreshTokenDto } from './dto/refresh-token.dto';
+  UseInterceptors
+} from "@nestjs/common";
+import { AuthenticationService } from "./authentication.service";
+import { CreateUserDto, CredentialsDto, UserDto } from "../users/user/user.dto";
+import { TokenDto } from "./dto/token.dto";
+import { RefreshTokenDto } from "./dto/refresh-token.dto";
 
-@Controller('auth')
+@Controller("auth")
 export class AuthenticationController {
-  constructor(private readonly _authentication: AuthenticationService) {}
+  constructor(private readonly _authentication: AuthenticationService) {
+  }
 
-  @Post('register')
+  @Post("register")
   @UseInterceptors(ClassSerializerInterceptor)
   public async register(@Body() user: CreateUserDto): Promise<UserDto> {
     try {
@@ -26,7 +27,7 @@ export class AuthenticationController {
     }
   }
 
-  @Post('login')
+  @Post("login")
   @UseInterceptors(ClassSerializerInterceptor)
   public async login(@Body() credentials: CredentialsDto): Promise<TokenDto> {
     try {
@@ -36,10 +37,10 @@ export class AuthenticationController {
     }
   }
 
-  @Post('refresh-token')
+  @Post("refresh-token")
   public async refreshToken(@Body() token: RefreshTokenDto): Promise<TokenDto> {
     try {
-      return this._authentication.refreshJsonWebToken(token.refreshToken);
+      return this._authentication.refreshJsonWebToken(token.refresh_token);
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
     }

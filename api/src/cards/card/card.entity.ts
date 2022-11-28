@@ -8,17 +8,17 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { CardSet } from '../cardset/cardset.entity';
-import { CardType } from '../cardtype/cardtype.entity';
-import { CardColor } from '../cardcolor/cardcolor.entity';
-import { CardStatus } from '../cardstatus/cardstatus.entity';
-import { CardTag } from '../cardtag/cardtag.entity';
-import { CardImage } from '../cardimage/cardimage.entity';
-import { CardRarity } from '../cardrarity/cardrarity.entity';
-import { CardErrata } from '../carderrata/carderrata.entity';
-import { CardAttribute } from '../cardattribute/cardattribute.entity';
+  PrimaryGeneratedColumn
+} from "typeorm";
+import { CardSet } from "../cardset/cardset.entity";
+import { CardType } from "../cardtype/cardtype.entity";
+import { CardColor } from "../cardcolor/cardcolor.entity";
+import { CardStatus } from "../cardstatus/cardstatus.entity";
+import { CardTag } from "../cardtag/cardtag.entity";
+import { CardImage } from "../cardimage/cardimage.entity";
+import { CardRarity } from "../cardrarity/cardrarity.entity";
+import { CardErrata } from "../carderrata/carderrata.entity";
+import { CardAttribute } from "../cardattribute/cardattribute.entity";
 
 @Entity('card')
 export class Card extends BaseEntity {
@@ -45,6 +45,12 @@ export class Card extends BaseEntity {
 
   @Column({ nullable: true })
   life?: number;
+
+  @Column({ nullable: true })
+  prev?: string;
+
+  @Column({ nullable: true })
+  next?: string;
 
   @Column({ nullable: true })
   fr_effect?: string;

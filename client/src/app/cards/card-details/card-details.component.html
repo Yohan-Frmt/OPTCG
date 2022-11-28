@@ -1,66 +1,80 @@
-<ng-container *ngIf="card | async as c">
+<ng-container *ngIf="card | async as card">
   <div class="container">
+    <button (click)="changeCard(card.prev!)">PREV</button>
+    <button (click)="changeCard(card.next!)">NEXT</button>
     <div class="row cardDetails">
       <div class="col-md-4">
         <div class="details left">
           <div class="serialSet">
-            <div class="serial">{{ c.serial_number }}</div>
-            <div class="set">{{ c.set.en_name }}</div>
+            <div class="serial">{{ card.serial_number }}</div>
+            <div class="set">{{ card.set.en_name }}</div>
           </div>
-          <img [src]="'/assets/images/cards/' + c.serial_number.split('-')[0] + '/' + c.images[imageNumber].path">
-          <div *ngIf="c.images.length > 1" class="imgChoice">
-            <span class="arrow" (click)="previousImage()"><-</span>
-            <span>{{ imageNumber + 1}}/{{ c.images.length}}</span>
-            <span class="arrow" (click)="nextImage(c.images.length)">-></span>
+          <img [src]="'/assets/images/cards/' + card.set.set_number + '/' + card.images[imageNumber].path"
+               alt="{{card.serial_number}}">
+          <div *ngIf="card.images.length > 1" class="imgChoice">
+            <span (click)="previousImage()" class="arrow"><-</span>
+            <span>{{ imageNumber + 1}}/{{ card.images.length}}</span>
+            <span (click)="nextImage(card.images.length)" class="arrow">-></span>
           </div>
           <table>
             <tr>
               <td class="left">Rarity :</td>
-              <td class="right">{{ c.rarities[0].en_name }}</td>
+              <td class="right">{{ card.rarities[0].en_name }}</td>
             </tr>
             <tr>
               <td class="left">Type :</td>
-              <td class="right">{{ c.type.en_name }}</td>
+              <td class="right">{{ card.type.en_name }}</td>
             </tr>
             <tr>
-              <td class="left">Attribute :</td>
-              <td class="right">{{ c.attribute.en_name }}</td>
+              <ng-container *ngIf="card.attribute">
+                <td class="left">Attribute :</td>
+                <td class="right">{{ card.attribute.en_name }}</td>
+              </ng-container>
             </tr>
             <tr>
-              <td class="left" *ngIf="!c.colors[1]">Color :</td>
-              <td class="left" *ngIf="c.colors[1]">Colors :</td>
-              <td class="right"><span *ngFor="let color of c.colors">{{ color.en_name }} </span></td>
+              <td *ngIf="!card.colors[1]" class="left">Color :</td>
+              <td *ngIf="card.colors[1]" class="left">Colors :</td>
+              <td class="right"><span *ngFor="let color of card.colors">{{ color.en_name }} </span></td>
             </tr>
             <tr>
-              <td class="left"*ngIf="!c.tags[1]">Tag :</td>
-              <td class="left" *ngIf="c.tags[1]">Tags :</td>
-              <td class="right"><div *ngFor="let tag of c.tags">{{ tag.en_name }} </div></td>
+              <td *ngIf="!card.tags[1]" class="left">Tag :</td>
+              <td *ngIf="card.tags[1]" class="left">Tags :</td>
+              <td class="right">
+                <div *ngFor="let tag of card.tags">{{ tag.en_name }} </div>
+              </td>
             </tr>
             <tr>
-              <td class="left" *ngIf="c.type.en_name == 'Leader'">Life :</td>
-              <td class="left" *ngIf="c.type.en_name != 'Leader'">Cost :</td>
-              <td class="right">{{ c.cost }}{{ c.life }}</td>
+              <td *ngIf="card.type.en_name == 'Leader'" class="left">Life :</td>
+              <td *ngIf="card.type.en_name != 'Leader'" class="left">Cost :</td>
+              <td class="right">{{ card.cost }}{{ card.life }}</td>
             </tr>
-            <tr *ngIf="c.power">
+            <tr *ngIf="card.power">
               <td class="left">Power :</td>
-              <td class="right">{{ c.power }}</td>
+              <td class="right">{{ card.power }}</td>
             </tr>
-            <tr *ngIf="c.type.en_name == 'Character'">
+            <tr *ngIf="card.type.en_name == 'Character'">
               <td class="left">Counter :</td>
-              <td class="right" *ngIf="c.counter">{{ c.counter }}</td>
-              <td class="right" *ngIf="!c.counter">0</td>
+              <td *ngIf="card.counter" class="right">{{ card.counter }}</td>
+              <td *ngIf="!card.counter" class="right">0</td>
             </tr>
           </table>
         </div>
       </div>
       <div class="col-md-8">
         <div class="details">
-          <div class="topName" [style.background-color]="c.colors[0].hex_color">
-            <div class="name">{{ c.en_name }}</div>
-            <div class="serial">{{ c.serial_number }}</div>
+          <div [style.background-color]="card.colors[0].hex_color" class="topName">
+            <div class="name">{{ card.en_name }}</div>
+            <div class="serial">{{ card.serial_number }}</div>
           </div>
           <span class="title">Description</span>
-          <div class="description">{{ c.en_effect }}</div>
+          <div class="description">{{ card.en_effect }}</div>
+        </div>
+        <div *ngFor="let commonCard of commonUsedCard | async">
+          <img (click)="changeCard(commonCard.code)"
+               [src]="'assets/images/cards/' + commonCard.code.split('-')[0] +'/' + commonCard.code + '.png'"
+               [width]="50"
+               alt="{{commonCard.code}}"
+          />
         </div>
       </div>
     </div>

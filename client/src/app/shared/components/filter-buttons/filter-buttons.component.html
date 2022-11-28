@@ -1,0 +1,8 @@
+<div class="filter">
+  <div (click)="valueSelected(item.en_name)" *ngFor="let item of filter | async | sort: 'asc' :'en_name'"
+       [class.active]="isActive(item.en_name)" [style.background-color]="item.hex_color"
+       [style.border-color]="item.hex_color"
+       class="filterButton">
+    <span>{{ item.en_name }}</span>
+  </div>
+</div>

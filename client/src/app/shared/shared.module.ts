@@ -14,6 +14,9 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorDialogService } from './services/error-dialog.service';
+import { PopupModule } from './components/popup/popup.module';
+import { FilterButtonsModule } from './components/filter-buttons/filter-buttons.module';
+import { FilterButtonsRaritiesModule } from './components/filter-buttons-rarities/filter-buttons-rarities.module';
 
 @NgModule({
   declarations: [ErrorDialogComponent],
@@ -39,11 +42,14 @@ import { ErrorDialogService } from './services/error-dialog.service';
     FormFieldModule,
     LogoModule,
     FilterModule,
+    FilterButtonsModule,
+    FilterButtonsRaritiesModule,
     SkeletonModule,
     DeckPreviewModule,
     SearchbarModule,
     PipeModule,
     ErrorDialogComponent,
+    PopupModule
   ],
   providers: [ErrorDialogService],
 })

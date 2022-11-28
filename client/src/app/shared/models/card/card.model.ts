@@ -1,11 +1,11 @@
-import { ICardColor } from './card-color.model';
-import { ICardType } from './card-type.model';
-import { ICardRarity } from './card-rarity.model';
-import { ICardSet } from './card-set.model';
-import { ICardImage } from './card-image.model';
-import { ICardErrata } from './card-errata.model';
-import { ICardStatus } from './card-status.model';
-import { ICardAttribute } from './card-attribute.model';
+import { ICardColor } from "./card-color.model";
+import { ICardType } from "./card-type.model";
+import { ICardRarity } from "./card-rarity.model";
+import { ICardSet } from "./card-set.model";
+import { ICardImage } from "./card-image.model";
+import { ICardErrata } from "./card-errata.model";
+import { ICardStatus } from "./card-status.model";
+import { ICardAttribute } from "./card-attribute.model";
 
 export interface ICard {
   readonly id: string;
@@ -14,6 +14,8 @@ export interface ICard {
   readonly en_name: string;
   readonly jp_name: string;
   readonly cost?: number;
+  readonly prev?: string;
+  readonly next?: string;
   readonly power?: number;
   readonly life?: number;
   readonly fr_effect?: string;

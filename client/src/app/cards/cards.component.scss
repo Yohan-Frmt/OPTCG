@@ -7,10 +7,16 @@
   top: 75px;
   margin-left: -12px;
   height: 89vh;
+  overflow-y: auto;
+  padding-bottom: 30px;
 
-  hr {
-    margin: 20px -12px;
-    border: 5px solid $background-color;
+  .buttons {
+    padding-top: 20px;
+
+    button {
+      display: block;
+      margin: 5px auto;
+    }
   }
 
   &__title {

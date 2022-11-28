@@ -1,34 +1,36 @@
-import { Injectable } from '@angular/core';
-import { ApiService } from '../../core/api/api.service';
-import { firstValueFrom, Observable } from 'rxjs';
-import { ICard, IDeck, IDeckVisibility } from '../models';
-import { getDeckFromCode } from '../models/deckbuilder/encoder/deck-encoder';
-import { CardService } from './card.service';
-import { Deck } from '../models/deckbuilder/deck.builder';
-import { IDeckContent } from '../models/deck/deck-content.model';
+import { Injectable } from "@angular/core";
+import { ApiService } from "../../core/api/api.service";
+import { firstValueFrom, Observable } from "rxjs";
+import { ICard, IDeck, IDeckVisibility } from "../models";
+import { getDeckFromCode } from "../../deckbuilder/builder/encoder/deck-encoder";
+import { CardService } from "./card.service";
+import { Deck } from "../../deckbuilder/builder/deck.builder";
+import { IDeckContent } from "../models/deck/deck-content.model";
 
-interface IDeckQuery {}
+interface IDeckQuery {
+}
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root"
 })
 export class DeckService {
   constructor(
     private readonly _api: ApiService,
-    private readonly _card: CardService,
-  ) {}
+    private readonly _card: CardService
+  ) {
+  }
 
   public get decks(): Observable<IDeck[]> {
-    return this._api.get<IDeck[]>('/decks');
+    return this._api.get<IDeck[]>("/decks");
   }
 
   public get visibilities(): Observable<IDeckVisibility[]> {
-    return this._api.get<IDeckVisibility[]>('/deckvisibilities');
+    return this._api.get<IDeckVisibility[]>("/deckvisibilities");
   }
 
   public decksQuery = (query: IDeckQuery): Observable<IDeck[]> =>
     this._api.get<IDeck[]>(
-      `/decks?${new URLSearchParams(query as any).toString()}`,
+      `/decks?${new URLSearchParams(query as any).toString()}`
     );
 
   public deck = (id: string): Observable<IDeck> =>
@@ -50,14 +52,14 @@ export class DeckService {
     const cards: ICard[] = [];
     for (const cardCodeAndCount of getDeckFromCode(content)) {
       const card = await firstValueFrom(
-        this._card.getCard(cardCodeAndCount.code),
+        this._card.getCard(cardCodeAndCount.code)
       );
       cards.push({ ...card, count: cardCodeAndCount.count });
     }
     const leader = cards.pop()!;
     return {
       leader,
-      cards: Deck.sortDeck(cards),
+      cards: Deck.sortDeck(cards)
     };
   };
 }

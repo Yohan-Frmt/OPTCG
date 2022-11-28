@@ -1,4 +1,4 @@
-import { Type } from 'class-transformer';
+import { Type } from "class-transformer";
 import {
   IsDate,
   IsDefined,
@@ -8,11 +8,11 @@ import {
   IsOptional,
   IsString,
   IsUUID,
-  ValidateNested,
-} from 'class-validator';
-import { DeckVisibilityDto } from '../deckvisibility/deckvisibility.dto';
-import { UserDto } from '../../users/user/user.dto';
-import { TDeck } from '../../shared/encoder/types';
+  ValidateNested
+} from "class-validator";
+import { DeckVisibilityDto } from "../deckvisibility/deckvisibility.dto";
+import { UserDto } from "../../users/user/user.dto";
+import { TDeck } from "../../shared/encoder/types";
 
 export class DeckDto {
   @IsUUID()
@@ -35,6 +35,10 @@ export class DeckDto {
   @IsString()
   @IsNotEmpty()
   readonly content: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly leader: string;
 
   @IsDate()
   @IsOptional()

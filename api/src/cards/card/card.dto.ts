@@ -9,17 +9,17 @@ import {
   IsOptional,
   IsString,
   IsUUID,
-  ValidateNested,
-} from 'class-validator';
-import { CardSetDto } from '../cardset/cardset.dto';
-import { CardTypeDto } from '../cardtype/cardtype.dto';
-import { CardColorDto } from '../cardcolor/cardcolor.dto';
-import { CardImageDto } from '../cardimage/cardimage.dto';
-import { CardRarityDto } from '../cardrarity/cardrarity.dto';
-import { CardStatusDto } from '../cardstatus/cardstatus.dto';
-import { Type } from 'class-transformer';
-import { CardErrataDto } from '../carderrata/carderrata.dto';
-import { CardAttributeDto } from '../cardattribute/cardattribute.dto';
+  ValidateNested
+} from "class-validator";
+import { CardSetDto } from "../cardset/cardset.dto";
+import { CardTypeDto } from "../cardtype/cardtype.dto";
+import { CardColorDto } from "../cardcolor/cardcolor.dto";
+import { CardImageDto } from "../cardimage/cardimage.dto";
+import { CardRarityDto } from "../cardrarity/cardrarity.dto";
+import { CardStatusDto } from "../cardstatus/cardstatus.dto";
+import { Type } from "class-transformer";
+import { CardErrataDto } from "../carderrata/carderrata.dto";
+import { CardAttributeDto } from "../cardattribute/cardattribute.dto";
 
 export class CardDto {
   @IsUUID()
@@ -54,6 +54,14 @@ export class CardDto {
   @IsNumber()
   @IsOptional()
   readonly life?: number;
+
+  @IsString()
+  @IsOptional()
+  readonly prev?: string;
+
+  @IsString()
+  @IsOptional()
+  readonly next?: string;
 
   @IsString()
   @IsOptional()

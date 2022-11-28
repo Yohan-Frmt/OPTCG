@@ -1,7 +1,3 @@
-interface ErrorConstructor {
-  captureStackTrace(thisArg: any, func: any): void;
-}
-
 export class ExtendableError extends Error {
   constructor(message: string) {
     super(message);
