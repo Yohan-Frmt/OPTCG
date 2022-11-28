@@ -1,8 +1,4 @@
 <card *ngIf="leader" [card]="leader"></card>
-<hr />
-<hr />
-<hr />
-<hr />
 <ng-container *ngIf="cards">
   <ng-container *ngFor="let card of cards">
     <card *ngIf="card" [card]="card"></card>

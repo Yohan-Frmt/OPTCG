@@ -5,6 +5,7 @@ import { ICard, IUser } from "../../shared/models";
 import { CardService } from "../../shared/services/card.service";
 import { Observable } from "rxjs";
 import { TCardCodeAndCount } from "../../deckbuilder/builder/encoder/types";
+import * as Fa from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "card-details",
@@ -18,6 +19,7 @@ export class CardDetailsComponent implements OnInit {
   public commonUsedCard!: Observable<TCardCodeAndCount[]>;
   public serialNumber: string = "";
   public imageNumber: number = 0;
+  public FontAwesomeIcon = Fa;
 
   constructor(
     private readonly _authentication: AuthenticationService,
