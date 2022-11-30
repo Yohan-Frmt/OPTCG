@@ -20,6 +20,7 @@ export class CardDetailsComponent implements OnInit {
   public serialNumber: string = "";
   public imageNumber: number = 0;
   public FontAwesomeIcon = Fa;
+  public moreCommonCards: boolean = false;
 
   constructor(
     private readonly _authentication: AuthenticationService,
@@ -51,4 +52,6 @@ export class CardDetailsComponent implements OnInit {
   public changeCard = (serial: string) => {
     this._router.navigate(["/cards", serial]);
   };
+
+  public displayCommonCards = () => (this.moreCommonCards = !this.moreCommonCards);
 }

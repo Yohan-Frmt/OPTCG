@@ -4,12 +4,14 @@
     &.cardDetails {
         .details {
             border-radius: 20px;
-            height: 100%;
+            padding-bottom: 10px;
             border-top: 2px solid $tertiary-color;
 
             &.left {
                 background-color: $primary-color;
                 color: $text-secondary-color;
+                position: sticky;
+                top: 75px;
             }
 
             .serialSet {
@@ -112,18 +114,48 @@
                 text-transform: uppercase;
                 font-weight: 600;
                 font-size: 20px;
-                margin: 10px 0;
+                margin: 0 0 10px;
                 display: block;
+                background: $primary-color;
+                width: max-content;
+                color: $text-secondary-color;
+                padding: 0 10px;
+                border-radius: 5px;
             }
 
             .description {
-                margin: 10px 0;
+                margin: 20px 0;
                 padding: 20px 40px;
                 background: $background-color;
                 font-weight: 600;
                 font-size: 17px;
                 border: 2px solid $primary-color;
                 border-radius: 10px;
+
+                .row {
+                    img {
+                        width: 100%;
+                        cursor: pointer;
+                    }
+    
+                    .percent {
+                        text-align: center;
+                        display: block;
+                    }
+                }
+
+                .moreCharts {
+                    font-weight: 600;
+                    cursor: pointer;
+                    width: 100%;
+                    text-align: center;
+                    position: relative;
+                    bottom: -20px;
+                
+                    &:hover {
+                      background: rgba(0, 0, 0, 0.2);
+                    }
+                }
             }
         }
     }
