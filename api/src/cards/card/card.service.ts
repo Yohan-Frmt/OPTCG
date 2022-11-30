@@ -64,7 +64,7 @@ export class CardService {
     }
     return mostUsedCards
       .sort((a, b) => b.percent - a.percent)
-      .slice(0, 6);
+      .slice(0, 24);
   };
   public findAll = async (query?: any): Promise<Card[]> =>
     await this._dataSource

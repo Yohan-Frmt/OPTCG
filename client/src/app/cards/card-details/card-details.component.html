@@ -69,19 +69,39 @@
                        [icon]="FontAwesomeIcon.faArrowRight"></fa-icon>
             </div>
           </div>
-          <span class="title">Description</span>
-          <div class="description">{{ card.en_effect }}</div>
+          <div class="description">
+            <span class="title">Description</span>
+            {{ card.en_effect }}
+          </div>
 
-          <div *ngIf="(commonUsedCard | async)?.length! >= 1" class="row stats">
-            <span *ngIf="card.type.en_name != 'Leader'" class="title">Carte utilisée avec les leaders</span>
-            <span *ngIf="card.type.en_name == 'Leader'" class="title">Cartes utilisées avec ce leader</span>
-            <div *ngFor="let commonCard of commonUsedCard | async" class="col-md-2">
-              <span>{{commonCard.percent}}</span>
-              <img (click)="changeCard(commonCard.code)"
-                   [src]="'assets/images/cards/' + commonCard.code.split('-')[0] +'/' + commonCard.code + '.png'"
-                   [width]="50"
-                   alt="{{commonCard.code}}"
-              />
+          <div class="description">
+            <span *ngIf="card.type.en_name != 'Leader'" class="title">Card used with these leaders</span>
+            <span *ngIf="card.type.en_name == 'Leader'" class="title">Cards used with this leader</span>
+            <div *ngIf="(commonUsedCard | async)?.length! >= 1">
+              <div class="row">
+                <div *ngFor="let commonCard of commonUsedCard | async | slice:0:6" class="col-md-2">
+                  <img (click)="changeCard(commonCard.code)"
+                      [src]="'assets/images/cards/' + commonCard.code.split('-')[0] +'/' + commonCard.code + '.png'"
+                      [width]="50"
+                      alt="{{commonCard.code}}"
+                  />
+                  <span class="percent">{{commonCard.percent}}%</span>
+                </div>
+              </div>
+
+              <div *ngIf="moreCommonCards" class="row">
+                <div *ngFor="let commonCard of commonUsedCard | async | slice:6" class="col-md-2">
+                  <img (click)="changeCard(commonCard.code)"
+                      [src]="'assets/images/cards/' + commonCard.code.split('-')[0] +'/' + commonCard.code + '.png'"
+                      [width]="50"
+                      alt="{{commonCard.code}}"
+                  />
+                  <span class="percent">{{commonCard.percent}}%</span>
+                </div>
+              </div>
+
+              <div (click)="displayCommonCards()" *ngIf="!moreCommonCards" class="moreCharts">+</div>
+              <div (click)="displayCommonCards()" *ngIf="moreCommonCards" class="moreCharts">-</div>
             </div>
           </div>
         </div>
