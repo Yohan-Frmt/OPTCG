@@ -22,7 +22,7 @@ export class CardService {
 
   public findAssociatedCards = async (serial: string) => {
     const card: Card = await this.repository.findOneOrFail({ where: { serial_number: serial }, relations: ["type"] });
-    const mostUsedCards: TCardCodeAndCount[] = [];
+    let mostUsedCards: TCardCodeAndCount[] = [];
     if (card.type.en_name === "Leader") {
       const [decks, count] = await this._dataSource.getRepository(Deck).findAndCount({ where: { leader: card.serial_number } });
       if (!count) return null;
@@ -31,32 +31,40 @@ export class CardService {
         cards.pop();
         for (const card of cards) {
           const cardExist = mostUsedCards.find(x => x.code === card.code);
-          cardExist ?
+          if (cardExist) {
             mostUsedCards[mostUsedCards.findIndex(x => x.code === card.code)] = {
               ...card,
               count: card.count + cardExist.count
-            } :
+            };
+          } else {
             mostUsedCards.push(card);
+          }
         }
       }
+      mostUsedCards = mostUsedCards.map((card) => ({ ...card, percent: 100 / count }));
     } else {
       const decks = await this._dataSource.getRepository(Deck).find();
       for (const deck of decks) {
         const found = getDeckFromCode(deck.content).find(x => x.code === card.serial_number);
         if (!found) continue;
         const cardExist = mostUsedCards.find(x => x.code === deck.leader);
-        cardExist ?
+        if (cardExist) {
           mostUsedCards[mostUsedCards.findIndex(x => x.code === deck.leader)] = {
             code: deck.leader,
             count: ++cardExist.count
-          } :
+          };
+        } else {
           mostUsedCards.push({
             code: deck.leader,
             count: 1
           });
+        }
       }
+      mostUsedCards = mostUsedCards.map((card) => ({ ...card, percent: 100 / mostUsedCards.length }));
     }
-    return mostUsedCards.sort((a, b) => b.count - a.count).slice(0, 5);
+    return mostUsedCards
+      .sort((a, b) => b.percent - a.percent)
+      .slice(0, 6);
   };
   public findAll = async (query?: any): Promise<Card[]> =>
     await this._dataSource
