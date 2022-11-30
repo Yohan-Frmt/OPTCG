@@ -99,8 +99,8 @@
               </div>
             </div>
 
-            <div (click)="displayCommonCards()" *ngIf="!moreCommonCards" class="moreCharts">+</div>
-            <div (click)="displayCommonCards()" *ngIf="moreCommonCards" class="moreCharts">-</div>
+            <div (click)="displayCommonCards()" *ngIf="(commonUsedCard | async)?.length! > 6 && !moreCommonCards" class="moreCharts">+</div>
+            <div (click)="displayCommonCards()" *ngIf="(commonUsedCard | async)?.length! > 6 && moreCommonCards" class="moreCharts">-</div>
           </div>
         </div>
       </div>

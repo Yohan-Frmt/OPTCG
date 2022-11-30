@@ -151,6 +151,7 @@
                     text-align: center;
                     position: relative;
                     bottom: -20px;
+                    user-select: none;
                 
                     &:hover {
                       background: rgba(0, 0, 0, 0.2);
