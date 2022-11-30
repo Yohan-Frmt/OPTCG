@@ -75,7 +75,7 @@
           </div>
 
           <div class="description" *ngIf="(commonUsedCard | async)?.length! >= 1">
-            <span *ngIf="card.type.en_name != 'Leader'" class="title">Card used with these leaders</span>
+            <span *ngIf="card.type.en_name != 'Leader'" class="title">Leaders used with this card</span>
             <span *ngIf="card.type.en_name == 'Leader'" class="title">Cards used with this leader</span>
             <div class="row">
               <div *ngFor="let commonCard of commonUsedCard | async | slice:0:6" class="col-md-2">
