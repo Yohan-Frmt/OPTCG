@@ -33,7 +33,7 @@ export class DeckService {
       `/decks?${new URLSearchParams(query as any).toString()}`
     );
 
-  public deck = (id: string): Observable<IDeck> =>
+  public getDeck = (id: string): Observable<IDeck> =>
     this._api.get<IDeck>(`/deck/${id}`);
 
   public getLeader = async (deck: IDeck): Promise<ICard> => {
@@ -45,7 +45,7 @@ export class DeckService {
     return cards;
   };
 
-  public getDeck = async (deck: IDeck): Promise<IDeckContent> =>
+  public getDeckContent = async (deck: IDeck): Promise<IDeckContent> =>
     await this.decode(deck.content);
 
   public decode = async (content: string): Promise<IDeckContent> => {

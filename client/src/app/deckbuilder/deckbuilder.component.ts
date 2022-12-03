@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { DeckbuilderService } from "./deckbuilder.service";
 import { AlertService } from "../shared/services/alert.service";
-import { ICard, IDeckVisibility, IUser } from "../shared/models";
+import { ICard, IDeck, IDeckVisibility, IUser } from "../shared/models";
 import { CardService } from "../shared/services/card.service";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
 import { DeckbuilderManager } from "./builder/manager.builder";
 import { Observable } from "rxjs";
 import * as CKE from "@ckeditor/ckeditor5-build-decoupled-document";
 import { DeckService } from "../shared/services/deck.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "deckbuilder",
@@ -22,6 +22,7 @@ export class DeckbuilderComponent implements OnInit {
   public name: string = "";
   public deckCode: string = "";
   public visibility: string = "------------";
+  public deckId: string | null;
   public editor = CKE;
   public description: string = "Coucou c'est moi";
   public showDescription: boolean = false;
@@ -36,6 +37,7 @@ export class DeckbuilderComponent implements OnInit {
   constructor(
     private readonly _authentication: AuthenticationService,
     private readonly _router: Router,
+    private readonly _route: ActivatedRoute,
     private readonly _alert: AlertService,
     private readonly _card: CardService,
     private readonly _deck: DeckService,
@@ -45,10 +47,21 @@ export class DeckbuilderComponent implements OnInit {
     this.manager = this._deckbuilder.manager;
     this.cards = this._deckbuilder.cards;
     this.visibilities = this._deck.visibilities;
+    this.deckId = this._route.snapshot.paramMap.get("id");
   }
 
   ngOnInit(): void {
     this.manager.initCharts(document.getElementsByClassName("chart"));
+    if (this.deckId) {
+      this._deck.getDeck(this.deckId).subscribe({
+        next: async (deck: IDeck) => {
+          await this.importDeck(deck.content);
+          this.name = deck.name;
+          this.visibility = (deck.visibility as IDeckVisibility).en_name;
+          this.description = deck.description;
+        }
+      });
+    }
   }
 
   public onClick = (card: ICard) => {
@@ -87,9 +100,9 @@ export class DeckbuilderComponent implements OnInit {
       editor.ui.getEditableElement()
     );
   };
-  public importDeck = () => {
+  public importDeck = async (deckCode: string) => {
     this.displayImport(false);
-    this._deckbuilder.import(this.deckCode);
+    await this._deckbuilder.import(deckCode);
   };
 
 

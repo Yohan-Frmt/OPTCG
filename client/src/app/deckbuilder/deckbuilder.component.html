@@ -139,5 +139,5 @@
 
 <popup (closed)="displayImport($event)" [height]="'100px'" [opened]="showImport" [width]="'300px'">
   <input [(ngModel)]="deckCode" placeholder="enter deck code here" type="text">
-  <button (click)="importDeck()" type="submit">Import</button>
+  <button (click)="importDeck(deckCode)" type="submit">Import</button>
 </popup>
