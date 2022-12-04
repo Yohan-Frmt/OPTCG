@@ -129,6 +129,8 @@ export class Deck {
 
   public removeAllCardsFromDeck = (): void => {
     this.cards.length = 0;
+    this.length = 0;
+    this.leader = null;
   };
 
   public isEmpty = (): boolean => this.cards.length === 0;
