@@ -6,6 +6,9 @@ import { CardDto } from "./card.dto";
 import { Deck } from "../../decks/deck/deck.entity";
 import { getDeckFromCode } from "../../shared/encoder/deck-encoder";
 import { TCardCodeAndCount } from "../../shared/encoder/types";
+import { PaginationOptionsDto } from "../../shared/pagination/pagination-options.dto";
+import { PaginationMetaDto } from "../../shared/pagination/pagination-meta.dto";
+import { PaginationDto } from "../../shared/pagination/pagination.dto";
 
 @Injectable()
 export class CardService {
@@ -66,8 +69,8 @@ export class CardService {
       .sort((a, b) => b.percent - a.percent)
       .slice(0, 24);
   };
-  public findAll = async (query?: any): Promise<Card[]> =>
-    await this._dataSource
+  public findAll = async (paginationOptions: PaginationOptionsDto, query?: any): Promise<PaginationDto<CardDto>> => {
+    const qb = this._dataSource
       .getRepository(Card)
       .createQueryBuilder("card")
       .leftJoinAndSelect("card.images", "images")
@@ -146,8 +149,15 @@ export class CardService {
           }
         }
       })
-      .orderBy("card.serial_number", "ASC")
-      .getMany();
+      .orderBy("card.serial_number", paginationOptions.order)
+      .skip(paginationOptions.skip)
+      .take(paginationOptions.take);
+
+    const itemCount = await qb.getCount();
+    const { entities } = await qb.getRawAndEntities();
+    const meta = new PaginationMetaDto({ itemCount, paginationOptions });
+    return new PaginationDto(entities, meta);
+  };
 
   public findOneBySerial = async (serial: string): Promise<Card> =>
     this._dataSource

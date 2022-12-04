@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { PaginationModule } from './pagination/pagination.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         signOptions: { expiresIn: '1h' },
       }),
     }),
+    PaginationModule,
   ],
   exports: [JwtModule],
 })
