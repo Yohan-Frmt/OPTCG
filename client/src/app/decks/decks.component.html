@@ -1,1 +1,4 @@
-<deck-preview *ngFor="let deck of decks | async" [deck]="deck"></deck-preview>
+<ng-container *ngFor="let deck of decks | async">
+  <deck-preview [deck]="deck"></deck-preview>
+  <button (click)="edit(deck.id)">Edit</button>
+</ng-container>
