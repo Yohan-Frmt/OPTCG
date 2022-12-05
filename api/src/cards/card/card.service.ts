@@ -69,7 +69,7 @@ export class CardService {
       .sort((a, b) => b.percent - a.percent)
       .slice(0, 24);
   };
-  public findAll = async (paginationOptions: PaginationOptionsDto, query?: any): Promise<PaginationDto<CardDto>> => {
+  public findAll = async (paginationOptions: PaginationOptionsDto): Promise<PaginationDto<CardDto>> => {
     const qb = this._dataSource
       .getRepository(Card)
       .createQueryBuilder("card")
@@ -83,7 +83,7 @@ export class CardService {
       .leftJoinAndSelect("card.rarities", "rarity")
       .leftJoinAndSelect("card.status", "status")
       .where((qb: SelectQueryBuilder<Card>) => {
-        for (const [type, value] of query) {
+        for (const [type, value] of Object.entries(paginationOptions)) {
           if (!value) continue;
           switch (type) {
             case "attribute":
