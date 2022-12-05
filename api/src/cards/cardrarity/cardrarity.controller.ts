@@ -1,8 +1,9 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { CardRarityService } from "./cardrarity.service";
 import { CardRarityDto } from "./cardrarity.dto";
-import { ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse } from "@nestjs/swagger";
+import { ApiBody, ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Rarities")
 @Controller("cardrarities")
 export class CardRarityController {
   constructor(private readonly service: CardRarityService) {
