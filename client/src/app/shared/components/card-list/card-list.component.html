@@ -1,5 +1,5 @@
-<div [style.top]="getMouseYZoomedCard() + 'px'" *ngIf="isZoomed" class="zoomedCard">
-  <img [src]="imgCardZoomed" [width]="300"/>
+<div *ngIf="isZoomed" [style.top]="getMouseYZoomedCard() + 'px'" class="zoomedCard">
+  <img [src]="imgCardZoomed" [width]="300" alt="zoomed card" />
 </div>
 
 <table>
@@ -16,21 +16,22 @@
   </tr>
   </thead>
   <tbody>
-  <tr
-    (click)="onCardClick(card)"
-    (contextmenu)="onCardRightClick(card)"
-    *ngFor="let card of cards | async"
-    [style.background-image]="!card.colors[1] ? 
-      'linear-gradient(to right, ' + card.colors[0].hex_color + ' 45%, ' + card.colors[0].hex_color + ' 55%)' 
+  <ng-container *ngIf="cards | async as cards">
+    <tr
+      (click)="onCardClick(card)"
+      (contextmenu)="onCardRightClick(card)"
+      (mouseenter)="zoomCard(true, card)"
+      (mouseleave)="zoomCard(false)"
+      (mousemove)="mouseMoved($event)"
+      *ngFor="let card of cards.data"
+      [style.background-image]="!card.colors[1] ?
+      'linear-gradient(to right, ' + card.colors[0].hex_color + ' 45%, ' + card.colors[0].hex_color + ' 55%)'
       :
-      'linear-gradient(to right, ' + card.colors[0].hex_color + ' 45%, ' + card.colors[1].hex_color + ' 55%)' 
+      'linear-gradient(to right, ' + card.colors[0].hex_color + ' 45%, ' + card.colors[1].hex_color + ' 55%)'
     "
-    (mousemove)="mouseMoved($event)" 
-    (mouseenter)="zoomCard(true, card)" 
-    (mouseleave)="zoomCard(false)"
-  >
-    <th
-      [style.background-image]="
+    >
+      <th
+        [style.background-image]="
           'linear-gradient(to right, rgba(15,20,22,0) 0%,' +
           card.colors[0].hex_color +
           ' 90%, ' +
@@ -41,17 +42,18 @@
           card.serial_number +
           '.png)'
         "
-      class="cardImage"
-    ></th>
-    <th>{{ card.type.en_name }}</th>
-    <th>{{ card.en_name }}</th>
-    <th>{{ card.cost }}{{ card.life }}</th>
-    <th>{{ card.power }}</th>
-    <th>{{ card.counter }}</th>
-    <th>
-      <span *ngFor="let rarity of card.rarities">{{ rarity.abbr }}</span>
-    </th>
-    <th>{{ card.serial_number }}</th>
-  </tr>
+        class="cardImage"
+      ></th>
+      <th>{{ card.type.en_name }}</th>
+      <th>{{ card.en_name }}</th>
+      <th>{{ card.cost }}{{ card.life }}</th>
+      <th>{{ card.power }}</th>
+      <th>{{ card.counter }}</th>
+      <th>
+        <span *ngFor="let rarity of card.rarities">{{ rarity.abbr }}</span>
+      </th>
+      <th>{{ card.serial_number }}</th>
+    </tr>
+  </ng-container>
   </tbody>
 </table>

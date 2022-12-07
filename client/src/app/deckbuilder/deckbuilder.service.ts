@@ -6,12 +6,13 @@ import { ICard, ICardRarity, IDeck, IDeckStringContent } from "../shared/models"
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
 import { Observable } from "rxjs";
 import { DeckService } from "../shared/services/deck.service";
+import { Pagination } from "../shared/models/pagination/pagination.model";
 
 @Injectable({
   providedIn: "root"
 })
 export class DeckbuilderService {
-  public cards!: Observable<ICard[]>;
+  public cards!: Observable<Pagination<ICard>>;
 
   constructor(
     private readonly _api: ApiService,

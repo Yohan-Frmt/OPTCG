@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 import { ICard } from "../../models";
 import { map, Observable } from "rxjs";
 import { Router } from "@angular/router";
+import { Pagination } from "../../models/pagination/pagination.model";
 
 @Component({
   selector: "card-list",
@@ -10,7 +11,7 @@ import { Router } from "@angular/router";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardListComponent {
-  @Input() public cards!: Observable<ICard[]>;
+  @Input() public cards!: Observable<Pagination<ICard>>;
   @Input() public fromDeckbuilder: boolean = false;
   @Input() public deckId!: string;
   @Output() public cardClicked = new EventEmitter<ICard>();
@@ -25,32 +26,53 @@ export class CardListComponent {
   }
 
   public sortCardsByType(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.type.en_name < b.type.en_name ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (a.type.en_name < b.type.en_name ? -1 : 1));
+      return x;
+    }));
   }
 
   public sortCardsByEnName(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.en_name < b.en_name ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (a.en_name < b.en_name ? -1 : 1));
+      return x;
+    }));
   }
 
   public sortCardsByCostLife(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.life ? 1 : !b.life || a.life > b.life ? -1 : 1))));
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.cost ? 1 : !b.cost || a.cost > b.cost ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (!a.life ? 1 : !b.life || a.life > b.life ? -1 : 1));
+      x.data.sort((a, b) => (!a.cost ? 1 : !b.cost || a.cost > b.cost ? -1 : 1));
+      return x;
+    }));
   }
 
   public sortCardsByPower(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.power ? 1 : !b.power || a.power > b.power ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (!a.power ? 1 : !b.power || a.power > b.power ? -1 : 1));
+      return x;
+    }));
   }
 
   public sortCardsByCounter(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (!a.counter ? 1 : !b.counter || a.counter > b.counter ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (!a.counter ? 1 : !b.counter || a.counter > b.counter ? -1 : 1));
+      return x;
+    }));
   }
 
   public sortCardsByRarity(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.rarities[0].abbr < b.rarities[0].abbr ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (a.rarities[0].abbr < b.rarities[0].abbr ? -1 : 1));
+      return x;
+    }));
   }
 
   public sortCardsBySerialNumber(): void {
-    this.cards = this.cards.pipe(map(card => card.sort((a, b) => (a.serial_number < b.serial_number ? -1 : 1))));
+    this.cards = this.cards.pipe<Pagination<ICard>>(map(x => {
+      x.data.sort((a, b) => (a.serial_number < b.serial_number ? -1 : 1));
+      return x;
+    }));
   }
 
   public onCardClick(card: ICard) {
@@ -68,14 +90,14 @@ export class CardListComponent {
     return false;
   }
 
-  public zoomCard(value: boolean, card?: ICard) : void {
+  public zoomCard(value: boolean, card?: ICard): void {
     this.isZoomed = value;
-    this.imgCardZoomed = '/assets/images/cards/' + card?.serial_number.split('-')[0] + '/' + card?.images[0].path;
+    this.imgCardZoomed = "/assets/images/cards/" + card?.serial_number.split("-")[0] + "/" + card?.images[0].path;
   }
 
   mouseMoved(event: MouseEvent) {
     this.mouseY = event.pageY;
   }
 
-  getMouseYZoomedCard = () : number => this.mouseY - 120;
+  getMouseYZoomedCard = (): number => this.mouseY - 120;
 }

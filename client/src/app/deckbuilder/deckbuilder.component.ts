@@ -9,6 +9,7 @@ import { Observable } from "rxjs";
 import * as CKE from "@ckeditor/ckeditor5-build-decoupled-document";
 import { DeckService } from "../shared/services/deck.service";
 import { Router } from "@angular/router";
+import { Pagination } from "../shared/models/pagination/pagination.model";
 
 @Component({
   selector: "deckbuilder",
@@ -26,7 +27,7 @@ export class DeckbuilderComponent implements OnInit {
   public description: string = "Coucou c'est moi";
   public showDescription: boolean = false;
   public showImport: boolean = false;
-  public cards!: Observable<ICard[]>;
+  public cards!: Observable<Pagination<ICard>>;
   public visibilities!: Observable<IDeckVisibility[]>;
   public step!: string | void;
   public moreCharts: boolean = false;

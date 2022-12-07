@@ -5,6 +5,7 @@ import { ICard, ICardColor, ICardRarity, ICardSet, ICardStatus, ICardTag, ICardT
 import { AlertService } from "../shared/services/alert.service";
 import { CardService } from "../shared/services/card.service";
 import * as Fa from "@fortawesome/free-solid-svg-icons";
+import { Pagination } from "../shared/models/pagination/pagination.model";
 
 @Component({
   selector: "cards",
@@ -14,12 +15,12 @@ import * as Fa from "@fortawesome/free-solid-svg-icons";
 })
 export class CardsComponent implements OnInit, OnChanges {
   @Input() public fromDeckbuilder: boolean = false;
-  @Input() public cardsPreload!: Observable<ICard[]>;
+  @Input() public cardsPreload!: Observable<Pagination<ICard>>;
   @Output() public cardClicked = new EventEmitter<ICard>();
   @Output() public cardRightClicked = new EventEmitter<ICard>();
   public user: IUser | null;
   public query: any = [];
-  public cards!: Observable<ICard[]>;
+  public cards!: Observable<Pagination<ICard>>;
   public rarities!: Observable<ICardRarity[]>;
   public sets!: Observable<ICardSet>;
   public status!: Observable<ICardStatus>;
@@ -74,6 +75,6 @@ export class CardsComponent implements OnInit, OnChanges {
     this.showList = option;
   }
 
-  private _isCardsPreloaded = (cards: Observable<ICard[]>) =>
+  private _isCardsPreloaded = (cards: Observable<Pagination<ICard>>) =>
     this.cardsPreload ? (this.cards = this.cardsPreload) : (this.cards = cards);
 }

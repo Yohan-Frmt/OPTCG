@@ -3,6 +3,7 @@ import { ApiService } from "../../core/api/api.service";
 import { ICard, ICardAttribute, ICardColor, ICardRarity, ICardSet, ICardStatus, ICardTag, ICardType } from "../models";
 import { Observable } from "rxjs";
 import { TCardCodeAndCount } from "../../deckbuilder/builder/encoder/types";
+import { Pagination } from "../models/pagination/pagination.model";
 
 @Injectable({
   providedIn: "root"
@@ -11,8 +12,8 @@ export class CardService {
   constructor(private readonly _api: ApiService) {
   }
 
-  public get cards(): Observable<ICard[]> {
-    return this._api.get<ICard[]>("/cards");
+  public get cards(): Observable<Pagination<ICard>> {
+    return this._api.get<Pagination<ICard>>("/cards");
   }
 
   public get rarities(): Observable<ICardRarity[]> {
@@ -56,7 +57,7 @@ export class CardService {
   public getCard = (serial: string): Observable<ICard> =>
     this._api.get<ICard>("/card/" + serial);
 
-  public cardsQuery = (queries: [string, string][]): Observable<ICard[]> => {
+  public cardsQuery = (queries: [string, string][]): Observable<Pagination<ICard>> => {
     let query: any = {};
     for (const [value, type] of queries) {
       switch (type) {
@@ -99,7 +100,7 @@ export class CardService {
       }
     }
 
-    return this._api.get<ICard[]>(
+    return this._api.get<Pagination<ICard>>(
       `/cards?${new URLSearchParams(<any>query).toString()}`
     );
   };
