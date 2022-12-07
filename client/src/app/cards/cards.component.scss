@@ -1,5 +1,9 @@
 @import '_variables';
 
+.gray {
+  filter: grayscale(1);
+}
+
 .filters {
   background-color: $primary-color;
   color: $text-secondary-color;

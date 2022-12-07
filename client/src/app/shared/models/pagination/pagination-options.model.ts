@@ -1,9 +1,9 @@
-enum Order {
+export enum Order {
   ASC = "ASC",
   DESC = "DESC"
 }
 
-export interface PaginationOptions {
+export interface IPaginationOptions {
   readonly order: Order;
   readonly page: number;
   readonly take: number;

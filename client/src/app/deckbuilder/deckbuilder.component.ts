@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { DeckbuilderService } from "./deckbuilder.service";
 import { AlertService } from "../shared/services/alert.service";
-import { ICard, IDeckVisibility, IUser } from "../shared/models";
+import { ICard, IDeckVisibility, IPagination, IUser } from "../shared/models";
 import { CardService } from "../shared/services/card.service";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
 import { DeckbuilderManager } from "./builder/manager.builder";
@@ -9,7 +9,6 @@ import { Observable } from "rxjs";
 import * as CKE from "@ckeditor/ckeditor5-build-decoupled-document";
 import { DeckService } from "../shared/services/deck.service";
 import { Router } from "@angular/router";
-import { Pagination } from "../shared/models/pagination/pagination.model";
 
 @Component({
   selector: "deckbuilder",
@@ -27,7 +26,7 @@ export class DeckbuilderComponent implements OnInit {
   public description: string = "Coucou c'est moi";
   public showDescription: boolean = false;
   public showImport: boolean = false;
-  public cards!: Observable<Pagination<ICard>>;
+  public cards!: Observable<IPagination<ICard>>;
   public visibilities!: Observable<IDeckVisibility[]>;
   public step!: string | void;
   public moreCharts: boolean = false;

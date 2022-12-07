@@ -1,9 +1,19 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from "../../core/api/api.service";
-import { ICard, ICardAttribute, ICardColor, ICardRarity, ICardSet, ICardStatus, ICardTag, ICardType } from "../models";
+import {
+  ICard,
+  ICardAttribute,
+  ICardColor,
+  ICardRarity,
+  ICardSet,
+  ICardStatus,
+  ICardTag,
+  ICardType,
+  IPagination,
+  Order
+} from "../models";
 import { Observable } from "rxjs";
 import { TCardCodeAndCount } from "../../deckbuilder/builder/encoder/types";
-import { Pagination } from "../models/pagination/pagination.model";
 
 @Injectable({
   providedIn: "root"
@@ -12,8 +22,8 @@ export class CardService {
   constructor(private readonly _api: ApiService) {
   }
 
-  public get cards(): Observable<Pagination<ICard>> {
-    return this._api.get<Pagination<ICard>>("/cards");
+  public get cards(): Observable<IPagination<ICard>> {
+    return this._api.get<IPagination<ICard>>("/cards");
   }
 
   public get rarities(): Observable<ICardRarity[]> {
@@ -57,50 +67,55 @@ export class CardService {
   public getCard = (serial: string): Observable<ICard> =>
     this._api.get<ICard>("/card/" + serial);
 
-  public cardsQuery = (queries: [string, string][]): Observable<Pagination<ICard>> => {
+  public cardsQuery = (queries?: [string, string][], page: number = 1, take: number = 20, order: Order = Order.ASC): Observable<IPagination<ICard>> => {
     let query: any = {};
-    for (const [value, type] of queries) {
-      switch (type) {
-        case "rarities":
-          query.rarities = value;
-          if (!value) delete query.rarities;
-          break;
-        case "sets":
-          query.sets = value;
-          if (!value) delete query.set;
-          break;
-        case "status":
-          query.status = value;
-          if (!value) delete query.status;
-          break;
-        case "attribute":
-          query.attribute = value;
-          if (!value) delete query.attribute;
-          break;
-        case "types":
-          query.types = value;
-          if (!value) delete query.type;
-          break;
-        case "tags":
-          query.tags = value;
-          break;
-        case "colors":
-          query.colors = value;
-          break;
-        case "costs":
-          query.costs = value;
-          break;
-        case "powers":
-          query.powers = value;
-          break;
-        case "search":
-          query.search = value;
-          if (!value) delete query.search;
-          break;
+    query.page = page;
+    query.take = take;
+    query.order = order;
+    if (queries) {
+      for (const [value, type] of queries) {
+        switch (type) {
+          case "rarities":
+            query.rarities = value;
+            if (!value) delete query.rarities;
+            break;
+          case "sets":
+            query.sets = value;
+            if (!value) delete query.set;
+            break;
+          case "status":
+            query.status = value;
+            if (!value) delete query.status;
+            break;
+          case "attribute":
+            query.attribute = value;
+            if (!value) delete query.attribute;
+            break;
+          case "types":
+            query.types = value;
+            if (!value) delete query.type;
+            break;
+          case "tags":
+            query.tags = value;
+            break;
+          case "colors":
+            query.colors = value;
+            break;
+          case "costs":
+            query.costs = value;
+            break;
+          case "powers":
+            query.powers = value;
+            break;
+          case "search":
+            query.search = value;
+            if (!value) delete query.search;
+            break;
+        }
       }
     }
 
-    return this._api.get<Pagination<ICard>>(
+    return this._api.get<IPagination<ICard>>(
       `/cards?${new URLSearchParams(<any>query).toString()}`
     );
   };

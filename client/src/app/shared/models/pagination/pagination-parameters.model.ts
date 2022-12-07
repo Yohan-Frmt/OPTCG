@@ -1,6 +1,6 @@
-import { PaginationOptions } from "./pagination-options.model";
+import { IPaginationOptions } from "./pagination-options.model";
 
-export interface PaginationParameters {
-  readonly paginationOptions?: PaginationOptions;
+export interface IPaginationParameters {
+  readonly paginationOptions?: IPaginationOptions;
   readonly itemCount?: number;
 }

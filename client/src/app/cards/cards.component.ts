@@ -1,11 +1,21 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from "@angular/core";
-import { Observable } from "rxjs";
+import { firstValueFrom, map, Observable } from "rxjs";
 import { AuthenticationService } from "../core/authentication/services/authentication.service";
-import { ICard, ICardColor, ICardRarity, ICardSet, ICardStatus, ICardTag, ICardType, IUser } from "../shared/models";
+import {
+  ICard,
+  ICardColor,
+  ICardRarity,
+  ICardSet,
+  ICardStatus,
+  ICardTag,
+  ICardType,
+  IPagination,
+  IPaginationMeta,
+  IUser
+} from "../shared/models";
 import { AlertService } from "../shared/services/alert.service";
 import { CardService } from "../shared/services/card.service";
 import * as Fa from "@fortawesome/free-solid-svg-icons";
-import { Pagination } from "../shared/models/pagination/pagination.model";
 
 @Component({
   selector: "cards",
@@ -15,12 +25,13 @@ import { Pagination } from "../shared/models/pagination/pagination.model";
 })
 export class CardsComponent implements OnInit, OnChanges {
   @Input() public fromDeckbuilder: boolean = false;
-  @Input() public cardsPreload!: Observable<Pagination<ICard>>;
+  @Input() public cardsPreload!: Observable<IPagination<ICard>>;
   @Output() public cardClicked = new EventEmitter<ICard>();
   @Output() public cardRightClicked = new EventEmitter<ICard>();
   public user: IUser | null;
   public query: any = [];
-  public cards!: Observable<Pagination<ICard>>;
+  public cards!: Observable<IPagination<ICard>>;
+  public meta!: IPaginationMeta;
   public rarities!: Observable<ICardRarity[]>;
   public sets!: Observable<ICardSet>;
   public status!: Observable<ICardStatus>;
@@ -45,8 +56,9 @@ export class CardsComponent implements OnInit, OnChanges {
     if (changes.cardsPreload) this.cards = changes.cardsPreload.currentValue;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this._isCardsPreloaded(this._card.cards);
+    this.meta = await this._setMeta();
     this.rarities = this._card.rarities;
     this.sets = this._card.sets;
     this.status = this._card.status;
@@ -75,6 +87,17 @@ export class CardsComponent implements OnInit, OnChanges {
     this.showList = option;
   }
 
-  private _isCardsPreloaded = (cards: Observable<Pagination<ICard>>) =>
+  public goToPreviousPage = async (page: number): Promise<void> => {
+    this.cards = this._card.cardsQuery(undefined, --page);
+    this.meta = await this._setMeta();
+  };
+  public goToNextPage = async (page: number): Promise<void> => {
+    this.cards = this._card.cardsQuery(undefined, ++page);
+    this.meta = await this._setMeta();
+  };
+
+  private _setMeta = async () => await firstValueFrom(this.cards.pipe(map(({ meta }) => meta)));
+
+  private _isCardsPreloaded = (cards: Observable<IPagination<ICard>>) =>
     this.cardsPreload ? (this.cards = this.cardsPreload) : (this.cards = cards);
 }

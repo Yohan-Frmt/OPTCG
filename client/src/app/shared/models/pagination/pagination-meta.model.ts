@@ -1,4 +1,4 @@
-export interface PaginationMeta {
+export interface IPaginationMeta {
   readonly page: number;
   readonly take: number;
   readonly skip?: number;

@@ -77,6 +77,10 @@
           <searchbar (searchSubmit)="onSubmit($event)"></searchbar>
         </div>
       </div>
+      <ng-container *ngIf="meta">
+        <button (click)="goToPreviousPage(meta.page)" [class.gray]="!meta.hasPreviousPage">Previous Page</button>
+        <button (click)="goToNextPage(meta.page)" [class.gray]="!meta.hasNextPage">Next Page</button>
+      </ng-container>
       <ng-container *ngIf="cards | async as cards">
         <div [style.display]="showList ? 'none!important' : 'flex'" class="row card-list mx-0"
              style="user-select: none">

@@ -1,6 +1,6 @@
-import { PaginationMeta } from "./pagination-meta.model";
+import { IPaginationMeta } from "./pagination-meta.model";
 
-export interface Pagination<T> {
+export interface IPagination<T> {
   readonly data: T[];
-  readonly meta: PaginationMeta;
+  readonly meta: IPaginationMeta;
 }
