@@ -11,9 +11,10 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { SharedModule } from "../shared/shared.module";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { CardListModule } from "../shared/components/card-list/card-list.module";
+import { NumberToIterablePipe } from "../shared/pipes/number-to-iterable.pipe";
 
 @NgModule({
-  declarations: [CardsComponent, CardDetailsComponent],
+  declarations: [CardsComponent, CardDetailsComponent, NumberToIterablePipe],
   imports: [
     CommonModule,
     CardsRoutingModule,

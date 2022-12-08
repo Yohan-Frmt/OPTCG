@@ -96,6 +96,15 @@ export class CardsComponent implements OnInit, OnChanges {
     this.meta = await this._setMeta();
   };
 
+  public goToPage = async (i: string | number) => {
+    if (typeof i === "number") {
+      this.cards = this._card.cardsQuery(undefined, i);
+    } else {
+      this.cards = this._card.cardsQuery(undefined, Math.ceil((this.meta.page + this.meta.pageCount) / 2));
+    }
+    this.meta = await this._setMeta();
+  };
+
   private _setMeta = async () => await firstValueFrom(this.cards.pipe(map(({ meta }) => meta)));
 
   private _isCardsPreloaded = (cards: Observable<IPagination<ICard>>) =>

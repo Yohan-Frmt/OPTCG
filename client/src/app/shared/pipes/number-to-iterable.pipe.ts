@@ -1,11 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'numberToIterable',
+  name: "numberToIterable"
 })
 export class NumberToIterablePipe implements PipeTransform {
-  transform(value: any): any {
-    const maxOfTwo = value === Infinity ? 2 : Math.min(2, value);
-    return new Array(maxOfTwo).fill(value).map((x, i) => i);
+  transform(value: number, current?: number, nFirst?: number, nLast?: number, separator?: string): (string | number)[] {
+    // const firsts = arr.slice(0, Math.min(nFirst, arr.length));
+    // const lasts = arr.slice(-Math.min(nLast, arr.length), arr.length);
+    return new Array(value).fill(0).map((x, i) => ++i);
+    // return [...firsts, separator, ...lasts];
   }
 }
