@@ -84,7 +84,7 @@
         </div>
         <div *ngIf="meta.pageCount > 1">
           <button (click)="goToPage(i)"
-                  *ngFor="let i of meta.pageCount | numberToIterable">{{i}}</button>
+                  *ngFor="let i of meta.pageCount | numberToIterable: meta.page">{{i.separator || i}}</button>
         </div>
       </ng-container>
       <ng-container *ngIf="cards | async as cards">
