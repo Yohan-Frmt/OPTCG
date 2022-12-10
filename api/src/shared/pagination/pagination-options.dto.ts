@@ -1,4 +1,4 @@
-import { IsArray, IsEnum, IsInt, IsOptional, IsString, Max, Min } from "class-validator";
+import { IsEnum, IsInt, IsOptional, IsString, Max, Min } from "class-validator";
 import { ApiPropertyOptional } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 
@@ -59,17 +59,17 @@ export class PaginationOptionsDto {
   powers?: string;
 
   @IsOptional()
-  @IsArray()
+  @IsString({ each: true })
   @ApiPropertyOptional()
   types?: string[];
 
   @IsOptional()
-  @IsArray()
+  @IsString({ each: true })
   @ApiPropertyOptional()
   tags?: string[];
 
   @IsOptional()
-  @IsArray()
+  @IsString({ each: true })
   @ApiPropertyOptional()
   colors?: string[];
 

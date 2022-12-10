@@ -115,6 +115,7 @@ export class CardService {
       }
     }
 
+    console.log(query);
     return this._api.get<IPagination<ICard>>(
       `/cards?${new URLSearchParams(<any>query).toString()}`
     );

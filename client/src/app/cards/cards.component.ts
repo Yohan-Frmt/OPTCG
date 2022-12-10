@@ -69,9 +69,10 @@ export class CardsComponent implements OnInit, OnChanges {
     this.powers = this._card.powers;
   }
 
-  public onSubmit = ([value, type]: [string, string]) => {
+  public onSubmit = async ([value, type]: [string, string]): Promise<void> => {
     this.query.push([value, type]);
     this.cards = this._card.cardsQuery(this.query);
+    this.meta = await this._setMeta();
   };
 
   public onCardClick(card: ICard) {
@@ -88,22 +89,22 @@ export class CardsComponent implements OnInit, OnChanges {
   }
 
   public goToPreviousPage = async (page: number): Promise<void> => {
-    this.cards = this._card.cardsQuery(undefined, --page);
+    this.cards = this._card.cardsQuery(this.query || undefined, --page);
     this.meta = await this._setMeta();
   };
 
   public goToNextPage = async (page: number): Promise<void> => {
-    this.cards = this._card.cardsQuery(undefined, ++page);
+    this.cards = this._card.cardsQuery(this.query || undefined, ++page);
     this.meta = await this._setMeta();
   };
 
   public goToPage = async (i: number | { separator: string, type: string }) => {
-    if (typeof i === "number") this.cards = this._card.cardsQuery(undefined, i);
+    if (typeof i === "number") this.cards = this._card.cardsQuery(this.query || undefined, i);
     else {
       let calc: number;
       if (i.type) calc = i.type === "prev" ? (this.meta.page + 1) / 2 : (this.meta.page + this.meta.pageCount) / 2;
       else calc = (1 + this.meta.pageCount) / 2;
-      this.cards = this._card.cardsQuery(undefined, Math.ceil(calc));
+      this.cards = this._card.cardsQuery(this.query || undefined, Math.ceil(calc));
     }
     this.meta = await this._setMeta();
   };
