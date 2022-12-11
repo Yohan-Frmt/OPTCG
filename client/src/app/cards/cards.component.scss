@@ -86,6 +86,7 @@ fa-icon.ng-fa-icon {
   text-align: center;
   border-radius: 5px;
   cursor: pointer;
+  padding-top: 3px;
 
   &:hover, &.active {
     background: $tertiary-color;
