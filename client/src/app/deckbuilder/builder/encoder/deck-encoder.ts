@@ -10,7 +10,10 @@ class DeckDecoder {
     2: "ST02",
     3: "ST03",
     4: "ST04",
-    5: "OP01"
+    5: "OP01",
+    6: "OP02",
+    7: "ST05",
+    8: "ST06",
   };
 
   public static getDeckFromCode(code: string): TDeck {

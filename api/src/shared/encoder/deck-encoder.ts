@@ -9,7 +9,10 @@ class DeckEncoder {
     ST02: 2,
     ST03: 3,
     ST04: 4,
-    OP01: 5
+    OP01: 5,
+    OP02: 6,
+    ST05: 7,
+    ST06: 8
   };
 
   public static getCodeFromDeck = (deck: TDeck) =>
