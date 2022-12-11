@@ -42,7 +42,7 @@ export class DeckService {
   }
 
   public async findOneById(id: string): Promise<Deck> {
-    return await this.repository.findOne({ where: { id } });
+    return await this.repository.findOne({ where: { id }, relations: ["visibility"] });
   }
 
   public async findOneByCode(code: string): Promise<Deck> {

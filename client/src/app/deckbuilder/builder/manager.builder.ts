@@ -155,6 +155,10 @@ export class DeckbuilderManager {
     this.activeFormat.deck.removeCardFromDeck(card);
   };
 
+  public clearDeck = (): void => {
+    this.deck.removeAllCardsFromDeck();
+  };
+
   public initCharts = (charts: HTMLCollectionOf<Element>) => {
     for (const chart of charts) this.initChart(chart);
   };

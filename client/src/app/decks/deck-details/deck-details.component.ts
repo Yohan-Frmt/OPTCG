@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../../core/authentication/services/authentication.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ICard, IDeck, IUser } from "../../shared/models";
 import { Observable } from "rxjs";
 import { DeckService } from "../../shared/services/deck.service";
@@ -22,18 +22,23 @@ export class DeckDetailsComponent implements OnInit {
     private readonly _authentication: AuthenticationService,
     private readonly _deck: DeckService,
     private readonly _card: CardService,
-    private readonly _route: ActivatedRoute
+    private readonly _route: ActivatedRoute,
+    private readonly _router: Router
   ) {
     this.user = this._authentication.currentUserValue();
   }
 
   ngOnInit(): void {
     this.deckId = this._route.snapshot.paramMap.get("id")!;
-    this.deck = this._deck.deck(this.deckId);
+    this.deck = this._deck.getDeck(this.deckId);
     this.deck.subscribe(async (deck) => {
-      const content = await this._deck.getDeck(deck);
+      const content = await this._deck.getDeckContent(deck);
       this.leader = content.leader;
       this.cards = content.cards;
     });
   }
+
+  public edit = (): void => {
+    this._router.navigate(["deckbuilder", this.deckId]);
+  };
 }

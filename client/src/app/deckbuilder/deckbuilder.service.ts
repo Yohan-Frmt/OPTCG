@@ -51,15 +51,13 @@ export class DeckbuilderService {
     this.manager.updateChart();
   };
 
-  public import(deckCode: string) {
-    this._deck.decode(deckCode)
-      .then(deck => {
-        console.log(deck);
-        this.manager.setLeader(deck.leader);
-        for (const card of deck.cards)
-          for (let i = card.count!; i--;)
-            this.manager.addCard(card);
-      });
+  public async import(deckCode: string) {
+    const deck = await this._deck.decode(deckCode);
+    this.manager.setLeader(deck.leader);
+    for (const card of deck.cards)
+      for (let i = card.count!; i--;)
+        this.manager.addCard(card);
+    this.manager.updateChart();
   }
 
   public create = (name: string, { cards }: IDeckStringContent, visibility: string, description: string): Observable<IDeck> => {
@@ -72,17 +70,4 @@ export class DeckbuilderService {
     };
     return this._api.post<IDeck, IDeck>("/deck", deck);
   };
-
-  // public checkDeck = () => {
-  //   let query = {} as any;
-  //   let c: string[] = [];
-  //   for (const color of this.deck.leader!.colors) c.push(color.en_name);
-  //   if (JSON.stringify(this._colors) === JSON.stringify(c)) return;
-  //   query['_colors'] = c.join();
-  //   this._cards = this._card.cardsQuery([c.join(), 'colors']);
-  //   this._colors = c;
-  //   this.deck.main = this.deck.main.filter(
-  //     (card) => !card.colors.some((r) => !c.includes(r.en_name)),
-  //   );
-  // };
 }
