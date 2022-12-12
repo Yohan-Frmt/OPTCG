@@ -1,4 +1,13 @@
-import { ArrayNotEmpty, IsArray, IsNotEmpty, IsOptional, IsString, IsUUID, ValidateNested } from "class-validator";
+import {
+  ArrayNotEmpty,
+  IsArray,
+  IsDate,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsUUID,
+  ValidateNested
+} from "class-validator";
 import { Type } from "class-transformer";
 import { CardDto } from "../card/card.dto";
 
@@ -19,6 +28,17 @@ export class CardSetDto {
   @IsString()
   @IsNotEmpty()
   readonly set_number: string;
+
+  @IsDate()
+  @IsNotEmpty()
+  @IsOptional()
+  readonly jp_release?: Date;
+
+  @IsDate()
+  @IsNotEmpty()
+  @IsOptional()
+  readonly wld_release?: Date;
+
 
   @IsOptional()
   @IsArray()

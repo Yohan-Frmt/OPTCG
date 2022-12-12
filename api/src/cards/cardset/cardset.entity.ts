@@ -1,15 +1,9 @@
-import {
-  BaseEntity,
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Card } from '../card/card.entity';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Card } from "../card/card.entity";
 
-@Entity('cardset')
+@Entity("cardset")
 export class CardSet extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
@@ -17,9 +11,16 @@ export class CardSet extends BaseEntity {
 
   @Column()
   en_name: string;
-  
+
   @Column()
   set_number: string;
+
+  @Column({ type: "timestamp", nullable: true })
+  readonly jp_release?: Date;
+
+  @Column({ type: "timestamp", nullable: true })
+  readonly wld_release?: Date;
+
 
   @OneToMany(() => Card, (card: Card) => card.set)
   cards: Card[];
