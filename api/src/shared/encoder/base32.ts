@@ -1,48 +1,41 @@
-const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
 
-export function encode(buffer: ArrayBuffer): string {
+export const encode = (buffer: ArrayBuffer): string => {
   const length = buffer.byteLength;
-  const binaryData = new Uint8Array(buffer);
-  let numBitsProcessed = 0;
-  let encodedString = '';
+  const data = new Uint8Array(buffer);
+  let num = 0;
+  let code = "";
   let value = 0;
-  for (let idx = 0; idx < length; idx++) {
-    value = (value << 8) | binaryData[idx];
-    numBitsProcessed += 8;
-    while (numBitsProcessed >= 5) {
-      encodedString += alphabet[(value >>> (numBitsProcessed - 5)) & 31];
-      numBitsProcessed -= 5;
+  for (let index = 0; index < length; index++) {
+    value = (value << 8) | data[index];
+    num += 8;
+    while (num >= 5) {
+      code += alphabet[(value >>> (num - 5)) & 31];
+      num -= 5;
     }
   }
-  if (numBitsProcessed > 0)
-    encodedString += alphabet[(value << (5 - numBitsProcessed)) & 31];
-  while (encodedString.length % 8 !== 0) encodedString += '=';
-  return encodedString;
-}
+  if (num > 0) code += alphabet[(value << (5 - num)) & 31];
+  while (code.length % 8 !== 0) code += "=";
+  return code;
+};
 
-export function decode(input: string): ArrayBuffer {
-  function readCharOrThrowError(char: string): number {
-    const idx = alphabet.indexOf(char);
-    if (idx === -1) throw new Error('Invalid character found: ' + char);
-    return idx;
-  }
-
-  const cleanedInput = input.toUpperCase().replace(/\=+$/, '');
-  let numBitsProcessed = 0;
-  let outputIdx = 0;
+export const decode = (code: string): ArrayBuffer => {
+  const readChar = (char: string): number => {
+    const index = alphabet.indexOf(char);
+    if (index === -1) throw new Error("Invalid character found: " + char);
+    return index;
+  };
+  const input = code.toUpperCase().replace(/=+$/, "");
+  let num = 0;
+  let index = 0;
   let value = 0;
-  const output = new Uint8Array(((cleanedInput.length * 5) / 8) | 0);
-  for (
-    let currCharOfInput = 0;
-    currCharOfInput < cleanedInput.length;
-    currCharOfInput++
-  ) {
-    value = (value << 5) | readCharOrThrowError(cleanedInput[currCharOfInput]);
-    numBitsProcessed += 5;
-    if (numBitsProcessed >= 8) {
-      output[outputIdx++] = (value >>> (numBitsProcessed - 8)) & 255;
-      numBitsProcessed -= 8;
-    }
+  const output = new Uint8Array(((input.length * 5) / 8) | 0);
+  for (let i = 0; i < input.length; i++) {
+    value = (value << 5) | readChar(input[i]);
+    num += 5;
+    if (num < 8) continue;
+    output[index++] = (value >>> (num - 8)) & 255;
+    num -= 8;
   }
   return output.buffer;
-}
+};
