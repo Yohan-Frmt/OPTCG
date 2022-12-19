@@ -35,9 +35,11 @@ export class CardDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.params.subscribe(({ serial }) => {
-      this.card = this._card.getCard(serial);
-      this.commonUsedCard = this._card.getAssociatedCard(serial);
+    this._route.params.subscribe({
+      next: ({ serial }) => {
+        this.card = this._card.getCard(serial);
+        this.commonUsedCard = this._card.getAssociatedCard(serial);
+      }
     });
   }
 

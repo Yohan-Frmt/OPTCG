@@ -35,7 +35,7 @@ export class QueryFailedExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    let message = (exception as any).message.message;
+    let message = (exception as any).message?.message;
     let code = "HttpException";
 
     Logger.error(message, (exception as any).stack, `${request.method} ${request.url}`);

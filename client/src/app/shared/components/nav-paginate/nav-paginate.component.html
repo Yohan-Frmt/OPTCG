@@ -1,0 +1,12 @@
+<div>
+  <button (click)="sendValue(meta.page - 1)" [class.gray]="!meta.hasPreviousPage">Previous Page</button>
+  <button (click)="sendValue(meta.page + 1)" [class.gray]="!meta.hasNextPage">Next Page</button>
+</div>
+<div *ngIf="meta.pageCount > 1">
+  <span *ngIf="arr[0] !== 1">...</span>
+  <button (click)="sendValue(i)" *ngFor="let i of arr" [class.active]="meta.page === i">{{i}}</button>
+  <span *ngIf="arr[arr.length - 1] !== meta.pageCount">...</span>
+</div>
+
+<!-- DESIGN : Première Page .. 5 6 [7] 8 9 .. Dernière Page [Aller à la page [...]]-->
+<!-- DESIGN : Première Page [1] 2 3 4 5 .. Dernière Page [Aller à la page [...]]-->

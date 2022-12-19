@@ -88,24 +88,8 @@ export class CardsComponent implements OnInit, OnChanges {
     this.showList = option;
   }
 
-  public goToPreviousPage = async (page: number): Promise<void> => {
-    this.cards = this._card.cardsQuery(this.query || undefined, --page);
-    this.meta = await this._setMeta();
-  };
-
-  public goToNextPage = async (page: number): Promise<void> => {
-    this.cards = this._card.cardsQuery(this.query || undefined, ++page);
-    this.meta = await this._setMeta();
-  };
-
-  public goToPage = async (i: number | { separator: string, type: string }) => {
-    if (typeof i === "number") this.cards = this._card.cardsQuery(this.query || undefined, i);
-    else {
-      let calc: number;
-      if (i.type) calc = i.type === "prev" ? (this.meta.page + 1) / 2 : (this.meta.page + this.meta.pageCount) / 2;
-      else calc = (1 + this.meta.pageCount) / 2;
-      this.cards = this._card.cardsQuery(this.query || undefined, Math.ceil(calc));
-    }
+  public goToPage = async (i: number) => {
+    this.cards = this._card.cardsQuery(this.query || undefined, i);
     this.meta = await this._setMeta();
   };
 
