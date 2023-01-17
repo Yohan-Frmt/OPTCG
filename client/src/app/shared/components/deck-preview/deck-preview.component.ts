@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICard, IDeck } from '../../models';
 import { CardService } from '../../services/card.service';
 import { DeckService } from '../../services/deck.service';
@@ -22,9 +23,18 @@ export class DeckPreviewComponent implements OnInit {
   constructor(
     private readonly _card: CardService,
     private readonly _deck: DeckService,
+    private readonly _router: Router
   ) {}
 
   ngOnInit(): void {
     this.leader = this._deck.getLeader(this.deck);
   }
+
+  public view = (id: string | undefined): void => {
+    this._router.navigate(["/decks", id!]);
+  };
+
+  public edit = (id: string | undefined): void => {
+    this._router.navigate(["deckbuilder", id!]);
+  };
 }

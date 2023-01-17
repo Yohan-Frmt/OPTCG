@@ -2,18 +2,10 @@ export default class VarInt {
   private static readonly AllButMSB = 0x7f;
   private static readonly JustMSB = 0x80;
 
-  constructor(_b: ArrayBuffer | Uint8Array) {
-    this._bytes = new Uint8Array(_b);
-  }
+  private bytes: Uint8Array;
 
-  private _bytes: Uint8Array;
-
-  get bytes(): Uint8Array {
-    return this._bytes;
-  }
-
-  set bytes(value: Uint8Array) {
-    this._bytes = value;
+  constructor(_bytes: ArrayBuffer | Uint8Array) {
+    this.bytes = new Uint8Array(_bytes);
   }
 
   public get length(): number {
@@ -21,33 +13,34 @@ export default class VarInt {
   }
 
   public static Get = (value: number): Uint8Array => {
-    const buffer = new Uint8Array(10);
-    let idx = 0;
+    const buff = new Uint8Array(10);
+    let currentIndex = 0;
     if (value == 0) return new Uint8Array([0]);
     while (value !== 0) {
-      let byte = value & this.AllButMSB;
+      let byteVal = value & this.AllButMSB;
       value >>= 7;
-      if (value != 0) byte |= this.JustMSB;
-      buffer[idx++] = byte;
+      if (value != 0) byteVal |= this.JustMSB;
+      buff[currentIndex++] = byteVal;
     }
-    return buffer.slice(0, idx);
+    return buff.slice(0, currentIndex);
   };
+
+  public get = (index: number): number => this.bytes[index];
 
   public Pop = (): number => {
     let result = 0;
-    let nbShift = 0;
-    let nbPopped = 0;
-
+    let currentShift = 0;
+    let popped = 0;
     for (let i = 0; i < this.bytes.length; i++) {
-      nbPopped++;
+      popped++;
       const current = this.bytes[i] & VarInt.AllButMSB;
-      result |= current << nbShift;
+      result |= current << currentShift;
       if ((this.bytes[i] & VarInt.JustMSB) != VarInt.JustMSB) {
-        this.bytes = this.bytes.slice(nbPopped);
+        this.bytes = this.bytes.slice(popped);
         return result;
       }
-      nbShift += 7;
+      currentShift += 7;
     }
-    throw 'Byte array did not contain valid varints.';
+    throw "Byte array did not contain valid varints.";
   };
 }
