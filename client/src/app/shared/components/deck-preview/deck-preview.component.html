@@ -1,1 +1,9 @@
-<card *ngIf="leader | async as l" [card]="l" [deckId]="deck.id!"></card>
+<ng-container *ngIf="leader | async as l">
+    <div (click)="view(deck.id)" class="deckPreview" [style.background-image]="'url(/assets/images/cards/' + l.serial_number.split('-')[0] + '/' + l.serial_number + '.png)'">
+        <button (click)="edit(deck.id)">Edit</button>
+        <div class="deckInfos">
+            <span class="author" (click)="view(deck.id)">Auteur</span>
+            <span class="name" (click)="view(deck.id)">{{ deck.name }}</span>
+        </div>
+    </div>
+</ng-container>
