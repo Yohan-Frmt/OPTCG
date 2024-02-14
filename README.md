@@ -16,12 +16,6 @@ Le déclin rapide de la fanbase du jeu One Piece a entraîné l'annulation du pr
 
 - **Simulation de pioche** : Les joueurs pouvaient simuler des pioches aléatoires pour tester la probabilité de tirer des cartes spécifiques dans leur deck.
 
-## Prérequis
-
-- Node.js (version X.X.X)
-- npm (version X.X.X)
-- MongoDB (version X.X.X)
-
 ## Installation
 
 1. Clonez ce dépôt sur votre machine locale :
